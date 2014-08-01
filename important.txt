@@ -23,12 +23,14 @@ STRUCTURE
 	- ISSUES
 
 
-
+WHAT WAS DONE
+	- 
+	- download sissvoc and run 
 
 
 ISSUES -  
 Just flag the issues - 
-	(note but don't spend excessive time)
+	(easy way to organize but without spending excessive time)
 
 	- Longer term. authoring and management. Simon Cox suggests, ...    
 
@@ -71,28 +73,29 @@ Moving to a triple-store - raises issues of maintaining postgresql connection wh
 	would need to be redeveloped.
 	
 
-SCOPE.
-	Intro. 
+INTRO / scope
 
 	A solution for Imos/aodn controlled vocabularly is needed.
-	To avoid a home-rolled ad-hoc system and instead use commonly available open-licensed technologies. From the
+	It is desirable to avoid a home-rolled and ad-hoc system. and instead use commonly available open-licensed technologies. From the
 	point of view of support open communities, interoperability and bearing in mind the limited development resources
 	available. 
 
-	Current Situation
-
-	Several key components have been developed that may be used as basis to future. A control_vocab_db has been 
-	designed and implemented to represent PUPIA. 
-
-
-	short term - publishing and search. long term - authoring and management.
+	jcshort term - publishing and search. long term - authoring and management.
 	management is found including authoring and management.  - it is also used by geoserver - in parameter mappings
 
-	There are two broad requirements. In the sh
-	  
 	- publishing / search. 
 	More long term - Seb/Kim indicated the move to using fine grained-terminology - ereefs.
 
+
+CURRENT SITUATION 
+
+	Several key components have been developed that may be used as basis to future. A relational control_vocab_db has been 
+	designed and implemented to represent PUPIA. 
+
+	A document giving db table mappings to SKOS / SPARQL has been prepared. (Kim's doc) 
+
+		There are two broad requirements. In the sh
+	  
 	- Information about facility and subfacility should as useful .
 
 
@@ -187,6 +190,8 @@ SiSSVoc
 
 SiSSVoc (local) will be customisable.
 
+
+---
 
 Other points relevant to Sissvoc
 	(maybe better - as an introduction to sissvoc )
