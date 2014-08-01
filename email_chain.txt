@@ -1,0 +1,322 @@
+
+ RE: Analysis of vocabulary publishing options
+Craig Jones <Craig.Jones@utas.edu.au>
+Tue 7/29/2014 3:12 PM
+-------- Forwarded Message --------
+Subject:	RE: Analysis of vocabulary publishing options
+Date:	Tue, 8 Jul 2014 16:12:19 +1000
+From:	Roger Proctor <Roger.Proctor@utas.edu.au>
+To:		Craig Jones <Craig.Jones@utas.edu.au>, Peter Blain <Peter.Blain@utas.edu.au>
+CC:		Sebastien Mancini <Sebastien.Mancini@utas.edu.au>, kimtfinney@gmail.com <kimtfinney@gmail.com>, Jacqui Hope <Jacqui.Hope@utas.edu.au>
+
+
+Hi Craig
+
+I'm sure we can produce a requirements document before the next iteration.
+
+In fact, yes, it includes management as well as publishing, although I think only the LDP provides some of that functionality at present. We have been in discussion with ANDS about them supporting the development of a common management and publishing tool, and then hosting it into the future, but we have no timeline for this yet.
+
+Kim, Seb ... can we have a get-together tomorrow to follow up on this.
+
+thanks
+rog
+ 
+
+Dr Roger Proctor
+Director, eMarine Information Infrastructure, Integrated Marine Observing System
+University of Tasmania, Private Bag 21, Hobart, Tasmania, 7001, Australia
+Tel: +61 3 6226 1977; Mob: +61 4 0015 3449
+Email: roger.proctor@utas.edu.au; URL: http://www.imos.org.au/emii.html
+From: Craig Jones [Craig.Jones@utas.edu.au]
+Sent: Tuesday, 8 July 2014 3:38 PM
+To: Peter Blain; Roger Proctor
+Cc: Sebastien Mancini; kimtfinney@gmail.com; Jacqui Hope
+Subject: Re: Analysis of vocabulary publishing options
+
+HI Rog,
+
+This arose this morning when we were discussing this in iteration planning.  I was talking specifically about
+
+"(b) it might be wise to compile at least a high level view of AODN/emII functional requirements (separated into immediate and longer term) that could set the basic benchmarks for the evaluation. This task need not be onerous and would provide some systematic way of ‘evaluating’ the different options. "
+
+I was making the assumption that these requirements are something that Seb/Kim would be preparing?  If so, any work preparing these before hand would mean we wouldn't be waiting for these before we could start the analysis.
+
+I also notice that the brief focuses on publishing options.  I was expecting vocab management to be included.   Does it make sense to look at them independently?
+
+
+Thanks,
+CraigJ
+
+
+
+
+
+On 08/07/14 15:18, Peter Blain wrote:
+Thanks for this Rog,
+
+I was wondering if Seb, or yourself, could prepare a user requirements document?  Craig doesn't feel that he can proceed without knowing the desired features and requirements.     
+
+The evaluation is still on the reserve task list.  If you can complete the user requirements in the next couple of weeks Craig will, with any luck, be able to do the evaluation next iteration.
+
+Cheers,
+Pete.
+
+
+On Wed, 2014-07-02 at 01:48 +0000, Roger Proctor wrote:
+Hi Craig
+
+As you know we are considering vocabulary tools for IMOS and AODN. We would like you to conduct an analysis of available options to guide our forward thinking. I think this has already been mentioned in planning and is currently a reserve task.
+ 
+
+This will help us decide what we should do, and your advice and information will be used to make an informed choice going forward.
+
+
+Here is a brief on the task.
+
+
+Perform an evaluation of two different platforms that are available for vocabulary 'publishing and retrieval', namely ‘SISSVoc' and the 'Linked Data Platform' (LDP). 
+
+
+ 
+
+
+The different configurations of interest are the SISSVoc instances that are operational at ANDS (http://www.ands.org.au/services/controlled-vocabulary.html and http://researchdata.ands.org.au/developers/documentation/services/vocabulary_api) and within eReefs (https://www.seegrid.csiro.au/wiki/Siss/SISSvoc3Overview and https://wiki.csiro.au/display/ER/Water+Quality+vocabulary) and the LDP as described at https://github.com/UKGovLD/ukl-registry-poc/wiki (prototype deployment at http://environment.data.gov.uk/registry/).
+
+
+ 
+
+
+The purpose of the evaluation is two-fold: (a) to assess the level of effort/skills required by emII staff to install, configure & customise, maintain and populate the different platforms (and configurations) and (b) to help guide our preferred choice of platform based on tool capability vs our functional requirements. The evaluation should provide a justified recommendation on which platform to adopt, taking into account both (a) and (b) and also give some rough indications of the level of effort required to bring the platform into service within eMII (for the recommended option). 
+
+
+ 
+
+
+To perform the evaluation with respect to '(a)’ it might be useful to establish some thresholds for acceptable levels of effort (across the different aspects of ‘install’, ‘configure & customise’, 'maintain’ and ‘populate’), or at least broadly define what these tasks are assumed to encompass before assessment begins. For (b) it might be wise to compile at least a high level view of AODN/emII functional requirements (separated into immediate and longer term) that could set the basic benchmarks for the evaluation. This task need not be onerous and would provide some systematic way of ‘evaluating’ the different options. 
+
+
+
+We are happy to discuss further when you have digested the brief.
+
+
+Thanks
+
+
+Rog
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dr Roger Proctor, Director, IMOS eMarine Information Infrastructure
+University of Tasmania, Private Bag 110, Hobart, TAS 7001, Australia
+Tel: +61 3 6226 1977, Mob: +61 4 0015 3449, Fax: +61 3 6226 2997
+Email: roger.proctor@utas.edu.au, URL: http://www.imos.org.au/eMII.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Craig Jones <Craig.Jones@utas.edu.au>
+Tue 7/29/2014 3:11 PM
+-------- Forwarded Message --------
+Subject:	Re: Analysis of vocabulary publishing options
+Date:	Tue, 8 Jul 2014 16:14:06 +1000
+From:	Kim Finney <kimtfinney@gmail.com>
+To:		Craig Jones <Craig.Jones@utas.edu.au>
+CC:		Peter Blain <Peter.Blain@utas.edu.au>, Roger Proctor <Roger.Proctor@utas.edu.au>, Sebastien Mancini <Sebastien.Mancini@utas.edu.au>, Jacqui Hope <Jacqui.Hope@utas.edu.au>
+
+
+Hi Craig, Peter,
+
+I thought I’d jump in and make a couple of comments.
+
+The wording of the brief in trying to summarise the task in one sentence to begin with is probably a little misleading. We already know (I think) that SISSVoc out of the box has not been designed as an authoring and vocab management tool, but rather a publishing and retrieval tool, so before commencing an evaluation on that product we know most of the evaluation will end up focussing on the ‘publishing and retrieval' aspects. LDP by contrast looks like it has authoring and management capability in addition to publishing capability. Anyway, I think you are correct. The evaluation should be covering term authoring and management which was alluded to in the expansion on the ‘purpose’ in part (a) of Roger’s brief by including 'maintaining and populating' the different platforms. But it wasn't clear enough.
+
+In response to the question who is going to prepare some high level requirements I expected that Seb and I would have to take primary responsibility for getting these down on paper before Craig could begin. Some work has already been done in this regard (actually much of it pertaining to the term authoring and management requirements, but also other stuff). This material needs to be augmented though with an indication of which requirements IMOS needs now vs what could be acquired in the longer term. I can do this with Seb’s help.
+
+
+Regards, Kim
+
+
+On 8 Jul 2014, at 3:38 pm, Craig Jones <Craig.Jones@utas.edu.au> wrote:
+
+HI Rog,
+
+This arose this morning when we were discussing this in iteration planning.  I was talking specifically about
+
+"(b) it might be wise to compile at least a high level view of AODN/emII functional requirements (separated into immediate and longer term) that could set the basic benchmarks for the evaluation. This task need not be onerous and would provide some systematic way of ‘evaluating’ the different options. "
+
+I was making the assumption that these requirements are something that Seb/Kim would be preparing?  If so, any work preparing these before hand would mean we wouldn't be waiting for these before we could start the analysis.
+
+I also notice that the brief focuses on publishing options.  I was expecting vocab management to be included.   Does it make sense to look at them independently?
+
+
+Thanks,
+CraigJ
+
+
+
+
+
+On 08/07/14 15:18, Peter Blain wrote:
+Thanks for this Rog,
+
+I was wondering if Seb, or yourself, could prepare a user requirements document?  Craig doesn't feel that he can proceed without knowing the desired features and requirements.     
+
+The evaluation is still on the reserve task list.  If you can complete the user requirements in the next couple of weeks Craig will, with any luck, be able to do the evaluation next iteration.
+
+Cheers,
+Pete.
+
+
+On Wed, 2014-07-02 at 01:48 +0000, Roger Proctor wrote:
+Hi Craig
+
+As you know we are considering vocabulary tools for IMOS and AODN. We would like you to conduct an analysis of available options to guide our forward thinking. I think this has already been mentioned in planning and is currently a reserve task.
+ 
+
+This will help us decide what we should do, and your advice and information will be used to make an informed choice going forward.
+
+
+Here is a brief on the task.
+
+
+Perform an evaluation of two different platforms that are available for vocabulary 'publishing and retrieval', namely ‘SISSVoc' and the 'Linked Data Platform' (LDP). 
+
+
+ 
+
+
+The different configurations of interest are the SISSVoc instances that are operational at ANDS (http://www.ands.org.au/services/controlled-vocabulary.html and http://researchdata.ands.org.au/developers/documentation/services/vocabulary_api) and within eReefs (https://www.seegrid.csiro.au/wiki/Siss/SISSvoc3Overview and https://wiki.csiro.au/display/ER/Water+Quality+vocabulary) and the LDP as described at https://github.com/UKGovLD/ukl-registry-poc/wiki (prototype deployment at http://environment.data.gov.uk/registry/).
+
+
+ 
+
+
+The purpose of the evaluation is two-fold: (a) to assess the level of effort/skills required by emII staff to install, configure & customise, maintain and populate the different platforms (and configurations) and (b) to help guide our preferred choice of platform based on tool capability vs our functional requirements. The evaluation should provide a justified recommendation on which platform to adopt, taking into account both (a) and (b) and also give some rough indications of the level of effort required to bring the platform into service within eMII (for the recommended option). 
+
+
+ 
+
+
+To perform the evaluation with respect to '(a)’ it might be useful to establish some thresholds for acceptable levels of effort (across the different aspects of ‘install’, ‘configure & customise’, 'maintain’ and ‘populate’), or at least broadly define what these tasks are assumed to encompass before assessment begins. For (b) it might be wise to compile at least a high level view of AODN/emII functional requirements (separated into immediate and longer term) that could set the basic benchmarks for the evaluation. This task need not be onerous and would provide some systematic way of ‘evaluating’ the different options. 
+
+
+
+We are happy to discuss further when you have digested the brief.
+
+
+Thanks
+
+
+Rog
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dr Roger Proctor, Director, IMOS eMarine Information Infrastructure
+University of Tasmania, Private Bag 110, Hobart, TAS 7001, Australia
+Tel: +61 3 6226 1977, Mob: +61 4 0015 3449, Fax: +61 3 6226 2997
+Email: roger.proctor@utas.edu.au, URL: http://www.imos.org.au/eMII.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Craig Jones <Craig.Jones@utas.edu.au>
+Tue 7/29/2014 3:11 PM
+-------- Forwarded Message --------
+Subject:	Re: Analysis of vocabulary publishing options
+Date:	Tue, 8 Jul 2014 15:38:38 +1000
+From:	Craig Jones <Craig.Jones@utas.edu.au>
+To:		Peter Blain <Peter.Blain@utas.edu.au>, Roger Proctor <Roger.Proctor@utas.edu.au>
+CC:		Sebastien Mancini <Sebastien.Mancini@utas.edu.au>, kimtfinney@gmail.com <kimtfinney@gmail.com>, Jacqui Hope <Jacqui.Hope@utas.edu.au>
+
+
+HI Rog,
+
+This arose this morning when we were discussing this in iteration planning.  I was talking specifically about
+
+"(b) it might be wise to compile at least a high level view of AODN/emII functional requirements (separated into immediate and longer term) that could set the basic benchmarks for the evaluation. This task need not be onerous and would provide some systematic way of ‘evaluating’ the different options. "
+
+I was making the assumption that these requirements are something that Seb/Kim would be preparing?  If so, any work preparing these before hand would mean we wouldn't be waiting for these before we could start the analysis.
+
+I also notice that the brief focuses on publishing options.  I was expecting vocab management to be included.   Does it make sense to look at them independently?
+
+
+Thanks,
+CraigJ
+
+
+
+
+
+On 08/07/14 15:18, Peter Blain wrote:
+Thanks for this Rog,
+
+I was wondering if Seb, or yourself, could prepare a user requirements document?  Craig doesn't feel that he can proceed without knowing the desired features and requirements.     
+
+The evaluation is still on the reserve task list.  If you can complete the user requirements in the next couple of weeks Craig will, with any luck, be able to do the evaluation next iteration.
+
+Cheers,
+Pete.
+
+
+On Wed, 2014-07-02 at 01:48 +0000, Roger Proctor wrote:
+Hi Craig
+
+As you know we are considering vocabulary tools for IMOS and AODN. We would like you to conduct an analysis of available options to guide our forward thinking. I think this has already been mentioned in planning and is currently a reserve task.
+ 
+
+This will help us decide what we should do, and your advice and information will be used to make an informed choice going forward.
+
+
+Here is a brief on the task.
+
+
+Perform an evaluation of two different platforms that are available for vocabulary 'publishing and retrieval', namely ‘SISSVoc' and the 'Linked Data Platform' (LDP). 
+
+
+ 
+
+
+The different configurations of interest are the SISSVoc instances that are operational at ANDS (http://www.ands.org.au/services/controlled-vocabulary.html and http://researchdata.ands.org.au/developers/documentation/services/vocabulary_api) and within eReefs (https://www.seegrid.csiro.au/wiki/Siss/SISSvoc3Overview and https://wiki.csiro.au/display/ER/Water+Quality+vocabulary) and the LDP as described at https://github.com/UKGovLD/ukl-registry-poc/wiki (prototype deployment at http://environment.data.gov.uk/registry/).
+
+
+ 
+
+
+The purpose of the evaluation is two-fold: (a) to assess the level of effort/skills required by emII staff to install, configure & customise, maintain and populate the different platforms (and configurations) and (b) to help guide our preferred choice of platform based on tool capability vs our functional requirements. The evaluation should provide a justified recommendation on which platform to adopt, taking into account both (a) and (b) and also give some rough indications of the level of effort required to bring the platform into service within eMII (for the recommended option). 
+
+
+ 
+
+
+To perform the evaluation with respect to '(a)’ it might be useful to establish some thresholds for acceptable levels of effort (across the different aspects of ‘install’, ‘configure & customise’, 'maintain’ and ‘populate’), or at least broadly define what these tasks are assumed to encompass before assessment begins. For (b) it might be wise to compile at least a high level view of AODN/emII functional requirements (separated into immediate and longer term) that could set the basic benchmarks for the evaluation. This task need not be onerous and would provide some systematic way of ‘evaluating’ the different options. 
+
+
+
+We are happy to discuss further when you have digested the brief.
+
+
+Thanks
+
+
+Rog
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Dr Roger Proctor, Director, IMOS eMarine Information Infrastructure
+University of Tasmania, Private Bag 110, Hobart, TAS 7001, Australia
+Tel: +61 3 6226 1977, Mob: +61 4 0015 3449, Fax: +61 3 6226 2997
+Email: roger.proctor@utas.edu.au, URL: http://www.imos.org.au/eMII.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Craig Jones <Craig.Jones@utas.edu.au>
+Tue 7/29/2014 3:10 PM
+To:
+Julian Atkinson;
+-------- Forwarded Message --------
+Subject:	Re: Analysis of vocabulary publishing options
+Date:	Tue, 8 Jul 2014 15:18:58 +1000
+From:	Peter Blain <Peter.Blain@utas.edu.au>
+To:		Roger Proctor <Roger.Proctor@utas.edu.au>
+CC:		Sebastien Mancini <Sebastien.Mancini@utas.edu.au>, kimtfinney@gmail.com <kimtfinney@gmail.com>, Craig Jones <Craig.Jones@utas.edu.au>, Jacqui Hope <Jacqui.Hope

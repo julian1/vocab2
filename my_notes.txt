@@ -1,0 +1,252 @@
+
+publishing mechanisms - 'linked data'
+	rdf is considered too low-level - as a huge list of resources.
+
+
+
+----
+Is there a requirement to use skos extension mechanisms ? 
+
+use third party tools to edit skos - as an alternate front end. to sissvoc
+
+	iQvoc  - open source that can import and export skos.o
+	tema tres can export skos.
+	poolparty commercial thesaurus management and skos editor.
+
+
+
+-------
+Need paragraph about where we are at the moment. 
+ contr_vocab_db 
+
+- ANDs if option2 - need to eliminate contr_vocab_db. don't want to state stores
+	- to manage, 
+
+
+Scope - what we need PUPIA 
+		LDP - not SKOS system - generalized linked data system 
+
+----
+
+How do SOS and Sensor ML work - are they a part of the rdf resources
+	- interaction with SOS service endpoint 
+
+what is provides addresses		
+
+Vocab manager? would a crud application onto our existing db work?
+
+how does sisvocc communicate with ereefs server?  common sisvocc api/webservice - what's the technology?
+
+
+- Do we need to define our schema for PUPIA. have it as xsd?
+
+- whw are there two arrows
+
+
+- Need SKOS Vocab files -> Geonetwork.
+
+- Rdfs -> IMOS sissvoc
+
+------------------------------
+
+Option 3 
+	we have a working db
+
+
+
+----------------------------------------------------------
+ANDS 
+	- need harvesters - for the interfaces. 
+
+	- Pete's preferred solution
+		- dependency on external party	
+			- for fixing
+		
+		- vocab as a key part of our geoserver/geonetwork  
+			
+
+----
+0. review email chain.
+
+1. need to install sissvoc - at least to identify build process etc. maven/chef 
+
+Common tasks
+	- method to handle postgres db migrations - liquibase 
+	- service or extension to populate db from sissvoc. 
+
+
+	- scripts to normalize to current vocab_db structure.
+
+- extensible. imos specific functionality. CRUD capability for PUPIA 
+
+
+SCOPE
+	- if only need our PUPIA - for AODN and BODC then just use our db
+	- and publish the DB as a sparql end-point 
+
+
+-----
+Keep in mind the cpability to update geonetwork metadata records directly
+through geonetwork apis. 
+
+For example Craig's work for spatial bounds.
+-----
+
+issue of 
+	latency/response speed with ldp - being remote. 
+	depedent service outside infrastructure. 
+
+	IMPORTANT - ANDS intends to couple catalogue and the sissvoc server. 
+		"Vocabularies published through the catalogue are not automatically available via the server. 
+		This will be addressed in a coming release of the service."
+	but no information about whether will publicize work. 
+
+	- 
+
+--------
+
+Biggest issue is Lots of mappings.
+	Db, schemas, geonetwork
+
+-------------------
+
+
+Conceptually - 
+
+
+	- Quality of documentation 
+	- Availability of support
+	- Ease to fork/branch
+	- Difficulty in managing with chef
+	- Number of services - required to push meta data around the system.
+
+
+
+
+	- what are others using as front end for Sissvoc? 
+
+	- Why not try to obtain ANDS front end?
+	
+
+	Curently Overview-Role 
+		manager + author tool -> sissvoc -> (perhaps ingest/mapping) db  <- geoserver
+
+
+	there's work involved (service required) - in translating rdf triples -> to relational model for postgresql db.
+		- for parameter mapping?. 
+		- for harvesting.
+		
+
+	Is db required at all. 
+
+
+	longer term.
+	- larger questions about data management.
+		1. use vocab db - and annotate at harvest time, adding metadata references to db. 
+			If not always then in what scope - eg. generic profile schema for observations
+		2. push providers to mark up netcdf with the terms. so can be extracted at harvest - perhaps semi automatically. 
+		3. mark up the geonetwork metadata record
+
+
+	- geoserver - currently joins parameter mappiing
+
+		Should there be an interface straight onto the rdf triples?.
+		
+		If want to serve up (sos- sensor ml) data - using other schemes?
+
+
+
+	- What's authoritative and what's derivativ
+		- what/where is the state?.	
+		rdf triples maintained in rdf database (SISSVOC/ LDP)
+			versus 
+		postgres db.
+
+	- advantage of the current db, is that it serves as a base that is working
+		for parameter mapping. even though there's no nice interface over it.
+
+
+	- geonetwork - interface to the classifier.
+
+
+	- staying within the sissvoc community - eg. ereefs. etc 	
+	- interoperability. - if non sissvoc. 
+
+	- analyze - in terms of the various interfaces between 
+		- postgres database
+		- harvester
+		- geonetwork
+
+	- authoring versus management. 
+
+
+	CRUD - interface over the top of the postgresql db. - for term management. PUPIA 
+
+
+	for publishing we just have rdf triples - should be able to be published easily. 
+
+
+
+Because all in a state of flux - there's a need
+
+consider - importance of agile flexibility to adapt to different machi
+	- Avoid lock in.
+	- Mappings
+	- YAGNI
+
+parameter, unit, platform, instrument, analysis. 
+	- here - defined by AODN working group (seb, kim) borrowing terms (bodc) .  
+	- internationally - ODIP
+
+
+
+Is sensor ml a subset of the instument stuff that will be managed.
+
+
+
+
+
+---------
+
+
+Don't like that there appear to be two stores?  - maybe they're just interfaces.
+	add RDF interface onto the postgres db.
+
+advantages of postgres versus dedicated - include wide- knowledge of db. also have capable xml tools in later versions of postgres - xquery?
+ 
+postgres or triplet store 
+
+
+If pull up and parameterize/abstract the vocabularly used for describing data and manage with a voc management system. 
+	
+	- then could harvesters/ db schemas be modelled more generically - using a set of mappings 
+	from netcdf attributes to vocab. 
+
+	- if not universally - then in spcific contexts - eg. for profiles.
+
+
+- Raises Possibility - with extensive backing to support terms - can the harvesters be written 
+	more generically. Basically mapping netcdf attributes to the thesaurus. 
+	
+	- or limited form - eg. profiles  
+
+already inter-operating with parameter_mappings. 
+
+How does it interact with geonetwork?
+
+
+- Own app to manage data in database. 
+- reporting - writing code.
+
+Apps that try to envisage all app domains - 
+Compatibility with our existing contr_vocab db
+
+write crud.
+
+contr_vocab is being used in soop_sst_metadata_summary  - and data in contr_vocab.  
+	but importantly it is being used for downloads / and perhaps in reporting? .
+
+
+parameter_mapping also does QC.
+
+

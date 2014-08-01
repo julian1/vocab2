@@ -1,0 +1,53 @@
+
+
+# elda
+
+
+# ands
+	https://researchdata.ands.org.au/registry/
+
+	http://www.ands.org.au/services/controlled-vocabulary.html
+
+
+
+# cool uri
+http://www.webopedia.com/TERM/C/cool_URI.html
+
+
+# URL resolution to description of the item
+http://environment.data.gov.au/water/quality/def/object/nitrogen
+
+# concept search
+http://sissvoc.ereefs.info/sissvoc/ereefs/concept?labelcontains=temperature
+# sparql interface 
+http://sissvoc.ereefs.info/ereefs/sparql
+
+
+
+ldp ? 
+
+	http://environment.data.gov.uk/registry/
+
+
+Resources
+
+"SISSVoc: A Linked Data API for SKOS vocabularies"
+	http://www.semantic-web-journal.net/system/files/swj658.pdf
+
+"Improve your taxonomy management using the W3C SKOS standard"
+	http://www.ibm.com/developerworks/library/x-skostaxonomy/
+
+
+"ANDS Controlled Vocabulary Service"
+	http://www.ands.org.au/services/controlled-vocabulary.html
+
+"SKOS: a beginner's guide"
+	http://www.unc.edu/~prjsmith/skos_guide.html
+
+"RDF Result sets"
+	http://www.amberdown.net/"
+
+"D2R Server: Accessing databases with SPARQL and as Linked Data"
+	http://d2rq.org/d2r-server
+	https://github.com/d2rq/d2rq
+

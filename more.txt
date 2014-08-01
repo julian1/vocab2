@@ -1,0 +1,20 @@
+
+forall P . (P -> P) -> P
+
+The link in Koray Can's reply is good. In the meantime, the statement in YDTM is based on the Curry-Howard isomorphism between logic and lambda calculus, the basis of functional programming. Types correspond to propositions, and the logical proposition in the subject line is certainly false.
+
+This proposition corresponds to the type given to the y combinator:
+
+y f = f (y f)
+
+with which we can write general recursion by continuation-passing style:
+
+fact' c 0 = 1
+fact' c x = x * (c (x-1))
+
+fact = y fact'
+
+It is bogus (a false proposition) because it doesn't terminate/is an invalid proposition.
+
+Google around for types and recursion and you'll find better explanations than mine.
+

@@ -1,0 +1,20 @@
+
+
+Hi Craig,
+
+Please find attached two documents and a Figure. The Figure goes with the 'Vocab Management Tool Use Cases Roadmap doc’. This document elaborates on requirements for the vocabulary authoring/management part of the problem and the ‘RequirementsTermPublishing’ doc lists high level requirements for the publishing/referencing needs. 
+
+
+** -- ISO 19135:2005 specifies procedures to be followed in establishing, maintaining and publishing registers of unique, unambiguous and permanent identifiers, and meanings that are assigned to items of geographic information
+
+	- does this mean web services
+
+
+As you will know these sets of requirements just fall along a continuum really and we may find something that can address everything in a very integrated way, or else tools will focus only on part of our overall requirement.
+
+In reality our short term needs are to get something up and running which can publish our vocabs (by December of this year at the latest). Authoring and managing is an important but secondary priority (which we could wait for until after June of next year). However, as I understand it the evaluation should look at options recognising that we have to put in place something that covers all of our needs eventually - so we really need to know what the path to that goal should look like (cognisant of the level of effort that would need to be expended to get there using the options available to us).
+
+In the ‘RequirementsTermPublishing’ doc I have put little asterisks next to things that seem a little bit more important than others”.
+
+Regards, Kim
+

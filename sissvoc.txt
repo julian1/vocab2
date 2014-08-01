@@ -1,0 +1,52 @@
+
+
+http://www.rvdata.us/voc
+
+	uses r2 to serve controlled vocabularies over postgres db.
+
+
+---
+
+Appears to have easy ability to configure using stylesheets
+---
+
+
+---
+java -jar jetty-runner.jar context.xml
+
+
+navigate to,
+
+http://localhost:8080/elda-demo/meta/api
+
+
+# search
+http://localhost:8080/elda-demo/API/wq/concept?labelcontains=pesticide
+	
+	---- will link here,
+	http://def.seegrid.csiro.au/resources/water/water-quality/wq-object/pesticide
+
+
+http://localhost:8080/elda-demo/API/wq/concept.xml?labelcontains=pesticide
+- xml result
+
+
+# 
+http://localhost:8080/elda-demo/API/wq/concept?labelcontains=CDP-alpha-D-abequose
+
+
+-----
+
+
+- stack
+	CLIENT
+	SISSVOC API
+	ELDA (linked data api)
+	SKOS
+	SPARQL
+	RDF
+	persistance layer.
+
+-----
+
+

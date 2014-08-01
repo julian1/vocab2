@@ -1,0 +1,33 @@
+
+
+interfaces - skos. 
+
+update mechanism from excel spread sheets.
+
+
+
+
+How do SOS and Sensor ML work - are they a part of the rdf resources
+	- interaction with SOS service endpoint 
+
+what is provides addresses		
+
+Vocab manager? would a crud application onto our existing db work?
+
+how does sisvocc communicate with ereefs server?  common sisvocc api/webservice - what's the technology?
+
+
+- Do we need to define our schema for PUPIA. have it as xsd?
+
+- whw are there two arrows
+
+
+- Need SKOS Vocab files -> Geonetwork.
+
+- Rdfs -> IMOS sissvoc
+------------------------------
+
+Option 3 
+	we have a working db
+
+

@@ -1,0 +1,18 @@
+
+write some skos - for geonetwork - so we know what's involved
+
+RE: state - a key goal is to avoid developing our own ad-hoc home-grown approach.  
+
+read the requirements documentation
+
+email kim about why separate db for parameter mappings
+
+scope
+
+
+
+Current situation - need a statement about where we are now.
+	two dbs 
+
+and the contr vocab db, and hierarchical search, and parameter mappings
+

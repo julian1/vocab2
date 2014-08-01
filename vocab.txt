@@ -1,0 +1,510 @@
+
+
+kimtfinney@gmail.com
+
+
+
+---
+
+IS sparql restful ? - can we manipulate records. eg. add and remove them
+
+
+TTL file
+	This is the template LDA configuration for a SISSvoc service
+
+
+
+
+LINKED DATA
+	used by sissvoc
+
+
+
+SISSVOC-RUNNER
+	https://github.com/jyucsiro/sissvoc-runner
+	
+	code is available.
+	lightweight.
+
+ELDA
+	- handles application-level data formats (JSON, XML).
+
+	- elda = LD api	
+	- so probably also used by UK LDP 
+	- ELDA allows configuration of http endpoints corresponding to sparql queries for a given rdf triple. 
+
+
+D2R Server: Accessing databases with SPARQL and as Linked Data
+
+ - This on-the-fly translation allows publishing of RDF from large live databases 
+	and eliminates the need for replicating the data into a dedicated RDF triple store.
+
+	github/ java/tomcat 
+
+	small.
+	 cat $( find  -type f -iname '*.java' ) | wc -l
+	30k 
+ 
+	mature. 10 years. actively developed.
+
+
+
+
+
+
+RDF / semantic web intro
+	http://www.youtube.com/watch?v=Nk9TOx1sBUk
+
+Description - SISSVoc: A Linked Data API for SKOS vocabularies 
+
+http://www.semantic-web-journal.net/system/files/swj658.pdf
+
+----
+
+other skos tools
+	iQvoc  - open source that can import and export skos.o
+	tema tres can export skos.
+	poolparty commercial thesaurus management and skos editor.
+
+
+SKOS ONTOLOGY
+	- "The skos ontology defines a Concept class, and preferred labels, 
+	alternative labels, and relationships to other concepts are modeled as 
+	properties of that class".
+
+	- you assign metadata to the concept. but not to the label. although 
+	there is an extension mechanism - SKOS-Xl
+
+
+
+http://d2rq.org/
+
+	- The D2RQ Platform is a system for accessing relational databases as virtual, read-only 
+	RDF graphs. It offers RDF-based access to the content of relational databases without 
+	having to replicate it into an RDF store. Using D2RQ you can:
+
+		- query a non-RDF database using SPARQL
+		- access the content of the database as Linked Data over the Web
+		- create custom dumps of the database in RDF formats for loading into an RDF store
+
+
+
+OCAML-RDF
+	Supports postgres !!!
+	http://zoggy.github.io/ocaml-rdf/
+
+	OCaml-RDF is an OCaml library to manipulate RDF graphs and execute Sparql queries. 
+
+
+SESAME 
+	RESTFUL INTERFACE TO SPARQL
+
+	http://www.snee.com/bobdc.blog/2009/02/getting-started-with-sesame.html
+
+	curl -H "Accept:  application/sparql-results+xml, */*;q=0.5" 
+  http://localhost:8080/openrdf-sesame/repositories/test1?query=
+  SELECT%20DISTINCT%20%3Fp%20WHERE%20%7B%3Fs%20%3Fp%20%3Fo%7D
+
+
+
+	- can expose sparql language over postgres. - enough 
+	- maybe other things.
+
+	- postgresql - but support may be deprecated
+
+
+DOAP
+	description of a project
+	foaf:Person <- class
+
+
+SKOS Core - thesaurus.
+
+SKOS Core[21] defines the classes and properties sufficient to represent the 
+common features found in a standard thesaurus. It is based on a concept-centric 
+view of the vocabulary, where primitive objects are not terms, but abstract 
+notions represented by terms. Each SKOS concept is defined as an RDF resource. 
+Each concept can have RDF properties attached, including:
+
+    - one or more preferred index terms (at most one in each natural language)
+    - alternative terms or synonyms
+    - definitions and notes, with specification of their language
+
+Concepts can be organized in hierarchies using broader-narrower relationships, 
+or linked by non-hierarchical (associative) relationships. Concepts can be 
+gathered in concept schemes, to provide consistent and structured sets of 
+concepts, representing whole or part of a controlled vocabulary.
+
+These features represent the stable part of SKOS Core. Other elements of the 
+vocabulary are still considered unstable.[citation needed]
+
+
+--** SKOS concept - is an RDF resource **--.
+
+Terms(language), (synonyms), definitions and notes.
+
+DATABASE
+	triple structure of rdf
+	table structure of relational db.
+
+
+ONTOLOGY
+OWL = ontology web language
+	- relation between classes and super classes 
+	and predicates relations are called an 'ontology'.
+
+	http://www.youtube.com/watch?v=Nk9TOx1sBUk
+
+	'Nothing magical about semtantics and Ontologies'
+
+	- "a bit like database schemas"
+
+
+
+
+
+CLASSES (for object/subjects)
+	- have inheritance
+
+	- eg super  
+		foaf_person -> agent	
+		image -> document	
+
+
+RESOURCE
+	- R in RDF
+	- the triple - object, predicate, subject.
+
+SISS
+	Spatial Information Services Stack
+
+
+UKGOVLD
+	https://github.com/UKGovLD/ukl-registry-poc/
+
+	"The proof-of-concept implementation runs as a java web application on a linux server."
+
+	https://github.com/UKGovLD/ukl-registry-poc
+		code is here. it's a maven project.
+
+	(No commits main repo for a year - Aug 2013).
+
+	Mailing lists - nothing since dec 2013.
+	http://data.gov.uk/linked-data/UKGovLD
+	
+
+	https://github.com/UKGovLD/ukl-registry-poc/wiki/Installation
+
+	
+
+	complex distribution - with a pre-packaged WAR and scripts to to prepare an Amazon Ebs instance
+		- downloads java, apache, web server?
+		- when primary installation instructions should have instructions to bulid and configure.
+
+
+	"The registry design and proof-of-concept was developed under a project sponsored by UKGovLD.
+	The resulting proof-of-concept codebase has been made available under an open source license (Apache v2, see code repository).
+	On-going maintenance, support and future development is currently unfunded."
+
+		- https://github.com/UKGovLD/ukl-registry-poc/wiki/Project-Governance
+	
+
+-----
+
+SISSVOC and ANDS
+
+The different configurations of interest are the SISSVoc instances that are operational at 
+	ANDS (http://www.ands.org.au/services/controlled-vocabulary.html 
+		and http://researchdata.ands.org.au/developers/documentation/services/vocabulary_api) 
+		and within eReefs (https://www.seegrid.csiro.au/wiki/Siss/SISSvoc3Overview 
+		and https://wiki.csiro.au/display/ER/Water+Quality+vocabulary) 
+		
+	and the LDP as described at https://github.com/UKGovLD/ukl-registry-poc/wiki (prototype deployment at http://environment.data.gov.uk/registry/).
+
+
+ANDS
+	- australian national data service
+	- http://www.ands.org.au/services/controlled-vocabulary.html
+
+	- At this point in time, no automated interface between the catalogue and server exists. 
+
+	IMPORTANT - ANDS intends to 
+	Vocabularies published through the catalogue are not automatically available via the server. 
+	This will be addressed in a coming release of the service.
+
+	Endpoint
+		http://services.ands.org.au/vocabs
+
+	Why not get ANDS front end?
+
+SISSVOC
+	- SISS = spatial information services stack.
+
+
+	 Kim - 
+
+	The wording of the brief in trying to summarise the task in one sentence to 
+	begin with is probably a little misleading. We already know (I think) that 
+	
+	SISSVoc out of the box has *not* been designed as an authoring and vocab 
+	management tool, but rather a publishing and retrieval tool, so before 
+	commencing an evaluation on that product we know most of the evaluation will 
+	end up focussing on the ‘publishing and retrieval' aspects. 
+
+
+	SISSVoc: A Linked Data API for SKOS vocabularies
+	
+
+LDP
+
+	LDP by contrast looks like it has authoring and management capability in addition 
+	to publishing capability. Anyway, I think you are correct. The evaluation should be 
+	covering term authoring and management which was alluded to in the expansion on the 
+	‘purpose’ in part (a) of Roger’s brief by including 'maintaining and 
+	populating' the different platforms. But it wasn't clear enough.
+
+
+"The standard defines the procedures to be followed during the establishment, maintenance"
+
+EREEFS SISSVOC 
+	 eReefs is a collaborative project focussed on the Great Barrier Reef 	
+
+
+REIFICATION
+	- The body of knowledge modeled by a collection of statements may be subjected to 
+	reification, in which each statement (that is each triple 
+	subject-predicate-object altogether) is assigned a URI and treated as a 
+	resource about which additional statements can be made, as in "Jane says that 
+	John is the author of document X". Reification is sometimes important in order 
+	to deduce a level of confidence or degree of usefulness for each statement.
+
+	- In a reified RDF database, each original statement, being a resource, itself, 
+	most likely has at least three additional statements made about it: one to 
+	assert that its subject is some resource, one to assert that its predicate is 
+	some resource, and one to assert that its object is some resource or literal. 
+	More statements about the original statement may also exist, depending on the 
+	application's needs.
+
+
+LDP (linked data platform)
+	http://codyburleson.com/2013/06/22/w3c-ldp-reframing-the-web/
+
+
+SENSOR ONTOLOGIES
+	http://www.w3.org/2005/Incubator/ssn/wiki/Review_of_Sensor_and_Observations_Ontologies
+	nice picture of an example
+		https://marinemetadata.org/files/mmi/csiroSensorOntology.png
+
+SENSORML 
+	- SensorML is an approved Open Geospatial Consortium standard. 
+	- SensorML provides standard models and an XML encoding for describing sensors and 
+	measurement processes.
+	- generic but considered robust.
+	- SensorML can provide a complete and unambiguous description of the 
+	lineage of an observation. In other words, it can describe in detail the 
+	process by which an observation came to be .... from acquisition by one or more 
+	detectors to processing and perhaps even interpretation by an analyst.
+
+
+STARFL - StarFL 
+	- A new Metadata Language for Sensor Descriptions
+	- starfish fungus language.
+
+
+CSW - search interface - can be used as search interface over 19135
+
+
+Geonetwork - search to 19135 - is just geonetwork UI search. 
+
+
+
+SOS - Sensor Observation Service
+	- The Sensor Observation Service (SOS) is a web service to query real-time sensor 
+	data and sensor data time series and is part of the Sensor Web. 
+
+	- the SOS is an official OGC standard. 
+	- modeled in sensorml
+
+	http://en.wikipedia.org/wiki/Sensor_Observation_Service
+
+
+ISO 19135 - 
+	specifies procedures to be followed in establishing, maintaining and 
+	publishing registers of unique, unambiguous and permanent identifiers, and 
+	meanings that are assigned to items of geographic information
+		- 
+	http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=325
+	53 
+
+	- does this mean web-services for publishing terms?.
+
+	- change of terms over time. dealt with expressly. 
+	- independent of technology
+
+
+ISO 19115 
+	"and its parts defines how to describe geographical information and 
+	associated services, including contents, spatial-temporal purchases, data 
+	quality, access and rights to use"
+	- http://en.wikipedia.org/wiki/Geospatial_metadata
+	
+
+
+
+LINKED DATA
+	http://en.wikipedia.org/wiki/Linked_data
+
+	method of publishing structured data so that it can be interlinked and 
+	become more useful. It builds upon standard Web technologies such as HTTP, RDF 
+	and URIs, but rather than using them to serve web pages for human readers, it 
+	extends them to share information in a way that can be read automatically by 
+	computers. 
+
+	
+
+PUPIA - parameter, unit of measure, platform, instrument, analysis method.
+
+
+GEONETWORK - schema plugin. 
+	meteo@aodn99:~/imos/projects/schema-plugins/iso19139.mcp-2.0/schema/extensions$ ls
+	mcpDwcTerms.xsd  mcpExtensions.xsd
+
+
+XSD (XML Schema Definition), 
+
+
+SCHEMATRON
+	- In markup languages, Schematron is a rule-based validation language for 
+	making assertions about the presence or absence of patterns in XML trees. It is 
+	a structural schema language expressed in XML using a small number of elements 
+	and XPath.
+
+	- Craig - enforce additional constraints not possible to capture with XSD 
+
+DUBLIN CORE elements
+	15 core elements here - http://dublincore.org/documents/dces/
+
+
+URI = embraces both URL and URN.
+
+
+CREATIVE COMMONS
+	Very interesting. - Creative Commons uses rdf to describe their licenses. They 
+	build on copyright law. 
+
+XSD -> OO Type system impedance
+	http://lambda-the-ultimate.org/node/1629
+
+---
+PREDICATE LOGIC, PROLOG and RDF
+	- Interesting, Predicate logic, prolog and rdf.
+	http://www.xml.com/pub/a/2001/04/25/prologrdf/
+
+---
+
+TRIPLE STORE DATABASE
+
+	- A triplestore is a purpose-built database for the storage and retrieval of 
+	triples,[1] a triple being a data entity composed of subject-predicate-object, 
+	like "Bob is 35" or "Bob knows Fred".
+
+	Much like a relational database, one stores information in a triplestore and 
+	retrieves it via a query language. Unlike a relational database, a triplestore 
+	is optimized for the storage and retrieval of triples. In addition to queries, 
+	triples can usually be imported/exported using Resource Description Framework 
+	(RDF) and other formats.
+
+SWISH
+	Interesting
+	Swish is a framework, written in the purely functional programming language 
+	Haskell, for performing deductions in RDF data using a variety of techniques.
+
+SKOS 
+	- Simple Knowledge Organization System (SKOS) is a W3C recommendation 
+	designed for representation of thesauri, classification schemes, taxonomies, 
+	subject-heading systems, 
+		or any other type of structured controlled vocabulary.
+		- SKOS is part of the Semantic Web family of standards built upon RDF 
+	and RDFS, and its main objective is to enable easy publication and use of such 
+	vocabularies as linked data.
+		- This mechanism for describing resources is a major component in the 
+	W3C's Semantic Web activity:
+
+
+RDFS = RDF schema
+
+
+SPARQL.
+	- inference language to work with rdf 
+
+	Simple Protocol and RDF Query Language
+
+RDF
+	- core concept - is tripple =  subject, predicate, object
+
+	- Includes Dublin core.
+
+	- The resource "http://www.w3.org/People/EM/contact#me" is the subject.
+	The objects are:
+		"Eric Miller" (with a predicate "whose name is"),
+		mailto:e.miller123(at)example (with a predicate "whose email address is"), and
+		"Dr." (with a predicate "whose title is").
+
+
+		- The Resource Description Framework (RDF) is a family of World Wide 
+	Web Consortium (W3C) specifications [1] originally designed as a metadata data 
+	model. It has come to be used as a general method for conceptual description or 
+	modeling of information that is implemented in web resources, using a variety 
+	of syntax notations and data serialization formats.
+
+		subject / predicate
+		based upon the idea of making statements about resources (in particular 
+	web resources) in the form of subject-predicate-object expressions.
+
+		 These expressions are known as triples in RDF terminology. The subject 
+	denotes the resource, and the predicate denotes traits or aspects of the 
+	resource and expresses a relationship between the subject and the object. For 
+	example, one way to represent the notion "The sky has the color blue" in RDF is 
+	as the triple: a subject denoting "the sky", a predicate denoting "has", and an 
+	object denoting "the color blue". 
+
+	A collection of RDF statements intrinsically represents a labeled, directed 
+	multi-graph. As such, an RDF-based data model is more naturally suited to 
+	certain kinds of knowledge representation than the relational model and other 
+	ontological models.  
+	--
+
+	- The root RDF data model is deliberately very minimal and, as with 
+	XML, that minimalism is intended to make things easier for programs. 
+
+	- One consequence of that minimalism, when coupled with other 
+	machine-friendly design tropes, is that though "human readable", RDF is not 
+	generally very human writable (although the Notation3 syntax tries to improve 
+	things.) 
+
+	- Furthermore, while RDF's data model is specified, the processing 
+	model isn't (deliberately), so one should expect a wide variety of processors, 
+	each working in its own way, depending on a variety of constraints and 
+	desiderata.
+
+CONTOLLED VOCABULARY
+	- 
+	Controlled vocabularies provide a way to organize knowledge for 
+	subsequent retrieval. They are used in subject indexing schemes, subject 
+	headings, thesauri, etc 
+
+	Controlled vocabulary schemes mandate predefined, authorised terms 
+	preselected by the designer of the vocabulary, in contrast to natural language 
+	vocabularies without restriction.
+
+RDF query language  / SPARQL
+	- specifically a query language for databases, able to retrieve and 
+	manipulate data stored in Resource Description Framework format.
+	- SPARQL is emerging as the de facto RDF query language
+
+	SPARQL allows for a query to consist of triple patterns, conjunctions, 
+	disjunctions, and optional patterns.[7]
+
+
+RSS (Rich Site Summary); -> RDF Site Summary; 
+
