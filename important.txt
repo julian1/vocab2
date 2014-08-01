@@ -75,7 +75,7 @@ Moving to a triple-store - raises issues of maintaining postgresql connection wh
 
 INTRO / scope
 
-	A solution for Imos/aodn controlled vocabularly is needed.
+	A controlled vocabularly is needed solution is needed for Imos/aodn to support .
 	It is desirable to avoid a home-rolled and ad-hoc system. and instead use commonly available open-licensed technologies. From the
 	point of view of support open communities, interoperability and bearing in mind the limited development resources
 	available. 
