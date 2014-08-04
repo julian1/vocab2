@@ -1,5 +1,8 @@
 
+Rapport/Breathing.
+Who cares - work on haskell instead for enjobility
 
+----
 need to note at end of document in issues 
 	- developed non-linked . 
 	- means means to one dont affect the other, 
@@ -87,6 +90,16 @@ Just flag the issues -
 
 
 	- Mechanimsm - of tagging of fields. eg. extracted from netcdf, appended at harvest, or mapped using strings at download (current). 
+
+
+	- For REST (as a resource/service facade for SPARQL), the newer (now, W3C) spec is Linked Data Platform (LDP): http://www.w3.org/TR/ldp/
+		ldp may use ldp which is w3c 	
+		not adhoc elda
+
+	- need to note - the cost of deploying a web app is low - according to scrum baseline tasks - 2
+
+
+	- type conversion. relational -> rdf -> upload ANDS triples -> reformat skos -> parameter_mappings ? 
 
 
 
