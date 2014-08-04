@@ -34,47 +34,64 @@ res = conn.exec( <<-EOS
   o.vocabulary_term_name as child
 
   from contr_vocab_db.vocabulary_term_table v 
-
   left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id 
   left join contr_vocab_db.subject_term_table s on s.vocabulary_term_name = v.vocabulary_term_name
   left join contr_vocab_db.internal_associated_terms_table a on a.subject_term_id = s.subject_term_id 
-
   left join contr_vocab_db.object_term_table o on a.object_term_id = o.object_term_id
 
   -- constraint
   where a.association_type_name = 'isInstanceOf'
-
-  -- I think we just need to map from object_term_id of internal_associated_terms to the object_term table.
-  -- where v.vocabulary_term_name = 'research vessel'
   ; 
 
-
-  select * from narrower; 
-
+  select * from narrower;
 EOS
 )
 
-res.each { |row|
-    puts row # 
-} 
-
-abort( 'abort')
-
-#
 # res.each { |row|
 #     puts row # 
-#     #puts row['vocabulary_term_name']
+# } 
 # 
-#     puts <<-EOS
-# 
-#     <skos:Concept rdf:about= #{row['vocabulary_term_uid']} >  
-#       <skos:prefLabel xml:lang="en">#{row['vocabulary_term_name']}</skos:prefLabel>
-#       <skos:definition>#{row['vocabulary_term_definition']}</skos:definition>
-#       <dc:source>#{row['citation_string']}</dc:source>
-#     
-# EOS
-#   } 
-# 
+
+
+res = conn.exec( <<-EOS
+  -- whoot
+  -- select vocabulary_term_name from contr_vocab_db.vocabulary_term_table 
+
+  create temporary view concept as
+  select 
+    trim( trailing from v.vocabulary_term_uid) as about,
+    v.vocabulary_term_name as prefLabel,
+    v.vocabulary_term_definition as definition,
+    r.citation_string as source
+  from contr_vocab_db.vocabulary_term_table v 
+  left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id 
+  ;
+
+  select * from concept where preflabel = 'research vessel'; 
+ ; 
+EOS
+)
+
+# res.each { |row|
+#     puts row # 
+# } 
+# abort( 'abort')
+
+#
+res.each { |row|
+    puts row # 
+    #puts row['vocabulary_term_name']
+
+    puts <<-EOS
+
+    <skos:Concept rdf:about= #{row['about']} >  
+      <skos:prefLabel xml:lang="en">#{row['prefLabel']}</skos:prefLabel>
+      <skos:definition>#{row['definition']}</skos:definition>
+      <dc:source>#{row['source']}</dc:source>
+    
+EOS
+  } 
+
 
 
 
