@@ -1,0 +1,2439 @@
+++ sudo -u postgres psql -c 'drop database vocab'
+DROP DATABASE
+++ sudo -u postgres psql -c 'create database vocab'
+CREATE DATABASE
+++ sudo -u postgres psql -d vocab -f /home/meteo/imos/projects/db/admin.sql
+psql:/home/meteo/imos/projects/db/admin.sql:15: NOTICE:  schema "admin" does not exist, skipping
+DROP SCHEMA
+CREATE SCHEMA
+GRANT
+SET
+CREATE FUNCTION
+GRANT
+CREATE FUNCTION
+GRANT
+CREATE FUNCTION
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE VIEW
+GRANT
+CREATE FUNCTION
+GRANT
+CREATE FUNCTION
+GRANT
+CREATE FUNCTION
+GRANT
+CREATE FUNCTION
+GRANT
+CREATE FUNCTION
+GRANT
+CREATE FUNCTION
+GRANT
+++ sudo -u postgres psql -c 'drop role contr_vocab_db'
+DROP ROLE
+++ sudo -u postgres psql -c 'drop role maplayers_vocab_read'
+DROP ROLE
+++ sudo -u postgres psql -d vocab -c 'create user contr_vocab_db password '\''a'\'''
+CREATE ROLE
+++ sudo -u postgres psql -d vocab -c 'create user maplayers_vocab_read'
+CREATE ROLE
+++ export PGPASSWORD=a
+++ PGPASSWORD=a
+++ echo 'creating schema'
+creating schema
+++ sudo -u postgres psql -d vocab -c 'create schema contr_vocab_db; alter schema contr_vocab_db owner to contr_vocab_db'
+ALTER SCHEMA
+++ echo 'creating tables'
+creating tables
+++ psql -d vocab -U contr_vocab_db -f 'Contr_vocab_db - tables creation v8.0_contrvocabUser.sql'
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:1: NOTICE:  table "vocabulary_register_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:2: NOTICE:  table "person_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:4: NOTICE:  table "register_owner_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:6: NOTICE:  table "register_manager_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:7: NOTICE:  table "term_proposer_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:8: NOTICE:  table "vocabulary_type_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:9: NOTICE:  table "organisation_name_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:10: NOTICE:  table "organisation_synonym_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:11: NOTICE:  table "affiliation_type_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:12: NOTICE:  table "person_organisational_affiliation_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:13: NOTICE:  table "reference_source_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:14: NOTICE:  table "association_type_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:15: NOTICE:  table "classification_scheme_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:16: NOTICE:  table "classification_scheme_category_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:17: NOTICE:  table "vocabulary_term_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:18: NOTICE:  table "subject_term_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:19: NOTICE:  table "object_term_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:20: NOTICE:  table "internal_associated_terms_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:21: NOTICE:  table "external_associated_terms_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:22: NOTICE:  table "classification_scheme_association_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:23: NOTICE:  table "amendment_table" does not exist, skipping
+DROP TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:40: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "vocabulary_register_table_pkey" for table "vocabulary_register_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:55: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "person_table_pkey" for table "person_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:72: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "organisation_name_table_pkey" for table "organisation_name_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:84: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "organisation_synonym_table_pkey" for table "organisation_synonym_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:94: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "affiliation_type_table_pkey" for table "affiliation_type_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:108: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "person_organisational_affiliation_table_pkey" for table "person_organisational_affiliation_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:123: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "register_owner_table_pkey" for table "register_owner_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:138: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "register_manager_table_pkey" for table "register_manager_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:151: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "term_proposer_table_pkey" for table "term_proposer_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:161: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "vocabulary_type_table_pkey" for table "vocabulary_type_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:174: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "reference_source_table_pkey" for table "reference_source_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:184: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "association_type_table_pkey" for table "association_type_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:199: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "classification_scheme_table_pkey" for table "classification_scheme_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:214: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "classification_scheme_category_table_pkey" for table "classification_scheme_category_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:246: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "vocabular_term_table_pkey" for table "vocabulary_term_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:257: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "subject_term_table_pkey" for table "subject_term_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:268: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "object_term_table_pkey" for table "object_term_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:282: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "internal_associated_terms_table_pkey" for table "internal_associated_terms_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:295: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "external_associated_terms_table_pkey" for table "external_associated_terms_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:309: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "classification_scheme_association_table_pkey" for table "classification_scheme_association_table"
+CREATE TABLE
+ALTER TABLE
+psql:Contr_vocab_db - tables creation v8.0_contrvocabUser.sql:330: NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "amendment_table_pkey" for table "amendment_table"
+CREATE TABLE
+ALTER TABLE
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+GRANT
+SET
+++ echo populating
+populating
+++ psql -d vocab -U contr_vocab_db -f test_seb_vocab_v4.txt
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:186: ERROR:  invalid byte sequence for encoding "UTF8": 0xa0
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:363: ERROR:  invalid byte sequence for encoding "UTF8": 0xe97269
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:703: ERROR:  invalid byte sequence for encoding "UTF8": 0xa0
+psql:test_seb_vocab_v4.txt:705: ERROR:  invalid byte sequence for encoding "UTF8": 0xa0
+psql:test_seb_vocab_v4.txt:707: ERROR:  invalid byte sequence for encoding "UTF8": 0xa0
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:1099: ERROR:  invalid byte sequence for encoding "UTF8": 0xa0
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:1194: ERROR:  invalid byte sequence for encoding "UTF8": 0x92
+psql:test_seb_vocab_v4.txt:1196: ERROR:  invalid byte sequence for encoding "UTF8": 0x92
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:1216: ERROR:  invalid byte sequence for encoding "UTF8": 0x96
+psql:test_seb_vocab_v4.txt:1220: ERROR:  invalid byte sequence for encoding "UTF8": 0xba
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:1323: ERROR:  invalid byte sequence for encoding "UTF8": 0xb1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:1339: ERROR:  invalid byte sequence for encoding "UTF8": 0xb1
+psql:test_seb_vocab_v4.txt:1341: ERROR:  invalid byte sequence for encoding "UTF8": 0xb1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:1349: ERROR:  invalid byte sequence for encoding "UTF8": 0xb1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:1537: ERROR:  invalid byte sequence for encoding "UTF8": 0xfc
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:1661: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(Nortek Continental) is not present in table "vocabulary_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:1735: ERROR:  invalid byte sequence for encoding "UTF8": 0xe97269
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:2075: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(Slocum Glider) is not present in table "vocabulary_term_table".
+psql:test_seb_vocab_v4.txt:2077: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(Seaglider UW) is not present in table "vocabulary_term_table".
+psql:test_seb_vocab_v4.txt:2079: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(1KA Seaglider) is not present in table "vocabulary_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:2231: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(Aanderaa Oxygen optode ) is not present in table "vocabulary_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:2293: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(OSi OWI-430 DSP-WIVIS Present Weather and Visibility Sensor) is not present in table "vocabulary_term_table".
+psql:test_seb_vocab_v4.txt:2295: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(OSi ORG-815-DR Optical Rain Gauge) is not present in table "vocabulary_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:2315: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(Pico Technologies PT-104 Platinum Resistance Data Logger) is not present in table "vocabulary_term_table".
+psql:test_seb_vocab_v4.txt:2317: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(Everest Interscience 4000.4ZL Temperature Sensor) is not present in table "vocabulary_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:2339: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(RBR TDR-2050 underwater temperature logger) is not present in table "vocabulary_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:2353: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(Falmouth Scientific Instruments NXIC CTD) is not present in table "vocabulary_term_table".
+psql:test_seb_vocab_v4.txt:2355: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(Satlantic ISUS V3 Nitrate Sensor) is not present in table "vocabulary_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:2363: ERROR:  insert or update on table "subject_term_table" violates foreign key constraint "subject_term_table_fkey"
+DETAIL:  Key (vocabulary_term_name)=(RBR XR-420 CTD Marine) is not present in table "vocabulary_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:2493: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(37) is not present in table "subject_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:2567: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(118) is not present in table "subject_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:2907: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(293) is not present in table "subject_term_table".
+psql:test_seb_vocab_v4.txt:2909: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(294) is not present in table "subject_term_table".
+psql:test_seb_vocab_v4.txt:2911: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(295) is not present in table "subject_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:3063: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(490) is not present in table "subject_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:3163: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(541) is not present in table "subject_term_table".
+psql:test_seb_vocab_v4.txt:3165: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(542) is not present in table "subject_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:3187: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(552) is not present in table "subject_term_table".
+psql:test_seb_vocab_v4.txt:3189: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(553) is not present in table "subject_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:3225: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(606) is not present in table "subject_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:3253: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(614) is not present in table "subject_term_table".
+psql:test_seb_vocab_v4.txt:3255: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(614) is not present in table "subject_term_table".
+psql:test_seb_vocab_v4.txt:3257: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(614) is not present in table "subject_term_table".
+psql:test_seb_vocab_v4.txt:3259: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(615) is not present in table "subject_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:3275: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(619) is not present in table "subject_term_table".
+psql:test_seb_vocab_v4.txt:3277: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(619) is not present in table "subject_term_table".
+psql:test_seb_vocab_v4.txt:3279: ERROR:  insert or update on table "internal_associated_terms_table" violates foreign key constraint "internal_associated_terms_table_fkey2"
+DETAIL:  Key (subject_term_id)=(619) is not present in table "subject_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:3565: ERROR:  insert or update on table "external_associated_terms_table" violates foreign key constraint "external_associated_terms_table_fkey2"
+DETAIL:  Key (vocabulary_term_name)=(RBR TDR-2050 underwater temperature logger) is not present in table "vocabulary_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:3581: ERROR:  insert or update on table "external_associated_terms_table" violates foreign key constraint "external_associated_terms_table_fkey2"
+DETAIL:  Key (vocabulary_term_name)=(Falmouth Scientific Instruments NXIC CTD) is not present in table "vocabulary_term_table".
+psql:test_seb_vocab_v4.txt:3583: ERROR:  insert or update on table "external_associated_terms_table" violates foreign key constraint "external_associated_terms_table_fkey2"
+DETAIL:  Key (vocabulary_term_name)=(Satlantic ISUS V3 Nitrate Sensor) is not present in table "vocabulary_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:test_seb_vocab_v4.txt:3591: ERROR:  insert or update on table "external_associated_terms_table" violates foreign key constraint "external_associated_terms_table_fkey2"
+DETAIL:  Key (vocabulary_term_name)=(RBR XR-420 CTD Marine) is not present in table "vocabulary_term_table".
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
