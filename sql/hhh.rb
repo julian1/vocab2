@@ -25,6 +25,7 @@ res = conn.exec( <<-EOS
   -- whoot
   -- select vocabulary_term_name from contr_vocab_db.vocabulary_term_table 
 
+  create temporary view narrower as
   select -- vocabulary_term_uid,
     v.vocabulary_term_name, 
  -- v.vocabulary_term_definition,
@@ -44,9 +45,11 @@ res = conn.exec( <<-EOS
   where a.association_type_name = 'isInstanceOf'
 
   -- I think we just need to map from object_term_id of internal_associated_terms to the object_term table.
-
-
   -- where v.vocabulary_term_name = 'research vessel'
+  ; 
+
+
+  select * from narrower; 
 
 EOS
 )
