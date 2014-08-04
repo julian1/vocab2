@@ -14,7 +14,10 @@
 
 require 'pg'
 
-conn = PG::Connection.open(:host => "dbprod.emii.org.au", :dbname => "harvest", :user => "jfca", :password => "fredfred" )
+# psql -U contr_vocab_db -h localhost -d vocab  -c 'select * from contr_vocab_db.internal_associated_terms_table '
+
+# conn = PG::Connection.open(:host => "dbprod.emii.org.au", :dbname => "harvest", :user => "jfca", :password => "fredfred" )
+conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
 
 # we really want to create a view.
 
@@ -27,14 +30,21 @@ res = conn.exec( <<-EOS
  -- v.vocabulary_term_definition,
  -- r.reference_id,
  -- r.citation_string,
-  a.*
+  o.vocabulary_term_name as child
 
   from contr_vocab_db.vocabulary_term_table v 
+
   left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id 
-
-
   left join contr_vocab_db.subject_term_table s on s.vocabulary_term_name = v.vocabulary_term_name
   left join contr_vocab_db.internal_associated_terms_table a on a.subject_term_id = s.subject_term_id 
+
+  left join contr_vocab_db.object_term_table o on a.object_term_id = o.object_term_id
+
+  -- constraint
+  where a.association_type_name = 'isInstanceOf'
+
+  -- I think we just need to map from object_term_id of internal_associated_terms to the object_term table.
+
 
   -- where v.vocabulary_term_name = 'research vessel'
 
