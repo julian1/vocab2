@@ -2,6 +2,10 @@
 
 # elda
 
+	http://sws.ifi.uio.no/lda/docs/
+
+	shows how to use just elda in jetty/tomcat from command line.
+
 
 # ands
 	https://researchdata.ands.org.au/registry/

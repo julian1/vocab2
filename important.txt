@@ -1,4 +1,28 @@
 
+
+need to note at end of document in issues 
+	- developed non-linked . 
+	- means means to one dont affect the other, 
+	- and only authoritative source is files.
+----
+
+	also at en. grails/crud front 
+		- end to db as update mechanism
+--
+
+also how we don't want to have to start again wit 
+	two databases have neen developed
+	requirements doc
+	etc
+
+
+
+
+-----
+
+Concept - of superset. ANDs doesn't have superset. versioning, author, other details.
+
+
 Should try to get to Pete - before planning. 
 
 ----
@@ -37,6 +61,11 @@ Just flag the issues -
 	- Namespacing . Used by ANDs. assigned some type of identifier. DI =  
 					indirection not needed.
 					- issue. irrespective of ands or local sissvoc
+
+
+	- if we go with external provider. then we will need to decompose the skos back to relational form to ingest
+	into the parameter_mappings db for wfs download information. requiring harvester etc.
+
 
 	(Kim's email)
 
