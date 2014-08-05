@@ -19,42 +19,34 @@ require 'pg'
 # conn = PG::Connection.open(:host => "dbprod.emii.org.au", :dbname => "harvest", :user => "jfca", :password => "fredfred" )
 conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
 
-# conn2 = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
-
-# we really want to create a view.
-# conn = PG.connect(:dbname => 'db1')
-
-#
-
-
-
-# res = conn.exec( <<-EOS
-#   -- concept
-#   create temporary view concept as
-#   select
-#     trim(trailing from v.vocabulary_term_uid) as about,
-#     v.vocabulary_term_name as prefLabel,
-#     v.vocabulary_term_definition as definition,
-#     r.citation_string as source
-#   from contr_vocab_db.vocabulary_term_table v
-#   left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id
-#   ;
-#
-#   select about from concept ;
-# EOS
-# )
-#
-# res.each { |row|
-#     puts row #
-# }
-#
-# abort( 'finish' )
-
 # how should we piece this stuff together...
 # pass in connection and term???
 
+# should we break all these things apart
 
-def func1( conn, x)
+
+
+def get_definition( conn, x)
+  conn.prepare('statement1', <<-EOS
+    select
+      v.vocabulary_term_definition as definition
+    from contr_vocab_db.vocabulary_term_table v
+    where v.vocabulary_term_name = $1
+  EOS
+  )
+
+
+  res = conn.exec_prepared('statement1', [ x ] ) 
+  res.each { |row|
+      puts row #
+  }
+end
+
+get_definition( conn, "research vessel" ) 
+abort( 'finished')
+
+
+def get_properties( conn, x)
 
   res = conn.exec( <<-EOS
     -- concept
@@ -73,19 +65,26 @@ def func1( conn, x)
   EOS
   )
 
+  # lets just use strings rather than symbols
   res.each { |row|
-      puts row #
-      #puts row['vocabulary_term_name']
-      puts <<-EOS
-      <skos:Concept rdf:about= #{row['about']} >
-        <skos:prefLabel xml:lang="en">#{row['prefLabel']}</skos:prefLabel>
-        <skos:definition>#{row['definition']}</skos:definition>
-        <dc:source>#{row['source']}</dc:source>
+    puts row 
+  }
 
-  EOS
-    }
+#   res.each { |row|
+#       puts row #
+#       #puts row['vocabulary_term_name']
+#       puts <<-EOS
+#       <skos:Concept rdf:about= #{row['about']} >
+#         <skos:prefLabel xml:lang="en">#{row['prefLabel']}</skos:prefLabel>
+#         <skos:definition>#{row['definition']}</skos:definition>
+#         <dc:source>#{row['source']}</dc:source>
+# 
+#   EOS
+#  }
 end
 
+
+func1( conn, "dummy" );
 
 
 def get_narrower( conn, x)
