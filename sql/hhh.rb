@@ -65,27 +65,19 @@ def prepare_statements( conn)
     -- narrower
     select
     v.vocabulary_term_uid,
-    -- trim(trailing from o.vocabulary_term_uid) as narrower,
-
-    -- o.vocabulary_term_name as narrower -- this thing still needs to be mapped to the uri
-                                      -- not sure the db is correctly structured.
-    v2.vocabulary_term_uid as narrower
+    trim( trailing from v2.vocabulary_term_uid) as narrower
 
     from contr_vocab_db.vocabulary_term_table v
     left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id
     left join contr_vocab_db.subject_term_table s on s.vocabulary_term_name = v.vocabulary_term_name
     left join contr_vocab_db.internal_associated_terms_table a on a.subject_term_id = s.subject_term_id
     -- left join contr_vocab_db.object_term_table o on a.object_term_id = o.object_term_id
-
-
     left join contr_vocab_db.vocabulary_term_table v2 on a.object_term_id = v2.vocabulary_term_code
 
     where a.association_type_name = 'isInstanceOf'
     and v.vocabulary_term_name = $1
   EOS
   )
-
-
 
 end
 
@@ -123,7 +115,6 @@ def dump_skos(conn, term)
       #{ s = ""
         conn.exec_prepared('narrower', [term]).each { |row|
           s += <<-EOS
-
       <skos:narrower rdf:resource="#{row['narrower']}"/>
           EOS
         }
@@ -136,33 +127,10 @@ end
 # dump_all_terms( conn)
 term = "L'Astrolabe"
 
-dump_fields(conn, term)
-# dump_skos( conn, term)
+# dump_fields(conn, term)
 
-
-
-abort( 'finished' )
-
-
-
+dump_skos( conn, term)
 
 
 
  
-# 
-#
-#   # we should be encoding ruby tuples  according to the name
-#   # might have multiple results
-#   
-#   # or just output the xml as needed.
-# 
-#   conn.exec_prepared('statement1', [ x ] ) .each { |row|
-#       puts row #
-#   }
-# end
-# 
-# get_narrower( conn, "L'Astrolabe" )
-# 
-# 
-# 
-# 
