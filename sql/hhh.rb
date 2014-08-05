@@ -67,8 +67,9 @@ def prepare_statements( conn)
     v.vocabulary_term_uid,
     -- trim(trailing from o.vocabulary_term_uid) as narrower,
 
-    o.vocabulary_term_name as narrower -- this thing still needs to be mapped to the uri
+    -- o.vocabulary_term_name as narrower -- this thing still needs to be mapped to the uri
                                       -- not sure the db is correctly structured.
+    a.object_term_id as narrower
 
     from contr_vocab_db.vocabulary_term_table v
     left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id
