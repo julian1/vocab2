@@ -93,7 +93,8 @@ term = "L'Astrolabe"
 # } 
 # 
 
-# ok there's an issue that the puts is outputting to std out rather than creating our string...
+
+## the narrower resource isn't correct. It should be a uri. 
 
   puts <<-EOS
   <skos:Concept rdf:about="#{ conn.exec_prepared('about', [term])[0]['about'] }">
