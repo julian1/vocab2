@@ -54,7 +54,10 @@ def prepare_statements( conn)
   conn.prepare('narrower', <<-EOS
     -- narrower
     select
-    v.vocabulary_term_name,
+
+    v.vocabulary_term_uid,
+    -- trim(trailing from o.vocabulary_term_uid) as narrower,
+
     o.vocabulary_term_name as narrower
     from contr_vocab_db.vocabulary_term_table v
     left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id
@@ -81,16 +84,24 @@ prepare_statements( conn)
 
 term = "L'Astrolabe"
 
-puts "definition #{ conn.exec_prepared('definition', [term])[0] } "  
-puts "source #{ conn.exec_prepared('source', [term])[0] } "  
-puts "about #{ conn.exec_prepared('about', [term])[0] } "  
-puts "narrower" 
-conn.exec_prepared('narrower', [term]).each { |row| 
-  puts row
-} 
+# puts "definition #{ conn.exec_prepared('definition', [term])[0] } "  
+# puts "source #{ conn.exec_prepared('source', [term])[0] } "  
+# puts "about #{ conn.exec_prepared('about', [term])[0] } "  
+# puts "narrower" 
+# conn.exec_prepared('narrower', [term]).each { |row| 
+#   puts row
+# } 
+# 
+# 
+# puts
+
+ conn.exec_prepared('narrower', [term]).each {  |row|
+
+      puts "here #{row}"
+    }
 
 
-puts
+# ok there's an issue that the puts is outputting to std out rather than creating our string...
 
   puts <<-EOS
   <skos:Concept rdf:about="#{ conn.exec_prepared('about', [term])[0]['about'] }">
@@ -98,17 +109,34 @@ puts
     <skos:definition>#{ conn.exec_prepared('definition', [term])[0]['definition']}</skos:definition>
     <dc:source>#{ conn.exec_prepared('source', [term])[0]['source']  }</dc:source>
 
-  #{ conn.exec_prepared('narrower', [term]).each {  |row|
 
-    puts row
+  #{
+  s = ""
+   conn.exec_prepared('narrower', [term]).each {  |row|
+      s += "0 <skos:narrower rdf:resource= #{row['narrower']}"
     }
-  }
+    s
+ }
 
   EOS
+
+ conn.exec_prepared('narrower', [term]).each {  |row|
+
+#      puts row['narrower']
+      puts "1  <skos:narrower rdf:resource= #{row['narrower']}"
+    }
+
+
 
 
 abort( 'finished' )
 
+#  # { conn.exec_prepared('narrower', [term]).each {  |row|
+# 
+# #      puts row['narrower']
+#       puts row
+#     }
+#   }
 
 # puts get_citation( conn, "research vessel" ) 
 # # abort( 'finished')
