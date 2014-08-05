@@ -15,10 +15,9 @@
 
 require 'pg'
 
-conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
 
 
-def prepare_statements( conn)
+def prepare_all_statements( conn)
 
   conn.prepare('all_terms', <<-EOS
     select v.vocabulary_term_name
@@ -27,14 +26,12 @@ def prepare_statements( conn)
   EOS
   )
 
-
 #   conn.prepare('term', <<-EOS
 #     select *
 #     from contr_vocab_db.vocabulary_term_table v
 #     where v.vocabulary_term_name = $1
 #   EOS
 #   )
-
 
   conn.prepare('definition', <<-EOS
     select
@@ -81,31 +78,29 @@ def prepare_statements( conn)
 
 end
 
-prepare_statements( conn)
-
 
 def dump_all_terms(conn)
-  puts "dumping all_terms" 
-  conn.exec_prepared('all_terms').each { |row| 
+  puts "dumping all_terms"
+  conn.exec_prepared('all_terms').each { |row|
     puts row
   }
 end
 
 
-def dump_fields(conn, term)
-  puts "definition #{ conn.exec_prepared('definition', [term])[0] } "  
-  puts "source #{ conn.exec_prepared('source', [term])[0] } "  
-  puts "about #{ conn.exec_prepared('about', [term])[0] } "  
-  puts "narrower" 
-  conn.exec_prepared('narrower', [term]).each { |row| 
+def dump_concept_fields(conn, term)
+  puts "definition #{ conn.exec_prepared('definition', [term])[0] } "
+  puts "source #{ conn.exec_prepared('source', [term])[0] } "
+  puts "about #{ conn.exec_prepared('about', [term])[0] } "
+  puts "narrower"
+  conn.exec_prepared('narrower', [term]).each { |row|
     puts row
-  } 
+  }
 end
 
 
-def dump_skos(conn, term)
+def dump_concept_as_skos(conn, term)
   puts "dumping skos"
-  ## the narrower resource isn't correct. It should be a uri. 
+  ## the narrower resource isn't correct. It should be a uri.
   puts <<-EOS
     <skos:Concept rdf:about="#{ conn.exec_prepared('about', [term])[0]['about'] }">
       <skos:prefLabel xml:lang="en">#{term}</skos:prefLabel>
@@ -124,13 +119,17 @@ def dump_skos(conn, term)
 end
 
 
-# dump_all_terms( conn)
+conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
+prepare_all_statements(conn)
+
+
+# dump_all_terms(conn)
 term = "L'Astrolabe"
 
-# dump_fields(conn, term)
+# dump_concept_fields(conn, term)
 
-dump_skos( conn, term)
+dump_concept_as_skos(conn, term)
 
 
 
- 
+
