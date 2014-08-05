@@ -34,9 +34,8 @@ def get_definition( conn, x)
     where v.vocabulary_term_name = $1
   EOS
   )
-
-
   res = conn.exec_prepared('statement1', [ x ] ) 
+  puts res[ 0][0]
   res.each { |row|
       puts row #
   }
