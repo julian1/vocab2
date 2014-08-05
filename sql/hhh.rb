@@ -1,5 +1,6 @@
 
-# Example,
+# Example ruby code to dump skos Concept from contr_vocab_db
+# 
 # <skos:Concept rdf:about="http://vocab.nerc.ac.uk/collection/L06/current/31/">
 #   <skos:inScheme rdf:resource="http://environment.data.gov.au/aodn//def/Platform"/>
 #   <skos:prefLabel xml:lang="en">Research Vessel</skos:prefLabel>
@@ -16,6 +17,8 @@
 require 'pg'
 
 
+# should be changed to take the term uid as parameter, not the english name
+# all of these should take the term uid as parameter not the english name
 
 def prepare_all_statements( conn)
 
@@ -62,7 +65,7 @@ def prepare_all_statements( conn)
     -- narrower
     select
     v.vocabulary_term_uid,
-    trim( trailing from v2.vocabulary_term_uid) as narrower
+    trim(trailing from v2.vocabulary_term_uid) as narrower
 
     from contr_vocab_db.vocabulary_term_table v
     left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id
