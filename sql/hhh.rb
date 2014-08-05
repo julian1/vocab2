@@ -106,8 +106,9 @@ def get_narrower( conn, x)
   )
 
   # we should be encoding ruby tuples  according to the name
-
   # might have multiple results
+  
+  # or just output the xml as needed.
 
   conn.exec_prepared('statement1', [ x ] ) .each { |row|
       puts row #
