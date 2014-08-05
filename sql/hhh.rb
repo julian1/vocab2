@@ -69,13 +69,17 @@ def prepare_statements( conn)
 
     -- o.vocabulary_term_name as narrower -- this thing still needs to be mapped to the uri
                                       -- not sure the db is correctly structured.
-    a.object_term_id as narrower
+    v2.vocabulary_term_uid as narrower
 
     from contr_vocab_db.vocabulary_term_table v
     left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id
     left join contr_vocab_db.subject_term_table s on s.vocabulary_term_name = v.vocabulary_term_name
     left join contr_vocab_db.internal_associated_terms_table a on a.subject_term_id = s.subject_term_id
-    left join contr_vocab_db.object_term_table o on a.object_term_id = o.object_term_id
+    -- left join contr_vocab_db.object_term_table o on a.object_term_id = o.object_term_id
+
+
+    left join contr_vocab_db.vocabulary_term_table v2 on a.object_term_id = v2.vocabulary_term_code
+
     where a.association_type_name = 'isInstanceOf'
     and v.vocabulary_term_name = $1
   EOS
