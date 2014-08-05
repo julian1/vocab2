@@ -92,14 +92,6 @@ term = "L'Astrolabe"
 #   puts row
 # } 
 # 
-# 
-# puts
-
- conn.exec_prepared('narrower', [term]).each {  |row|
-
-      puts "here #{row}"
-    }
-
 
 # ok there's an issue that the puts is outputting to std out rather than creating our string...
 
@@ -107,16 +99,17 @@ term = "L'Astrolabe"
   <skos:Concept rdf:about="#{ conn.exec_prepared('about', [term])[0]['about'] }">
     <skos:prefLabel xml:lang="en">#{term}</skos:prefLabel>
     <skos:definition>#{ conn.exec_prepared('definition', [term])[0]['definition']}</skos:definition>
-    <dc:source>#{ conn.exec_prepared('source', [term])[0]['source']  }</dc:source>
+    <dc:source>#{ conn.exec_prepared('source', [term])[0]['source'] }</dc:source>
 
+    #{ s = ""
+      conn.exec_prepared('narrower', [term]).each { |row|
+        s += <<-EOS
 
-  #{
-      s = ""
-      conn.exec_prepared('narrower', [term]).each {  |row|
-        s += "<skos:narrower rdf:resource= #{row['narrower']}"
+    <skos:narrower rdf:resource="#{row['narrower']}"/>
+        EOS
       }
-      s
-  }
+      s }
+  </skos:Concept>
 
   EOS
 
