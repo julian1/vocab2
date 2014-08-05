@@ -95,10 +95,14 @@ puts
   puts <<-EOS
   <skos:Concept rdf:about="#{ conn.exec_prepared('about', [term])[0]['about'] }">
     <skos:prefLabel xml:lang="en">#{term}</skos:prefLabel>
-    <skos:definition>#{  conn.exec_prepared('definition', [term])[0]['definition']}</skos:definition>
-    <dc:source>#{  conn.exec_prepared('source', [term])[0]['source']  }</dc:source>
+    <skos:definition>#{ conn.exec_prepared('definition', [term])[0]['definition']}</skos:definition>
+    <dc:source>#{ conn.exec_prepared('source', [term])[0]['source']  }</dc:source>
 
+  #{ conn.exec_prepared('narrower', [term]).each {  |row|
 
+    puts row
+    }
+  }
 
   EOS
 
