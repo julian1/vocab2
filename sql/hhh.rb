@@ -26,23 +26,53 @@ conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "c
 
 
 
-def get_definition( conn, x)
-  conn.prepare('statement1', <<-EOS
+def prepare_statements( conn)
+
+  conn.prepare('definition', <<-EOS
     select
-      v.vocabulary_term_definition as definition
+    v.vocabulary_term_definition as definition
     from contr_vocab_db.vocabulary_term_table v
     where v.vocabulary_term_name = $1
   EOS
   )
-  res = conn.exec_prepared('statement1', [ x ] ) 
-  puts res[ 0][0]
-  res.each { |row|
-      puts row #
-  }
+#  res = conn.exec_prepared('statement1', [x]) 
+#  res[ 0]["definition"]
+
+  conn.prepare('source', <<-EOS
+    select
+    r.citation_string as source
+    from contr_vocab_db.vocabulary_term_table v
+    left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id
+    where v.vocabulary_term_name = $1
+  EOS
+  )
+
+  conn.prepare('about', <<-EOS
+    select
+    trim(trailing from v.vocabulary_term_uid) as about
+    from contr_vocab_db.vocabulary_term_table v
+    where v.vocabulary_term_name = $1
+  EOS
+  )
+
 end
 
-get_definition( conn, "research vessel" ) 
-abort( 'finished')
+prepare_statements( conn)
+
+puts "definition #{ conn.exec_prepared('definition', ["research vessel"])[0] } "  
+puts "source #{ conn.exec_prepared('source', ["research vessel"])[0] } "  
+puts "about #{ conn.exec_prepared('about', ["research vessel"])[0] } "  
+
+
+
+
+
+puts get_citation( conn, "research vessel" ) 
+# abort( 'finished')
+
+
+
+
 
 
 def get_properties( conn, x)
