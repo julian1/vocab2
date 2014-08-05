@@ -36,11 +36,20 @@ def prepare_all_statements( conn)
 #   EOS
 #   )
 
-  conn.prepare('definition', <<-EOS
-    select
-    v.vocabulary_term_definition as definition
+
+# change to lookup_term
+  conn.prepare('term', <<-EOS
+    -- select v.vocabulary_term_uid
+    select trim(trailing from v.vocabulary_term_uid) as term
     from contr_vocab_db.vocabulary_term_table v
     where v.vocabulary_term_name = $1
+  EOS
+  )
+
+  conn.prepare('definition', <<-EOS
+    select v.vocabulary_term_definition as definition
+    from contr_vocab_db.vocabulary_term_table v
+    where v.vocabulary_term_uid = $1
   EOS
   )
 
@@ -49,7 +58,7 @@ def prepare_all_statements( conn)
     r.citation_string as source
     from contr_vocab_db.vocabulary_term_table v
     left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id
-    where v.vocabulary_term_name = $1
+    where v.vocabulary_term_uid = $1
   EOS
   )
 
@@ -57,7 +66,7 @@ def prepare_all_statements( conn)
     select
     trim(trailing from v.vocabulary_term_uid) as about
     from contr_vocab_db.vocabulary_term_table v
-    where v.vocabulary_term_name = $1
+    where v.vocabulary_term_uid = $1
   EOS
   )
 
@@ -75,7 +84,7 @@ def prepare_all_statements( conn)
     left join contr_vocab_db.vocabulary_term_table v2 on a.object_term_id = v2.vocabulary_term_code
 
     where a.association_type_name = 'isInstanceOf'
-    and v.vocabulary_term_name = $1
+    and v.vocabulary_term_uid = $1
   EOS
   )
 
@@ -90,12 +99,12 @@ def dump_all_terms(conn)
 end
 
 
-def dump_concept_fields(conn, term)
-  puts "definition #{ conn.exec_prepared('definition', [term])[0] } "
-  puts "source #{ conn.exec_prepared('source', [term])[0] } "
-  puts "about #{ conn.exec_prepared('about', [term])[0] } "
+def dump_concept_fields(conn, uid)
+  puts "definition #{ conn.exec_prepared('definition', [uid])[0] } "
+  puts "source #{ conn.exec_prepared('source', [uid])[0] } "
+  puts "about #{ conn.exec_prepared('about', [uid])[0] } "
   puts "narrower"
-  conn.exec_prepared('narrower', [term]).each { |row|
+  conn.exec_prepared('narrower', [uid]).each { |row|
     puts row
   }
 end
@@ -125,13 +134,33 @@ end
 conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
 prepare_all_statements(conn)
 
+# change uid to rdf_uid
 
+# lookup resource id
+uid = conn.exec_prepared('term', ["L'Astrolabe"])[0]['term']
+
+# dump_concept_fields(conn, uid)
+
+puts "uid is #{uid}"
+
+# -- puts conn.exec_prepared('definition', ['http://vocab.nerc.ac.uk/collection/C17/current/353L/'])[0]
+puts conn.exec_prepared('definition', [uid])[0]
+
+
+abort('finished')
+
+
+
+
+
+
+
+#puts conn.exec_prepared('definition', [])[0]
+# puts "definition #{ conn.exec_prepared('definition', [])[0] } "
 # dump_all_terms(conn)
-term = "L'Astrolabe"
-
+# term = "L'Astrolabe"
 # dump_concept_fields(conn, term)
-
-dump_concept_as_skos(conn, term)
+ dump_concept_as_skos(conn, term)
 
 
 
