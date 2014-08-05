@@ -1,4 +1,5 @@
 
+# Example 
 # <skos:Concept rdf:about="http://vocab.nerc.ac.uk/collection/L06/current/31/">
 #   <skos:inScheme rdf:resource="http://environment.data.gov.au/aodn//def/Platform"/>
 #   <skos:prefLabel xml:lang="en">Research Vessel</skos:prefLabel>
@@ -18,7 +19,6 @@ conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "c
 
 
 def prepare_statements( conn)
-
 
   conn.prepare('all_terms', <<-EOS
     select v.vocabulary_term_name
@@ -96,6 +96,9 @@ term = "L'Astrolabe"
 
 ## the narrower resource isn't correct. It should be a uri. 
 
+
+def dump_skos( conn, term)
+
   puts <<-EOS
   <skos:Concept rdf:about="#{ conn.exec_prepared('about', [term])[0]['about'] }">
     <skos:prefLabel xml:lang="en">#{term}</skos:prefLabel>
@@ -114,17 +117,12 @@ term = "L'Astrolabe"
 
   EOS
 
+end
 
 
+dump_skos( conn, term)
 
 abort( 'finished' )
-
-#  # { conn.exec_prepared('narrower', [term]).each {  |row|
-# 
-# #      puts row['narrower']
-#       puts row
-#     }
-#   }
 
 # puts get_citation( conn, "research vessel" ) 
 # # abort( 'finished')
