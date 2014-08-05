@@ -111,20 +111,14 @@ term = "L'Astrolabe"
 
 
   #{
-  s = ""
-   conn.exec_prepared('narrower', [term]).each {  |row|
-      s += "0 <skos:narrower rdf:resource= #{row['narrower']}"
-    }
-    s
- }
+      s = ""
+      conn.exec_prepared('narrower', [term]).each {  |row|
+        s += "<skos:narrower rdf:resource= #{row['narrower']}"
+      }
+      s
+  }
 
   EOS
-
- conn.exec_prepared('narrower', [term]).each {  |row|
-
-#      puts row['narrower']
-      puts "1  <skos:narrower rdf:resource= #{row['narrower']}"
-    }
 
 
 
