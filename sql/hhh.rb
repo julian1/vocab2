@@ -19,79 +19,111 @@ require 'pg'
 # conn = PG::Connection.open(:host => "dbprod.emii.org.au", :dbname => "harvest", :user => "jfca", :password => "fredfred" )
 conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
 
+# conn2 = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
+
 # we really want to create a view.
+# conn = PG.connect(:dbname => 'db1')
 
-res = conn.exec( <<-EOS
-  -- whoot
-  -- select vocabulary_term_name from contr_vocab_db.vocabulary_term_table 
+#
 
-  create temporary view narrower as
-  select -- vocabulary_term_uid,
-    v.vocabulary_term_name, 
- -- v.vocabulary_term_definition,
- -- r.reference_id,
- -- r.citation_string,
-  o.vocabulary_term_name as child
 
-  from contr_vocab_db.vocabulary_term_table v 
-  left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id 
-  left join contr_vocab_db.subject_term_table s on s.vocabulary_term_name = v.vocabulary_term_name
-  left join contr_vocab_db.internal_associated_terms_table a on a.subject_term_id = s.subject_term_id 
-  left join contr_vocab_db.object_term_table o on a.object_term_id = o.object_term_id
 
-  -- constraint
-  where a.association_type_name = 'isInstanceOf'
-  ; 
-
-  select * from narrower;
-EOS
-)
-
+# res = conn.exec( <<-EOS
+#   -- concept
+#   create temporary view concept as
+#   select 
+#     trim(trailing from v.vocabulary_term_uid) as about,
+#     v.vocabulary_term_name as prefLabel,
+#     v.vocabulary_term_definition as definition,
+#     r.citation_string as source
+#   from contr_vocab_db.vocabulary_term_table v 
+#   left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id 
+#   ;
+# 
+#   select about from concept ; 
+# EOS
+# )
+# 
 # res.each { |row|
 #     puts row # 
 # } 
 # 
+# abort( 'finish' )
+
+# how should we piece this stuff together...
+# pass in connection and term??? 
 
 
-res = conn.exec( <<-EOS
-  -- whoot
-  -- select vocabulary_term_name from contr_vocab_db.vocabulary_term_table 
+def func1( conn, x)
 
-  create temporary view concept as
-  select 
-    trim( trailing from v.vocabulary_term_uid) as about,
-    v.vocabulary_term_name as prefLabel,
-    v.vocabulary_term_definition as definition,
-    r.citation_string as source
-  from contr_vocab_db.vocabulary_term_table v 
-  left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id 
-  ;
+  res = conn.exec( <<-EOS
+    -- concept
 
-  select * from concept where preflabel = 'research vessel'; 
- ; 
-EOS
-)
+    create temporary view concept as
+    select 
+      trim(trailing from v.vocabulary_term_uid) as about,
+      v.vocabulary_term_name as prefLabel,
+      v.vocabulary_term_definition as definition,
+      r.citation_string as source
+    from contr_vocab_db.vocabulary_term_table v 
+    left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id 
+    ;
 
-# res.each { |row|
+    select * from concept where preflabel = 'research vessel'; 
+  EOS
+  )
+
+  res.each { |row|
+      puts row # 
+      #puts row['vocabulary_term_name']
+      puts <<-EOS
+      <skos:Concept rdf:about= #{row['about']} >  
+        <skos:prefLabel xml:lang="en">#{row['prefLabel']}</skos:prefLabel>
+        <skos:definition>#{row['definition']}</skos:definition>
+        <dc:source>#{row['source']}</dc:source>
+      
+  EOS
+    } 
+end
+
+
+
+def func2( conn, x)
+
+
+# conn.prepare('statement1', 'select $1::Int as result')
+# conn.exec_prepared('statement1', [ 123 ] ) .each { |row|
 #     puts row # 
 # } 
-# abort( 'abort')
+# #
 
-#
-res.each { |row|
-    puts row # 
-    #puts row['vocabulary_term_name']
+  conn.prepare('statement1', <<-EOS
 
-    puts <<-EOS
+    -- narrower
 
-    <skos:Concept rdf:about= #{row['about']} >  
-      <skos:prefLabel xml:lang="en">#{row['prefLabel']}</skos:prefLabel>
-      <skos:definition>#{row['definition']}</skos:definition>
-      <dc:source>#{row['source']}</dc:source>
-    
-EOS
+    -- create temporary view narrower as
+    select
+      v.vocabulary_term_name, 
+      o.vocabulary_term_name as child
+    from contr_vocab_db.vocabulary_term_table v 
+    left join contr_vocab_db.reference_source_table r on r.reference_id = v.reference_source_id 
+    left join contr_vocab_db.subject_term_table s on s.vocabulary_term_name = v.vocabulary_term_name
+    left join contr_vocab_db.internal_associated_terms_table a on a.subject_term_id = s.subject_term_id 
+    left join contr_vocab_db.object_term_table o on a.object_term_id = o.object_term_id
+    where a.association_type_name = 'isInstanceOf'
+  and v.vocabulary_term_name = $1
+        ; 
+  --  select * from narrower --   
+  EOS
+  )
+
+
+  conn.exec_prepared('statement1', [ x ] ) .each { |row|
+      puts row # 
   } 
+  abort( 'abort')
+end
 
 
-
+func2( conn, "L'Astrolabe" )
 
