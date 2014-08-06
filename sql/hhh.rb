@@ -14,6 +14,11 @@
 #
 
 
+# 
+# Probably all of the sql to extract rdf triples should be hooked together with 'union all'. 
+# 
+
+
 require 'pg'
 
 
