@@ -17,10 +17,7 @@
 require 'pg'
 
 
-# should be changed to take the term uid as parameter, not the english name
-# all of these should take the term uid as parameter not the english name
-
-def prepare_all_statements( conn)
+def prepare_all_statements(conn)
 
   conn.prepare('all_terms', <<-EOS
     select v.vocabulary_term_name
@@ -29,15 +26,7 @@ def prepare_all_statements( conn)
   EOS
   )
 
-#   conn.prepare('term', <<-EOS
-#     select *
-#     from contr_vocab_db.vocabulary_term_table v
-#     where v.vocabulary_term_name = $1
-#   EOS
-#   )
-
-
-# change to lookup_term
+  # lookup term and return rdf resource
   conn.prepare('term', <<-EOS
     -- select v.vocabulary_term_uid
     select trim(trailing from v.vocabulary_term_uid) as term
@@ -46,6 +35,7 @@ def prepare_all_statements( conn)
   EOS
   )
 
+  # concept definition
   conn.prepare('definition', <<-EOS
     select v.vocabulary_term_definition as definition
     from contr_vocab_db.vocabulary_term_table v
@@ -53,6 +43,7 @@ def prepare_all_statements( conn)
   EOS
   )
 
+  # concept citation/source
   conn.prepare('source', <<-EOS
     select
     r.citation_string as source
@@ -62,14 +53,7 @@ def prepare_all_statements( conn)
   EOS
   )
 
-  conn.prepare('about', <<-EOS
-    select
-    trim(trailing from v.vocabulary_term_uid) as about
-    from contr_vocab_db.vocabulary_term_table v
-    where v.vocabulary_term_uid = $1
-  EOS
-  )
-
+  # concept narrower
   conn.prepare('narrower', <<-EOS
     -- narrower
     select
@@ -99,22 +83,22 @@ def dump_all_terms(conn)
 end
 
 
-def dump_concept_fields(conn, uid)
-  puts "definition #{ conn.exec_prepared('definition', [uid])[0] } "
-  puts "source #{ conn.exec_prepared('source', [uid])[0] } "
-  puts "about #{ conn.exec_prepared('about', [uid])[0] } "
+def dump_concept_fields(conn, term)
+  puts "term #{ term }"
+  puts "source #{ conn.exec_prepared('source', [term])[0] } "
+  puts "about #{ conn.exec_prepared('about', [term])[0] } "
   puts "narrower"
-  conn.exec_prepared('narrower', [uid]).each { |row|
+  conn.exec_prepared('narrower', [term]).each { |row|
     puts row
   }
 end
 
 
-def dump_concept_as_skos(conn, term)
+def encode_skos_concept_as_xml(conn, term)
   puts "dumping skos"
   ## the narrower resource isn't correct. It should be a uri.
   puts <<-EOS
-    <skos:Concept rdf:about="#{ conn.exec_prepared('about', [term])[0]['about'] }">
+    <skos:Concept rdf:about="#{ term }">
       <skos:prefLabel xml:lang="en">#{term}</skos:prefLabel>
       <skos:definition>#{ conn.exec_prepared('definition', [term])[0]['definition']}</skos:definition>
       <dc:source>#{ conn.exec_prepared('source', [term])[0]['source'] }</dc:source>
@@ -134,34 +118,12 @@ end
 conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
 prepare_all_statements(conn)
 
-# change uid to rdf_uid
 
 # lookup resource id
-uid = conn.exec_prepared('term', ["L'Astrolabe"])[0]['term']
-
-# dump_concept_fields(conn, uid)
-
-puts "uid is #{uid}"
-
-# -- puts conn.exec_prepared('definition', ['http://vocab.nerc.ac.uk/collection/C17/current/353L/'])[0]
-puts conn.exec_prepared('definition', [uid])[0]
+rdf_term = conn.exec_prepared('term', ["L'Astrolabe"])[0]['term']
 
 
-abort('finished')
-
-
-
-
-
-
-
-#puts conn.exec_prepared('definition', [])[0]
-# puts "definition #{ conn.exec_prepared('definition', [])[0] } "
-# dump_all_terms(conn)
-# term = "L'Astrolabe"
-# dump_concept_fields(conn, term)
- dump_concept_as_skos(conn, term)
-
-
+# dump skos concept
+encode_skos_concept_as_xml(conn, rdf_term)
 
 
