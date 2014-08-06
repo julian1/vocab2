@@ -76,7 +76,7 @@ def make_prepared_statements(conn)
 end
 
 
-def dump_all_terms(conn)
+def test_dump_terms(conn)
   puts "dumping all_terms"
   conn.exec_prepared('all_terms').each { |row|
     puts row
@@ -84,7 +84,7 @@ def dump_all_terms(conn)
 end
 
 
-def dump_concept_fields(conn, term)
+def test_dump_concept_fields(conn, term)
   puts "term #{ term }"
   puts "source #{ conn.exec_prepared('source', [term])[0] } "
   puts "about #{ conn.exec_prepared('about', [term])[0] } "
@@ -101,7 +101,6 @@ def encode_skos_concept_as_xml(conn, term)
       <skos:prefLabel xml:lang="en">#{term}</skos:prefLabel>
       <skos:definition>#{ conn.exec_prepared('definition', [term])[0]['definition']}</skos:definition>
       <dc:source>#{ conn.exec_prepared('source', [term])[0]['source'] }</dc:source>
-
       #{ s = ""
         conn.exec_prepared('narrower', [term]).each { |row|
           s += <<-EOS
