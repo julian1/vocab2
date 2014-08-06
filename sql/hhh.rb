@@ -1,5 +1,5 @@
-
-# Example ruby code to dump skos Concept from contr_vocab_db
+#
+# Ruby example to dump xml coded skos Concept from contr_vocab_db
 # 
 # <skos:Concept rdf:about="http://vocab.nerc.ac.uk/collection/L06/current/31/">
 #   <skos:inScheme rdf:resource="http://environment.data.gov.au/aodn//def/Platform"/>
@@ -46,6 +46,7 @@ def make_prepared_statements(conn)
 
   # concept citation/source
   conn.prepare('source', <<-EOS
+    -- needs more case/ handling
     select
     r.citation_string as source
     from contr_vocab_db.vocabulary_term_table v
@@ -58,7 +59,7 @@ def make_prepared_statements(conn)
   conn.prepare('narrower', <<-EOS
     -- narrower
     select 
-    trim(trailing from v.vocabulary_term_uid) as term
+    trim(trailing from v.vocabulary_term_uid) as term,
     trim(trailing from v2.vocabulary_term_uid) as narrower
 
     from contr_vocab_db.vocabulary_term_table v
@@ -95,7 +96,6 @@ end
 
 
 def encode_skos_concept_as_xml(conn, term)
-  # the narrower resource isn't correct. It should be a uri.
   <<-EOS
     <skos:Concept rdf:about="#{ term }">
       <skos:prefLabel xml:lang="en">#{term}</skos:prefLabel>
@@ -118,12 +118,10 @@ end
 conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
 make_prepared_statements(conn)
 
-
 # lookup resource by name
 rdf_term = conn.exec_prepared('term', ["L'Astrolabe"])[0]['term']
 
-
-# dump skos concept
+# dump skos concept for resource
 puts encode_skos_concept_as_xml(conn, rdf_term)
 
 
