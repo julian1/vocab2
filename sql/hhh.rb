@@ -19,8 +19,9 @@ require 'pg'
 
 def prepare_all_statements(conn)
 
+  # return all terms
   conn.prepare('all_terms', <<-EOS
-    select v.vocabulary_term_name
+    select vocabulary_term_name, vocabulary_term_code, vocabulary_term_uid
     ,v.vocabulary_term_uid
     from contr_vocab_db.vocabulary_term_table v
   EOS
