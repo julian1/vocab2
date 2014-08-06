@@ -12,6 +12,13 @@
 
 	http://www.ands.org.au/services/controlled-vocabulary.html
 
+	login
+	http://services.ands.org.au/vocabs
+
+	Not able to - webservices issue - was unable to authenticate. and add myself to imos organisation to 
+
+	help 
+	http://www.ands.org.au/support/vocab-help-guide.pdf
 
 
 # cool uri

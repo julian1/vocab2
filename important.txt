@@ -1,4 +1,23 @@
 
+http://nextgamer.es/component/relatedvideos/?vid=pfchOJV5t9I
+
+ Why SKOS should be a focal point of your linked data strategy
+link : http://www.youtube.com/watch?v=pfchOJV5t9I
+---
+
+Add code. for skos output to report. 
+
+
+Need to investigate upload - local and remote skos.
+
+
+
+Ands
+	supports versioning of vocab as skos files according to the manual.
+	Support editing skos files.
+
+----
+
 Rapport/Breathing.
 Who cares - work on haskell instead for enjobility
 
@@ -58,6 +77,12 @@ WHAT WAS DONE
 ISSUES -  
 Just flag the issues - 
 	(easy way to organize but without spending excessive time)
+
+	- if we move to ANDs entirely - in future for management. then we will need scripts to harvest rdf/ skos from
+	ands, and then re-encode it in relational layer - to support our paramter and unit  mapping in geoserver headers.
+
+	- netcdf - harvesting.
+		
 
 	- Longer term. authoring and management. Simon Cox suggests, ...    
 
@@ -357,6 +382,21 @@ SissVoc
 
 	- Extremely lightweight. 
 
+
+Use open docs.
+
+need to say the option - of integrating sissvoc, 
+
+and add the pictures of the structure
+and the db structure.
+
+UK LDA
+	lda not skos specific platform. 
+	uncertain how browsing would integrate with sissvoc (already for ANDS, ereefs ) in terms of user experience.
+
+	For REST (as a resource/service facade for SPARQL), the newer (now, W3C) spec is Linked Data Platform (LDP): http://www.w3.org/TR/ldp/
+
+	sissvok - uses elda. but there's now a spec for LDP.
 
 
 UK LDA
