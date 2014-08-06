@@ -57,8 +57,8 @@ def make_prepared_statements(conn)
   # concept narrower
   conn.prepare('narrower', <<-EOS
     -- narrower
-    select
-    v.vocabulary_term_uid,
+    select 
+    trim(trailing from v.vocabulary_term_uid) as term
     trim(trailing from v2.vocabulary_term_uid) as narrower
 
     from contr_vocab_db.vocabulary_term_table v
@@ -72,7 +72,6 @@ def make_prepared_statements(conn)
     and v.vocabulary_term_uid = $1
   EOS
   )
-
 end
 
 
@@ -120,7 +119,7 @@ conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "c
 make_prepared_statements(conn)
 
 
-# lookup resource id
+# lookup resource by name
 rdf_term = conn.exec_prepared('term', ["L'Astrolabe"])[0]['term']
 
 
