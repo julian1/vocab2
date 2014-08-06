@@ -17,7 +17,7 @@
 require 'pg'
 
 
-def prepare_all_statements(conn)
+def make_prepared_statements(conn)
 
   # return all terms
   conn.prepare('all_terms', <<-EOS
@@ -96,9 +96,8 @@ end
 
 
 def encode_skos_concept_as_xml(conn, term)
-  puts "dumping skos"
-  ## the narrower resource isn't correct. It should be a uri.
-  puts <<-EOS
+  # the narrower resource isn't correct. It should be a uri.
+  <<-EOS
     <skos:Concept rdf:about="#{ term }">
       <skos:prefLabel xml:lang="en">#{term}</skos:prefLabel>
       <skos:definition>#{ conn.exec_prepared('definition', [term])[0]['definition']}</skos:definition>
@@ -116,8 +115,9 @@ def encode_skos_concept_as_xml(conn, term)
 end
 
 
+# create connection
 conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
-prepare_all_statements(conn)
+make_prepared_statements(conn)
 
 
 # lookup resource id
@@ -125,6 +125,6 @@ rdf_term = conn.exec_prepared('term', ["L'Astrolabe"])[0]['term']
 
 
 # dump skos concept
-encode_skos_concept_as_xml(conn, rdf_term)
+puts encode_skos_concept_as_xml(conn, rdf_term)
 
 
