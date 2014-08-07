@@ -17,7 +17,14 @@
 # 
 # Probably all of the sql to extract rdf triples should be hooked together with 'union all'. 
 # 
+# It really should be easy to implement sparql ontop of the relational db, - 
+#  once the object,predicate,subject triples are hooked together  
+#
+# Who/what implements the sparql interface in sissvoc. 
+#
 
+
+# prefLabel is wrong in this...
 
 require 'pg'
 
@@ -32,12 +39,23 @@ def make_prepared_statements(conn)
   EOS
   )
 
+
+  # change name to label
   # lookup term and return rdf resource
   conn.prepare('term', <<-EOS
     -- select v.vocabulary_term_uid
     select trim(trailing from v.vocabulary_term_uid) as term
     from contr_vocab_db.vocabulary_term_table v
     where v.vocabulary_term_name = $1
+  EOS
+  )
+
+
+  # concept prefLabel definition
+  conn.prepare('prefLabel', <<-EOS
+    select v.vocabulary_term_name as prefLabel
+    from contr_vocab_db.vocabulary_term_table v
+    where v.vocabulary_term_uid = $1
   EOS
   )
 
@@ -89,25 +107,30 @@ def test_dump_terms(conn)
 end
 
 
-def test_dump_concept_fields(conn, term)
-  puts "term #{ term }"
-  puts "source #{ conn.exec_prepared('source', [term])[0] } "
-  puts "about #{ conn.exec_prepared('about', [term])[0] } "
+def test_dump_concept_fields(conn, concept)
+  puts "concept #{ concept }"
+  puts "source #{ conn.exec_prepared('source', [concept])[0] } "
+  puts "about #{ conn.exec_prepared('about', [concept])[0] } "
   puts "narrower"
-  conn.exec_prepared('narrower', [term]).each { |row|
+  conn.exec_prepared('narrower', [concept]).each { |row|
     puts row
   }
 end
 
 
-def encode_skos_concept_as_xml(conn, term)
+def encode_skos_concept_as_xml(conn, concept)
+
+  definition = conn.exec_prepared('definition', [concept])[0]['definition']
+  prefLabel = conn.exec_prepared('prefLabel', [concept])[0]['prefLabel']
+  source = conn.exec_prepared('source', [concept])[0]['source']
+
   <<-EOS
-    <skos:Concept rdf:about="#{ term }">
-      <skos:prefLabel xml:lang="en">#{term}</skos:prefLabel>
-      <skos:definition>#{ conn.exec_prepared('definition', [term])[0]['definition']}</skos:definition>
-      <dc:source>#{ conn.exec_prepared('source', [term])[0]['source'] }</dc:source>
+    <skos:Concept rdf:about="#{ concept }">
+      <skos:prefLabel xml:lang="en">#{ prefLabel }</skos:prefLabel>
+      <skos:definition>#{ definition }</skos:definition>
+      <dc:source>#{ source }</dc:source>
       #{ s = ""
-        conn.exec_prepared('narrower', [term]).each { |row|
+        conn.exec_prepared('narrower', [concept]).each { |row|
           s += <<-EOS
       <skos:narrower rdf:resource="#{row['narrower']}"/>
           EOS
@@ -122,7 +145,7 @@ end
 conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
 make_prepared_statements(conn)
 
-# lookup resource by name
+# lookup concept by label 
 rdf_term = conn.exec_prepared('term', ["L'Astrolabe"])[0]['term']
 
 # dump skos concept for resource
