@@ -31,17 +31,15 @@ require 'pg'
 
 def make_prepared_statements(conn)
 
-  # return all terms
+  # return all tuples with useful fields
   conn.prepare('all_terms', <<-EOS
     select 
     vocabulary_term_name, 
     vocabulary_term_code, 
     trim(trailing from v.vocabulary_term_uid) as vocabulary_term_uid
-  
     from contr_vocab_db.vocabulary_term_table v
   EOS
   )
-
 
   # change name to label
   # lookup term and return rdf resource
@@ -154,7 +152,6 @@ make_prepared_statements(conn)
 
 conn.exec_prepared('all_terms').each { |row|
     term = row['vocabulary_term_uid']
-
     puts encode_skos_concept_as_xml(conn, term)
 }
 
