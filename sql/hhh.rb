@@ -132,8 +132,7 @@ def encode_skos_concept_as_xml(conn, concept)
     <skos:Concept rdf:about="#{ concept }">
       <skos:prefLabel xml:lang="en">#{ prefLabel }</skos:prefLabel>
       <skos:definition>#{ definition }</skos:definition>
-      <dc:source>#{ source }</dc:source>
-      #{ s = ""
+      <dc:source>#{ source }</dc:source> #{ s = ""
         conn.exec_prepared('narrower', [concept]).each { |row|
           s += <<-EOS
       <skos:narrower rdf:resource="#{row['narrower']}"/>
@@ -141,6 +140,7 @@ def encode_skos_concept_as_xml(conn, concept)
         }
         s }
     </skos:Concept>
+
   EOS
 end
 
