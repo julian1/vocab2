@@ -98,7 +98,7 @@ def make_prepared_statements(conn)
 end
 
 
-def test_dump_terms(conn)
+def test_dump_concepts(conn)
   puts "dumping all_terms"
   conn.exec_prepared('all_terms').each { |row|
     puts row
@@ -119,7 +119,9 @@ end
 
 def encode_skos_concept_as_xml(conn, concept)
 
-  ## all this stuff should probably be unionized
+  ## all this stuff should probably be unionized, to be able to be 
+  ## queries by sparql?
+  ## but with a view 
 
   definition = conn.exec_prepared('definition', [concept])[0]['definition']
   prefLabel = conn.exec_prepared('prefLabel', [concept])[0]['preflabel']
@@ -145,6 +147,16 @@ end
 # create connection
 conn = PG::Connection.open(:host => "localhost", :dbname => "vocab", :user => "contr_vocab_db", :password => "a" )
 make_prepared_statements(conn)
+
+
+conn.exec_prepared('all_terms').each { |row|
+    term = row['vocabulary_term_uid']
+
+    puts encode_skos_concept_as_xml(conn, term)
+}
+
+#test_dump_concepts(conn)
+abort('finished')
 
 # lookup concept by label 
 rdf_term = conn.exec_prepared('term', ["L'Astrolabe"])[0]['term']
