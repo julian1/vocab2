@@ -1,0 +1,31 @@
+
+SKOS PRIMER - EXCELLENT
+http://www.w3.org/TR/skos-primer/
+
+
+- prefLabel 
+	is the damn Label !!!! 
+
+
+- Skos extensions
+	for authoring and management.
+
+- What are Concept, Collection, ConceptSchema
+
+- 
+
+
+
+--
+
+- How does the sparql interface work in sissvoc. 
+
+	- what is it connecting too? 
+	elda over files. 
+	where are the vocab files?
+
+	- can we use it.
+
+
+
+
