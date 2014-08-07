@@ -33,8 +33,11 @@ def make_prepared_statements(conn)
 
   # return all terms
   conn.prepare('all_terms', <<-EOS
-    select vocabulary_term_name, vocabulary_term_code, vocabulary_term_uid
-    ,v.vocabulary_term_uid
+    select 
+    vocabulary_term_name, 
+    vocabulary_term_code, 
+    trim(trailing from v.vocabulary_term_uid) as vocabulary_term_uid
+  
     from contr_vocab_db.vocabulary_term_table v
   EOS
   )
@@ -155,13 +158,12 @@ conn.exec_prepared('all_terms').each { |row|
     puts encode_skos_concept_as_xml(conn, term)
 }
 
-#test_dump_concepts(conn)
-abort('finished')
 
-# lookup concept by label 
-rdf_term = conn.exec_prepared('term', ["L'Astrolabe"])[0]['term']
-
-# dump skos concept for resource
-puts encode_skos_concept_as_xml(conn, rdf_term)
-
+# 
+# # lookup concept by label 
+# rdf_term = conn.exec_prepared('term', ["L'Astrolabe"])[0]['term']
+# 
+# # dump skos concept for resource
+# puts encode_skos_concept_as_xml(conn, rdf_term)
+# 
 
