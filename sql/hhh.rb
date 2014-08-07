@@ -50,10 +50,9 @@ def make_prepared_statements(conn)
   EOS
   )
 
-
   # concept prefLabel definition
   conn.prepare('prefLabel', <<-EOS
-    select v.vocabulary_term_name as prefLabel
+    select v.vocabulary_term_name as preflabel
     from contr_vocab_db.vocabulary_term_table v
     where v.vocabulary_term_uid = $1
   EOS
@@ -120,8 +119,10 @@ end
 
 def encode_skos_concept_as_xml(conn, concept)
 
+  ## all this stuff should probably be unionized
+
   definition = conn.exec_prepared('definition', [concept])[0]['definition']
-  prefLabel = conn.exec_prepared('prefLabel', [concept])[0]['prefLabel']
+  prefLabel = conn.exec_prepared('prefLabel', [concept])[0]['preflabel']
   source = conn.exec_prepared('source', [concept])[0]['source']
 
   <<-EOS
