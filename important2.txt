@@ -1,4 +1,10 @@
 
+SKOS is OWL. 
+
+"As seen above, SOKS is an RDF/OWL vocabulary which can be seamlessly extended.."
+	w3 - primer
+
+
 WHAT DOES SPARQL RETURN ? - XML
 
 Does sparql follow uri's outside it's own domain ?
