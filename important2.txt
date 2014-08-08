@@ -1,6 +1,70 @@
 
+WHAT DOES SPARQL RETURN ? - XML
+
+Does sparql follow uri's outside it's own domain ?
+
+Redland librdf RDF API Library - Release Notes   - has postgresql backend. 
+
+---
+
 SKOS PRIMER - EXCELLENT
 http://www.w3.org/TR/skos-primer/
+
+Creating RDF triples (python)
+https://rdflib.readthedocs.org/en/latest/intro_to_creating_rdf.html
+
+SPARQL  Query Language
+http://www.w3.org/TR/sparql11-query/
+
+SPARQL QUERIES - WEB-INTERFACE
+http://www.linkeddatatools.com/querying-semantic-data
+
+http://dbpedia.org/sparql?query=SELECT+DISTINCT+?concept+WHERE+{+?s+a+?concept+}+LIMIT+50
+
+
+RDF and RUBY 
+http://semanticweb.org/wiki/Getting_data_from_the_Semantic_Web_%28Ruby%29
+http://blog.datagraph.org/2010/03/rdf-for-ruby
+
+
+SISSVOC
+
+a local instance can reference and support multiple vocabulary sources through configuration of different sparql endpoints. 
+	in ttl 
+	./resources/slake/config/Slake-ELDAConfig.ttl
+	exposes the
+	http://auscope-services-test.arrc.csiro.au/openrdf-sesame/repositories/slake
+	- eg. 
+----
+
+	For other's to integrate IMOS vocabulary into our. do other organisations need to configure
+	against our sparql endpoint 
+
+
+PID = persistent identifier service. 
+
+
+
+TTL FILES  *.ttl
+Are turtle rdf
+Turtle - Terse RDF Triple Language
+
+
+# can control the return type
+json
+curl -g -H 'Accept: application/json' 'http://def.seegrid.csiro.au/sparql/isc2008?query=SELECT+DISTINCT+?concept+WHERE+{+?s+a+?concept+}+LIMIT+50'
+xml
+curl -g -H 'Accept: application/xml' 'http://def.seegrid.csiro.au/sparql/isc2008?query=SELECT+DISTINCT+?concept+WHERE+{+?s+a+?concept+}+LIMIT+50'
+
+
+
+SPARQL ENDPOING
+http://def.seegrid.csiro.au/sparql/isc2008?query=%22whoot%22
+
+
+
+https://www.seegrid.csiro.au/wiki/Siss/SISSvoc30VocabularyDeployment
+
 
 
 - prefLabel 
