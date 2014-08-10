@@ -1,4 +1,11 @@
 
+LDP
+
+	https://github.com/UKGovLD/ukl-registry-poc/wiki 
+	LDP as described at https://github.com/UKGovLD/ukl-registry-poc/wiki (prototype deployment at http://environment.data.gov.uk/registry/).
+
+
+
 
 # elda
 
