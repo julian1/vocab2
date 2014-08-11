@@ -1,4 +1,12 @@
 
+
+DIFFERENCE BETWEEN SKOS RDFS AND OWL
+
+	http://answers.semanticweb.com/questions/11560/what-is-the-differnce-between-skos-rdfs-and-owl
+
+	http://www.w3.org/2006/07/SWD/SKOS/skos-and-owl/master.html
+
+
 LDP
 
 	https://github.com/UKGovLD/ukl-registry-poc/wiki 

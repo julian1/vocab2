@@ -1,4 +1,18 @@
 
+
+Very important. 
+
+	For complex ontology development - a third party tool is needed.
+
+	This is different from registry (LDP), publications (sissvoc), 
+
+SIZE number of resources
+	If a database is large, it is not practical to convert those data to 
+	static documents, nor is it practical for a consuming application to receive 
+	those data in the form of XML documents which must be parsed. T
+
+
+
 COULD USE PURL
 
 http://purl.org/docs/index.html

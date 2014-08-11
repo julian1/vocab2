@@ -1,7 +1,181 @@
 
+OWL
+	As an RDF serialization, OWL is a more expressive extension of RDF 
+	than of its precursor RDFS (section 4.4) or generic RDF (part 3). However, this 
+	increased expressivity comes at the expense of increased complexity. 
+
+
+
+	- Because of the complexity of OWL, OWL-based ontologies are nearly always constructed 
+	using a software tool called an ontology editor.
+
+	owl:DisjointClasses
+
+	OWL allows any two classes to be declared disjoint, i.e. it is not allowable 
+	for an individual to be an instance of both classes. Unless disjointness is 
+	declared explicitly, it is allowable for an individual to be simultaneously a 
+	member of any two (or more) classes. 
+
+
+OWL and RDFS
+	Since OWL is an extension of RDFS, it contains some of the concepts introduced 
+	to RDF by RDFS. OWL uses classes and properties, and includes terms from RDFS 
+	and RDF including rdf:Property, rdfs:subClassOf, rdfs:subPropertyOf, 
+	rdfs:range, and rdfs:domain which were discussed in section 4.3 and section 
+	4.4. 
+
+	The concept of a class in OWL is similar to its meaning in RDFS. In fact,
+
+		owl:Class rdfs:subClassOf rdfs:Class
+
+
+	Eg. An OWL:Class is a subClass of rdfs class !!!
+
+ONTOLOY
+	- in general an ontology describes the formal constraints of the terms in a 
+	vocabulary and expresses relationships among terms in the vocabulary using some 
+	kind of ontology representation language. The transition from simple vocabulary 
+	to complex ontology is a continuum without a distinct boundary. At one extreme 
+	are vocabularies such as Darwin Core where, although defined in RDF, properties 
+	have few or no expressed relationships to other properties or classes, and 
+	there are no defined relationships among the classes.
+
+
 
 kimtfinney@gmail.com
 
+DIFFERENCE BETWEEN SKOS RDFS AND OWL
+
+	http://answers.semanticweb.com/questions/11560/what-is-the-differnce-between-skos-rdfs-and-owl
+
+	So, first you have RDF which uses XML syntax to implement a semantic to 
+	describe resources. But it has limited vocabulary.
+
+	Then, you have RDFS, which is built on top of RDF with some stronger semantics 
+	such as Class,SubClass,Domain,Range
+
+	Now, you have SKOS and OWL which have different semantics and are intended for 
+	different application. OWL provides a language for knowledge representation and 
+	has semantically strict relationship such as Super/Subclass relationship.
+
+	SKOS is used mainly for knowledge Organization and has weaker semantic 
+	relationship such as Narrower/Broader,related and lexical relationship for 
+	prefLabel(prefered label),altLabel(alternative Label). OWL is very expressive 
+	and such expressiveness is not desired in some application because 
+	expressiveness do has a cost. So, SKOS has limited expressivity compared to 
+	OWL. It can be used for e.g. in Document Navigation System while OWL will be 
+	used in areas where lots of inferences need to made to get new piece of 
+	knowledge.
+
+	The broader/Narrower in SKOS should not be confused with Super/Subclass in OWL. 
+	In SKOS, if a concept A is linked by "broader" to concept B, it doesn't mean 
+	than B is the superclass of A and we cannot make inference that all As are B.
+
+
+
+	Thus a simple description of a term allows it to be adapted to uses that were 
+	not conceived by the original creators of the term. 
+		
+	- Example - derivedFrom - use of mother/child versus derivative artistic work
+
+
+R2RML
+	http://www.w3.org/TR/r2rml/
+
+
+	5.3.2.1. Serving data from an existing relational database as RDF
+
+	It is possible to implement an interface which allows a traditional relational 
+	database to serve RDF metadata.
+
+	The D2QR Platform (13) provides a mapping language that facilitates mapping and 
+	translation. With this interface, the database can serve the data as Linked 
+	Data and can also respond to SPARQL queries (see section 6.). D2QR also permits 
+	dumping the entire database into a file as RDF in various forms. (14)
+
+	Virtuoso (15) can transparently access native relational data as well as RDF 
+	data stored in its database. It allows SPARQL queries.
+
+	Triplify (16) is an application that can make content of small (less than 100MB 
+	database content) web-accessible databases also available as RDF. It converts 
+	the results of SQL queries into RDF.
+
+	Triplifier (17) is being developed by the BiSciCol project 
+	(http://biscicol.blogspot.com/) to input data from flat data formats 
+	(spreadsheets, Darwin Core Archives) and relational databases, and output RDF 
+	triples.
+
+	ezDBDB (18) converts metadata from simple data sources like spreadsheets into 
+	RDF and provides an opportunity to cache the resulting data in a triplestore 
+	and make it available to the LOD cloud.
+
+	Bio2RDF Description at http://dx.doi.org/10.1016/j.jbi.2008.03.004 "documents 
+	from public bioinformatics databases such as Kegg, PDB, MGI, HGNC and several 
+	of NCBI’s databases can now be made available in RDF format through a unique 
+	URL in the form of http://bio2rdf.org/namespace:id" 
+
+
+
+Property-value pair
+
+	- the predicate object group
+
+
+
+RELATIONSHIP RDFS AND DCMI ABSTRACT MODEL
+	- Because the DCMI Abstract Model was developed based on the concepts defined 
+	in RDF and RDFS, there is a direct relationship between the concepts discussed 
+	in section 4.3. and those which are described formally in RDFS.
+
+	DCAM			RDF/RDFS
+	----------------------------
+	resource		rdfs:Resource
+	property or element	rdf:Property
+	class			rdfs:Class
+	syntax encoding scheme	rdfs:Datatype
+	has domain		rdfs:domain
+	has range		rdfs:range
+	sub-property of	rdfs:subPropertyOf
+	sub-class of	rdfs:subClassOf
+
+RDFS
+	RDFS extends the basic RDF syntax by defining additional terms which facilitate the 
+	categorization of resources into classes, and which describe how properties are related 
+	to those classes.
+
+	eg. the 'a' or type thing.
+
+	The RDFS schema is silent about what constitutes appropriate classes or types in a particular 
+	situation. Users are free to use any pre-existing types/classes or to define their own. 
+
+	However, since the purpose of having classes seems to be to allow 
+	different users to know that they are both talking about the same kind of 
+	resource, it is a best practice to use well-known types rather than making up 
+	ad hoc types.(25) The wiki page ClassInventory lists classes defined in some 
+	well-known vocabularies and ontologies. 
+
+
+DCAM
+	Dublin Core Abstract Model
+		4.3.2.7. Sub-classes and sub-properties
+	
+
+	
+		- The DCMI Abstract Model allows a class to be related to another class by a 
+		sub-class relationship. One class is a sub-class of another class if all 
+		instances of the first class are also instances of the second class. For 
+		example dcterms:FileFormat is defined to be a sub-class of dcterms:MediaType. 
+		Therefore, anything which is a dcterms:FileFormat is also a dcterms:MediaType.
+
+		- The DCAM also allows a property to be related to another property by a 
+		sub-property relationship. A property is a sub-property of another property if 
+		all instances of the first property also have the same relationship as the 
+		second property. For example dcterms:creator is a sub-property of 
+		dcterms:contributor. 
+	
+	----
+
+	http://www.w3.org/2006/07/SWD/SKOS/skos-and-owl/master.html
 
 
 ---
@@ -12,6 +186,24 @@ ONTOLOGY
 	vocabulary and 
 	- expresses relationships among terms in the vocabulary using some 
 	kind of ontology representation language."
+
+	- systems have been developed to extend basic RDF and provide ways to 
+	indicate more clearly the nature of resources and the relationships between 
+	them. RDFS (section 4.4.) and OWL (section 7.4.) provide increasingly complex 
+	means of describing such relationships.
+
+	- Terms that are described as part of an ontology carry much more meaning and can be used 
+	to do more sophisticated machine reasoning (i.e. to "generate" new triples from existing ones).
+
+
+SKOS
+	SKOS is just a stand-alone vocabulary, built with OWL and RFS, like many others 
+	like FOAF, SIOC, GoodRelations... Its specific purpose is to model Thesaurii in RDF 
+
+
+SKOS-XL 
+	extends this SKOS labelling features by giving a Class to the Label object
+
 
 RDF:TYPE
 	In section 3.2.3. it was noted that the predicate rdf:type has the 
