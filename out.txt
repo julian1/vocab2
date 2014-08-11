@@ -1,0 +1,629 @@
+{"vocabulary_term_name"=>"current profilers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"anemometers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"meteorological packages", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"wave recorders", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"fluorometers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"current meters", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"radiometers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"bathythermographs", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"thermosalinographs", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"water temperature sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"thermistor chains", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"precipitation samplers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"underwater cameras", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"acoustic backscatter sensors", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Kilograms per cubic metre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"sound velocity sensors", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"plankton recorders", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"discrete water samplers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"surface current radars", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"continuous water samplers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"sediment traps", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"dissolved gas sensors", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"active fluorometers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"hydrophones", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"precipitation gauges", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"metal analysers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"flow meters", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"high performance liquid chromatographs", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"flow cytometers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Teledyne RDI Workhorse Long-Ranger ADCP", "association_type_name"=>"isTypeOf", "subject_term_id"=>"1", "object_term_id"=>"1"}
+{"vocabulary_term_name"=>"Teledyne RDI Workhorse Sentinel-300 ADCP", "association_type_name"=>"isTypeOf", "subject_term_id"=>"2", "object_term_id"=>"1"}
+{"vocabulary_term_name"=>"Teledyne RDI Workhorse Sentinel-600 ADCP", "association_type_name"=>"isTypeOf", "subject_term_id"=>"3", "object_term_id"=>"1"}
+{"vocabulary_term_name"=>"Teledyne RDI Workhorse Sentinel-1200 ADCP", "association_type_name"=>"isTypeOf", "subject_term_id"=>"4", "object_term_id"=>"1"}
+{"vocabulary_term_name"=>"Nortek Aquadopp Profiler", "association_type_name"=>"isTypeOf", "subject_term_id"=>"5", "object_term_id"=>"1"}
+{"vocabulary_term_name"=>"Nortek Aquadopp 3D doppler current meter", "association_type_name"=>"isTypeOf", "subject_term_id"=>"6", "object_term_id"=>"2"}
+{"vocabulary_term_name"=>"Nortek Aquadopp 3000 3D doppler current meter", "association_type_name"=>"isTypeOf", "subject_term_id"=>"7", "object_term_id"=>"2"}
+{"vocabulary_term_name"=>"Nortek Aquadopp 6000 3D doppler current meter", "association_type_name"=>"isTypeOf", "subject_term_id"=>"8", "object_term_id"=>"2"}
+{"vocabulary_term_name"=>"Nortek Continental", "association_type_name"=>"isTypeOf", "subject_term_id"=>"9", "object_term_id"=>"1"}
+{"vocabulary_term_name"=>"Nortek AWAC", "association_type_name"=>"isTypeOf", "subject_term_id"=>"10", "object_term_id"=>"1"}
+{"vocabulary_term_name"=>"Lockheed Martin Sippican Deep Blue XBT probe", "association_type_name"=>"isTypeOf", "subject_term_id"=>"11", "object_term_id"=>"3"}
+{"vocabulary_term_name"=>"Lockheed Martin Sippican T-7 XBT probe", "association_type_name"=>"isTypeOf", "subject_term_id"=>"12", "object_term_id"=>"3"}
+{"vocabulary_term_name"=>"Lockheed Martin Sippican T-4 XBT probe", "association_type_name"=>"isTypeOf", "subject_term_id"=>"13", "object_term_id"=>"3"}
+{"vocabulary_term_name"=>"RBR DR-1050 Depth recorder", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"fixed benthic node", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"land/onshore structure", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"coastal structure", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"autonomous underwater vehicle", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"lowered unmanned submersible", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"ship", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"research vessel", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"vessel of opportunity", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"vessel of opportunity on fixed route", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"fishing vessel", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"moored surface buoy", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"subsurface mooring", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"drifting subsurface profiling float", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"float", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"mooring", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"geostationary orbiting satellite", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"orbiting satellite", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"satellite", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"flightless bird", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"land-sea mammals", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Southern Surveyor", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"15", "object_term_id"=>"4"}
+{"vocabulary_term_name"=>"L'Astrolabe", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"16", "object_term_id"=>"4"}
+{"vocabulary_term_name"=>"Heron Island North mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"17", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Maria Island National Reference Station ADCP mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"18", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Maria Island National Reference Station sub-surface mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"19", "object_term_id"=>"6"}
+{"vocabulary_term_name"=>"Maria Island National Reference Station surface mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"20", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Maria Island National Reference Station acidification mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"21", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Aurora Australis", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"22", "object_term_id"=>"4"}
+{"vocabulary_term_name"=>"Kilograms", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Cape Ferguson", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"23", "object_term_id"=>"4"}
+{"vocabulary_term_name"=>"Solander", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"24", "object_term_id"=>"4"}
+{"vocabulary_term_name"=>"Spirit of Tasmania 1", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"25", "object_term_id"=>"7"}
+{"vocabulary_term_name"=>"Sirius", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"26", "object_term_id"=>"8"}
+{"vocabulary_term_name"=>"Acceptable proportion of signal returns", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Pressure (measured variable) exerted by the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Pressure (measured variable) exerted by the atmosphere and correction to sea level", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Temperature of the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Depth below surface of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Dew point temperature of the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Current direction in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Eastward current velocity in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Eastward wind velocity in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Saturation of oxygen {O2} in the water body [dissolved phase]", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Latitude north", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Longitude east", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Concentration of chlorophyll per unit volume of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Northward current velocity in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Northward wind velocity in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Orientation (pitch) of measurement platform", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Direction of motion (over ground) of measurement platform", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Orientation (roll angle) of measurement platform", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Speed (over ground) of measurement platform", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Precipitation rate (liquid water equivalent) in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Relative humidity of the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Practical salinity of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Skin temperature of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Temperature of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Highland Chief", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"27", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Spirit of Tasmania 2", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"28", "object_term_id"=>"7"}
+{"vocabulary_term_name"=>"Stadacona", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"29", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Wana Bhum", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"30", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Iron Yandi", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"31", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Pacific Sun", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"32", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Portland", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"33", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Pacific Celebes", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"34", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Sea Flyte", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"35", "object_term_id"=>"7"}
+{"vocabulary_term_name"=>"Fantasea Wonder", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"36", "object_term_id"=>"7"}
+{"vocabulary_term_name"=>"Linnaeus", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"37", "object_term_id"=>"4"}
+{"vocabulary_term_name"=>"Xutra Bhum", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"38", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Tangaroa", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"39", "object_term_id"=>"13"}
+{"vocabulary_term_name"=>"Santo Rocco", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"40", "object_term_id"=>"13"}
+{"vocabulary_term_name"=>"Austral Leader II", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"41", "object_term_id"=>"13"}
+{"vocabulary_term_name"=>"Janas", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"42", "object_term_id"=>"13"}
+{"vocabulary_term_name"=>"Will Watch", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"43", "object_term_id"=>"13"}
+{"vocabulary_term_name"=>"Southern Champion", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"44", "object_term_id"=>"13"}
+{"vocabulary_term_name"=>"Rehua", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"45", "object_term_id"=>"13"}
+{"vocabulary_term_name"=>"Hespérides", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"46", "object_term_id"=>"4"}
+{"vocabulary_term_name"=>"ANL Windarra", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"47", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Bateman's Marine Park 90m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"48", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Bateman's Marine Park 120m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"49", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Coffs Harbour 70m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"50", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Coffs Harbour 100m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"51", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Capricorn Channel Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"52", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Elusive Reef Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"53", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Height of right Bragg peak in power spectrum", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Heron Island South Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"54", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Lizard Shelf Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"55", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Lizard Slope Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"56", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Myrmidon Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"57", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"One Tree East Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"58", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Palm Passage Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"59", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Flat Top Banks Shelf Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"60", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Joseph Bonaparte Gulf Shelf Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"61", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Margaret Harries Banks Shelf Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"62", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Timor South Shelf Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"63", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Jervis Bay Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"64", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Kimberley 50m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"65", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Kimberley 100m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"66", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Kimberley 200m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"67", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Kimberley 400m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"68", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Darwin National Reference Station Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"69", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Esperance National Reference Station ADCP Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"70", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Esperance National Reference Station Sub-surface Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"71", "object_term_id"=>"6"}
+{"vocabulary_term_name"=>"Kangaroo Island National Reference Station Acidification Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"72", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Kangaroo Island National Reference Station Sub-surface Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"73", "object_term_id"=>"6"}
+{"vocabulary_term_name"=>"Ningaloo Reef National Reference Station Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"74", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"North Stradbroke Island National Reference Station ADCP Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"75", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"North Stradbroke Island National Reference Station Sub-surface Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"76", "object_term_id"=>"6"}
+{"vocabulary_term_name"=>"Two Rocks 200m Shelf Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"101", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"North Stradbroke Island National Reference Station Surface Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"77", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Rottnest Island National Reference Station ADCP Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"78", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Rottnest Island National Reference Station Sub-surface Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"79", "object_term_id"=>"6"}
+{"vocabulary_term_name"=>"Yongala National Reference Station Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"80", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Port Hacking 100m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"81", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Pilbara 50m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"82", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Pilbara 100m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"83", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Pilbara 200m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"84", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Deep Slope Mooring (M1)", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"85", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Cabbage Patch Mooring (M2)", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"86", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Mid-Slope Mooring (M3)", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"87", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Canyon Mooring (M4)", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"88", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Coffin Bay Mooring (M5)", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"89", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Investigator Strait Mooring (M6)", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"90", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Deep-Slope Mooring (M7)", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"91", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Spencer Gulf Mouth Mooring (M8)", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"92", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Sydney 100m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"93", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Sydney 140m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"94", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Canyon 200m Head Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"95", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Canyon 500m North Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"96", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Canyon 500m South Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"97", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Two Rocks 50m Shelf Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"98", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Two Rocks 100m Shelf Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"99", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Two Rocks 150m Shelf Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"100", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Watts per square metre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Two Rocks 500m Shelf Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"102", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"South-East Queensland 200m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"103", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"South-East Queensland 400m Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"104", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Ocean Reference Station Sydney Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"105", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Perth Canyon, WA Passive Acoustic Observatory", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"106", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Portland, VIC Passive Acoustic Observatory", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"107", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Tuncurry, NSW Passive Acoustic Observatory", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"108", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Southern ocean Flux Station mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"109", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Pulse 5 'heavy' Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"110", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Pulse 5 'light' Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"111", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Pulse 6 Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"112", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Pulse 7 Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"113", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Pulse 8 Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"114", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Sub-Antarctic Zone Sediment Trap Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"115", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"East Australian Current 1 Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"116", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"East Australian Current 2 Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"117", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"East Australian Current 3 Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"118", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"East Australian Current 4 Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"119", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"East Australian Current 5 Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"120", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Ombai Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"121", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Timor North Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"122", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Timor Sill Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"123", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Polynya1 Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"124", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Polynya2 Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"125", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Polynya3 Mooring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"126", "object_term_id"=>"5"}
+{"vocabulary_term_name"=>"Joana Bonita", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"127", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"M-Sagar", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"128", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Medontario", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"129", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Forum Samoa II", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"130", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Montreal Senator", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"131", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Swan River Bridge", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"132", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Australia Star", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"133", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Tower Bridge", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"134", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Anro Asia", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"135", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"New Zealand Star", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"136", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Capitaine Tasman", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"137", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Fua Kavenga", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"138", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Southern Moana", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"139", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"altimeter", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Nedlloyd Nelson", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"140", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"MSC Hobart", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"141", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"CMA CGA Charcot", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"142", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"CMA CGA Mimosa", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"143", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"CMA CGM Melbourne", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"144", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Passat Spring", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"145", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"CMA CGA Auckland", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"146", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Ital Ottima", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"147", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Buxlink", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"148", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"AS Cypria", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"149", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"MSC Federica", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"150", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Brisbane Star", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"151", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"P&O Nedlloyd Adelaide", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"152", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"CMA CGM Utrillo", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"153", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Stadt Weimar", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"154", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Canberra Express", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"155", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Wellington Express {DFCX2}", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"156", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Adelaide Express", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"157", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Contship Action", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"158", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"P&O Nedlloyd Encounter", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"159", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Bay Bridge", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"160", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"P&O Nedlloyd Otago", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"161", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Pacific Triangle", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"162", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"P&O Nedlloyd Salerno", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"163", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"MSC New Plymouth", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"164", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Melbourne Star", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"166", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Encounter Bay", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"167", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Flinders Bay ", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"168", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Botany Bay", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"169", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Discovery Bay", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"170", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"America Star", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"171", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"MSC Didem", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"172", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Safmarine Meru", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"173", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Wellington Express {MWSD3}", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"174", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Polar Star", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"175", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"SA Sederberg", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"176", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Maersk Constantia", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"177", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Lowlands Prosperity", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"178", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Contship Ambition", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"180", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Bartok", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"181", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"P&O Nedlloyd Jakarta", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"182", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"P&O Nedlloyd Sydney", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"183", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Nedlloyd Raleigh Bay", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"184", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"P&O Nedlloyd Brisbane", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"185", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Maersk Aberdeen", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"186", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Swan Reefer (MV Swan)", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"187", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Meridian", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"188", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"ANL Progress", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"189", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Ranginui", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"190", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Baltrum Trader", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"191", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Florence", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"192", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Vega Gotland", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"193", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Rangitata", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"194", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Karin Knorr", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"195", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Iron Dampier", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"196", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Anro Australia", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"197", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Iron Newcastle", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"198", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Iron Kembla", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"199", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Iron Pacific ", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"200", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Franklin", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"201", "object_term_id"=>"4"}
+{"vocabulary_term_name"=>"Australian Progress", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"202", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Iron Flinders", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"203", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Australian Enterprise", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"205", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Contship Borealis", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"206", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Contship Australis", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"207", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Coral Chief", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"208", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Papuan Chief", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"209", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Kokopo Chief", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"210", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"P&O Nedlloyd Napier", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"211", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"P&O Nedlloyd Wellington", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"212", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"TMM Tabasco", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"213", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Canmar Dynasty", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"215", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Sydney Express", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"216", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Nimos", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"217", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Contship Aurora", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"218", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Act 6", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"219", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Slocum Glider", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"221", "object_term_id"=>"8"}
+{"vocabulary_term_name"=>"Seaglider UW", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"222", "object_term_id"=>"8"}
+{"vocabulary_term_name"=>"water pressure sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"1KA Seaglider", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"223", "object_term_id"=>"8"}
+{"vocabulary_term_name"=>"NEMO Argo Float", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"224", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"NINJA Argo Float with SBE", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"225", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"NAVIS Argo Float with Iridium antenna", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"226", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"ARVOR Argo Float", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"227", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"SOLO Argo Float", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"228", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"SOLO Argo Float with Iridium antenna", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"229", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"SOLO-II Argo Float with Iridium antenna", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"230", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"PALACE R1 Argo Float", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"231", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"APEX Argo Float", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"232", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"APEX Argo Float with Iridium antenna", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"233", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"APEX Argo Float with APF8 controller board", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"234", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"PROVOR Argo Float", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"235", "object_term_id"=>"9"}
+{"vocabulary_term_name"=>"Lizard Island Base Station", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"236", "object_term_id"=>"10"}
+{"vocabulary_term_name"=>"Lizard Island Relay Pole 1", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"237", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Lizard Island Relay Pole 2", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"238", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Lizard Island Sensor Float 1", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"239", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Davies Reef Sensor Float 2", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"254", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Lizard Island Sensor Float 2", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"240", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Lizard Island Sensor Float 3", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"241", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Lizard Island Sensor Float 4", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"242", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Orpheus Island Base Station", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"243", "object_term_id"=>"10"}
+{"vocabulary_term_name"=>"Orpheus Island Relay Pole 1", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"244", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Orpheus Island Relay Pole 2", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"245", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Orpheus Island Relay Pole 3", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"246", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"water biogeochemical sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Orpheus Island Sensor Float 1", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"247", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Orpheus Island Sensor Float 2", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"248", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Rib Reef Sensor Float 1", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"249", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Myrmidon Reef Base Station", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"250", "object_term_id"=>"10"}
+{"vocabulary_term_name"=>"Myrmidon Reef Sensor Float 1", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"251", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Davies Reef Base Station ", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"252", "object_term_id"=>"10"}
+{"vocabulary_term_name"=>"Davies Reef Sensor Float 1", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"253", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"radar altimeters", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Davies Reef Sensor Float 3", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"255", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Davies Reef Sensor Float 4", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"256", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Davies Reef Sensor Float 5", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"257", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"One Tree Island Base Station", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"258", "object_term_id"=>"10"}
+{"vocabulary_term_name"=>"One Tree Island Relay Pole 1", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"259", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"One Tree Island Relay Pole 2", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"260", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Concentration of nitrate {NO3} per unit mass of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"One Tree Island Relay Pole 3", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"261", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Heron Island Base Station", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"262", "object_term_id"=>"10"}
+{"vocabulary_term_name"=>"Heron Island Relay Pole 1", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"263", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Heron Island Relay Pole 2", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"264", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Heron Island Relay Pole 3", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"265", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Heron Island Relay Pole 4", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"266", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Heron Island Sensor Float 4", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"274", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Wet bulb temperature of the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Heron Island Relay Pole 5", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"267", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Heron Island Relay Pole 6", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"268", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Heron Island Relay Pole 7", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"269", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Heron Island Relay Pole 8", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"270", "object_term_id"=>"12"}
+{"vocabulary_term_name"=>"Heron Island Sensor Float 1", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"271", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Heron Island Sensor Float 2", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"272", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Heron Island Sensor Float 3", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"273", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"Heron Island Sensor Float 5", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"275", "object_term_id"=>"11"}
+{"vocabulary_term_name"=>"offshore structure", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"satellite tracking system", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"optical backscatter sensors", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"transmissometers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"nutrient analysers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"plankton nets", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"satellite positioning systems", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"pH sensors", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"redox potential sensors", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Volume measures", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Argos doppler-localised transmitters", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"CTD Rosette", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"CTD", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Conductivity-Temperature sensors", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Percentage of good three beam solutions (one beam rejected) in ADCP bin", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Percentage of good transformations (error velocity threshold not exceeded) in ADCP bin", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Percentage of measurements where more than one beam was bad in ADCP bin", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Percentage of measurements with four beam solutions in ADCP bin", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Current velocity error in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Concentration of chlorophyll per unit mass of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Concentration of oxygen {O2} per unit volume of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Concentration of oxygen {O2} per unit mass of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Concentration of nitrate {NO3} per unit volume of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Concentration of silicate {SiO4} per unit volume of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Concentration of ammonium {NH4} per unit volume of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Concentration of silicate {SiO4} per unit mass of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Concentration of phosphate {PO4} per unit volume of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Concentration of phosphate {PO4} per unit mass of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Electrical conductivity of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Current speed in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Specific humidity of the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sound velocity in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Thickness of precipitation amount (liquid water equivalent) in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"elapsed time from reference date to UTC date of measurement", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Turbidity of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Upward current velocity in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Horizontal visibility in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Flow rate through instrument", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Wind from direction in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Wind speed in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Wind speed of gust in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Wind to direction in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Present weather in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Total alkalinity per unit mass of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Acoustic signal return amplitude from the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Height above sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Density of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Correlation in magnitude of the particle distribution in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Profiling descent speed of the instrument in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Number of oscillations of a wave per unit time {frequency}", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Precipitation duration (liquid water equivalent) in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Wind stress on the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Phytoplankton Colour Index", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Height of left Bragg peak in power spectrum", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Power spectrum signal to noise ratio", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Significant height of waves on the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Average height of waves on the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Root mean square height of waves on the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Average height of the highest 1/10th of waves on the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Maximum height of waves on the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Average crest period of waves on the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Average zero crossing period of the highest 1/3rd of waves on the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Direction of waves on the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Directional spreading of waves on the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Period of swell waves on the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Mole fraction of carbon dioxide (dry air) in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Partial pressure of carbon dioxide in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Fugacity of carbon dioxide (at 100% humidity) in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Mole fraction of carbon dioxide (dry air) in the equilibrated marine sample", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Partial pressure of carbon dioxide in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Fugacity of carbon dioxide (at 100% humidity) in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Fugacity anomaly (water - air) of carbon dioxide in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Gas flow rate through a non-dispersive infrared analyser", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Degrees Celsius", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Degrees Kelvin", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Metres", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Seconds", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Metres per second", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"pH units", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Volts", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Hertz", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Litres", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Square metres", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Decibels", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Degrees", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Degrees True", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Decibars", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Percent", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Micromoles per litre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Dimensionless", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Number per square metre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Litres per minute", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Bytes", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Moles", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Tropical Islander", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"276", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"CMA CGM Onyx", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"277", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Cap Reinga", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"278", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"CSCL Longkou", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"279", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"CMA CGM Lavender", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"280", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"ANL Benalla", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"281", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"JPO Scorpius", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"282", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Maersk Fuji", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"283", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Merkur Sky", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"284", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Icebird", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"285", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Hoegh Seoul", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"286", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Hoegh St. Petersburg", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"287", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Conti Harmony", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"288", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Schelde Trader", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"289", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Maersk Fukuoka ", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"290", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Isar Trader", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"291", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Sofrana Surville", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"292", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"BC San Francisco", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"293", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"CMA CGM Jade", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"294", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Santos Express", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"295", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Manila Express", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"296", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Pacific Gas", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"297", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"Mississauga Express", "association_type_name"=>"isInstanceOf", "subject_term_id"=>"298", "object_term_id"=>"14"}
+{"vocabulary_term_name"=>"filtration and acetone extraction", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"high performance liquid chromatography (HPLC)", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"concentration of echinenone per unit mass of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"equilibration with air, drying", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"constant temperature non-dispersive infra-red gas analysis", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Practical Salinity Unit", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Siemens per centimetre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Siemens per metre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Number per cubic metre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Millilitres per litre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Microwatts per square centimetre per nanometre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Micromoles per kilogram", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Abundance of biota", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Biotic taxonomic identification", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Aanderaa Oxygen optode ", "association_type_name"=>"isTypeOf", "subject_term_id"=>"299", "object_term_id"=>"15"}
+{"vocabulary_term_name"=>"Sea-Bird SBE 43 Dissolved Oxygen sensor ", "association_type_name"=>"isTypeOf", "subject_term_id"=>"300", "object_term_id"=>"15"}
+{"vocabulary_term_name"=>"Sea-Bird SBE 41 CTD", "association_type_name"=>"isTypeOf", "subject_term_id"=>"301", "object_term_id"=>"16"}
+{"vocabulary_term_name"=>"Satlantic OCR-504 multispectral radiometer ", "association_type_name"=>"isTypeOf", "subject_term_id"=>"302", "object_term_id"=>"17"}
+{"vocabulary_term_name"=>"WET Labs ECO Triplet", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"WET Labs ECO Puck Triple-Measurement Meter (Triplet)", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"time difference from reference time", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"ocean colour radiometers", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 26plus Seagauge Wave and Tide Recorder", "association_type_name"=>"isTypeOf", "subject_term_id"=>"308", "object_term_id"=>"18"}
+{"vocabulary_term_name"=>"Milligrams per cubic metre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Per metre per steradian", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Nephelometric Turbidity Units", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Hectapascals", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Millimetres", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Millimetres per hour", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Kilometres per hour", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Nanometres", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Millibars", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Microatmospheres", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Parts per million", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"atmospheric gas analysers ", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 38 thermometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"309", "object_term_id"=>"19"}
+{"vocabulary_term_name"=>"Sea-Bird SBE 21 SeaCAT thermosalinograph", "association_type_name"=>"isTypeOf", "subject_term_id"=>"310", "object_term_id"=>"20"}
+{"vocabulary_term_name"=>"model 8050 pCO2 measuring system", "association_type_name"=>"isTypeOf", "subject_term_id"=>"311", "object_term_id"=>"21"}
+{"vocabulary_term_name"=>"model 8050 pCO2 measuring system", "association_type_name"=>"isTypeOf", "subject_term_id"=>"311", "object_term_id"=>"15"}
+{"vocabulary_term_name"=>"LI-COR LI-7000 CO2/H2O Gas Analyzer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"312", "object_term_id"=>"21"}
+{"vocabulary_term_name"=>"Sea-Bird SBE 45 MicroTSG thermosalinograph", "association_type_name"=>"isTypeOf", "subject_term_id"=>"313", "object_term_id"=>"24"}
+{"vocabulary_term_name"=>"Sea-Bird SBE 45 MicroTSG thermosalinograph", "association_type_name"=>"isTypeOf", "subject_term_id"=>"313", "object_term_id"=>"19"}
+{"vocabulary_term_name"=>"Sea-Bird SBE 45 MicroTSG thermosalinograph", "association_type_name"=>"isTypeOf", "subject_term_id"=>"313", "object_term_id"=>"20"}
+{"vocabulary_term_name"=>"Simrad EK-60 echosounder", "association_type_name"=>"isTypeOf", "subject_term_id"=>"314", "object_term_id"=>"22"}
+{"vocabulary_term_name"=>"Fish-finder echosounders", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Simrad ES60 Split beam echosounder", "association_type_name"=>"isTypeOf", "subject_term_id"=>"315", "object_term_id"=>"22"}
+{"vocabulary_term_name"=>"SMRU CTD Satellite Relay Data Logger  ", "association_type_name"=>"isTypeOf", "subject_term_id"=>"316", "object_term_id"=>"24"}
+{"vocabulary_term_name"=>"SMRU CTD Satellite Relay Data Logger  ", "association_type_name"=>"isTypeOf", "subject_term_id"=>"316", "object_term_id"=>"19"}
+{"vocabulary_term_name"=>"SMRU CTD Satellite Relay Data Logger  ", "association_type_name"=>"isTypeOf", "subject_term_id"=>"316", "object_term_id"=>"16"}
+{"vocabulary_term_name"=>"SMRU CTD Satellite Relay Data Logger  ", "association_type_name"=>"isTypeOf", "subject_term_id"=>"316", "object_term_id"=>"23"}
+{"vocabulary_term_name"=>"Parts per billion", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"SMRU Satellite Relay Data Logger ", "association_type_name"=>"isTypeOf", "subject_term_id"=>"317", "object_term_id"=>"19"}
+{"vocabulary_term_name"=>"SMRU Satellite Relay Data Logger ", "association_type_name"=>"isTypeOf", "subject_term_id"=>"317", "object_term_id"=>"23"}
+{"vocabulary_term_name"=>"SMRU CTD/Fluorometer Satellite Relay Data Logger", "association_type_name"=>"isTypeOf", "subject_term_id"=>"318", "object_term_id"=>"25"}
+{"vocabulary_term_name"=>"SMRU CTD/Fluorometer Satellite Relay Data Logger", "association_type_name"=>"isTypeOf", "subject_term_id"=>"318", "object_term_id"=>"24"}
+{"vocabulary_term_name"=>"SMRU CTD/Fluorometer Satellite Relay Data Logger", "association_type_name"=>"isTypeOf", "subject_term_id"=>"318", "object_term_id"=>"19"}
+{"vocabulary_term_name"=>"SMRU CTD/Fluorometer Satellite Relay Data Logger", "association_type_name"=>"isTypeOf", "subject_term_id"=>"318", "object_term_id"=>"16"}
+{"vocabulary_term_name"=>"SMRU CTD/Fluorometer Satellite Relay Data Logger", "association_type_name"=>"isTypeOf", "subject_term_id"=>"318", "object_term_id"=>"23"}
+{"vocabulary_term_name"=>"salinity sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Young MA05103 Wind Monitor anemometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"319", "object_term_id"=>"26"}
+{"vocabulary_term_name"=>"Young MA05106 Wind Monitor anemometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"320", "object_term_id"=>"26"}
+{"vocabulary_term_name"=>"Gill Instruments WindObserver II Anemometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"321", "object_term_id"=>"26"}
+{"vocabulary_term_name"=>"Vaisala PTB220 Digital Barometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"322", "object_term_id"=>"27"}
+{"vocabulary_term_name"=>"Vaisala PA11 Digital Barometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"323", "object_term_id"=>"27"}
+{"vocabulary_term_name"=>"Vaisala DPA21 Digital Barometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"324", "object_term_id"=>"27"}
+{"vocabulary_term_name"=>"OSi ORG-815-DR Optical Rain Gauge", "association_type_name"=>"isTypeOf", "subject_term_id"=>"334", "object_term_id"=>"27"}
+{"vocabulary_term_name"=>"Vaisala PTU300 Combined Pressure, Humidity and Temperature Transmitter ", "association_type_name"=>"isTypeOf", "subject_term_id"=>"325", "object_term_id"=>"27"}
+{"vocabulary_term_name"=>"Vaisala HMP temperature and humidity sensor", "association_type_name"=>"isTypeOf", "subject_term_id"=>"326", "object_term_id"=>"27"}
+{"vocabulary_term_name"=>"Vaisala WAV151 wind vane", "association_type_name"=>"isTypeOf", "subject_term_id"=>"327", "object_term_id"=>"26"}
+{"vocabulary_term_name"=>"Vaisala WAA151 cup anemometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"328", "object_term_id"=>"26"}
+{"vocabulary_term_name"=>"Vaisala WAA15A cup anemometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"329", "object_term_id"=>"26"}
+{"vocabulary_term_name"=>"Rosemount ST2401 Temperature Probe", "association_type_name"=>"isTypeOf", "subject_term_id"=>"330", "object_term_id"=>"27"}
+{"vocabulary_term_name"=>"Vaisala HMT temperature and humidity sensor", "association_type_name"=>"isTypeOf", "subject_term_id"=>"331", "object_term_id"=>"27"}
+{"vocabulary_term_name"=>"Young 50202 Precipitation Gauge", "association_type_name"=>"isTypeOf", "subject_term_id"=>"332", "object_term_id"=>"27"}
+{"vocabulary_term_name"=>"OSi OWI-430 DSP-WIVIS Present Weather and Visibility Sensor", "association_type_name"=>"isTypeOf", "subject_term_id"=>"333", "object_term_id"=>"27"}
+{"vocabulary_term_name"=>"Sea-Bird SBE 3T Temperature Sensor", "association_type_name"=>"isTypeOf", "subject_term_id"=>"348", "object_term_id"=>"19"}
+{"vocabulary_term_name"=>"Eppley Precision Infrared Radiometer Pyrgyometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"335", "object_term_id"=>"17"}
+{"vocabulary_term_name"=>"Eppley Precision Spectral Pyranometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"336", "object_term_id"=>"17"}
+{"vocabulary_term_name"=>"Eppley Ultraviolet Radiometer (UVB)", "association_type_name"=>"isTypeOf", "subject_term_id"=>"337", "object_term_id"=>"17"}
+{"vocabulary_term_name"=>"LI-COR LI-190 PAR sensor", "association_type_name"=>"isTypeOf", "subject_term_id"=>"338", "object_term_id"=>"17"}
+{"vocabulary_term_name"=>"LI-COR LI-192 PAR sensor", "association_type_name"=>"isTypeOf", "subject_term_id"=>"339", "object_term_id"=>"17"}
+{"vocabulary_term_name"=>"Middleton Solar EQ08 Pyranometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"340", "object_term_id"=>"17"}
+{"vocabulary_term_name"=>"Middleton Solar SK01-DP2 Pyranometer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"341", "object_term_id"=>"17"}
+{"vocabulary_term_name"=>"GE Druck RPT350 Resonant Pressure Transducer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"342", "object_term_id"=>"27"}
+{"vocabulary_term_name"=>"Sea-Bird SBE 48 Hull Temperature Sensor", "association_type_name"=>"isTypeOf", "subject_term_id"=>"343", "object_term_id"=>"19"}
+{"vocabulary_term_name"=>"Milligrams per litre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Pico Technologies PT-104 Platinum Resistance Data Logger", "association_type_name"=>"isTypeOf", "subject_term_id"=>"344", "object_term_id"=>"19"}
+{"vocabulary_term_name"=>"Everest Interscience 4000.4ZL Temperature Sensor", "association_type_name"=>"isTypeOf", "subject_term_id"=>"345", "object_term_id"=>"19"}
+{"vocabulary_term_name"=>"Analog Devices AD590 Temperature Transducer", "association_type_name"=>"isTypeOf", "subject_term_id"=>"346", "object_term_id"=>"19"}
+{"vocabulary_term_name"=>"Aanderaa 4050 Temperature Sensor", "association_type_name"=>"isTypeOf", "subject_term_id"=>"347", "object_term_id"=>"19"}
+{"vocabulary_term_name"=>"Port Hacking National Reference Station ", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Millimetres per minute", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Millilitres per minute", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Radians", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Bass Strait Calibration site Mooring", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Storm Bay Calibration site Mooring", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Pressure (measured variable) in the water body exerted by overlying sea water and any medium above it", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Pressure (measured variable) in the water body exerted by overlying sea water only", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Temperature of oxygen determination", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Temperature for the equilibrated marine sample", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Pressure for the equilibrated marine sample", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Dry weight biomass per unit volume of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Wet weight biomass per unit volume of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Downwelling vector irradiance as photons (PAR wavelengths) in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Downwelling vector irradiance as photons (PAR wavelengths) in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-floor depth below surface of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Downwelling vector irradiance as energy (longwave) in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Downwelling vector irradiance as energy (solar (300-3000nm) wavelengths) in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Wind speed (relative to moving platform) in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Hourly maximum", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Hourly Mean", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Hourly minimum", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Number of values", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Wind direction (relative to moving platform) in the atmosphere", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"WET Labs ECO-FLNTU combined fluorometer and turbidity sensor", "association_type_name"=>"isTypeOf", "subject_term_id"=>"349", "object_term_id"=>"28"}abort
+
+{"vocabulary_term_name"=>"WET Labs ECO-FLNTU combined fluorometer and turbidity sensor", "association_type_name"=>"isTypeOf", "subject_term_id"=>"349", "object_term_id"=>"25"}
+{"vocabulary_term_name"=>"Micromoles per second per square metre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Knots (nautical miles per hour)", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Millimoles per cubic metre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Micrograms per litre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"seabird and duck", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Temperature anomaly of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Practical salinity anomaly of the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"sub-surface gliders", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Kilograms per square metre per second", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Pascals", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"organism", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Detection of acoustic tag", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sound recorded in the water body", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Drop net", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Watts per square metre per nanometre", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Watts per square metre per nanometre per steradian", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Star-Oddi Starmon mini temperature recorder", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 39 temperature recorder", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 37-SMP MicroCAT C-T Sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Teledyne RDI Broadband 150kHz ADCP", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 37-SM MicroCAT C-T Sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"RBR TDR-2050 underwater temperature logger", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Aanderaa Oxygen Optode 3975", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Star-Oddi DST Pitch and Roll Recorder", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"platform attitude sensors", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Rotronic Instruments MP1xxA humidity and temperature probe series", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 16Plus SEACAT C-T Recorder", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 19plus SEACAT CTD", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 25 Sealogger CTD", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Falmouth Scientific Instruments NXIC CTD", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Satlantic ISUS V3 Nitrate Sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"CMST-DSTO underwater sound recorder", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 16 SEACAT C-T Recorder", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 37-IMP MicroCAT C-T Sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"RBR XR-420 CTD Marine", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 19 SEACAT CTD", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Datawell directional waverider buoy", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"self-propelled boat", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 37-SIP MicroCAT C-T Sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Continuous Plankton Recorder - Hardy (1926, 1936); Glover (1962)", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 43 Dissolved Oxygen Sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"Sea-Bird SBE 43F Dissolved Oxygen Sensor", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}
+{"vocabulary_term_name"=>"drifting surface float", "association_type_name"=>nil, "subject_term_id"=>nil, "object_term_id"=>nil}

@@ -1,4 +1,5 @@
 
+
 http://nextgamer.es/component/relatedvideos/?vid=pfchOJV5t9I
 
  Why SKOS should be a focal point of your linked data strategy
@@ -39,6 +40,15 @@ also how we don't want to have to start again wit
 
 
 
+
+URI
+	- URL could be used to locate and retrieve an electronic document by means of 
+	some transfer protocol. However, over time it became accepted that 
+	identifiers could refer to non-retrievable resources as well. The broader term 
+	URI came into use to represent an identifier for any kind of resource, 
+	including non-information resources.
+
+	- it is generally not safe to assume that a URI can be dereferenced (5)
 
 -----
 

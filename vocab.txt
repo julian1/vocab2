@@ -6,6 +6,129 @@ kimtfinney@gmail.com
 
 ---
 
+ONTOLOGY
+	- "Although there is no strict definition of an ontology, it is generally 
+	recognized that an ontology describes the formal constraints of the terms in a 
+	vocabulary and 
+	- expresses relationships among terms in the vocabulary using some 
+	kind of ontology representation language."
+
+RDF:TYPE
+	In section 3.2.3. it was noted that the predicate rdf:type has the 
+	special role in RDF of indicating class membership. As a shortcut method in 
+	RDF/XML, the XML container element for the object being described can be named 
+	as the class of which the described resource is an instance rather than using 
+	the generic rdf:Description container name. When this is done, there is an 
+	implied rdf:type statement that is not shown in the actual XML but which exists 
+	and will be listed in any set of triples or shown in any graphical 
+	representation. So the two XML snippets:
+
+	<foaf:Person 
+	rdf:about="http://bioimages.vanderbilt.edu/contact/kirchoff#coblea">
+	  <foaf:name>Ashley Coble</foaf:name>
+	</foaf:Person>
+
+	and
+
+	<rdf:Description rdf:about="http://bioimages.vanderbilt.edu/contact/kirchoff#coblea">
+	  <rdf:type rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+	  <foaf:name>Ashley Coble</foaf:name>
+	</rdf:Description>
+
+	say exactly the same thing. 
+	---------
+
+	- In N3, the subject is listed, followed by an indented list 
+	predicate/object pairs. The special role of the rdf:type property is recognized 
+	here by using "a" in place of the rdf:type predicate, i.e. saying that 
+	agents:kirchoff#coblea is "a foaf:Person". 
+
+Ontology expressed in OWL (whose statements are themselves expressed in RDF) 
+
+SPO
+	OBJECT
+		subject - predicate - object
+		eg.
+		shakespeare - author - plays
+
+		subject is a URI and unambigious.
+
+	PREDICATE
+		- also called the 'property'
+
+		- "Like the subject, the predicate is also described by a URI."
+
+		- "The predicate is generally a term from a well-known vocabulary or ontology"
+
+	OBJECT
+		- The object represents something that is related to the subject through 
+		the relationship described by the predicate. 
+
+		- "The object can be of two types: literals (character strings) and URIs."
+
+		- "predicates whose objects are literals probably tend to be simple properties of the object, while" 
+
+		- "predicates whose objects are URIs are more likely to express 
+		relationships between the object and some other resource that is itself likely 
+		to be the object of additional RDF descriptions." 
+
+		- Web Ontology Language (OWL) provides a means to declare whether a predicate 
+		is a literal or a URI reference (see section 7.6.3. for more on this)." 
+
+		- When the Object is a uri rather than a literal, we have a (multi)graph.
+
+
+	OTHER
+		- The subjects and objects are referred to as nodes. 
+		- The predicates are referred to as arcs.
+
+
+NAMEPACING.
+		- note that actually makes things look like literals.
+
+		kimage: is an abbreviation for "http://bioimages.vanderbilt.edu/kirchoff/"
+		rdf: is an abbreviation for "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+		dctype: is an abbreviation for "http://purl.org/dc/dcmitype/",
+			+
+		http://bioimages.vanderbilt.edu/kirchoff/ac1490		http://www.w3.org/1999/02/22-rdf-syntax-ns#type		http://purl.org/dc/dcmitype/StillImage
+			=
+		kimage:ac1490  rdf:type  dctype:StillImage
+
+
+
+
+FOAF
+		Important - FOAF is a Vocabulary Specification
+
+
+---
+VERY IMPORTANT.
+
+LINKED DATA AND RDF
+
+	"Linked Data is the use of RDF:SeeAlso and OWL:SameAs relationships (amongst others) to publish data and interlink the instances between different data sets."
+
+
+OWL and SKOS
+
+	What is the relationship between OWL:SameAs versus using SKOS:match, SKOS:exactMatch etc. 
+
+	Personally I think 
+		link:uri (One of possibly many URIs which identify something.) covers many use cases; 
+		rdfs:seeAlso covers another large proportion, and finally 
+		owl:sameAs is useful when you want the strong semantics - can't find a use case which isn't covered by these three.
+
+	- "Linked Data is the use of RDF:SeeAlso and OWL:SameAs relationships (amongst others) to publish data and interlink the instances between different data sets."
+
+	- "The RDF Schema class and property system is similar to the type systems of object-oriented programming languages such as Java."
+	----
+	SKOS is OWL. 
+
+	"As seen above, SOKS is an RDF/OWL vocabulary which can be seamlessly extended.."
+		w3 - primer
+
+
+
 IS sparql restful ? - can we manipulate records. eg. add and remove them
 
 

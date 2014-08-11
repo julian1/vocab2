@@ -1,0 +1,72 @@
+
+Just have to report - that we attempted to get the app running . via vagrant example
+and by deploying the war.
+
+Not in the time available. no information about gui or api capabilities. 
+
+
+http://ukgovld.github.io/ukgovldwg/miniguides/
+
+
+Make sure. that say that we started it up in nectar.
+
+------
+
+https://github.com/UKGovLD/ukl-registry-poc/wiki/Faq
+
+explains the motivation.
+
+At its heart, the purpose of the registry is to enable coordinated publishing 
+and use of data across organizations. A key part of coordination is to use 
+agreed shared terms for things, where terms includes codes, code lists, spatial 
+object identifiers, namespaces and vocabulary elements. In particular, in many 
+domains we need a notion of completeness – these terms, and only these terms 
+are valid for this usage.
+
+This is needed both for error checking on publication and so that consuming 
+applications can be certain they can cover all cases. 
+
+
+***While this sounds opposed to the whole open world nature of RDF and Linked Data***, it is not that black & white.
+
+Firstly, a key requirement of the registry is hold metadata about terms (their status, who published them etc) and historical records of them.
+
+
+It's more philosophical. and very ambitious and broad in scope. 
+
+
+it's centralized - . cathedral not the bizzare.
+
+
+ukl-registry-poc   
+	= registry = registry management of terms. 
+	= poc = proof of concept
+
+
+In cases where all uses of a term should be withdrawn then the registry API provides the ?entity=<..> command for locating all references to a given entity
+
+
+Register	http://registry/{register}/../{subregister}
+Registered entity 
+
+this all corresponds to the register stuff in the Kim's contr_vocab_db .
+
+----
+
+meteo@aodn99:~/imos/projects/ukl-registry-poc$ find -type f  | grep -i java | wc -l
+91
+
+meteo@aodn99:~/imos/projects/ukl-registry-poc$ find -type f  | grep -i ttl | wc -l
+220
+
+
+Uses Jena. similar to sesame.
+
+Jena supports serialization to relational database.
+ 
+Jena is similar to Sesame; though, unlike Sesame, Jena provides support for OWL 
+(Web Ontology Language). The framework has various internal reasoners and the 
+Pellet reasoner (an open source Java OWL-DL reasoner) can be set up to work in 
+Jena.
+
+

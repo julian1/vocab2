@@ -1,9 +1,22 @@
 
-SKOS is OWL. 
+COULD USE PURL
 
-"As seen above, SOKS is an RDF/OWL vocabulary which can be seamlessly extended.."
-	w3 - primer
+http://purl.org/docs/index.html
 
+	- PURLs (Persistent Uniform Resource Locators) are Web addresses that 
+	act as permanent identifiers in the face of a dynamic and changing Web 
+	infrastructure. Instead of resolving directly to Web resources, PURLs provide a 
+	level of indirection that allows the underlying Web addresses of resources to 
+	change over time without negatively affecting systems that depend on them. This 
+	capability provides continuity of references to network resources that may 
+	migrate from machine to machine for business, social or technical reasons. 
+
+	http://purl.org/docs/help.html
+
+- used to reference DC terms
+
+
+-----
 
 WHAT DOES SPARQL RETURN ? - XML
 
@@ -12,6 +25,9 @@ Does sparql follow uri's outside it's own domain ?
 Redland librdf RDF API Library - Release Notes   - has postgresql backend. 
 
 ---
+
+BEGINNERS GUIDE RDF - OWL
+https://code.google.com/p/tdwg-rdf/wiki/Beginners
 
 SKOS PRIMER - EXCELLENT
 http://www.w3.org/TR/skos-primer/
