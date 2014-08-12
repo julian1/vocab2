@@ -1,0 +1,653 @@
+
+http://nextgamer.es/component/relatedvideos/?vid=pfchOJV5t9I
+
+VOCAB
+
+
+“As seen above, SOKS is an RDF/OWL vocabulary which can be seamlessly extended to fit …”o
+“”This section gives examples of re-using SKOS labelling properties to describe resources that are not necessarily SKOS concepts. … It then deals with the specific problem of articulating skos concepts with classes as defined by the ontology language OWL”
+
+- NEED TO REFERENCE THE OWL STUFF.
+
+
+owl:imports is supported to import conceptschemes into other conceptschemes, as complete rdf graphs.
+
+ARBITRARY RESOURCES - While the SKOS vocabulary does not include a mechanism for associating an arbitrary resource with a skos:concept, - it’s possible to use other vocabularies. DC for instance provides a subject property. 
+
+Eg. use the DC subject property to pull in other elements. 
+
+----
+
+
+- minting cocept URIS since they are resolvable to representations that can be accessed using standard web technologies.
+
+- believe can decorate with OWL but no schema verification. 
+
+use -cases read document.
+
+ Why SKOS should be a focal point of your linked data strategy
+link : http://www.youtube.com/watch?v=pfchOJV5t9I
+---
+
+Add code. for skos output to report.
+
+Need to investigate upload - local and remote skos.
+
+Ands
+    supports versioning of vocab as skos files according to the manual.
+    And support editing skos files - although ideally we would maintain primary locally. 
+
+----
+
+Rapport/Breathing.
+Who cares - work on haskell instead for nice systems.   or hook up the db. now we know the tripple store structure.
+----
+need to note at end of document in issues
+    - developed non-linked .
+    - means means to one dont affect the other,
+    - and only authoritative source is files.
+----
+
+    also at en. grails/crud front
+        - end to db as update mechanism
+--
+
+also how we don't want to have to start again wit
+    two databases have neen developed
+    requirements doc
+    etc
+
+“ sharing and cross-referencing  different vocabularies.”
+
+-----
+
+Concept - of superset. ANDs doesn't have superset. versioning, author, other details.
+
+
+Should try to get to Pete - before planning.
+
+----
+script to encode skos.
+
+Versioning - public very important.  
+
+
+STRUCTURE
+    - INTRO    (/Scope)    
+        need
+            short term
+            long
+        current situation
+        what was done
+    - SISSVOC INTRO
+    - LDP INTRO
+    - RESOURCES (links etc)               
+    - ISSUES
+
+ 
+
+INTRO
+
+Background. A Functional requirements document was requested. To be used a
+
+short-term - publishing and search, long-term authoring and management.
+
+Sissvoc/ ANDS
+- SissVOC is… specifically designed to address mismatching endpoints - as an API to match SKOS vocabulary . 
+
+
+LDP
+note currently unfunded. A runnable vagrant example was provided. However due to time constraints it was not tested.
+
+
+- while Sissvoc implements uses LDA own. 
+
+High Level Functional Requirements For Vocabulary and Term Publishing
+
+This is a dot point list of basic functional requirements for a tool (or a tool component) designed to publish vocabularies and their terms so that they can be searched and retrieved by end users. Ideally these requirements should be read in conjunction with the use-cases already drafted specifically for ‘vocabulary management and authoring’ because there is an overlap in requirements.
+
+1. Main function is to provide a resolvable endpoint for a vocabulary and its included terms (and details) using persistent identifiers.*
+
+SiSSVoc - locally or externally hosted (ANDS) supports using persistent identifiers. 
+Article tals branding. 4 things - expected. 
+Talk about rdf.
+
+SiSSVOC is built upon rdf, and is a restful publishing api. 
+
+    Cox states, that SISSVoc supports,
+For each item in the vocabulary, HTTP GET {URI} should resolve to a description of the item. This is suitable for direct reference to vocabulary items, and in-line links within datasets. http://environment.data.gov.au/water/quality/def/object/nitrogen
+
+The DNS resolvable component of the uri, it is expected that ANDs will maintain . 
+
+
+ANDS and IMOS has extensive experience in managing in chef the DNS component of names. Alternatively ANDS
+
+
+2. Resolvable content should be structured (or at least be able to be queried) using an RDF/SKOS encoding model. Content may however be adorned by other languages/metadata models (e.g. RDFS, OWL, Dublin Core). *
+
+SISSVoc provides a linked data API for publishing SKOS vocabularies. SKOS provides a standard vocabulary for thesarui, classifications, taxonomies and controlled vocabularies using RDF. According to Cox, SKOS lacks the expresitivity of languages such as OWL. However common metadata standards like Dublin Core are supported. It is anticipated that SKOS can be decorated with any data/metadata that can be encoded in RDF triples. 
+
+Additionally the SKOS Extensions RDF Vocabulary are a set of terms extending the SKOS Core vocabulary to support some common features of knowledge organisation systems, especially thesauri. (link) The extensions would appear to be designed to cover common needs for representing authoring and publishing .
+
+Resolvable content - can be extracted SKOS Concepts from the already developed relational vocab database demonstrates another approach which can then be ingested to a RDF persistence. An example script has been created to demonstate the feasibility of this approach. Alternately a SPARQL interface to RDF could be used over the db, to form RDF/SKOS content.
+
+
+3. It should be possible to access vocabularies and their terms via an (administratively) customisable Web-client interface and service interfaces. *
+
+
+
+SiSSVoc does not offer support for creation and update of vocabulary terms - since it is implemented on top of a read-only SPARQL endpoint/interface.  According to the ANDS handback… has extended SISSVOC, with a web supporting the editing SKOS files at file level - presumably by interacting with the file-store. Some support for web-based versioning and author management is available. There is a potential for conflict with the control_vocab_db . And a question. if we maintain current db.
+ 
+SiSSVoc running as a local instance supports customisation, image branding changes can be achieved and examples are given using simple css configuration. Examples are given in the source example.
+
+
+SISSVOC advice using a an external vocabulary content maintained using rdf editors (such as Protege or TopBraid Composer ). which ensure consistency of relationships between resources is maintained. And then generate the rdf files. 
+
+For web-based - maintenance environment - Enterprise Vocabulary NET and PoolParty Thesaurus Server. 
+
+
+4. Most users require read only access to content. *
+
+SiSSVoc supports generalized search, navigation and description lookup. Following uri’s to different organizations running different instances of SISSvoc preserves the user-interface look&feel, with only minor changes in organisational branding and css.
+
+
+5. There should ideally be a service interface that is REST-based* and a SPARQL service end-point.
+
+For SissVOC a basic set of SISSVoc URI patterns provide interfaces to for querying SLOS ConceptSchem, Collection and Concept. Additionally partial lists of concepts are available through broader / narrower properities predicates, and for discovery through label matching.
+
+For REST (as a resource/service facade for SPARQL), the newer (now, W3C) spec LDP also abstracts SPARQL queries into HTTP REST verb-able collections. 
+
+Sissvoc as a standalone instance would expose it by virtue of the u
+
+SISSVoc provides a Linked Data API for publishing SKOS vocabularies. It is designed with a HTTP-based interface aligned with REST-based web services. The URI patterns are aligned with SKOS vocabulary structure and web based facilitate discovery and access. Note however, that SISSVoc is not a full RESTful API, as it does not support HTTP operations for update and deletion.
+ 
+SPARQL (Simple Protocol and RDF Query Language) is an RDF query language able to preserve, retrieve and manipulate data in RDF format and is a W3c standard. SPARQL  abstracts encoding model (XML, … etc), and is adapted to the non-relational / graph structure of RDF.
+
+The SISSVOC RESTFUL URI patterns correspond very closely with SPARQL queries which perform the heavy-lifting.  SISSVOC uses a SPARQL endpoint as the mechanism to access RDF providing a strong separation of concerns.
+
+It could be possible to map the current control_vocab_db to expose a sparql interface using a tool such as r2d.  The sparql interface would the provide the endpoint SISSVOC and replacing the need for an additional persistence layer and the need to ingest raw skos files.
+
+It is anticipated that an external SISSVOC service such as ANDs would be unlikely to expose a sparql interfaces.
+ 
+d2r over contr_vocab_db could be used. 
+
+A stand-alone instance for example ereefs maintain a sparql endpoint. 
+eg. 
+ http://sissvoc.ereefs.info/ereefs/sparql
+
+6. The publishing and retrieval service should offer and receive re-direction(s) so that vocabularies or terms hosted on different domains (under differing content authorities) can still be accessed via the service (if desired). *
+
+SiSSVoc supports seamless and consistent navigation between differing SiSSVOC instances hosted on different domains.
+
+ 
+7. The Web-client should support some basic ‘canned’ querying (e.g. free text search against concept, collection and scheme ‘labels’; traversing a named vocabulary via hypertext links to explore included terms, their details and any matches or mappings to other published vocabularies). *
+
+SiSSVoc - yes (local instance). configurable ttl - examples available.
+
+SISSVOC configuration is in RDF using TTL encoding. Lots of examples are given. 
+
+Need to assess - concept, collection, scheme each one individually.
+
+ANDS SISSVOC has also developed a vocabulary tree style widget https://researchdata.ands.org.au/developers/documentation/widgets/vocab_widget
+
+
+8. The Web-Client should be able to display in a user-friendly way (e.g. using tables or forms) vocabulary and term details (e.g. scheme, collection and concept labels; alt labels, its type, description, membership, relations [including some Dublin core relations such as ‘publisher’ and ‘owner’ and revision info]). *
+
+SiSSVoc - yes. Believe should be able to display rdf extensions.  
+
+9. The Web-Client should be able to display categorized (classified) lists of discoverable content (e.g. all vocabs by provided by owner X; all terms in vocab Y)
+
+SiSSVoc. Uncertain. (local instance) Should be possible to modify local javascript, to provide alternate views.
+
+
+10. The Web-Client should offer different formats in which to download vocabularies or their terms (e.g. RDF*, text*, json, html*)
+
+SiSSVoc supports RDF, text, json, and html.
+
+11. The Web-Client should offer some statistics for users on the type and volume of content available (e.g., number of vocabularies that can be accessed and the number of terms in each vocabulary).
+ 
+
+With a Sparql interface it is trivial to construct queries to identy for example the number of concepts, schemes, collections available. Don’t believe  SISSVOc API has direct support although it could probably be easily added. 
+
+12. The publishing and retrieval service should be capable of being configured to dynamically read one or more repository sources to access content that needs to be published. *
+
+SiSSVoc (local), Uncertain. repository sources exposing sparql endpoints.
+
+13. Response times for retrieving queried content should be ‘user-tolerable’. *
+
+SiSSVoc - Both local and remote options assume appear to work quickly.
+
+14. System should provide an administrative console/configuration files to enable simple maintenance and administration (e.g., small changes to Web-client interface displays and supported queries; to detect and fix broken links in client-based hypertext; detecting missing details in retrieved content – indicating content needs moderating/validating; provide basic statistics on service usage).
+
+SiSSVoc
+
+15. There should be ‘meaningful’ error messaging provided in response to service calls that cannot be satisfied (or which have been framed incorrectly). *
+
+SiSSVoc (local) will be customisable.
+
+
+Feasibility of implemention
+
+Steps to implement short-term - 
+ANDS would involve nominating and configuring upload accounts. And uploading SKOS data. 
+Local instance - SCrum baseline tasks deployment a 2. and complex cookbook a 8. representing approximately half a 2-week iteration
+In both cases the export scripts need to be developed. From experience developing the script to generate SKOS concept, could be completed in an iteration.
+
+ 
+
+
+Other notes or Issues
+Just flag the issues - easy way to organize but without spending excessive time)
+
+SISSVOC uses LDA to abstract sparql queries and provide and programming level API and then implements it’s own skos skos ‘aligned’ REST services over the top. LDP uses the newer Linked Data Platform (LDP) which is a restful api and W3C standard.  
+
+There’s a possible Interoperability question between sissvoc api which is intended by the implementers as a ‘standard interface’ and present and (future) LDP centric vocab systems that have the advantage of being an adopted w3c standard.
+
+The issues would relate to the sharing and cross-referencing of different vocabularies due to different restful discovery and search mechanisms. It’s believed that SiSSVoc implementations have only been adopted within an Australian context.
+ 
+
+In discussion Seb/ Kim emphasised, that the content of the contr_contr_db is a superset of data that we want to publish via skos/rds mechanisms. Additional organisational content such as facility/subfacility details, lifecycle, versioning and namespacing of uri's, management of terms (term author details, when) may need to be persisted. These needs should be considered against the feature set of a third-party tool.  (reference See Kim’s email). LDP is reported to do this. 
+
+A package that also looks after ‘authoring and management’ should be assessed as to whether it can match these requirements. 
+
+Ideally that platform would utilize the wc3 skos extensions for management in order to be standards compliant. rather than developed as an ad-hoc and propriety system.
+
+
+
+If ANDs or an alternate third-party is chosen to manage the storage all records then scripts/ harvesters will need to be developed to harvest rdf/ skos and transform to relational form in order to ingest back into the contr_vocab_db and parameter_mappings databases in order to support geoserver metadata plugin which accesses this information via db connections. 
+
+Since the pure skos resources are a subset of the data that IMOS may wish to maintain, this would may need  to be considered carefully. 
+
+Similarly, the possibilty of AODN contributers marking up Netcdf with vocabularly introduces the possibility of performing the netcdf attribute to parameter mapping at harvest time, instead of the last-leg transform performed by geoserver at wfs download. Knowing the type of a parameter field in the harvest database improves the robustness of data over using simple string fields like “temp”.  There may also be possibilities for more generic harvesters and schemas for different facilities - if netcdf attributes could be abstracted.
+ 
+ 
+ 
+        
+
+    - Longer term. authoring and management. The primary author of the SISSVOC implementation paper,  instead of Simon Cox suggests, ...    
+
+    - Namespacing . Used by ANDs. assigned some type of identifier. DI =  
+                    indirection not needed.
+                    - issue. irrespective of ands or local sissvoc
+
+
+    - if we go with external provider. then we will need to decompose the skos back to relational form to ingest
+    into the parameter_mappings db for wfs download information. requiring harvester etc.
+
+
+    (Kim's email)
+ 
+    - The present db may represent a good can only be replaced if an alternate solution is found that supports entire lifecycle of vocab. This
+    would probably involve replacing the relational with a triple store persistance common to many
+    rdf. This raises issues of flexibility.
+
+    - At the moment, vocab exists in two place - no referential integrity between parameter mappings and vocab db. both schemas/databases are
+    populated with excel scripts, and reference each other for parameters and units, but there's
+    no integrity, and duplication of data.  
+        - strongly suggest following relational approaches / normalized representation.  
+
+    - Currently a single authoritative source for vocab. At the moment this is the spreadsheets used to populate via
+    matlab scripts. workflow. matlab scripts poor. maintained - in non-relational form.
+
+
+    - Mechanimsm - of tagging of fields. eg. extracted from netcdf, appended at harvest, or mapped using strings at download (current).
+
+
+    - For REST (as a resource/service facade for SPARQL), the newer (now, W3C) spec is Linked Data Platform (LDP): http://www.w3.org/TR/ldp/
+        ldp may use ldp which is w3c     
+        not adhoc elda
+
+    - need to note - the cost of deploying a web app is low - according to scrum baseline tasks - 2
+
+
+    - type conversion. relational -> rdf -> upload ANDS triples -> reformat skos -> parameter_mappings ?
+
+
+
+VERY IMPORTANT - organize desirable features
+    - local
+    - ands
+    - ldp
+
+----
+
+
+Moving to a triple-store - raises issues of maintaining postgresql connection which is needed for parameter_mapping, reporting,
+    would need to be redeveloped.
+    
+
+INTRO / scope
+
+    A controlled vocabularly is needed solution is needed for Imos/aodn to support .
+    It is desirable to avoid a home-rolled and ad-hoc system. and instead use commonly available open-licensed technologies. From the
+    point of view of support open communities, interoperability and bearing in mind the limited development resources
+    available.
+
+    jcshort term - publishing and search. long term - authoring and management.
+    management is found including authoring and management.  - it is also used by geoserver - in parameter mappings
+
+    - publishing / search.
+    More long term - Seb/Kim indicated the move to using fine grained-terminology - ereefs.
+
+
+CURRENT SITUATION
+
+    Several key components have been developed that may be used as basis to future. A relational control_vocab_db has been
+    designed and implemented to represent PUPIA.
+
+    A document giving db table mappings to SKOS / SPARQL has been prepared. (Kim's doc)
+
+        There are two broad requirements. In the sh
+      
+    - Information about facility and subfacility should as useful .
+
+
+
+Introduction SiSSVoc
+    - Developed by...
+        - used by...
+    - open source - licence
+    - source - available.  basically just a transform
+    - Demonstrated use to manage geo-spatial vocabularies - and specifically marine
+    - Very simple application. Consists of zero lines of java. A working test example avilable was able to be tested in 5 minutes after cloning.
+
+    Possibilities
+    - SissVoc -> ELDA -> sparql
+    - Nothing to do. But integration into workflow complicated.
+
+
+
+Introduction UK LDP
+    - SKOS ?
+    - sparql
+      
+
+"ANDS uses a customised instance of SISSvoc 3 to host a number of commonly used controlled vocabularies."
+    - http://researchdata.ands.org.au/developers/documentation/services/vocabulary_api
+
+---
+
+Other points relevant to Sissvoc
+    (maybe better - as an introduction to sissvoc )
+    - Advantages
+        - open source - licence
+        - source - available.  basically just a transform
+        - Very simple application. Consists of zero lines of java. A working test example avilable was able to be tested in 5 minutes after cloning.
+
+        underlying work
+        - SissVoc -> ELDA -> sparql
+        - Nothing to do. But integration into workflow complicated.
+
+    - Disadvantages
+        - deficient in authoring and management - may not be a long term solution for this requirement
+            - unless a third party tool is found to handle.
+        - Basically just subset of sparql parameterized as url. Unclear what advantage the service offers,
+            versus simply forwarding sparql requests?  - eg. Geoserver exposes its CQL language by allowing
+            the passing of the full string.
+            - reasoning it's SKOS VOCAB specific.
+        - nothing to do - we already have an account and can upload.
+        - It's more the web-site that ANZ have developed around the sissvoc implementation.
+
+
+
+
+-----
+Resources
+    - Kim email - discussing URI encoding    Wed, 11 Jun 2014 12:44:46 +1000
+    - r2r found by Seb.
+
+
+Be very good to try and configure and endpoint - eg. to ereefs project. to see if can do this.
+
+SISSVOC + a local SKOS manageemnt would fulfill both short and long term needs.
+    - need to investigate further these options.
+
+Investigation did. Research
+    Familarise with technology
+    looked at running local sissvoc
+    ands sissvoc
+
+Maybe have to state 'cant determine'
+
+----
+
+It is desirable to find low-cost to integrate all the components. for a system. and avoid
+    having to write our own.
+
+
+SISSVOC
+
+
+
+    Current workflow -
+
+        Need to note - We already have a db. but how do we export as skos? from here.
+        this entire workflow needs to be elaborated on
+
+        excel spread sheets -> (matlab) db  -> export as skos
+
+        why not generate as skos initially - then import -> because it's only a subset of
+        what needs to be in the database.
+
+
+    Relevance of db
+        Seb/ Kim emphaised
+            that contr_db is a superset of data that we want to publish via rds mechanisms.
+            It can only be replaced if a complete solution to entire lifecycle of vocab
+        management is found including authoring and management.
+            - it is also used by geoserver - in parameter mappings
+
+
+    locked into a solution that won't work in the long term.
+
+
+Interoperable ?
+    Identified a requirement for imos sissvoc to communicate with ereefs sysvoc. - above
+    rdf linking?
+    rdf
+    exchange between sissvoc servers.
+
+
+SissVoc
+
+    - Nice because it's low-effort solution to the publishing and search requirement.
+        this matches the imos/emii short-term requriement.
+        - provides human and machine readble
+        - integrates
+
+    - Agile principle that - avoid throwing everything out and rewriting/replacing system from scratch
+
+    - Very simple. 0 lines of java code to maintain. appears xsl
+
+    - Used by multiple parties.
+    - Easy to brand by changing css
+    - maintains standard cool uri structure.
+    - human (json) and machine (xml) interfaces
+
+
+
+    Risk.
+
+    * in use now - for many collections - integrates well for human search.
+        especially important for ereefs. data.
+
+    - both machine and human readable formats.
+
+
+    local (two approaches)
+        - d2h to use mappings over sparql
+        - manual mapping to export skos files -> to export
+    ANDs
+        - still needs manual mapping of db.        
+
+
+    There is an implementation !!!-  appears to be xsd transform
+
+    http://localhost:8080/elda-demo/meta/api
+
+    has the apis
+
+    - Extremely lightweight.
+
+
+Use open docs.
+
+need to say the option - of integrating sissvoc,
+
+and add the pictures of the structure
+and the db structure.
+
+UK LDA
+    lda not skos specific platform.
+    uncertain how browsing would integrate with sissvoc (already for ANDS, ereefs ) in terms of user experience.
+
+    For REST (as a resource/service facade for SPARQL), the newer (now, W3C) spec is Linked Data Platform (LDP): http://www.w3.org/TR/ldp/
+
+    sissvok - uses elda. but there's now a spec for LDP.
+
+
+UK LDA
+    ADVANTAGES
+
+    DISADVANTAGES    
+        - source available
+        - unfunded/ not mature/ proof of concept/
+        
+        - not specifically vocab / skos. ? check.
+
+
+
+
+------------
+
+SissVOC advice, highlights the difficulty of management,
+authoring and management. - is considered difficult.
+
+- Maintaining vocab content is more challending task. - which involves not only conept
+descriptions but also all the relationships wibtin and between vocabularies. Maintaining
+the integrity of these in the face of fine-grained update operations is a significant task.
+
+Vocab may be maintained. using rdf editros
+    - protege or topbraid composer.  
+    - web based
+------------
+
+    However they have a working solution - right now for management.
+        - used already in the community.  relevant to support etc.
+    
+ISSUES  
+Just flag the issues -
+    (easy way to organize but without spending excessive time)
+
+    - if we move to ANDs entirely - in future for management. then we will need scripts to harvest rdf/ skos from
+    ands, and then re-encode it in relational layer - to support our paramter and unit  mapping in geoserver headers.
+
+    - netcdf - harvesting.
+        
+
+    - Longer term. authoring and management. Simon Cox suggests, ...    
+
+    - Namespacing . Used by ANDs. assigned some type of identifier. DI =  
+                    indirection not needed.
+                    - issue. irrespective of ands or local sissvoc
+
+
+    - if we go with external provider. then we will need to decompose the skos back to relational form to ingest
+    into the parameter_mappings db for wfs download information. requiring harvester etc.
+
+
+    (Kim's email)
+
+    - In discussions Seb/ Kim emphasised, that the that contr_contr_db is a superset of data that we
+    want to publish via skos/rds mechanisms. Additional state/data - facility/subfacility details, lifecycle, versioning and namespacing of uri's,
+    management of terms (term author details, when) also require tracking.
+
+    - The present db may represent a good can only be replaced if an alternate solution is found that supports entire lifecycle of vocab. This
+    would probably involve replacing the relational with a triple store persistance common to many
+    rdf. This raises issues of flexibility.
+
+    - At the moment, vocab exists in two place - no referential integrity between parameter mappings and vocab db. both schemas/databases are
+    populated with excel scripts, and reference each other for parameters and units, but there's
+    no integrity, and duplication of data.  
+        - strongly suggest following relational approaches / normalized representation.  
+
+    - Currently a single authoritative source for vocab. At the moment this is the spreadsheets used to populate via
+    matlab scripts. workflow. matlab scripts poor. maintained - in non-relational form.
+
+
+    - Mechanimsm - of tagging of fields. eg. extracted from netcdf, appended at harvest, or mapped using strings at download (current).
+
+
+    - For REST (as a resource/service facade for SPARQL), the newer (now, W3C) spec is Linked Data Platform (LDP): http://www.w3.org/TR/ldp/
+        ldp may use ldp which is w3c     
+        not adhoc elda
+
+    - need to note - the cost of deploying a web app is low - according to scrum baseline tasks - 2
+
+
+    - type conversion. relational -> rdf -> upload ANDS triples -> reformat skos -> parameter_mappings ?
+
+
+
+VERY IMPORTANT - organize desirable features
+    - local
+    - ands
+    - ldp
+
+----
+
+
+Moving to a triple-store - raises issues of maintaining postgresql connection which is needed for parameter_mapping, reporting,
+    would need to be redeveloped.
+    
+
+INTRO / scope
+
+    A controlled vocabularly is needed solution is needed for Imos/aodn to support .
+    It is desirable to avoid a home-rolled and ad-hoc system. and instead use commonly available open-licensed technologies. From the
+    point of view of support open communities, interoperability and bearing in mind the limited development resources
+    available.
+
+    jcshort term - publishing and search. long term - authoring and management.
+    management is found including authoring and management.  - it is also used by geoserver - in parameter mappings
+
+    - publishing / search.
+    More long term - Seb/Kim indicated the move to using fine grained-terminology - ereefs.
+
+
+CURRENT SITUATION
+
+    Several key components have been developed that may be used as basis to future. A relational control_vocab_db has been
+    designed and implemented to represent PUPIA.
+
+    A document giving db table mappings to SKOS / SPARQL has been prepared. (Kim's doc)
+
+        There are two broad requirements. In the sh
+      
+    - Information about facility and subfacility should as useful .
+
+
+
+Introduction SiSSVoc
+    - Developed by...
+        - used by...
+    - open source - licence
+    - source - available.  basically just a transform
+    - Demonstrated use to manage geo-spatial vocabularies - and specifically marine
+    - Very simple application. Consists of zero lines of java. A working test example avilable was able to be tested in 5 minutes after cloning.
+
+    Possibilities
+    - SissVoc -> ELDA -> sparql
+    - Nothing to do. But integration into workflow complicated.
+
+
+
+Introduction UK LDP
+    - SKOS ?
+    - sparql
+      
+
+"ANDS uses a customised instance of SISSvoc 3 to host a number of commonly used controlled vocabularies."
+    - http://researchdata.ands.org.au/developers/documentation/services/vocabulary_api
+
+

@@ -1,0 +1,99 @@
+%% latex x.tex ; evince x.dvi
+
+\documentclass[10pt,a4paper]{article}
+% \documentclass[12pt]{report}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\title{Whoot!}
+\date{}
+\begin{document}
+
+  \maketitle
+    \begin{flushleft}
+  \setlength{\parindent}{5ex}
+
+
+
+\section{x}
+
+\subsection{Resolvable content should be structured (or at least be able to be queried)
+  using an RDF/SKOS encoding model. Content may however be adorned by other
+  languages/metadata models (e.g. RDFS, OWL, Dublin Core).  }
+
+
+	SISSVoc provides a linked data API for publishing SKOS vocabularies.
+  SKOS provides a standard vocabulary for thesarui, classifications, taxonomies
+  and controlled vocabularies using RDF.
+   According to Cox, SKOS lacks the expresitivity of languages such as OWL.
+  However common metadata standards like Dublin Core are supported.
+    It is anticipated that SKOS can be decorated with any data/metadata that can
+  be encoded in RDF triples.
+
+	Additionally the SKOS Extensions RDF Vocabulary are a set of terms extending
+	the SKOS Core vocabulary to support some common features of knowledge
+	organisation systems, especially thesauri. (link) The extensions would appear
+	to be designed to cover common needs for representing authoring and publishing.
+
+	Resolvable content - can be extracted SKOS Concepts from the already developed
+	relational vocab database demonstrates another approach which can then be
+	ingested to a RDF persistence. An example script has been created to demonstate
+	the feasibility of this approach. Alternately a SPARQL interface to RDF could
+	be used over the db, to form RDF/SKOS content.
+
+
+\subsection{y}
+  more crap
+
+
+
+
+
+
+  \end{flushleft}
+
+
+
+
+\LaTeX{} is a document preparation system for the \TeX{}
+  typesetting program. It offers programmable desktop
+  publishing features and extensive facilities for
+  automating most aspects of typesetting and desktop
+  publishing, including numbering and cross-referencing,
+  tables and figures, page layout, bibliographies, and
+  much more. \LaTeX{} was originally written in 1984 by
+  Leslie Lamport and has become the dominant method for
+  using \TeX; few people write in plain \TeX{} anymore.
+  The current version is \LaTeXe.
+
+  \begin{flushright}
+  a para
+  \textbf{should be bold}
+  \textit{should be italic}
+
+  \end{flushright}
+
+
+
+  \begin{flushleft}
+  My footnote\footnote{An example footnote.}
+  Another footnote\footnote{Another footnote.}
+
+  \hyperref[cnn]{http://www.cnn.com}
+
+  \url{http://www.google.com}
+  \href{http://www.google.com}{my google}
+  \href{http://www.cnn.com}{http://www.cnn.com}
+
+  % http://www.google.com
+  \end{flushleft}
+  more stuff
+  more stuff2
+
+  % This is a comment, not shown in final output.
+  % The following shows typesetting power of LaTeX:
+  \begin{align}
+    E_0 &= mc^2                              \\
+    E &= \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}}
+  \end{align}
+\end{document}
+
