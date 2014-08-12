@@ -62,6 +62,35 @@
 	be used over the db, to form RDF/SKOS content.
 
 
+\subsection{} 
+\begin{italicquotes} 
+3. It should be possible to access vocabularies and their terms via an 
+(administratively) customisable Web-client interface and service interfaces.*
+
+\end{italicquotes} 
+
+SiSSVoc does not offer support for creation and update of vocabulary terms - 
+since it is implemented on top of a read-only SPARQL endpoint/interface.  
+According to the ANDS handback… has extended SISSVOC, with a web supporting 
+the editing SKOS files at file level - presumably by interacting with the 
+file-store. Some support for web-based versioning and author management is 
+available. There is a potential for conflict with the \texttt{control\_vocab\_db}. And a 
+question. if we maintain current db.
+ 
+SiSSVoc running as a local instance supports customisation, image branding 
+changes can be achieved and examples are given using simple css configuration. 
+Examples are given in the source example.
+
+
+SISSVOC advice using a an external vocabulary content maintained using rdf 
+editors (such as Protege or TopBraid Composer ). which ensure consistency of 
+relationships between resources is maintained. And then generate the rdf files. 
+
+For web-based - maintenance environment - Enterprise Vocabulary NET and 
+PoolParty Thesaurus Server. 
+
+
+
 
 \subsection{} 
 \begin{italicquotes} 
