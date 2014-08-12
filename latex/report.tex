@@ -5,7 +5,14 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 
+% indent the first para after a new section
 \usepackage{indentfirst}
+
+
+% italic environment
+\newenvironment{italicquotes}
+{\begin{quote}\itshape}
+{\end{quote}}
 
 \title{Whoot!}
 \date{}
@@ -19,15 +26,11 @@
 
 \section{High level requirements}
 
+\begin{italicquotes} hopefully italic 
 
-\begin{subsection}{Resolvable content should be structured (or at least be able to be queried)
-  using an RDF/SKOS encoding model. Content may however be adorned by other
-  languages/metadata models (e.g. RDFS, OWL, Dublin Core).  }
+  and more italic
+  \end{italicquotes} 
 
-
-	SISSVoc provides a linked data API for publishing SKOS vocabularies.
- 
-\end{subsection}
 
 \subsection{Resolvable content should be structured (or at least be able to be queried)
   using an RDF/SKOS encoding model. Content may however be adorned by other
@@ -59,6 +62,21 @@
 \subsection{y}
   more crap
 
+
+\begin{subsection}{Resolvable content should be structured (or at least be able to be queried)
+  using an RDF/SKOS encoding model. Content may however be adorned by other
+  languages/metadata models (e.g. RDFS, OWL, Dublin Core).  }
+
+	SISSVoc provides a linked data API for publishing SKOS vocabularies.
+
+
+  \begin{textit}{
+    should be italic
+  }
+  \end{textit}
+
+
+\end{subsection}
 
 
 
