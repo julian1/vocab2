@@ -92,8 +92,13 @@
   PID service used in conjunction with SISSOV  \footnote{
   https://www.seegrid.csiro.au/wiki/Siss/PIDService}  
   
-  \item[]It's uncertain what capabilities LDP has for persisent identifiers.
+  \item[]LDP is a resource registry management system, however it's unknown 
+  if this includes direct support for persisent identifiers.
 
+% LDP -   The API should, where reasonable, follow REST principles. Specifically that
+% any resource in the system should be identified by a URI and be manipulable by
+% standard HTTP verbs (GET, PUT, DELETE, PATCH).
+% 
 
 % also supports versioning and management of PID could
 %% ok, we got this restful stuff confused. GET,POST,DELETE,UPDATE... etc.
@@ -132,11 +137,13 @@ broader and narrower terms in transitive and non-transitive forms and according
 to text based labels. 
 
   SKOS content can be decorated with other RDF based
-content and persisted to the underlying triple store. However SISSVOC provides
+content and persisted to the underlying triple store independently of SISSVOC
+functionality. SISSVOC provides
 no direct support URI patterns for search and discovery of such content. As an
 alternative, a sparql interface would provide a
 such query/search mechanism for non-SKOS content such as RDFS and OWL classes. 
 
+It's believed that LDP has no API support for SKOS specific resources.
 
 %    According to Cox, SKOS lacks the expresitivity of languages such as OWL.
 %   However common metadata standards like Dublin Core are supported.
@@ -164,14 +171,14 @@ such query/search mechanism for non-SKOS content such as RDFS and OWL classes.
   \end{italicquotes} 
 
   - still waiting on ANDS to give a test account.
-
   - need to mention the handbook.
 
-  SiSSVoc as a standalone application does not support for creation and update
-  of vocabulary terms.  - since it is implemented on top of a read-only SPARQL
-  endpoint/interface.  According to the ANDS handback… has extended SISSVOC, with
-  a web supporting the editing SKOS files at file level - presumably by
-  interacting with the file-store. Some support for web-based versioning and
+  SiSSVoc as a standalone application has no direct support for the creation and update
+  of vocabulary terms.  This is inherent to SISSVOC design, as a lightweight web-api
+  implemented over a read-only SPARQL endpoint/interface.  
+
+  According to the ANDS handback… ANDS support the editing SKOS files at file
+level.  Some support for web-based versioning and
   author management is available. There is a potential for conflict with the
   \texttt{control\_vocab\_db}. And a question. if we maintain current db.
 
@@ -179,12 +186,10 @@ such query/search mechanism for non-SKOS content such as RDFS and OWL classes.
 changes can be achieved and examples are given using simple css configuration.
 Examples are given in the source example.
 
-  SISSVOC advice using a an external vocabulary content maintained using rdf
+  SISSVOC authors advise using a an external vocabulary content maintained using rdf
 editors (such as Protege or TopBraid Composer ). which ensure consistency of
-relationships between resources is maintained. And then generate the rdf files. 
-
-  For web-based - maintenance environment - Enterprise Vocabulary NET and
-PoolParty Thesaurus Server. 
+relationships between resources is maintained. For web-based - maintenance environment 
+  - Enterprise Vocabulary NET and PoolParty Thesaurus Server. 
 
 
 
