@@ -62,9 +62,10 @@
 	be used over the db, to form RDF/SKOS content.
 
 
+% 3 
 \subsection{} 
 \begin{italicquotes} 
-3. It should be possible to access vocabularies and their terms via an 
+It should be possible to access vocabularies and their terms via an 
 (administratively) customisable Web-client interface and service interfaces.*
 
 \end{italicquotes} 
@@ -76,11 +77,10 @@ the editing SKOS files at file level - presumably by interacting with the
 file-store. Some support for web-based versioning and author management is 
 available. There is a potential for conflict with the \texttt{control\_vocab\_db}. And a 
 question. if we maintain current db.
- 
+
 SiSSVoc running as a local instance supports customisation, image branding 
 changes can be achieved and examples are given using simple css configuration. 
 Examples are given in the source example.
-
 
 SISSVOC advice using a an external vocabulary content maintained using rdf 
 editors (such as Protege or TopBraid Composer ). which ensure consistency of 
@@ -88,35 +88,6 @@ relationships between resources is maintained. And then generate the rdf files.
 
 For web-based - maintenance environment - Enterprise Vocabulary NET and 
 PoolParty Thesaurus Server. 
-
-
-
-
-\subsection{} 
-\begin{italicquotes} 
-  Resolvable content should be structured (or at least be able to be queried) 
-  using an RDF/SKOS encoding model. Content may however be adorned by other 
-  languages/metadata models (e.g. RDFS, OWL, Dublin Core).* 
-\end{italicquotes} 
-  
-
-  SISSVoc provides a linked data API for publishing SKOS vocabularies. SKOS 
-  provides a standard vocabulary for thesarui, classifications, taxonomies and 
-  controlled vocabularies using RDF. According to Cox, SKOS lacks the 
-  expresitivity of languages such as OWL. However common metadata standards like 
-  Dublin Core are supported. It is anticipated that SKOS can be decorated with 
-  any data/metadata that can be encoded in RDF triples. 
-
-  Additionally the SKOS Extensions RDF Vocabulary are a set of terms extending 
-  the SKOS Core vocabulary to support some common features of knowledge 
-  organisation systems, especially thesauri. (link) The extensions would appear 
-  to be designed to cover common needs for representing authoring and publishing .
-
-  Resolvable content - can be extracted SKOS Concepts from the already developed 
-  relational vocab database demonstrates another approach which can then be 
-  ingested to a RDF persistence. An example script has been created to demonstate 
-  the feasibility of this approach. Alternately a SPARQL interface to RDF could 
-  be used over the db, to form RDF/SKOS content.
 
 
 
