@@ -16,9 +16,15 @@
 {\begin{quote}\itshape}
 {\end{quote}}
 
+
+\let\Item\item
+\newcommand\SpecialItem{\renewcommand\item[1][]{\Item[\textbullet~\bfseries##1]}}
+\renewcommand\enddescription{\endlist\global\let\item\Item}
+
 \title{Whoot!}
 \date{}
 \begin{document}
+\SpecialItem
 
   \maketitle
     \begin{flushleft}
@@ -27,6 +33,13 @@
 
 
 \section{High level requirements}
+
+  \item[Text] more text
+
+    and below
+  \item[and some] more text
+  \item[] empty
+
 
 \begin{italicquotes} hopefully italic  
 
@@ -39,47 +52,65 @@
 % need to be consisistent.
 
 % 1 
-  \subsection{}
-  \begin{italicquotes} 
+  \subsection{
    Main function is to provide a resolvable endpoint for a vocabulary and its
   included terms (and details) using persistent identifiers.* 
-  \end{italicquotes} 
+  }
+
+  \item[]For each item in the vocabulary, persistent identifiers {URI} should
+  resolve to a description of the item.  This is necessary for direct reference to
+  vocabulary items, and in-line links within datasets.
+
+  \item[SISSVoc] as a standalone application has no inherant support for managing persistent
+  identifiers. The SISSVOC paper describes a deployment \footnote{ See Figure 3,
+  SISSVoc: A Linked Data API for SKOS vocabularies.
+
+  \url{http://www.semantic-web-journal.net/system/files/swj658.pdf} }, using a
+  Persistent Identifier Service is used to map persistent URI resources to SISSVoc
+  webservice urls but doesn't give futher details on the implementation or
+  whether and external provider was chosen. 
+
+  \item[ANDS] controlled vocabulary services build upons SISSVOC, although it appears
+  their persistent identifier service is a more general capability. According to
+  documentation, ANDS has a, 
+
+  \begin{italicquotes} [...] simple HTTP-based interface, [which] ensures that
+  identifier services can be integrated easily into existing data management
+  workflows.  \end{italicquotes}
+  ANDS does undertake to persist the infrastructure for required for
+  keeping its identifiers online. Ideally the service would be integrated
+  with other SISSVoc management functionality, although this was not tested.
+
+  \item[]Another alternative, would be to use a service such as \url{purl.org}  \footnote{ The most
+  prominent instances of such schemes are PURLexternal link, which has been used
+  by the National Library of Australia, and ARKexternal link, at the California
+  Digital Library.  }. 
 
 
-  In the SISSVOC paper \footnote{
-  See Table 6, SISSVoc: A Linked Data API for SKOS vocabularies.
-  \url{http://www.semantic-web-journal.net/system/files/swj658.pdf}
-  }, a Persistent Identifier Service is used to map . 
-
-
-PURL. SISSVOC used a per
-
-  \url{https://www.seegrid.csiro.au/wiki/Siss/PIDService} 
-
+  \item[]If desired it would probably be simple to publish identifiers under using an
+  AODN or EMII dns url.   
   
+  It's uncertain what capabilities LDP has for persisent identifiers.
 
 
+% also supports versioning and management of PID could
+%% ok, we got this restful stuff confused. GET,POST,DELETE,UPDATE... etc.
+%% are html commands.
 
-  
-  SiSSVoc - locally or externally hosted (ANDS) supports using persistent
-  identifiers.  Article tals branding. 4 things - expected.  Talk about rdf.
-
-  SiSSVOC is built upon rdf, and is a restful publishing api. 
-
-      Cox states, that SISSVoc supports, For each item in the vocabulary, HTTP GET
-  {URI} should resolve to a description of the item. This is suitable for direct
-  reference to vocabulary items, and in-line links within datasets.
-  http://environment.data.gov.au/water/quality/def/object/nitrogen
-
-  The DNS resolvable component of the uri, it is expected that ANDs will maintain
-  . 
-
-
-  ANDS and IMOS has extensive experience in managing in chef the DNS component of
-  names. Alternatively ANDS
-
-
-
+%   \# SISSVoc Deployment complemented by PID service
+%   PURL. SISSVOC used a per
+%   \url{https://www.seegrid.csiro.au/wiki/Siss/PIDService} 
+% 
+%   
+%   SiSSVoc - locally or externally hosted (ANDS) supports using persistent
+%   identifiers.  Article tals branding. 4 things - expected.  Talk about rdf.
+% 
+%   SiSSVOC is built upon rdf, and is a restful publishing api. 
+%%   The DNS resolvable component of the uri, it is expected that ANDs will maintain
+% 
+%   ANDS and IMOS has extensive experience in managing in chef the DNS component of
+%   names. Alternatively ANDS
+% 
 
 
 
@@ -89,29 +120,31 @@ PURL. SISSVOC used a per
 
   SISSVoc API - is orientated around Concept, Collection and .
 
-  It's assumed that being decorated with other RDF content.
-  
 
-	SISSVoc provides a linked data API for publishing SKOS vocabularies.
+  SISSVoc provides a linked data API for publishing SKOS vocabularies.
   SKOS provides a standard vocabulary for thesarui, classifications, taxonomies
   and controlled vocabularies using RDF.
-   According to Cox, SKOS lacks the expresitivity of languages such as OWL.
-  However common metadata standards like Dublin Core are supported.
-    It is anticipated that SKOS can be decorated with any data/metadata that can
-  be encoded in RDF triples.
+
+  It's assumed that content can be further decorated with other RDF content.
 
 
-	Additionally the SKOS Extensions RDF Vocabulary are a set of terms extending
-	the SKOS Core vocabulary to support some common features of knowledge
-	organisation systems, especially thesauri. (link) The extensions would appear
-	to be designed to cover common needs for representing authoring and publishing.
 
-	Resolvable content - can be extracted SKOS Concepts from the already developed
-	relational vocab database demonstrates another approach which can then be
-	ingested to a RDF persistence. An example script has been created to demonstate
-	the feasibility of this approach. Alternately a SPARQL interface to RDF could
-	be used over the , to form RDF/SKOS content.
-
+%    According to Cox, SKOS lacks the expresitivity of languages such as OWL.
+%   However common metadata standards like Dublin Core are supported.
+%     It is anticipated that SKOS can be decorated with any data/metadata that can
+%   be encoded in RDF triples.
+% 
+%   Additionally the SKOS Extensions RDF Vocabulary are a set of terms extending
+%   the SKOS Core vocabulary to support some common features of knowledge
+%   organisation systems, especially thesauri. (link) The extensions would appear
+%   to be designed to cover common needs for representing authoring and publishing.
+% 
+%   Resolvable content - can be extracted SKOS Concepts from the already developed
+%   relational vocab database demonstrates another approach which can then be
+%   ingested to a RDF persistence. An example script has been created to demonstate
+%   the feasibility of this approach. Alternately a SPARQL interface to RDF could
+%   be used over the , to form RDF/SKOS content.
+% 
 
 % 3 
   \subsection{} 
@@ -155,7 +188,7 @@ PoolParty Thesaurus Server.
   using an RDF/SKOS encoding model. Content may however be adorned by other
   languages/metadata models (e.g. RDFS, OWL, Dublin Core).  }
 
-	SISSVoc provides a linked data API for publishing SKOS vocabularies.
+  SISSVoc provides a linked data API for publishing SKOS vocabularies.
 
 
   \begin{textit}{
