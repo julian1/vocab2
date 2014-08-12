@@ -1,3 +1,4 @@
+%% sudo apt-get install texlive-latex-extra
 %% latex x.tex ; evince x.dvi
 
 \documentclass[10pt,a4paper]{article}
@@ -10,13 +11,19 @@
 % indent the first para after a new section
 \usepackage{indentfirst}
 
+% missing - \usepackage{sectsty}
+
+
+% control section fonts - it does work
+\usepackage{sectsty}
+\subsectionfont{\fontsize{10}{10}\selectfont}
 
 % italic environment
 \newenvironment{italicquotes}
 {\begin{quote}\itshape}
 {\end{quote}}
 
-
+% bullet point lists
 \let\Item\item
 \newcommand\SpecialItem{\renewcommand\item[1][]{\Item[\textbullet~\bfseries##1]}}
 \renewcommand\enddescription{\endlist\global\let\item\Item}
@@ -30,10 +37,8 @@
     \begin{flushleft}
   \setlength{\parindent}{5ex}
 
-
 % 
 % \section{High level requirements}
-% 
 %   \item[Text] more text
 %     and below
 %   \item[and some] more text
@@ -46,6 +51,7 @@
 
 % need to be consisistent.
 
+% OK
 % 1 
   \subsection{
    Main function is to provide a resolvable endpoint for a vocabulary and its
@@ -83,7 +89,8 @@
 
 
   \item[]If desired it would probably also be simple to publish identifiers under using an
-  AODN or EMII dns based url.   
+  AODN or EMII dns based url. Also see \footnote{
+https://www.seegrid.csiro.au/wiki/Siss/PIDService}  
   
   \item[]It's uncertain what capabilities LDP has for persisent identifiers.
 
@@ -108,11 +115,11 @@
 % 
 
 
-
+%% OK
+% 2
 \subsection{Resolvable content should be structured (or at least be able to be queried)
   using an RDF/SKOS encoding model. Content may however be adorned by other
   languages/metadata models (e.g. RDFS, OWL, Dublin Core).* }
-
 
   SISSVoc provides a linked data API for publishing SKOS vocabularies.
   SKOS provides a standard vocabulary for thesarui, classifications, taxonomies
@@ -124,10 +131,9 @@ narrower terms in transitive and non-transitive forms and according to text
 based labels. 
 
   It's assumed that content can be further decorated with other RDF based
-content. However there is no direct support for searching such content using SISSVoc
-URIs patterns. A sparql interface would however provide a query mechanism for non-SKOS
+content and persisted. However there is no direct support for searching such content using SISSVoc
+URIs patterns. A sparql interface would provide a query/search mechanism for non-SKOS
 content such as OWL classes. 
-
 
 
 %    According to Cox, SKOS lacks the expresitivity of languages such as OWL.
