@@ -94,6 +94,10 @@
   
   \item[]LDP is a resource registry management system, however it's unknown 
   if this includes direct support for persisent identifiers.
+    \footnote{ See 
+    https://github.com/UKGovLD/ukl-registry-poc/wiki/Principles-and-concepts
+  }
+
 
 % LDP -   The API should, where reasonable, follow REST principles. Specifically that
 % any resource in the system should be identified by a URI and be manipulable by
@@ -143,7 +147,7 @@ no direct support URI patterns for search and discovery of such content. As an
 alternative, a sparql interface would provide a
 such query/search mechanism for non-SKOS content such as RDFS and OWL classes. 
 
-It's believed that LDP has no API support for SKOS specific resources.
+It is believed that LDP has no specific API support for SKOS resources.
 
 %    According to Cox, SKOS lacks the expresitivity of languages such as OWL.
 %   However common metadata standards like Dublin Core are supported.
@@ -170,28 +174,50 @@ It's believed that LDP has no API support for SKOS specific resources.
 
   \end{italicquotes} 
 
-  - still waiting on ANDS to give a test account.
-  - need to mention the handbook.
 
-  SiSSVoc as a standalone application has no direct support for the creation and update
-  of vocabulary terms.  This is inherent to SISSVOC design, as a lightweight web-api
-  implemented over a read-only SPARQL endpoint/interface.  
+  SISSVoc provides a strong SKOS aligned web-based search and discovery functionality. 
 
-  According to the ANDS handback… ANDS support the editing SKOS files at file
-level.  Some support for web-based versioning and
-  author management is available. There is a potential for conflict with the
-  \texttt{control\_vocab\_db}. And a question. if we maintain current db.
+  In contrast to search/discovery, SiSSVoc as a standalone application has no direct 
+  support for the creation and update of vocabulary terms.  This is inherent to SISSVOC design, as a 
+  lightweight web-api implemented over a read-only SPARQL endpoint/interface.  
 
-  SiSSVoc running as a local instance supports customisation, image branding
-changes can be achieved and examples are given using simple css configuration.
-Examples are given in the source example.
+  If SiSSVoc deployed as a local then customisation, image branding
+  can be achieved via changes to css and js configuration.
+  Examples are given in the source code.
+   \footnote {
+      https://github.com/jyucsiro/sissvoc-runner/tree/master/sissvoc/resources
+    }
+    
+  According to the ANDS handbook, ANDS provides web-based GUI support for editing SKOS files at file level. 
+  \footnote { See 3.4.3, Editing Vocabularies \url{ http://www.ands.org.au/support/vocab-help-guide.pdf } 
+  }
 
-  SISSVOC authors advise using a an external vocabulary content maintained using rdf
-editors (such as Protege or TopBraid Composer ). which ensure consistency of
-relationships between resources is maintained. For web-based - maintenance environment 
-  - Enterprise Vocabulary NET and PoolParty Thesaurus Server. 
+  Some support for web-based versioning and author management at the file level
+  is also available. 
 
+  \footnote {
+    There is a need to consider whether file level versioning and management is
+  sufficiently fine-grained. Also interaction with existing registry management
+  already used in IMOS \texttt{control\_vocab\_db}. 
+  }
+  
+ 
 
+  For complex vocabulary authoring needs, SISSVOC authors suggest using a an external vocabulary content maintained using rdf
+editors (such as Protege or TopBraid Composer ) which can also ensure that consistency of
+relationships between resources is maintained (eg. for OWL). 
+
+  \begin{italicquotes} 
+  Vocabulary content may be maintained using RDF editors (such as Protégé 4 or
+TopBraid Composer 5 ), which ensure consistency of
+relationships between resources is maintained, and
+then generate RDF documents to transfer vocabulary
+content from the maintenance to publication envi-
+ronment, as outlined above. If a web-based vocabu-
+lary maintenance environment is required, then tools
+like TopQuadrant’s Enterprise Vocabulary Net 6 , and
+the PoolParty Thesaurus Server 7 are available.
+  \end{italicquotes} 
 
 
 \subsection{y}
