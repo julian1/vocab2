@@ -72,7 +72,7 @@
   \begin{italicquotes} [...] simple HTTP-based interface, [which] ensures that
   identifier services can be integrated easily into existing data management
   workflows.  \end{italicquotes}
-  ANDS does undertake to persist the infrastructure for required for
+  According to their documentation, ANDS does undertake to persist the infrastructure for required for
   keeping its identifiers online. Ideally the service would be integrated
   with other SISSVoc management functionality, although this was not tested.
 
@@ -82,10 +82,10 @@
   Digital Library.  }. 
 
 
-  \item[]If desired it would probably be simple to publish identifiers under using an
-  AODN or EMII dns url.   
+  \item[]If desired it would probably also be simple to publish identifiers under using an
+  AODN or EMII dns based url.   
   
-  It's uncertain what capabilities LDP has for persisent identifiers.
+  \item[]It's uncertain what capabilities LDP has for persisent identifiers.
 
 
 % also supports versioning and management of PID could
@@ -113,14 +113,20 @@
   using an RDF/SKOS encoding model. Content may however be adorned by other
   languages/metadata models (e.g. RDFS, OWL, Dublin Core).* }
 
-  SISSVoc API - is orientated around Concept, Collection and .
-
 
   SISSVoc provides a linked data API for publishing SKOS vocabularies.
   SKOS provides a standard vocabulary for thesarui, classifications, taxonomies
   and controlled vocabularies using RDF.
 
-  It's assumed that content can be further decorated with other RDF content.
+  The SISSVoc web-service API supports URI patterns for SKOS Concept,
+ConceptScheme and Collection. Further URI patterns are provided to discover broader and
+narrower terms in transitive and non-transitive forms and according to text
+based labels. 
+
+  It's assumed that content can be further decorated with other RDF based
+content. However there is no direct support for searching such content using SISSVoc
+URIs patterns. A sparql interface would however provide a query mechanism for non-SKOS
+content such as OWL classes. 
 
 
 
