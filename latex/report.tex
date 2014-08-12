@@ -58,7 +58,7 @@
   included terms (and details) using persistent identifiers.* 
   }
 
-  \item[]For each item in the vocabulary, persistent identifiers {URI} should
+  For each item in the vocabulary, persistent identifiers {URI} should
   resolve to a description of the item.  This is necessary for direct reference to
   vocabulary items, and in-line links within datasets.
 
@@ -87,10 +87,10 @@
   by the National Library of Australia, and ARKexternal link, at the California
   Digital Library.  }. 
 
-
   \item[]If desired it would probably also be simple to publish identifiers under using an
-  AODN or EMII dns based url. Also see \footnote{
-https://www.seegrid.csiro.au/wiki/Siss/PIDService}  
+  AODN or EMII dns based url. In this context, seegrid appear to have developed their own
+  PID service used in conjunction with SISSOV  \footnote{
+  https://www.seegrid.csiro.au/wiki/Siss/PIDService}  
   
   \item[]It's uncertain what capabilities LDP has for persisent identifiers.
 
@@ -121,19 +121,21 @@ https://www.seegrid.csiro.au/wiki/Siss/PIDService}
   using an RDF/SKOS encoding model. Content may however be adorned by other
   languages/metadata models (e.g. RDFS, OWL, Dublin Core).* }
 
-  SISSVoc provides a linked data API for publishing SKOS vocabularies.
-  SKOS provides a standard vocabulary for thesarui, classifications, taxonomies
-  and controlled vocabularies using RDF.
+  SISSVoc provides a linked data API for publishing SKOS vocabularies.  SKOS
+provides a standard vocabulary for thesarui, classifications, taxonomies and
+controlled vocabularies using RDF.
 
-  The SISSVoc web-service API supports URI patterns for SKOS Concept,
-ConceptScheme and Collection. Further URI patterns are provided to discover broader and
-narrower terms in transitive and non-transitive forms and according to text
-based labels. 
+  The SISSVoc web-service API supports URI patterns aligned with the SKOS
+vocabulary model. This includes patterns for SKOS Concept,
+ConceptScheme and Collection. Further URI patterns are provided to discover
+broader and narrower terms in transitive and non-transitive forms and according
+to text based labels. 
 
-  It's assumed that content can be further decorated with other RDF based
-content and persisted. However there is no direct support for searching such content using SISSVoc
-URIs patterns. A sparql interface would provide a query/search mechanism for non-SKOS
-content such as OWL classes. 
+  SKOS content can be decorated with other RDF based
+content and persisted to the underlying triple store. However SISSVOC provides
+no direct support URI patterns for search and discovery of such content. As an
+alternative, a sparql interface would provide a
+such query/search mechanism for non-SKOS content such as RDFS and OWL classes. 
 
 
 %    According to Cox, SKOS lacks the expresitivity of languages such as OWL.
