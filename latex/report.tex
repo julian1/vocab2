@@ -11,6 +11,10 @@
 % indent the first para after a new section
 \usepackage{indentfirst}
 
+
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
 % missing - \usepackage{sectsty}
 
 
@@ -52,6 +56,7 @@
 % need to be consisistent.
 
 
+\includegraphics{universe}  
 
 \section{
   What was done
@@ -63,7 +68,7 @@
   external sparql endpoints as rdf source was run-up under a tomcat webserver.
   \footnote{ \url { http://github.com/jyucsiro/sissvoc-runner }  } 
 
-  \item[] Attempted to run up provided vagrant example of ldp .
+  \item[] Attempted to run up provided vagrant example of UKGovLD, 
   \footnote{ \url { https://github.com/UKGovLD/registry-deploy-poc } } but
   difficulties with trying to mock AWS behavior. Eventually succeeded in running a pre-built war 
   to run on a Nectar VM. 
@@ -75,14 +80,12 @@
 	dummy admin account was not successful, due to a bug in open-id redirection probably
   due to absent dns configuration.
 
-  An understanding of the exact features of LDP is therefore more limited
-consistent with not being able to get the app to run.
+  An understanding of the exact features of LDP is therefore more limited.
 
   \item[] 
   Wrote preliminary scripts to extract and encode the contents of IMOS
   controlled vocabulary database as SKOS, suitable for input to Geonetwork 
-  for faceted search, or to upload to Vocab register such as ANDS.
-  To investigate difficulty.
+  and faceted search, or to upload to an external Vocab register such as ANDS.
 
 
 
@@ -325,8 +328,8 @@ desired). * }
 SiSSVoc supports seamless and consistent GUI navigation between differing
 SiSSVOC instances hosted on different domains.
 
-LDP GUI navigation capabilities are unknown, but assumed to be limited to registry management.
-
+LDP GUI navigation capabilities are unknown, but assumed to be limited to 
+registry management.
 
 
 % CRAP 
@@ -336,12 +339,15 @@ free text search against concept, collection and scheme ‘labels’; traversing
 named vocabulary via hypertext links to explore included terms, their details
 and any matches or mappings to other published vocabularies). * }
 
+SISSVoc supports free-text searching against concept, collection and concept
+schemes. And can traverse via hyperlinks for associated terms. 
+
+A picture is provided, 
+
+
 % SiSSVoc - yes (local instance). configurable ttl - examples available.
-% 
 % SISSVOC configuration is in RDF using TTL encoding. Lots of examples are given. 
-% 
 % Need to assess - concept, collection, scheme each one individually.
-% 
 % ANDS SISSVOC has also developed a vocabulary tree style widget
 % https://researchdata.ands.org.au/developers/documentation/widgets/vocab_widget
 % 
@@ -353,7 +359,7 @@ SiSSVoc - yes. Believe should be able to display rdf extensions.
 
 
 
-% include some pictures ?
+% could include some screenshots of sissvoc ?
 % as an alternative protoge with a dedicated SKOS and OWL plugins. 
 % 8
 \subsection{ The Web-Client should be able to display in a user-friendly way
