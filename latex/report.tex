@@ -1,4 +1,4 @@
-%% sudo apt-get install texlive-latex-extra
+%% rm report.pdf ; pdflatex -halt-on-error report.tex  && evince report.pdf
 %% latex x.tex ; evince x.dvi
 
 \documentclass[10pt,a4paper]{article}
@@ -50,6 +50,11 @@
 % 
 
 % need to be consisistent.
+
+
+
+
+
 
 % OK
 % 1 
@@ -265,7 +270,7 @@ non-relational / graph structure of RDF.
 which perform the heavy-lifting.  SISSVOC uses a SPARQL endpoint as the
 mechanism to access RDF providing a strong separation of concerns.
 
-  It could be possible to map the current control_vocab_db to expose a sparql
+  It could be possible to map the current \texttt{control\_vocab\_db} to expose a sparql
 interface using a tool such as r2d.  The sparql interface would the provide the
 endpoint SISSVOC and replacing the need for an additional persistence layer and
 the need to ingest raw skos files.
