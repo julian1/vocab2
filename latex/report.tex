@@ -71,9 +71,12 @@
   http://ukgovld-registry.s3.amazonaws.com/distribution/ukl-registry-0.0.1-SNAPSHOT-dist.tar.gz
   }}
 
-  Attempts to generate a dummy configuration, and investigate further under an
-  admin account was not successful, due to a bug in open-id redirection probably
+  Attempts to generate a dummy configuration, and investigate the app under a
+	dummy admin account was not successful, due to a bug in open-id redirection probably
   due to absent dns configuration.
+
+  An understanding of the exact features of LDP is therefore more limited
+consistent with not being able to get the app to run.
 
   \item[] 
   Wrote preliminary scripts to extract and encode the contents of IMOS
@@ -83,6 +86,9 @@
 
 
 
+\section { 
+	High Level Functional Requirements For Vocabulary and Term Publishing
+}
 
 % OK
 % 1 
@@ -319,11 +325,11 @@ desired). * }
 SiSSVoc supports seamless and consistent GUI navigation between differing
 SiSSVOC instances hosted on different domains.
 
-LDP capabilities are unknown, but assumed to be limited to registry management.
+LDP GUI navigation capabilities are unknown, but assumed to be limited to registry management.
 
 
 
-% OK
+% CRAP 
 %7
 \subsection{ The Web-client should support some basic ‘canned’ querying (e.g.
 free text search against concept, collection and scheme ‘labels’; traversing a
@@ -341,6 +347,23 @@ and any matches or mappings to other published vocabularies). * }
 % 
 
 Support LDP capabilities for registrar searching are unknown.
+
+SiSSVoc - yes. Believe should be able to display rdf extensions.  
+
+
+
+
+% include some pictures ?
+% as an alternative protoge with a dedicated SKOS and OWL plugins. 
+% 8
+\subsection{ The Web-Client should be able to display in a user-friendly way
+(e.g. using tables or forms) vocabulary and term details (e.g. scheme,
+collection and concept labels; alt labels, its type, description, membership,
+relations [including some Dublin core relations such as ‘publisher’ and ‘owner’
+and revision info]). * }
+
+
+
 
 
 
