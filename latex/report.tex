@@ -232,7 +232,7 @@ the PoolParty Thesaurus Server 7 are available.
 \subsection{ 
   4. Most users require read only access to content.* 
 }
-  SISSVoc provides a capable Web-client interface for read-only access vocabularies and their terms.
+  SISSVoc provides an easy-to-use Web-client interface for read-only access vocabularies and their terms.
 
   In contrast to search, navigation and discovery, SiSSVoc as a standalone application has no direct 
   support for the creation and update of vocabulary terms. This is inherent to SISSVOC design, as a 
@@ -251,14 +251,14 @@ resources. But note, this is a general capability lacking SKOS specific function
 }
 
   SISSVoc is designed with a HTTP-based interface aligned with REST-based web
-services. The URI patterns facilitate SKOS discovery and access. Note however,
-that SISSVoc is not a full RESTful API, as it does not support HTTP operations
+services. The URI patterns facilitate SKOS discovery and access. However,
+SISSVoc is not a full RESTful API, as it does not support HTTP operations
 for update and deletion of resources.
   
   LDP is designed with a view to RESTFUL management of registry resources.
 \footnote { https://github.com/UKGovLD/ukl-registry-poc/wiki/Api } It should be
 noted that references to SKOS in the discussion of the LDP api apply to
-registrars, not the SKOS contents of any particular registrars.  
+registrars, not the SKOS contents maintained by particular registrars.  
 
 
   SPARQL (Simple Protocol and RDF Query Language) is an RDF query language able
@@ -267,18 +267,17 @@ SPARQL abstracts encoding model (XML, … etc), and is adapted to the
 non-relational / graph structure of RDF.
 
   The SISSVOC RESTFUL URI patterns correspond very closely with SPARQL queries
-which perform the heavy-lifting.  SISSVOC uses a SPARQL endpoint as the
+which perform the background work.  SISSVOC uses a SPARQL endpoint as the
 mechanism to access RDF providing a strong separation of concerns.
 
-  It could be possible to map the current \texttt{control\_vocab\_db} to expose a sparql
-interface using a tool such as r2d.  The sparql interface would the provide the
+  It would be possible to map the current \texttt{control\_vocab\_db} to expose a sparql
+interface using a tool such as r2d  \footnote{ \url{ http://www.w3.org/TR/r2rml/ } }  .  The sparql interface would the provide the
 endpoint SISSVOC and replacing the need for an additional persistence layer and
 the need to ingest raw skos files.
 
-  It is anticipated that an external SISSVOC provider such as ANDs would be
-unlikely to expose a sparql interfaces.
+  It is expected that an external SISSVOC provider such as ANDs would be
+unlikely to expose such low-level query capability to their interfaces.
    
-
 
 \subsection{y}
 
