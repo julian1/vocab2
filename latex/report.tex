@@ -11,9 +11,19 @@
 % indent the first para after a new section
 \usepackage{indentfirst}
 
-
+% for png
 \usepackage{graphicx}
 \graphicspath{ {images/} }
+
+
+
+% for figure captioning
+%\usepackage[capposition=top]{floatrow}
+%\usepackage{caption}
+\usepackage{caption}
+
+% to control positioning
+\usepackage{float}
 
 % missing - \usepackage{sectsty}
 
@@ -312,6 +322,9 @@ r2rml \footnote{ \url{ http://www.w3.org/TR/r2rml/ } } .  The sparql interface
 would thus provide the endpoint for SISSVOC and replace the need to manage an
 additional persistence layer.
 
+	At least in standalone hosting, SISSVOC has supporting client-side SPARQL forms, 
+	and showing the current SPARQL query.
+
     It is expected that an external SISSVOC provider such as ANDs would be
 unlikely to expose such low-level query capability.
    
@@ -323,36 +336,53 @@ re-direction(s) so that vocabularies or terms hosted on different domains (under
 differing content authorities) can still be accessed via the service (if
 desired). * }
 
+{
 SiSSVoc supports seamless and consistent GUI navigation between differing
 SiSSVOC instances hosted on different domains.
+%
+Alternatively, normal url de-referencing allows navigation to non-sissvoc
+vocabulary implementations based around normal rdf resource uris.
+%
+Interestingly, due to the nature of the decoupled end-point design, SiSSVoc 
+can be configured to use multiple SPARQL endpoint providers. This unifies access
+to different vocabulary providers from the same SISSVOC instance. 
 
-Alternatively, normal url de-referencing will enable navigation to non-sissvoc
-vocabulary implementations.
+% \begin{figure}
+% % \centering% default with `floatrow`
+% %\rule{1cm}{1cm}% placeholder for `\includegraphics`
+% \includegraphics[width=7cm]{multipleendpoints}  
+% \caption{A figure}
+% \floatfoot{A note}
+% \end{figure}
 
-An interesting feature due to the decoupled end-point design, is that SiSSVoc 
-can be configured to use multiple SPARQL endpoint providers, this unifies search 
-across to the same hosted same SISSVOC instance. 
-
-\includegraphics[width=12cm]{multipleendpoints}  
+\begin{figure}[H]
+%\begin{figure}
+\centering
+\caption{A figure}
+\rule{1cm}{1cm}% placeholder for `\includegraphics`
+%\fnote{A note}
+\label{fig:test}
+\end{figure}
 
 LDP GUI navigation capabilities are unknown, but assumed to be limited to 
 registry management.
-
-
+}
+%
+%
 % CRAP 
 %7
 \subsection{ The Web-client should support some basic ‘canned’ querying (e.g.
 free text search against concept, collection and scheme ‘labels’; traversing a
 named vocabulary via hypertext links to explore included terms, their details
 and any matches or mappings to other published vocabularies). * }
-
+%
 SISSVoc supports free-text searching against concept, collection and concept
-schemes. And can traverse via hyperlinks for associated terms. 
-
-A picture of SISSVoc running locally but connected to WC 
-
+schemes. SISSVoc can also traverse via hyperlinks for associated terms. 
+%
 \includegraphics[width=12cm]{sissvoc}  
-
+\footnote{ SISSVoc links to multiple vocabularies } 
+% need a footnote.
+%
 
 
 % SiSSVoc - yes (local instance). configurable ttl - examples available.
