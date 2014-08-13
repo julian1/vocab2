@@ -95,7 +95,11 @@
   controlled vocabulary database as SKOS, suitable for input to Geonetwork 
   and faceted search, or to upload to an external Vocab register such as ANDS.
 
-
+  \item[] 
+	Attempted to register with ANDS to obtain an account, and set up a test
+	registry. Few technical issues, and currently working with their technical
+	support to try and resolve.
+		
 
 \section { 
 	High Level Functional Requirements For Vocabulary and Term Publishing
@@ -400,10 +404,13 @@ collection and concept labels; alt labels, its type, description, membership,
 relations [including some Dublin core relations such as ‘publisher’ and ‘owner’
 and revision info]). * }
 
+The SISSVoc Web-Client supports user-friendly presentation of SKOS term details
+including preferred label, definition, broader, and membership relations. Also
+other metatadata terms such as Dublic Core source. 
 
-The SISSVoc Web-Client supports user-friendly presentation of SKOS term details. It's not
-certain what schema support is available. 
- 
+It appears that the simple html table layout supports showing all associated rdf
+properties that resolve to literals or rdfs:label types rather than URI
+resources that would require dereferencing.
 
 \begin{figure}[H]
 \centering
@@ -411,13 +418,6 @@ certain what schema support is available.
 \includegraphics[width=12cm]{nitrogen}  
 \label{fig:test}
 \end{figure}
-
-
-
-
-
-
-\subsection{y}
 
 
 
