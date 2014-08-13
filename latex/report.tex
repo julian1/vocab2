@@ -53,6 +53,34 @@
 
 
 
+\section{
+  What was done
+}
+
+  In order to get a better feel for the ap. practical. 
+
+  \item[] A local instance of sissvoc, which is preconfigured to use
+  external sparql endpoints as rdf source was run-up under a tomcat webserver.
+  \footnote{ \url { http://github.com/jyucsiro/sissvoc-runner }  } 
+
+  \item[] Attempted to run up provided vagrant example of ldp .
+  \footnote{ \url { https://github.com/UKGovLD/registry-deploy-poc } } but
+  difficulties with trying to mock AWS behavior. Eventually succeeded in running a pre-built war 
+  to run on a Nectar VM. 
+  \footnote{ \url { 
+  http://ukgovld-registry.s3.amazonaws.com/distribution/ukl-registry-0.0.1-SNAPSHOT-dist.tar.gz
+  }}
+
+  Attempts to generate a dummy configuration, and investigate further under an
+  admin account was not successful, due to a bug in open-id redirection probably
+  due to absent dns configuration.
+
+  \item[] 
+  Wrote preliminary scripts to extract and encode the contents of IMOS
+  controlled vocabulary database as SKOS, suitable for input to Geonetwork 
+  for faceted search, or to upload to Vocab register such as ANDS.
+  To investigate difficulty.
+
 
 
 
@@ -251,44 +279,69 @@ resources. But note, this is a general capability lacking SKOS specific function
   There should ideally be a service interface that is REST-based* and a SPARQL service end-point.
 }
 
-  SISSVoc is designed with a HTTP-based interface aligned with REST-based web
+    SISSVoc is designed with a HTTP-based interface aligned with REST-based web
 services. The URI patterns facilitate SKOS discovery and access. However,
-SISSVoc is not a full RESTful API, as it does not support HTTP operations
-for update and deletion of resources.
-  
-  LDP is designed with a view to RESTFUL management of registry resources.
+SISSVoc is not a full RESTful API, as it does not support HTTP operations for
+update and deletion of resources.
+    
+    LDP is designed with a view to RESTFUL management of registry resources.
 \footnote { https://github.com/UKGovLD/ukl-registry-poc/wiki/Api } It should be
 noted that references to SKOS in the discussion of the LDP api apply to
 registrars, not SKOS content maintained by particular registrars.  
 
 
-  SPARQL (Simple Protocol and RDF Query Language) is an RDF query language able
-to preserve, retrieve and manipulate data in RDF format and is a W3c standard.
-SPARQL abstracts encoding model (XML, … etc), and is adapted to the
-non-relational / graph structure of RDF.
+    SPARQL (Simple Protocol and RDF Query Language) is an RDF query language
+able to preserve, retrieve and manipulate data in RDF format and is a W3c
+standard.  SPARQL abstracts the encoding model (XML, … etc), and persistence
+layer and is adapted to the non-relational / graph structure of RDF.
 
-  The SISSVOC RESTFUL URI patterns correspond very closely with SPARQL queries
-which perform the substantial work.  SISSVOC uses a SPARQL endpoint as the
+    The SISSVOC RESTFUL URI patterns correspond quite closely with specific SPARQL queries
+which perform the substantial work. SISSVOC thus relies on a SPARQL endpoint as the
 mechanism to access RDF providing a strong separation of concerns.
 
-  It would be feasible to map the already IMOS developed \texttt{control\_vocab\_db} to expose a sparql
-interface using a tool such as r2rml \footnote{ \url{ http://www.w3.org/TR/r2rml/ } } .  The sparql interface would the provide the
-endpoint for SISSVOC and replacing the need for an additional persistence layer and
-the need to ingest raw skos files.
+    It would be feasible to map the already IMOS developed
+\texttt{control\_vocab\_db} to expose a sparql interface using a tool such as
+r2rml \footnote{ \url{ http://www.w3.org/TR/r2rml/ } } .  The sparql interface
+would thus provide the endpoint for SISSVOC and replace the need to manage an
+additional persistence layer.
 
-  It is expected that an external SISSVOC provider such as ANDs would be
+    It is expected that an external SISSVOC provider such as ANDs would be
 unlikely to expose such low-level query capability.
    
 
 % OK
 % 6
-\subsection{ 
-  The publishing and retrieval service should offer and receive re-direction(s) so that vocabularies or terms hosted on different domains (under differing content authorities) can still be accessed via the service (if desired). *
-}
+\subsection{ The publishing and retrieval service should offer and receive
+re-direction(s) so that vocabularies or terms hosted on different domains (under
+differing content authorities) can still be accessed via the service (if
+desired). * }
 
-SiSSVoc supports seamless and consistent GUI navigation between differing SiSSVOC instances hosted on different domains.
+SiSSVoc supports seamless and consistent GUI navigation between differing
+SiSSVOC instances hosted on different domains.
 
-LDP capabilities are unknown, but assumed to be limited.
+LDP capabilities are unknown, but assumed to be limited to registry management.
+
+
+
+% OK
+%7
+\subsection{ The Web-client should support some basic ‘canned’ querying (e.g.
+free text search against concept, collection and scheme ‘labels’; traversing a
+named vocabulary via hypertext links to explore included terms, their details
+and any matches or mappings to other published vocabularies). * }
+
+% SiSSVoc - yes (local instance). configurable ttl - examples available.
+% 
+% SISSVOC configuration is in RDF using TTL encoding. Lots of examples are given. 
+% 
+% Need to assess - concept, collection, scheme each one individually.
+% 
+% ANDS SISSVOC has also developed a vocabulary tree style widget
+% https://researchdata.ands.org.au/developers/documentation/widgets/vocab_widget
+% 
+
+Support LDP capabilities for registrar searching are unknown.
+
 
 
 \subsection{y}
