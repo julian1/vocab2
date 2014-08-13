@@ -271,22 +271,24 @@ non-relational / graph structure of RDF.
 which perform the substantial work.  SISSVOC uses a SPARQL endpoint as the
 mechanism to access RDF providing a strong separation of concerns.
 
-  It would be possible to map the already IMOS developed \texttt{control\_vocab\_db} to expose a sparql
-interface using a tool such as r2d  \footnote{ \url{ http://www.w3.org/TR/r2rml/ } }  .  The sparql interface would the provide the
-endpoint SISSVOC and replacing the need for an additional persistence layer and
+  It would be feasible to map the already IMOS developed \texttt{control\_vocab\_db} to expose a sparql
+interface using a tool such as r2rml \footnote{ \url{ http://www.w3.org/TR/r2rml/ } } .  The sparql interface would the provide the
+endpoint for SISSVOC and replacing the need for an additional persistence layer and
 the need to ingest raw skos files.
 
   It is expected that an external SISSVOC provider such as ANDs would be
 unlikely to expose such low-level query capability.
    
 
+% OK
 % 6
 \subsection{ 
   The publishing and retrieval service should offer and receive re-direction(s) so that vocabularies or terms hosted on different domains (under differing content authorities) can still be accessed via the service (if desired). *
 }
 
+SiSSVoc supports seamless and consistent GUI navigation between differing SiSSVOC instances hosted on different domains.
 
-
+LDP capabilities are unknown, but assumed to be limited.
 
 
 \subsection{y}
