@@ -347,20 +347,11 @@ Interestingly, due to the nature of the decoupled end-point design, SiSSVoc
 can be configured to use multiple SPARQL endpoint providers. This unifies access
 to different vocabulary providers from the same SISSVOC instance. 
 
-% \begin{figure}
-% % \centering% default with `floatrow`
-% %\rule{1cm}{1cm}% placeholder for `\includegraphics`
-% \includegraphics[width=7cm]{multipleendpoints}  
-% \caption{A figure}
-% \floatfoot{A note}
-% \end{figure}
-
+% H=HERE
 \begin{figure}[H]
-%\begin{figure}
 \centering
-\caption{A figure}
-\rule{1cm}{1cm}% placeholder for `\includegraphics`
-%\fnote{A note}
+\caption{SISSVoc using multiple SISSVOC domains}
+\includegraphics[width=12cm]{multipleendpoints}  
 \label{fig:test}
 \end{figure}
 
@@ -376,13 +367,17 @@ free text search against concept, collection and scheme ‘labels’; traversing
 named vocabulary via hypertext links to explore included terms, their details
 and any matches or mappings to other published vocabularies). * }
 %
-SISSVoc supports free-text searching against concept, collection and concept
-schemes. SISSVoc can also traverse via hyperlinks for associated terms. 
-%
+SISSVoc supports free-text searching against concept labels. It can list
+concept, collection and concept schemes. SISSVoc can also traverse links 
+for associated broader and narrower terms. 
+
+\begin{figure}[H]
+\centering
+\caption{SISSVoc Gui Concept search and results}
 \includegraphics[width=12cm]{sissvoc}  
-\footnote{ SISSVoc links to multiple vocabularies } 
-% need a footnote.
-%
+\label{fig:test}
+\end{figure}
+
 
 
 % SiSSVoc - yes (local instance). configurable ttl - examples available.
@@ -394,9 +389,6 @@ schemes. SISSVoc can also traverse via hyperlinks for associated terms.
 
 Support LDP capabilities for registrar searching are unknown.
 
-SiSSVoc - yes. Believe should be able to display rdf extensions.  
-
-
 
 
 % could include some screenshots of sissvoc ?
@@ -407,6 +399,16 @@ SiSSVoc - yes. Believe should be able to display rdf extensions.
 collection and concept labels; alt labels, its type, description, membership,
 relations [including some Dublin core relations such as ‘publisher’ and ‘owner’
 and revision info]). * }
+
+
+The SISSWeb
+
+\begin{figure}[H]
+\centering
+\caption{SISSVoc Gui SKOS Resource }
+\includegraphics[width=12cm]{nitrogen}  
+\label{fig:test}
+\end{figure}
 
 
 
