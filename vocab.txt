@@ -1,10 +1,41 @@
 
+
+OWL REASONERS
+	- One basic function that a reasoner can perform is to check an OWL ontology for consistency
+
+	- One basic function that a reasoner can perform is to check an OWL 
+	ontology for consistency, i.e. whether it is possible for a class to have any 
+	instances. It can also infer an ontology class hierarchy which may go beyond 
+	the hierarchy asserted explicitly by OWL statements.
+
+	- An ontology consists of a set of axioms which place constraints on sets 
+	of individuals (called "classes") and the types of relationships permitted 
+	between them. These axioms provide semantics by allowing systems to infer 
+	additional information based on the data explicitly provided. A full 
+	introduction to the expressive power of the OWL is provided in the W3C's OWL 
+	Guide
+
 OWL
+	It's easier to understand what it is - by looking at the things it represents
+
+		OWL in two ways: OWL DL and OWL Full
+
+		classes
+			owl:Class and individuals
+			owl:DisjointClasses
+			owl:equivalentClass
+			owl:equivalentProperty
+			owl:sameAs
+
+		property characteristics
+			owl:inverseOf
+			owl:TransitiveProperty
+			owl:FunctionalProperty
+
+
 	As an RDF serialization, OWL is a more expressive extension of RDF 
 	than of its precursor RDFS (section 4.4) or generic RDF (part 3). However, this 
 	increased expressivity comes at the expense of increased complexity. 
-
-
 
 	- Because of the complexity of OWL, OWL-based ontologies are nearly always constructed 
 	using a software tool called an ontology editor.
@@ -15,6 +46,11 @@ OWL
 	for an individual to be an instance of both classes. Unless disjointness is 
 	declared explicitly, it is allowable for an individual to be simultaneously a 
 	member of any two (or more) classes. 
+
+	- requires that objects that are literals rather than uri's are identified
+	as such.
+
+	- it's just a set of requirements that a vocab must follow.
 
 
 OWL and RDFS

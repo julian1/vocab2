@@ -106,31 +106,6 @@ High Level Functional Requirements For Vocabulary and Term Publishing
 
 This is a dot point list of basic functional requirements for a tool (or a tool component) designed to publish vocabularies and their terms so that they can be searched and retrieved by end users. Ideally these requirements should be read in conjunction with the use-cases already drafted specifically for ‘vocabulary management and authoring’ because there is an overlap in requirements.
 
-1. Main function is to provide a resolvable endpoint for a vocabulary and its included terms (and details) using persistent identifiers.*
-
-SiSSVoc - locally or externally hosted (ANDS) supports using persistent identifiers. 
-Article tals branding. 4 things - expected. 
-Talk about rdf.
-
-SiSSVOC is built upon rdf, and is a restful publishing api. 
-
-    Cox states, that SISSVoc supports,
-For each item in the vocabulary, HTTP GET {URI} should resolve to a description of the item. This is suitable for direct reference to vocabulary items, and in-line links within datasets. http://environment.data.gov.au/water/quality/def/object/nitrogen
-
-The DNS resolvable component of the uri, it is expected that ANDs will maintain . 
-
-
-ANDS and IMOS has extensive experience in managing in chef the DNS component of names. Alternatively ANDS
-
-
-2. Resolvable content should be structured (or at least be able to be queried) using an RDF/SKOS encoding model. Content may however be adorned by other languages/metadata models (e.g. RDFS, OWL, Dublin Core). *
-
-SISSVoc provides a linked data API for publishing SKOS vocabularies. SKOS provides a standard vocabulary for thesarui, classifications, taxonomies and controlled vocabularies using RDF. According to Cox, SKOS lacks the expresitivity of languages such as OWL. However common metadata standards like Dublin Core are supported. It is anticipated that SKOS can be decorated with any data/metadata that can be encoded in RDF triples. 
-
-Additionally the SKOS Extensions RDF Vocabulary are a set of terms extending the SKOS Core vocabulary to support some common features of knowledge organisation systems, especially thesauri. (link) The extensions would appear to be designed to cover common needs for representing authoring and publishing .
-
-Resolvable content - can be extracted SKOS Concepts from the already developed relational vocab database demonstrates another approach which can then be ingested to a RDF persistence. An example script has been created to demonstate the feasibility of this approach. Alternately a SPARQL interface to RDF could be used over the db, to form RDF/SKOS content.
-
 
 3. It should be possible to access vocabularies and their terms via an (administratively) customisable Web-client interface and service interfaces. *
 
@@ -174,6 +149,9 @@ d2r over contr_vocab_db could be used.
 A stand-alone instance for example ereefs maintain a sparql endpoint. 
 eg. 
  http://sissvoc.ereefs.info/ereefs/sparql
+
+
+
 
 6. The publishing and retrieval service should offer and receive re-direction(s) so that vocabularies or terms hosted on different domains (under differing content authorities) can still be accessed via the service (if desired). *
 
