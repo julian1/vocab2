@@ -76,7 +76,7 @@
 \item[] LDP and SISSVoc are complementary solutions rather than alternatives
 \item[] It's not self-evident that centralised registration management such as that provided by LDP necessarily matches IMOS/EMII organisational publishing requirements. Even LDP authors acknowledge their project is contrary to the non-federated nature of RDF publishing
 \item[] Support for more sophisticated vocabulary authoring and development actions probably does not exist yet in the form of a web-based solution. For example, inferencing and consistency checking of OWL vocabularies already supported by dedicated third-party Vocabulary applications, or verifying the reciprocal relationship of broader/narrower SKOS terms.
-\item[] An investment has already been made around a control vocab publishing database. This includes supporting the appending of Geoserver parameter and unit information at download and 
+\item[] An investment has already been made around a controlled vocabulary database. This includes supporting the appending of Geoserver parameter and unit information at download and 
 as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. Abandoning this effort would require the establishment of new work-flows
 \item[] LDP is currently unfunded, lacking project oversight, technical support, points of contact or active forums. It's an unfeasible technical-risk unless a consensus emerges from multiple external groups on new funding and feature development 
 
@@ -100,10 +100,10 @@ as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. Aba
   under a tomcat webserver and demonstrated during Iteration review.
   \footnote{ \url { http://github.com/jyucsiro/SISSVoc-runner }  } 
 
-  \item[] It was found to be very difficult to glean an understanding of the functionality of LDP by reading internal 
+  \item[] It was found to be very difficult to glean an understanding of the functionality of LDP by reading source-code and internal 
   development literature. Therefore a version of UKGovLD was also run-up on a private Nectar VM allocation. This followed prior 
   unsuccessful attempts to provision a vagrant example of UKGovLD 
-  \footnote{ \url { https://github.com/UKGovLD/registry-deploy-poc } } but
+  \footnote{ \url { https://github.com/UKGovLD/registry-deploy-poc } } 
   due to problems mocking Amazon AWS behavior.  
   \footnote{ \url { 
   http://ukgovld-registry.s3.amazonaws.com/distribution/ukl-registry-0.0.1-SNAPSHOT-dist.tar.gz
@@ -113,17 +113,17 @@ as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. Aba
 	privileges was fruitless, due to a bug in open-id redirection. However it was possible to explore and navigate the main 
   menu-system of the application.
 %
-  The discussion of LDP features is necessarily more limited.
+  The discussion of LDP features is therefore more limited.
 
   \item[] 
   Preliminary scripts to extract and encode the contents of IMOS
   controlled vocabulary database as SKOS were written to guage the difficulty to perform the required mapping. These were further modified to be suitable 
   to input into Geonetwork for current development to support platform / parameter based faceted search. Such export feature would probably also be necessary for upload 
-  to a publishing provider eg. ANDs or purl.org. 
+  to a publishing provider eg. ANDS or purl.org. 
 
   \item[] 
 	Attempted to register with ANDS and obtain an account to establish a test
-	registry of published vocabulary terms. There were some technical issues, requiring help from ANDs technical
+	registry of published vocabulary terms. There were some technical issues, requiring help from ANDS technical
 	support which were unresolved.
 		
   \item[] SISSVoc and LDP was assesed against the High Level Functional Requirements For Vocabulary and Term Publishing previously
@@ -191,7 +191,7 @@ as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. Aba
 
 % also supports versioning and management of PID could
 %% ok, we got this restful stuff confused. GET,POST,DELETE,UPDATE... etc.
-%% are html commands.
+%% are html commANDS.
 
 %   \# SISSVoc Deployment complemented by PID service
 %   PURL. SISSVoc used a per
@@ -202,7 +202,7 @@ as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. Aba
 %   identifiers.  Article tals branding. 4 things - expected.  Talk about rdf.
 % 
 %   SISSVoc is built upon rdf, and is a restful publishing api. 
-%%   The DNS resolvable component of the uri, it is expected that ANDs will maintain
+%%   The DNS resolvable component of the uri, it is expected that ANDS will maintain
 % 
 %   ANDS and IMOS has extensive experience in managing in chef the DNS component of
 %   names. Alternatively ANDS
@@ -272,7 +272,7 @@ It is believed that LDP has no specific API support for SKOS resources.
 %     }
 %    
   According to the ANDS handbook, ANDS provides web-based GUI support for editing SKOS files at file level. 
-  \footnote { See 3.4.3, Editing Vocabularies \url{ http://www.ands.org.au/support/vocab-help-guide.pdf } 
+  \footnote { See 3.4.3, Editing Vocabularies \url{ http://www.ANDS.org.au/support/vocab-help-guide.pdf } 
   }
 
   Some support for web-based versioning and author management at the file level
@@ -318,7 +318,7 @@ the PoolParty Thesaurus Server 7 are available.
   support for the creation and update of vocabulary terms. This is inherent to SISSVoc design, as a 
   lightweight web-api implemented over a read-only SPARQL endpoint/interface.  
 
-  ANDs extends SISSVoc cabpability by including support for uploading, and raw editing
+  ANDS extends SISSVoc cabpability by including support for uploading, and raw editing
   at file-level. 
 
   LDP provides a Web-client for fine grained registry management of term
@@ -360,7 +360,7 @@ additional persistence layer.
 	At least in standalone hosting, SISSVoc has supporting client-side SPARQL forms, 
 	and showing the current SPARQL query.
 
-    It is expected that an external SISSVoc provider such as ANDs would be
+    It is expected that an external SISSVoc provider such as ANDS would be
 unlikely to expose such low-level query capability.
    
 
@@ -419,7 +419,7 @@ for associated broader and narrower terms.
 % SISSVoc configuration is in RDF using TTL encoding. Lots of examples are given. 
 % Need to assess - concept, collection, scheme each one individually.
 % ANDS SISSVoc has also developed a vocabulary tree style widget
-% https://researchdata.ands.org.au/developers/documentation/widgets/vocab_widget
+% https://researchdata.ANDS.org.au/developers/documentation/widgets/vocab_widget
 % 
 
 Support LDP capabilities for registrar searching are unknown.
@@ -464,7 +464,7 @@ owner X; all terms in vocab Y) }
 \item[SISSVoc] as a stand-alone application has no notion of term ownership semantics.  
 % importance of SKOS_XL Presumably  
 
-\item [ANDs] may support since it combines registry management and SISSVoc. 
+\item [ANDS] may support since it combines registry management and SISSVoc. 
 
 \item [LDP] may have support - unknown
 
