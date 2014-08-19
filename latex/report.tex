@@ -161,11 +161,10 @@ feature development
   }
 
   \item For each term in the vocabulary persistent identifiers {URI} should
-  resolve to a description of the item. This is necessary for direct reference to
-  vocabulary items, and in-line links within datasets.
+  be de-referenceable to the RDF item description. 
 
-  \item SISSVoc as a standalone application has no inherant support for managing persistent
-  identifiers. The SISSVoc paper describes a deployment \footnote{ See Figure 3,
+  \item SISSVoc as a standalone application has no inherent support for managing persistent
+  identifiers. The main SISSVoc paper describes a deployment \footnote{ See Figure 3,
   SISSVoc: A Linked Data API for SKOS vocabularies.
 
   \url{http://www.semantic-web-journal.net/system/files/swj658.pdf} }, using a
@@ -175,23 +174,23 @@ feature development
 
   \item ANDS controlled vocabulary services build upons SISSVoc, although it appears
   their persistent identifier service is a more general capability. According to
-  documentation, ANDS has a, 
+  documentation ANDS has, 
 
-  \begin{italicquotes} [...] simple HTTP-based interface, [which] ensures that
+  \begin{italicquotes} [...] a simple HTTP-based interface, [which] ensures that
   identifier services can be integrated easily into existing data management
   workflows.  \end{italicquotes}
-  According to their documentation, ANDS does undertake to persist the infrastructure for required for
-  keeping its identifiers online. Ideally the service would be integrated
-  with other SISSVoc management functionality, although this was not tested.
+  Futhermore, ANDS does undertake to persist the infrastructure required for
+  keeping its identifiers online. Ideally this service would be integrated
+  with other SISSVoc vocabulary management functionality, although this was not tested.
 
   \item[]Another alternative, would be to use a service such as \url{purl.org}  \footnote{ The most
   prominent instances of such schemes are PURLexternal link, which has been used
   by the National Library of Australia, and ARKexternal link, at the California
   Digital Library.  }. 
 
-  \item[]If desired it would probably also be simple to publish identifiers under using an
+  \item[]It would probably also be simple a step to publish identifiers under using an
   AODN or EMII dns based url. In this context, seegrid appear to have developed their own
-  PID service used in conjunction with SISSOV  \footnote{
+  PID service used in conjunction with their own SISSVoc deployment  \footnote{
   https://www.seegrid.csiro.au/wiki/Siss/PIDService}  
   
   \item[]LDP is a resource registry management system, however it's unknown 
