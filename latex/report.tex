@@ -334,34 +334,35 @@ resources. But this is a believed to be a general capability lacking SKOS specif
 % OK
 % 5
 \subsection{ 
-  There should ideally be a service interface that is REST-based* and a SPARQL service end-point.
+  There should ideally be a service interface that is REST-based* and a 
+  SPARQL service end-point.
 }
 
-   \item SISSVoc is designed with a HTTP-based interface aligned with
-REST-based web services. The URI patterns facilitate SKOS discovery and access.
-However, as the authors of the system note, SISSVoc is not a full RESTful API, as 
-it does not support HTTP operations for update and deletion of resources.
-    
-  \item  LDP is designed with a view to RESTFUL management of registry
-resources.  \footnote { https://github.com/UKGovLD/ukl-registry-poc/wiki/Api }
-It should be noted that references to SKOS in the discussion of the LDP api
-apply to registrars, not SKOS content maintained by particular registrants.  
+     \item SISSVoc is designed with a HTTP-based interface aligned with
+  REST-based web services. The URI patterns facilitate SKOS discovery and access.
+  However, as the authors of the system note, SISSVoc is not a full RESTful API, as 
+  it does not support HTTP operations for update and deletion of resources.
+      
+    \item  LDP is designed with a view to RESTFUL management of registry
+  resources.  \footnote { https://github.com/UKGovLD/ukl-registry-poc/wiki/Api }
+  It should be noted that references to SKOS in the discussion of the LDP api
+  apply to registrars, not SKOS content maintained by particular registrants.  
 
-    \item SPARQL (Simple Protocol and RDF Query Language) is an RDF query
-language able to preserve, retrieve and manipulate data in RDF format and is a
-W3c standard.  SPARQL abstracts the encoding model (XML, … etc), and
-persistence layer and is adapted to the non-relational / graph structure of
-RDF.
+      \item SPARQL (Simple Protocol and RDF Query Language) is an RDF query
+  language able to preserve, retrieve and manipulate data in RDF format and is a
+  W3c standard.  SPARQL abstracts the encoding model (XML, … etc), and
+  persistence layer and is adapted to the non-relational / graph structure of
+  RDF.
 
- \item   The SISSVoc RESTFUL URI patterns correspond quite closely with
-specific SPARQL queries which perform the substantial computation. SISSVoc thus relies
-on a SPARQL endpoint as the mechanism to access RDF providing a strong
-separation of concerns. It would be feasible to map the already developed IMOS
-\texttt{control\_vocab\_db} to expose a SPARQL interface using a tool such as
-r2rml \footnote{ \url{ http://www.w3.org/TR/r2rml/ } }. This has already been
-achieved in one controlled vocabulary instance \footnote{ \url{ http://www.seb-source.org/ } }. 
-The SPARQL interface would thus provide the endpoint for SISSVoc and replace the 
-need to manage an additional persistence layer.
+   \item   The SISSVoc RESTFUL URI patterns correspond quite closely with
+  specific SPARQL queries which perform the substantial computation. SISSVoc thus relies
+  on a SPARQL endpoint as the mechanism to access RDF providing a strong
+  separation of concerns. It would be feasible to map the already developed IMOS
+  \texttt{control\_vocab\_db} to expose a SPARQL interface using a tool such as
+  r2rml \footnote{ \url{ http://www.w3.org/TR/r2rml/ } }. This has already been
+  achieved in one controlled vocabulary instance \footnote{ \url{ http://www.seb-source.org/ } }. 
+  The SPARQL interface would thus provide the endpoint for SISSVoc and replace the 
+  need to manage an additional persistence layer.
 
   \item It is expected that an external SISSVoc provider such as ANDS would be 
   unlikely to expose such a low-level query capability.
@@ -374,62 +375,61 @@ re-direction(s) so that vocabularies or terms hosted on different domains (under
 differing content authorities) can still be accessed via the service (if
 desired). * }
 
-{
-\item SISSVoc supports seamless and consistent GUI based navigation between differing
-SISSVoc instances hosted on different domains.
-%
-\item Alternatively, normal url de-referencing allows navigation to non-SISSVoc
-vocabulary implementations (eg. BODC/NERC) based around normal RDF resource uris.
-%
-\item Interestingly, due to the nature of the decoupled end-point design, SISSVoc 
-can be configured to use multiple SPARQL endpoint providers. This unifies access
-to different vocabulary providers that expose SPARQL from the same SISSVoc instance. 
+  {
+  \item SISSVoc supports seamless and consistent GUI based navigation between differing
+  SISSVoc instances hosted on different domains.
+  %
+  \item Alternatively, normal URI de-referencing allows navigation to non-SISSVoc
+  vocabulary implementations and their terms (eg. BODC/NERC).
+  %
+  \item Interestingly, due to the nature of the decoupled end-point design, SISSVoc 
+  can be configured to use multiple SPARQL endpoint providers. This unifies access
+  to different vocabulary providers that expose SPARQL from the same SISSVoc instance. 
 
-% H=HERE
-\begin{figure}[H]
-\centering
-\caption{SISSVoc host demonstrating access to multiple SISSVoc domains}
-\includegraphics[width=12cm]{multipleendpoints}  
-\label{fig:test}
-\end{figure}
+  % H=HERE
+  \begin{figure}[H]
+  \centering
+  \caption{SISSVoc host demonstrating access to multiple SISSVoc domains from the same instance}
+  \includegraphics[width=12cm]{multipleendpoints}  
+  \label{fig:test}
+  \end{figure}
 
-LDP GUI navigation capabilities are unknown, but assumed to be limited to 
-registry management.
-}
+  LDP GUI navigation capabilities are unknown, but assumed to be limited to 
+  registry management.
+  }
+  %
 %
-%
-% CRAP 
+% CRAP  - Maybe OK
 %7
 \subsection{ The Web-client should support some basic ‘canned’ querying (e.g.
 free text search against concept, collection and scheme ‘labels’; traversing a
 named vocabulary via hypertext links to explore included terms, their details
 and any matches or mappings to other published vocabularies). * }
 %
-SISSVoc supports free-text searching against concept labels. It can list
-concept, collection and concept schemes. SISSVoc can also traverse links 
-for associated broader and narrower terms. 
+  \item SISSVoc supports free-text searching against concept labels. It can list
+  concept, collection and concept schemes. SISSVoc can also traverse links 
+  for associated broader and narrower terms. 
 
-\begin{figure}[H]
-\centering
-\caption{SISSVoc Gui Concept search and results}
-\includegraphics[width=12cm]{sissvoc}  
-\label{fig:test}
-\end{figure}
+  \begin{figure}[H]
+  \centering
+  \caption{SISSVoc Gui Concept search and results}
+  \includegraphics[width=12cm]{sissvoc}  
+  \label{fig:test}
+  \end{figure}
 
 
 
-% SISSVoc - yes (local instance). configurable ttl - examples available.
-% SISSVoc configuration is in RDF using TTL encoding. Lots of examples are given. 
-% Need to assess - concept, collection, scheme each one individually.
-% ANDS SISSVoc has also developed a vocabulary tree style widget
-% https://researchdata.ANDS.org.au/developers/documentation/widgets/vocab_widget
-% 
+  % SISSVoc - yes (local instance). configurable ttl - examples available.
+  % SISSVoc configuration is in RDF using TTL encoding. Lots of examples are given. 
+  % Need to assess - concept, collection, scheme each one individually.
+  % ANDS SISSVoc has also developed a vocabulary tree style widget
+  % https://researchdata.ANDS.org.au/developers/documentation/widgets/vocab_widget
+  % 
 
-Support LDP capabilities for registrar searching are unknown.
+LDP capabilities for registrar searching are unknown.
 
 
 % OK
-% could include some screenshots of SISSVoc ?
 % as an alternative protoge with a dedicated SKOS and OWL plugins. 
 % 8
 \subsection{ The Web-Client should be able to display in a user-friendly way
@@ -438,13 +438,13 @@ collection and concept labels; alt labels, its type, description, membership,
 relations [including some Dublin core relations such as ‘publisher’ and ‘owner’
 and revision info]). * }
 
-The SISSVoc Web-Client supports user-friendly presentation of SKOS term details
+\item The SISSVoc Web-Client supports user-friendly presentation of SKOS term details
 including preferred label, definition, broader, and membership relations. Also
-other metatadata terms such as Dublic Core source. 
+other metatadata terms such as DC. 
 
-It appears that the simple html table layout supports showing all associated RDF
+\item It appears that the simple html table layout supports showing all associated RDF
 properties if they are literals or RDFs:label types rather than URIs that
-require dereferencing.
+need to be de-referenced.
 
 \begin{figure}[H]
 \centering
@@ -456,7 +456,7 @@ require dereferencing.
 
 %%%%%%%%%%%%%%
 
-% ALMOST OK.
+% OK although brief.
 %9 
 \subsection{ 9. The Web-Client should be able to display categorized
 (classified) lists of discoverable content (e.g. all vocabs by provided by
@@ -464,24 +464,27 @@ owner X; all terms in vocab Y) }
 
 %owner - meaning - repo management.  classification - ?? must learn
 
-\item[SISSVoc] as a stand-alone application has no notion of term ownership semantics.  
-% importance of SKOS_XL Presumably  
+  \item[] SISSVoc as a stand-alone application has no notion of term ownership semantics. There is
+  a set of extensions for SKOS that appear to be designed to support management such as 
+  assigning author properties. 
+  \footnote  { \url { http://www.w3.org/TR/skos-reference/skos-xl.html } }    
+  % importance of SKOS_XL Presumably  
 
-\item [ANDS] may support since it combines registry management and SISSVoc. 
+  \item[] ANDS may have support since it combines some registry management with SISSVoc. 
 
-\item [LDP] may have support - unknown
+  \item LDP unknown, although conceivable since consistent with registry management function.
 
 
-
+% OK
 % 10 
 \subsection{ 10. The Web-Client should offer different formats in which to
 download vocabularies or their terms (e.g. RDF*, text*, json, html*) }
 
-SISSVoc supports downloading terms as html, json, RDF, text, ttl and xml. The
-web-api has no support for downloading complete SKOS vocabularies except via a
-manually crafted SPARQL request.
+  \item SISSVoc supports download in human and machine readable form including html, 
+  json, RDF, text, ttl and xml. However, the web-api has no support for downloading 
+  partial or complete SKOS vocabularies except via a manually crafted SPARQL request.
 
-LDP's encoding support is unknown.
+  \item LDPs encoding support is unknown.
 
 % ALMOST OK
 % 11 
@@ -490,11 +493,11 @@ type and volume of content available (e.g., number of vocabularies that can be
 accessed and the number of terms in each vocabulary).  }
  
 
-SISSVoc has no inherent support for compiling content statistics.
+  \item SISSVoc has no inherent support for compiling vocabulary content statistics.
 
-Using a SPARQL interface it ought to be trivial to construct queries to identy
-for example the number of concepts, schemes, collections available with varying
-search constraints applied. 
+  \item However, using a SPARQL interface it ought to be trivial to construct queries to identify
+  for example the number of SKOS concepts, schemes or collections available with varying
+  search constraints applied. 
 
 % ALMOST OK
 % 12
@@ -502,10 +505,10 @@ search constraints applied.
 being configured to dynamically read one or more repository sources to access
 content that needs to be published. * }
 
-As has been described, a stand-alone SISSVoc test-runner can be configured to
-read from multiple end-point sources. Although the front-end GUI support is not
-very polished and uses different styling inconsistent with the rest of the
-application.
+  \item As has been described, a stand-alone SISSVoc test-runner can be configured to
+  read from multiple end-point data sources. Although the front-end GUI support is not
+  very polished and uses styling inconsistent with the rest of the
+  application.
 
 
 % OK
@@ -514,13 +517,13 @@ application.
 13. Response times for retrieving queried content should be ‘user-tolerable’. *
 }
 
-During basic user-interface testing, both the local and remote \(ANDS\) options assume appear to be 
-responsive. 
+\item During basic user-interface testing, both the local and remote ANDS
+options assume appear to be responsive.
 
 % It's expected that most of the speed will be backend / perssistence. 
 
 
-% ROUGH
+% OK 
 % 14
 \subsection{  14. System should provide an administrative console/configuration
 files to enable simple maintenance and administration (e.g., small changes to
@@ -530,13 +533,13 @@ links in client-based hypertext; detecting missing details in retrieved content
 service usage).
 }
 
-Don't believe SISSVoc or LDP offer any administrative control over configuration. 
+\item It's believed that neither SISSVoc or LDP offer any administrative control over configuration. 
 
-A locally deployed SISSVoc would permit the normal configuration possibilities that comes with controlling the
-source code - css, ttl and javascript changes.
+\item A locally deployed SISSVoc would permit the normal configuration possibilities that comes with 
+controlling the source code - such as css, ttl and javascript changes.
 
-Usage statistics could be compiled using awstats, similar to other imos
-web-apps. 
+\item For a local deployment, usage statistics could be compiled using awstats, in the same fashion as other 
+IMOS web-applications. 
 
 LDP usage 
 
