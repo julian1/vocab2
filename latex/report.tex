@@ -76,7 +76,7 @@
 focus on integrating other provider's services and products to match needs due 
 to limited development resources
 \item[] LDP and SISSVoc are complementary solutions rather than alternatives
-\item[] It's not self-evident that centralised registration management such as 
+\item[] It is not self-evident that centralised registration management such as 
 that provided by LDP necessarily matches IMOS/EMII organisational publishing 
 requirements. Even LDP authors acknowledge their project is contrary to the 
 non-federated nature of RDF publishing while SISSVoc deployments appear to work
@@ -85,13 +85,14 @@ well independently
 \item[] Support for more sophisticated vocabulary authoring and development 
 actions probably does not exist yet in the form of a web-based solution. For 
 example, to support inferencing and consistency checking of OWL vocabularies already 
-supported by dedicated third-party vocabulary applications, or to verify the 
+found in dedicated third-party vocabulary applications, or to verify the 
 reciprocal relationship of broader/narrower SKOS terms.
 \item[] An investment has already been made around a controlled vocabulary 
 database. This includes supporting the appending of Geoserver parameter and 
 unit information at WFS download and 
 as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. 
-Abandoning this effort would require the establishment of new work-flows
+Abandoning this effort would require the establishment of new work-flows and infrastructure
+changes
 \item[] LDP is currently unfunded, lacking project oversight, technical 
 support, points of contact or active discussion forums. It clearly presents an infeasible technical-risk 
 unless there is a consensus from multiple external groups on new funding and 
@@ -245,14 +246,13 @@ controlled vocabularies using RDF.
   broader and narrower terms in transitive and non-transitive forms and according
   to text based labels. 
 
-   \item SKOS content can be decorated with other RDF based
-  content and persisted to any underlying triple store independently of SISSVoc
-  functionality. However, SISSVoc provides
-  no direct support URI patterns for the search and discovery of such content. As an
-  alternative, a SPARQL interface does provide a
-  query/search mechanism for non-SKOS content such as DC, RDFS or OWL classes. A local-instance
-  of SISSVoc could be modified to use this SPARQL with support in the GUI if such 
-  functionality was deemed important. 
+     \item SKOS can be decorated with other RDF based content and persisted to
+  any underlying relational or triple store independently of SISSVoc
+  functionality. However, SISSVoc provides no direct support URI patterns for the
+  search and discovery of such content. As an alternative, a SPARQL interface
+  does provide a query/search mechanism for non-SKOS content such as DC, RDFS or
+  OWL classes. A local-instance of SISSVoc could be modified to use this SPARQL
+  with support in the GUI if such functionality was deemed important. 
 
   \item It is believed that LDP has no specific API support for SKOS resources.
 
@@ -294,12 +294,10 @@ controlled vocabularies using RDF.
   %    
  \item    According to the ANDS handbook, ANDS provides web-based GUI support for
   editing SKOS but only at file level.  \footnote { See 3.4.3, Editing
-  Vocabularies \url{ http://www.ANDS.org.au/support/vocab-help-guide.pdf } }
-
-    Some support for web-based versioning and author management at the file level
-  is also available. Permissions to make change are tied to authority roles.
-
-    \footnote { There is a need to consider whether file level versioning and
+  Vocabularies \url{ http://www.ANDS.org.au/support/vocab-help-guide.pdf } } Some 
+  support for web-based versioning and author management at the file level
+  is also available. While permissions to make change are tied to authority 
+  roles.  \footnote { There is a need to consider whether file level versioning and
   management is sufficiently fine-grained. Also how should this interact with
   existing registry management already used in IMOS \texttt{control\_vocab\_db}.
   }
@@ -321,14 +319,13 @@ controlled vocabularies using RDF.
   \url{http://www.semantic-web-journal.net/system/files/swj658.pdf} }
 
 
-% this REPEATS/CONFLICTS with subsection 3
+% OK
 % 4
 \subsection{ 
   4. Most users require read only access to content.* 
 }
-  \item SISSVoc provides an easy-to-use Web-client interface for read-only access to vocabularies and their terms.
-
-  \item As already noted SISSVoc has a read-only application design.
+  \item SISSVoc provides an easy-to-use Web-client interface for read-only access to 
+  vocabularies and their terms.  As already noted SISSVoc has a read-only application design.
  
   \item LDP provides a Web-client for fine grained registry management of term
 resources. But this is a believed to be a general capability lacking SKOS specific support.
@@ -340,37 +337,34 @@ resources. But this is a believed to be a general capability lacking SKOS specif
   There should ideally be a service interface that is REST-based* and a SPARQL service end-point.
 }
 
-    SISSVoc is designed with a HTTP-based interface aligned with REST-based web
-services. The URI patterns facilitate SKOS discovery and access. However,
-SISSVoc is not a full RESTful API, as it does not support HTTP operations for
-update and deletion of resources.
+   \item SISSVoc is designed with a HTTP-based interface aligned with
+REST-based web services. The URI patterns facilitate SKOS discovery and access.
+However, as the authors of the system note, SISSVoc is not a full RESTful API, as 
+it does not support HTTP operations for update and deletion of resources.
     
-    LDP is designed with a view to RESTFUL management of registry resources.
-\footnote { https://github.com/UKGovLD/ukl-registry-poc/wiki/Api } It should be
-noted that references to SKOS in the discussion of the LDP api apply to
-registrars, not SKOS content maintained by particular registrars.  
+  \item  LDP is designed with a view to RESTFUL management of registry
+resources.  \footnote { https://github.com/UKGovLD/ukl-registry-poc/wiki/Api }
+It should be noted that references to SKOS in the discussion of the LDP api
+apply to registrars, not SKOS content maintained by particular registrars.  
 
+    \item SPARQL (Simple Protocol and RDF Query Language) is an RDF query
+language able to preserve, retrieve and manipulate data in RDF format and is a
+W3c standard.  SPARQL abstracts the encoding model (XML, … etc), and
+persistence layer and is adapted to the non-relational / graph structure of
+RDF.
 
-    SPARQL (Simple Protocol and RDF Query Language) is an RDF query language
-able to preserve, retrieve and manipulate data in RDF format and is a W3c
-standard.  SPARQL abstracts the encoding model (XML, … etc), and persistence
-layer and is adapted to the non-relational / graph structure of RDF.
-
-    The SISSVoc RESTFUL URI patterns correspond quite closely with specific SPARQL queries
-which perform the substantial work. SISSVoc thus relies on a SPARQL endpoint as the
-mechanism to access RDF providing a strong separation of concerns.
-
-    It would be feasible to map the already IMOS developed
+ \item   The SISSVoc RESTFUL URI patterns correspond quite closely with
+specific SPARQL queries which perform the substantial work. SISSVoc thus relies
+on a SPARQL endpoint as the mechanism to access RDF providing a strong
+separation of concerns. It would be feasible to map the already IMOS developed
 \texttt{control\_vocab\_db} to expose a SPARQL interface using a tool such as
-r2rml \footnote{ \url{ http://www.w3.org/TR/r2rml/ } } .  The SPARQL interface
+r2rml \footnote{ \url{ http://www.w3.org/TR/r2rml/ } }. This has already been
+performed in one controlled vocabulary system. The SPARQL interface
 would thus provide the endpoint for SISSVoc and replace the need to manage an
 additional persistence layer.
 
-	At least in standalone hosting, SISSVoc has supporting client-side SPARQL forms, 
-	and showing the current SPARQL query.
-
-    It is expected that an external SISSVoc provider such as ANDS would be
-unlikely to expose such low-level query capability.
+  \item It is expected that an external SISSVoc provider such as ANDS would be 
+  unlikely to expose such a low-level query capability.
    
 
 % OK
