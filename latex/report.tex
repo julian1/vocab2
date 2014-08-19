@@ -168,12 +168,12 @@ feature development
   SISSVoc: A Linked Data API for SKOS vocabularies.
 
   \url{http://www.semantic-web-journal.net/system/files/swj658.pdf} }, using a
-  Persistent Identifier Service is used to map persistent URI resources to SISSVoc
+  Persistent Identifier Service to map persistent URI resources to SISSVoc
   webservice urls but doesn't give futher details on the implementation or
-  whether and external provider was chosen. 
+  whether an external provider was chosen. 
 
   \item ANDS controlled vocabulary services build upons SISSVoc, although it appears
-  their persistent identifier service is a more general capability. According to
+  their persistent identifier service is a more general organisational capability. According to
   documentation ANDS has, 
 
   \begin{italicquotes} [...] a simple HTTP-based interface, [which] ensures that
@@ -186,7 +186,11 @@ feature development
   \item[]Another alternative, would be to use a service such as \url{purl.org}  \footnote{ The most
   prominent instances of such schemes are PURLexternal link, which has been used
   by the National Library of Australia, and ARKexternal link, at the California
-  Digital Library.  }. 
+  Digital Library. 
+
+  Purl provides high-level adminstrative functionality for managing Persistent Uniform Resource 
+  Locators, including Users, Groups, Domains, Help etc.
+ }. 
 
   \item[]It would probably also be simple a step to publish identifiers under using an
   AODN or EMII dns based url. In this context, seegrid appear to have developed their own
@@ -231,24 +235,24 @@ feature development
   using an RDF/SKOS encoding model. Content may however be adorned by other
   languages/metadata models (e.g. RDFS, OWL, Dublin Core).* }
 
-  SISSVoc provides a linked data API for publishing SKOS vocabularies.  SKOS
-provides a standard vocabulary for thesarui, classifications, taxonomies and
+  \item SISSVoc provides a linked data API for publishing SKOS vocabularies. SKOS
+  is a standard vocabulary for thesarui, classifications, taxonomies and
 controlled vocabularies using RDF.
 
-  The SISSVoc web-service API supports URI patterns aligned with the SKOS
-vocabulary model. This includes patterns for SKOS Concept,
-ConceptScheme and Collection. Further URI patterns are provided to discover
-broader and narrower terms in transitive and non-transitive forms and according
-to text based labels. 
+   \item  The SISSVoc web-service API supports URI patterns that are aligned with the SKOS
+  vocabulary model. This includes access patterns for SKOS Concept,
+  ConceptScheme and Collection. Further URI patterns are provided to discover
+  broader and narrower terms in transitive and non-transitive forms and according
+  to text based labels. 
 
-  SKOS content can be decorated with other RDF based
-content and persisted to the underlying triple store independently of SISSVoc
-functionality. SISSVoc provides
-no direct support URI patterns for search and discovery of such content. As an
-alternative, a SPARQL interface would provide a
-such query/search mechanism for non-SKOS content such as RDFS and OWL classes. 
+   \item SKOS content can be decorated with other RDF based
+  content and persisted to any underlying triple store independently of SISSVoc
+  functionality. SISSVoc provides
+  no direct support URI patterns for search and discovery of such content. As an
+  alternative, a SPARQL interface does provide a
+  query/search mechanism for non-SKOS content such as DC, RDFS or OWL classes. 
 
-It is believed that LDP has no specific API support for SKOS resources.
+  \item It is believed that LDP has no specific API support for SKOS resources.
 
 %    According to Cox, SKOS lacks the expresitivity of languages such as OWL.
 %   However common metadata standards like Dublin Core are supported.
@@ -273,54 +277,46 @@ It is believed that LDP has no specific API support for SKOS resources.
   It should be possible to access vocabularies and their terms via an 
   (administratively) customisable Web-client interface and service interfaces.* } 
 
+    SISSVoc provides a capable Web-client interface for read-only access
+  vocabularies and their terms.
 
-  SISSVoc provides a capable Web-client interface for read-only access vocabularies and their terms.
+    In contrast to search, naviation and discovery, SISSVoc as a standalone
+  application has no direct support for the creation and update of vocabulary
+  terms. This is inherent to SISSVoc design, as a lightweight web-api implemented
+  over a read-only based SPARQL endpoint/interface.  
 
-  In contrast to search, naviation and discovery, SISSVoc as a standalone application has no direct 
-  support for the creation and update of vocabulary terms. This is inherent to SISSVoc design, as a 
-  lightweight web-api implemented over a read-only SPARQL endpoint/interface.  
+  %   the SISSVoc client interface supports customisation, image branding which
+  %   can be achieved via changes to css and js configuration.  Examples are
+  %   given in the source code.  \footnote {
+  %   https://github.com/jyucsiro/SISSVoc-runner/tree/master/SISSVoc/resources }
+  %    
+    According to the ANDS handbook, ANDS provides web-based GUI support for
+  editing SKOS but only at file level.  \footnote { See 3.4.3, Editing
+  Vocabularies \url{ http://www.ANDS.org.au/support/vocab-help-guide.pdf } }
 
-%   the SISSVoc client interface supports customisation, image branding
-%   which can be achieved via changes to css and js configuration.
-%   Examples are given in the source code.
-%    \footnote {
-%       https://github.com/jyucsiro/SISSVoc-runner/tree/master/SISSVoc/resources
-%     }
-%    
-  According to the ANDS handbook, ANDS provides web-based GUI support for editing SKOS files at file level. 
-  \footnote { See 3.4.3, Editing Vocabularies \url{ http://www.ANDS.org.au/support/vocab-help-guide.pdf } 
+    Some support for web-based versioning and author management at the file level
+  is also available. Permissions to make change are tied to authority roles.
+
+    \footnote { There is a need to consider whether file level versioning and
+  management is sufficiently fine-grained. Also how should this interact with
+  existing registry management already used in IMOS \texttt{control\_vocab\_db}.
   }
+    
+  % this doesn't quite belong, 
+    For complex vocabulary authoring needs, SISSVoc authors suggest using an
+  external vocabulary editor to maintain content that can also ensure that
+  consistency of relationships between resources is maintained (eg. for OWL). 
 
-  Some support for web-based versioning and author management at the file level
-is also available. Permissions to make change are tied to authority roles.
+    \begin{italicquotes} Vocabulary content may be maintained using RDF editors
+  (such as Protégé 4 or TopBraid Composer 5 ), which ensure consistency of
+  relationships between resources is maintained, and then generate RDF documents
+  to transfer vocabulary content from the maintenance to publication envi-
+  ronment, as outlined above. If a web-based vocabu- lary maintenance environment
+  is required, then tools like TopQuadrant’s Enterprise Vocabulary Net 6 , and
+  the PoolParty Thesaurus Server 7 are available.  \end{italicquotes} 
 
-  \footnote {
-    There is a need to consider whether file level versioning and management is
-  sufficiently fine-grained. Also interaction with existing registry management
-  already used in IMOS \texttt{control\_vocab\_db}. 
-  }
-  
-% this doesn't quite belong, 
-  For complex vocabulary authoring needs, SISSVoc authors suggest using an
-external vocabulary editor to maintain content that can also ensure that consistency of
-relationships between resources is maintained (eg. for OWL). 
-
-  \begin{italicquotes} 
-  Vocabulary content may be maintained using RDF editors (such as Protégé 4 or
-TopBraid Composer 5 ), which ensure consistency of
-relationships between resources is maintained, and
-then generate RDF documents to transfer vocabulary
-content from the maintenance to publication envi-
-ronment, as outlined above. If a web-based vocabu-
-lary maintenance environment is required, then tools
-like TopQuadrant’s Enterprise Vocabulary Net 6 , and
-the PoolParty Thesaurus Server 7 are available.
-  \end{italicquotes} 
-
-  \footnote {
-    3.2. HTTP operations and REST behaviour, 
-\url{http://www.semantic-web-journal.net/system/files/swj658.pdf} 
-  }
+    \footnote { 3.2. HTTP operations and REST behaviour,
+  \url{http://www.semantic-web-journal.net/system/files/swj658.pdf} }
 
 
 % this REPEATS/CONFLICTS with subsection 3
