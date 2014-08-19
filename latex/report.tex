@@ -79,7 +79,9 @@ to limited development resources
 \item[] It's not self-evident that centralised registration management such as 
 that provided by LDP necessarily matches IMOS/EMII organisational publishing 
 requirements. Even LDP authors acknowledge their project is contrary to the 
-non-federated nature of RDF publishing
+non-federated nature of RDF publishing while SISSVoc deployments appear to work
+well independently  
+
 \item[] Support for more sophisticated vocabulary authoring and development 
 actions probably does not exist yet in the form of a web-based solution. For 
 example, to support inferencing and consistency checking of OWL vocabularies already 
@@ -87,7 +89,7 @@ supported by dedicated third-party vocabulary applications, or to verify the
 reciprocal relationship of broader/narrower SKOS terms.
 \item[] An investment has already been made around a controlled vocabulary 
 database. This includes supporting the appending of Geoserver parameter and 
-unit information at download and 
+unit information at WFS download and 
 as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. 
 Abandoning this effort would require the establishment of new work-flows
 \item[] LDP is currently unfunded, lacking project oversight, technical 
@@ -124,7 +126,7 @@ feature development
   } }
   %
     Attempting to generate a dummy configuration for LDP and login with
-  administrative privileges was fruitless, due to a bug in open-id redirection.
+  administrative privileges was frustrated, due to an apparent bug in open-id redirection.
   However it was possible to explore and navigate the main menu-system of the
   application.
   %
@@ -169,11 +171,11 @@ feature development
 
   \url{http://www.semantic-web-journal.net/system/files/swj658.pdf} }, using a
   Persistent Identifier Service to map persistent URI resources to SISSVoc
-  webservice urls but fails to give futher details on the implementation or
+  webservice urls, but fails to give futher details on the implementation or
   whether an external provider was chosen. 
 
   \item ANDS controlled vocabulary services builds upon SISSVoc, although it appears
-  their persistent identifier service is a more general organisational capability. According to
+  their persistent identifier service may be a more general organisational capability. According to
   documentation ANDS has, 
 
   \begin{italicquotes} [...] a simple HTTP-based interface, [which] ensures that
@@ -245,10 +247,12 @@ controlled vocabularies using RDF.
 
    \item SKOS content can be decorated with other RDF based
   content and persisted to any underlying triple store independently of SISSVoc
-  functionality. SISSVoc provides
-  no direct support URI patterns for search and discovery of such content. As an
+  functionality. However, SISSVoc provides
+  no direct support URI patterns for the search and discovery of such content. As an
   alternative, a SPARQL interface does provide a
-  query/search mechanism for non-SKOS content such as DC, RDFS or OWL classes. 
+  query/search mechanism for non-SKOS content such as DC, RDFS or OWL classes. A local-instance
+  of SISSVoc could be modified to use this SPARQL with support in the GUI if such 
+  functionality was deemed important. 
 
   \item It is believed that LDP has no specific API support for SKOS resources.
 
@@ -269,16 +273,16 @@ controlled vocabularies using RDF.
 %   be used over the , to form RDF/SKOS content.
 % 
 
+% OK
 % 3 
-% NOT QUITE RIGHT - adminstratively customisable.
   \subsection{
   It should be possible to access vocabularies and their terms via an 
   (administratively) customisable Web-client interface and service interfaces.* } 
 
-    SISSVoc provides a capable Web-client interface for read-only access
+   \item  SISSVoc provides a capable Web-client interface for read-only access
   vocabularies and their terms.
 
-    In contrast to search, naviation and discovery, SISSVoc as a standalone
+   \item  In contrast to search, naviation and discovery, SISSVoc as a standalone
   application has no direct support for the creation and update of vocabulary
   terms. This is inherent to SISSVoc design, as a lightweight web-api implemented
   over a read-only based SPARQL endpoint/interface.  
@@ -288,7 +292,7 @@ controlled vocabularies using RDF.
   %   given in the source code.  \footnote {
   %   https://github.com/jyucsiro/SISSVoc-runner/tree/master/SISSVoc/resources }
   %    
-    According to the ANDS handbook, ANDS provides web-based GUI support for
+ \item    According to the ANDS handbook, ANDS provides web-based GUI support for
   editing SKOS but only at file level.  \footnote { See 3.4.3, Editing
   Vocabularies \url{ http://www.ANDS.org.au/support/vocab-help-guide.pdf } }
 
@@ -301,7 +305,7 @@ controlled vocabularies using RDF.
   }
     
   % this doesn't quite belong, 
-    For complex vocabulary authoring needs, SISSVoc authors suggest using an
+ \item    For complex vocabulary authoring needs, SISSVoc authors suggest using an
   external vocabulary editor to maintain content that can also ensure that
   consistency of relationships between resources is maintained (eg. for OWL). 
 
@@ -313,7 +317,7 @@ controlled vocabularies using RDF.
   is required, then tools like TopQuadrant’s Enterprise Vocabulary Net 6 , and
   the PoolParty Thesaurus Server 7 are available.  \end{italicquotes} 
 
-    \footnote { 3.2. HTTP operations and REST behaviour,
+    \footnote { 3.2. SISSVoc HTTP operations and REST behaviour discussed,
   \url{http://www.semantic-web-journal.net/system/files/swj658.pdf} }
 
 
@@ -322,17 +326,12 @@ controlled vocabularies using RDF.
 \subsection{ 
   4. Most users require read only access to content.* 
 }
-  SISSVoc provides an easy-to-use Web-client interface for read-only access vocabularies and their terms.
+  \item SISSVoc provides an easy-to-use Web-client interface for read-only access to vocabularies and their terms.
 
-  In contrast to search, navigation and discovery, SISSVoc as a standalone application has no direct 
-  support for the creation and update of vocabulary terms. This is inherent to SISSVoc design, as a 
-  lightweight web-api implemented over a read-only SPARQL endpoint/interface.  
-
-  ANDS extends SISSVoc cabpability by including support for uploading, and raw editing
-  at file-level. 
-
-  LDP provides a Web-client for fine grained registry management of term
-resources. But note, this is a general capability lacking SKOS specific functionality.
+  \item As already noted SISSVoc has a read-only application design.
+ 
+  \item LDP provides a Web-client for fine grained registry management of term
+resources. But this is a believed to be a general capability lacking SKOS specific support.
 
 
 % OK
