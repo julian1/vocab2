@@ -9,7 +9,7 @@
 \usepackage{hyperref}
 
 % indent the first para after a new section
-\usepackage{indentfirst}
+%\usepackage{indentfirst}
 
 % for png
 \usepackage{graphicx}
@@ -49,7 +49,9 @@
 
   \maketitle
     \begin{flushleft}
-  \setlength{\parindent}{5ex}
+
+
+%  \setlength{\parindent}{5ex}
 
 % 
 % \section{High level requirements}
@@ -70,13 +72,13 @@
 	Summary
 }
 
-\item[] IMOS/EMII should avoid pursuing their own ad-hoc solution and instead focus on integrating other provider's services and products to match needs 
+\item[] IMOS/EMII should avoid pursuing their own ad-hoc solution and instead focus on integrating other provider's services and products to match needs due to limited development resources
 \item[] LDP and SISSVoc are complementary solutions rather than alternatives
-\item[] It's not evident that centralised registration management such as that provided by LDP necessarily matches IMOS/EMII organisational publishing requirements. Even LDP authors acknowledge their project is contrary to the non-federated nature of RDF
-\item[] Support for more sophisticated vocabulary authoring and development actions probably don't yet exist in the form of a web-based solution. For example, inferencing and consistency checking of OWL vocabularies which are supported by dedicated third-party Vocabulary applications.
-\item[] A substantial investment has been made around control vocab publishing database. This includes supporting the appending of geoserver paramter and unit information at download and 
-as a source of SKOS vocabulary for Geonetwork/Portal for faceted search. Abandoning this effort would require establishing new work-flows
-\item[] LDP is currently unfunded, lacking project oversight, technical support, points of contact, active forums.
+\item[] It's not evident that centralised registration management such as that provided by LDP necessarily matches IMOS/EMII organisational publishing requirements. Even LDP authors acknowledge their project is contrary to the non-federated nature of RDF publishing
+\item[] Support for more sophisticated vocabulary authoring and development actions probably don't exist yet in the form of a web-based solution. For example, inferencing and consistency checking of OWL vocabularies which are supported by dedicated third-party Vocabulary applications, or verifying the reciprocal relationship of broader/narrower SKOS terms.
+\item[] An investment has already been made around a control vocab publishing database. This includes supporting the appending of Geoserver parameter and unit information at download and 
+as a source of SKOS vocabulary for Geonetwork/Portal for faceted search. Abandoning this effort would require the establishment of new work-flows
+\item[] LDP is currently unfunded, lacking project oversight, technical support, points of contact or active forums. It's an unfeasible technical-risk unless a consensus emerges from multiple external groups on new funding and feature development 
 
 
 
@@ -84,33 +86,35 @@ as a source of SKOS vocabulary for Geonetwork/Portal for faceted search. Abandon
   Tasks undertaken
 }
 
-%  It was impossible to try and glean an understanding of the functionality of LDP by reading internal development literature. 
+%  
 
 %  0was complicated by the absence of any production hosts. and where avilable documentation 
 %  was limited internal design discussion and justifications. To try and get a more hands on feel, the following 
 
-  \item[] A local instance of SISSVoc, which is preconfigured to use
-  external sparql endpoints as rdf source was run-up under a tomcat webserver.
+  \item[] A local instance of SISSVoc using preconfigured external SPARQL endpoints as rdf source was run-up 
+  under a tomcat webserver and demonstrated during Iteration review.
   \footnote{ \url { http://github.com/jyucsiro/SISSVoc-runner }  } 
 
-  \item[] There was an attempt to run up provided vagrant example of UKGovLD, 
+  \item[] It was found to be very difficult to glean an understanding of the functionality of LDP by reading internal 
+  development literature. Therefore a version of UKGovLD was also run-up on a private Nectar VM allocation. This followed prior 
+  unsuccessful attempts to provision a vagrant prepared example of UKGovLD, 
   \footnote{ \url { https://github.com/UKGovLD/registry-deploy-poc } } but
-  difficulties with trying to mock AWS behavior. Eventually succeeded in running a pre-built war 
-  to run on a Nectar VM. 
+  due to difficulties with trying to mock AWS behavior.  
   \footnote{ \url { 
   http://ukgovld-registry.s3.amazonaws.com/distribution/ukl-registry-0.0.1-SNAPSHOT-dist.tar.gz
   }}
 %
-  Attempting to generate a dummy configuration, and use the app with 
-	a admin account was fruitless, due to a bug in open-id redirection - probably
+  Attempting to generate a dummy configuration for LDP, and use the app with 
+	admin account was fruitless, due to a bug in open-id redirection - probably
   due to absence of correct dns configuration.
 %
-  The features of LDP is therefore more limited.
+  The discussion of LDP features is therefore more limited.
 
   \item[] 
-  Wrote preliminary scripts to try and extract and encode the contents of IMOS
-  controlled vocabulary database as SKOS to guage difficulty. this suitable for input to Geonetwork 
-  and faceted search, or to upload to an external Vocab register such as ANDS.
+  Preliminary scripts to extract and encode the contents of IMOS
+  controlled vocabulary database as SKOS were written to understand the difficulty of the mapping required. These were further modified to be suitable 
+  to input into Geonetwork for use in platform / parameter based faceted search. Such export feature is probably also necessary for upload 
+  to a publishing provider eg. ANDs or purl.org. 
 
   \item[] 
 	Attempted to register with ANDS to obtain an account, and set up a test
@@ -215,7 +219,7 @@ to text based labels.
 content and persisted to the underlying triple store independently of SISSVoc
 functionality. SISSVoc provides
 no direct support URI patterns for search and discovery of such content. As an
-alternative, a sparql interface would provide a
+alternative, a SPARQL interface would provide a
 such query/search mechanism for non-SKOS content such as RDFS and OWL classes. 
 
 It is believed that LDP has no specific API support for SKOS resources.
@@ -338,8 +342,8 @@ which perform the substantial work. SISSVoc thus relies on a SPARQL endpoint as 
 mechanism to access RDF providing a strong separation of concerns.
 
     It would be feasible to map the already IMOS developed
-\texttt{control\_vocab\_db} to expose a sparql interface using a tool such as
-r2rml \footnote{ \url{ http://www.w3.org/TR/r2rml/ } } .  The sparql interface
+\texttt{control\_vocab\_db} to expose a SPARQL interface using a tool such as
+r2rml \footnote{ \url{ http://www.w3.org/TR/r2rml/ } } .  The SPARQL interface
 would thus provide the endpoint for SISSVoc and replace the need to manage an
 additional persistence layer.
 
@@ -475,7 +479,7 @@ accessed and the number of terms in each vocabulary).  }
 
 SISSVoc has no inherent support for compiling content statistics.
 
-Using a Sparql interface it ought to be trivial to construct queries to identy
+Using a SPARQL interface it ought to be trivial to construct queries to identy
 for example the number of concepts, schemes, collections available with varying
 search constraints applied. 
 
