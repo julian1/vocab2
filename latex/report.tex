@@ -72,13 +72,28 @@
 	Summary
 }
 
-\item[] IMOS/EMII should avoid pursuing their own ad-hoc solution and instead focus on integrating other provider's services and products to match needs due to limited development resources
+\item[] IMOS/EMII should avoid pursuing their own ad-hoc solution and instead 
+focus on integrating other provider's services and products to match needs due 
+to limited development resources
 \item[] LDP and SISSVoc are complementary solutions rather than alternatives
-\item[] It's not self-evident that centralised registration management such as that provided by LDP necessarily matches IMOS/EMII organisational publishing requirements. Even LDP authors acknowledge their project is contrary to the non-federated nature of RDF publishing
-\item[] Support for more sophisticated vocabulary authoring and development actions probably does not exist yet in the form of a web-based solution. For example, inferencing and consistency checking of OWL vocabularies already supported by dedicated third-party Vocabulary applications, or verifying the reciprocal relationship of broader/narrower SKOS terms.
-\item[] An investment has already been made around a controlled vocabulary database. This includes supporting the appending of Geoserver parameter and unit information at download and 
-as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. Abandoning this effort would require the establishment of new work-flows
-\item[] LDP is currently unfunded, lacking project oversight, technical support, points of contact or active forums. It's an unfeasible technical-risk unless a consensus emerges from multiple external groups on new funding and feature development 
+\item[] It's not self-evident that centralised registration management such as 
+that provided by LDP necessarily matches IMOS/EMII organisational publishing 
+requirements. Even LDP authors acknowledge their project is contrary to the 
+non-federated nature of RDF publishing
+\item[] Support for more sophisticated vocabulary authoring and development 
+actions probably does not exist yet in the form of a web-based solution. For 
+example, to support inferencing and consistency checking of OWL vocabularies already 
+supported by dedicated third-party vocabulary applications, or to verify the 
+reciprocal relationship of broader/narrower SKOS terms.
+\item[] An investment has already been made around a controlled vocabulary 
+database. This includes supporting the appending of Geoserver parameter and 
+unit information at download and 
+as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. 
+Abandoning this effort would require the establishment of new work-flows
+\item[] LDP is currently unfunded, lacking project oversight, technical 
+support, points of contact or active discussion forums. It clearly presents an infeasible technical-risk 
+unless there is a consensus from multiple external groups on new funding and 
+feature development 
 
 
 \clearpage
@@ -92,44 +107,46 @@ as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. Aba
 }
 
 %  
-
-
   The following tasks were completed:  
 
-  \item[] A local instance of SISSVoc using preconfigured external SPARQL endpoints for various service providers was run-up 
-  under a tomcat webserver and demonstrated during Iteration review.
-  \footnote{ \url { http://github.com/jyucsiro/SISSVoc-runner }  } 
+    \item[] A local instance of SISSVoc using preconfigured external SPARQL
+  endpoints for various service providers was run-up under a tomcat webserver and
+  demonstrated during Iteration review.  \footnote{ \url {
+  http://github.com/jyucsiro/SISSVoc-runner }  } 
 
-  \item[] It was found to be very difficult to glean an understanding of the functionality of LDP by reading source-code and internal 
-  development literature. Therefore a version of UKGovLD was also run-up on a private Nectar VM allocation. This followed prior 
-  unsuccessful attempts to provision a vagrant example of UKGovLD 
-  \footnote{ \url { https://github.com/UKGovLD/registry-deploy-poc } } 
-  due to problems mocking Amazon AWS behavior.  
-  \footnote{ \url { 
+    \item[] It was found to be very difficult to glean an understanding of the
+  functionality of LDP by reading source-code and internal development
+  literature. Therefore a version of UKGovLD was also run-up on a private Nectar
+  VM allocation. This followed prior unsuccessful attempts to provision a vagrant
+  example of UKGovLD.  \footnote{ \url {
+  https://github.com/UKGovLD/registry-deploy-poc } and \url {
   http://ukgovld-registry.s3.amazonaws.com/distribution/ukl-registry-0.0.1-SNAPSHOT-dist.tar.gz
-  }}
-%
-  Attempting to generate a dummy configuration for LDP and login with administrative 
-	privileges was fruitless, due to a bug in open-id redirection. However it was possible to explore and navigate the main 
-  menu-system of the application.
-%
-  The discussion of LDP features is therefore more limited.
+  } }
+  %
+    Attempting to generate a dummy configuration for LDP and login with
+  administrative privileges was fruitless, due to a bug in open-id redirection.
+  However it was possible to explore and navigate the main menu-system of the
+  application.
+  %
+    The discussion of LDP features is therefore more limited.
 
-  \item[] 
-  Preliminary scripts to extract and encode the contents of IMOS
-  controlled vocabulary database as SKOS were written to guage the difficulty to perform the required mapping. These were further modified to be suitable 
-  to input into Geonetwork for current development to support platform / parameter based faceted search. Such export feature would probably also be necessary for upload 
-  to a publishing provider eg. ANDS or purl.org. 
+    \item[] Preliminary scripts to extract and encode the contents of the IMOS
+  controlled vocabulary database as SKOS were written to guage the difficulty to
+  perform the required mapping. These were further modified to be suitable to
+  input into Geonetwork for current development to support platform / parameter
+  based faceted search. Such export feature would probably also be necessary for
+  upload to a publishing provider eg. ANDS or purl.org. 
 
-  \item[] 
-	Attempted to register with ANDS and obtain an account to establish a test
-	registry of published vocabulary terms. There were some technical issues, requiring help from ANDS technical
-	support which were unresolved.
-		
-  \item[] SISSVoc and LDP was assesed against the High Level Functional Requirements For Vocabulary and Term Publishing previously
-  prepared by Project Officers.
-	
+    \item[] Attempted to register with ANDS and obtain an account to establish a
+  test registry of published vocabulary terms. There were some technical issues,
+  requiring help from ANDS technical support which were unresolved.
+      
+    \item[] SISSVoc and LDP was assesed against the \textit{High Level Functional
+  Requirements For Vocabulary and Term Publishing} previously prepared by Project
+  Officers.
+    
 
+\clearpage
 
 
 \section { 
@@ -143,11 +160,11 @@ as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. Aba
   included terms (and details) using persistent identifiers.* 
   }
 
-  For each item in the vocabulary, persistent identifiers {URI} should
-  resolve to a description of the item.  This is necessary for direct reference to
+  \item For each term in the vocabulary persistent identifiers {URI} should
+  resolve to a description of the item. This is necessary for direct reference to
   vocabulary items, and in-line links within datasets.
 
-  \item[SISSVoc] as a standalone application has no inherant support for managing persistent
+  \item SISSVoc as a standalone application has no inherant support for managing persistent
   identifiers. The SISSVoc paper describes a deployment \footnote{ See Figure 3,
   SISSVoc: A Linked Data API for SKOS vocabularies.
 
@@ -156,7 +173,7 @@ as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. Aba
   webservice urls but doesn't give futher details on the implementation or
   whether and external provider was chosen. 
 
-  \item[ANDS] controlled vocabulary services build upons SISSVoc, although it appears
+  \item ANDS controlled vocabulary services build upons SISSVoc, although it appears
   their persistent identifier service is a more general capability. According to
   documentation, ANDS has a, 
 
