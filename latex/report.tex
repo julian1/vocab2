@@ -42,7 +42,7 @@
 \newcommand\SpecialItem{\renewcommand\item[1][]{\Item[\textbullet~\bfseries##1]}}
 \renewcommand\enddescription{\endlist\global\let\item\Item}
 
-\title{Investigation into Control Vocabulary Publishing Services}
+\title{Investigation into Controlled Vocabulary Authoring and Publishing}
 \date{}
 \begin{document}
 \SpecialItem
@@ -72,21 +72,21 @@
 	Summary
 }
 
-\item[] IMOS/EMII should avoid pursuing our own ad-hoc solution and instead 
+\item[] IMOS/EMII should avoid pursuing an internally developed ad-hoc solution and instead 
 focus on integrating other provider's services and products to match needs due 
 to limited development resources
 \item[] LDP and SISSVoc should be considered complementary solutions rather than alternatives
 \item[] It is not evident that centralised registration management such as 
 that provided by LDP necessarily matches IMOS/EMII organisational publishing 
 requirements. Even LDP authors acknowledge that their project is contrary to the 
-non-federated nature of RDF publishing - while SISSVoc deployments appear to work
-well independently  
+non-federated nature of RDF publishing - while SISSVoc deployments integrate well 
+even when hosted independently
 
 \item[] Support for more sophisticated vocabulary authoring and development 
 activity probably does not exist yet in the form of a web-based solution. For 
 example, to support inferencing and consistency checking of OWL vocabularies already 
 found in dedicated third-party vocabulary applications, or to verify the 
-reciprocal relationship of broader/narrower SKOS terms.
+reciprocal relationship of broader/narrower SKOS terms
 \item[] An investment has already been made in the development of a controlled vocabulary 
 database. This includes supporting the appending of Geoserver parameter and 
 unit information at WFS download and 
@@ -101,7 +101,7 @@ feature development
 
 \clearpage
 
-% multiple SISSVOC publishers have emerged and co-operate well together 
+% multiple SISSVOC publishers have emerged and cooperate well together 
 
 % have a section on background
 
@@ -112,9 +112,9 @@ feature development
 %  
   The following tasks were completed:  
 
-    \item[] A local instance of SISSVoc using preconfigured external SPARQL
-  endpoints for various service providers was run-up under a tomcat webserver and
-  demonstrated during Iteration review.  \footnote{ \url {
+    \item[] A local instance of SISSVoc using pre-configured external SPARQL
+  endpoints for various service providers was run-up under a Jetty webserver and
+  demonstrated.  \footnote{ \url {
   http://github.com/jyucsiro/SISSVoc-runner }  } 
 
     \item[] It was very difficult to glean an understanding of the
@@ -134,17 +134,17 @@ feature development
     The discussion of LDP features is therefore more limited.
 
     \item[] Preliminary scripts to extract and encode the contents of the IMOS
-  controlled vocabulary database as SKOS were written to guage the difficulty to
+  controlled vocabulary database as SKOS were written to gauge the difficulty to
   perform the required mapping. These were further modified to be suitable to
   input into Geonetwork for current development to support platform / parameter
   based faceted search. Such export feature would probably also be necessary for
-  upload to a publishing provider eg. ANDS or purl.org. 
+  upload to a publishing provider such as ANDS or purl.org. 
 
-    \item[] Attempted to register with ANDS and obtain an account to establish a
+    \item[] Attempted to register an account with ANDS to establish a
   test registry of published vocabulary terms. There were some technical issues,
-  requiring help from ANDS technical support which were unresolved.
+  requiring ANDS technical assistance which were unresolved.
       
-    \item[] SISSVoc and LDP was assesed against the \textit{High Level Functional
+    \item[] SISSVoc and LDP was assessed against the \textit{High Level Functional
   Requirements For Vocabulary and Term Publishing} previously prepared by Project
   Officers.
     
@@ -166,13 +166,13 @@ feature development
   \item For each term in the vocabulary persistent identifiers {URI} should
   be de-referenceable to the RDF item description. 
 
-  \item SISSVoc as a standalone application has no inherent support for managing persistent
+  \item SISSVoc as a stand-alone application has no inherent support for managing persistent
   identifiers. The main SISSVoc paper describes a deployment \footnote{ See Figure 3,
   SISSVoc: A Linked Data API for SKOS vocabularies.
 
   \url{http://www.semantic-web-journal.net/system/files/swj658.pdf} }, using a
   Persistent Identifier Service to map persistent URI resources to SISSVoc
-  webservice urls, but fails to give futher details on the implementation or
+  web service urls, but fails to give further details on the implementation or
   whether an external provider was chosen. 
 
   \item ANDS controlled vocabulary services builds upon SISSVoc, although it appears
@@ -181,13 +181,13 @@ feature development
 
   \begin{italicquotes} [...] a simple HTTP-based interface, [which] ensures that
   identifier services can be integrated easily into existing data management
-  workflows.  \end{italicquotes}
-  Futhermore, ANDS does undertake to persist the infrastructure required for
+  work flows.  \end{italicquotes}
+  Furthermore, ANDS does undertake to persist the infrastructure required for
   keeping its identifiers online. Ideally this service would be integrated
   with other SISSVoc vocabulary management functionality, although this was not tested.
 
   \item[]Another alternative, would be to use a service such as \url{purl.org} which is a free provider 
-  of Persistent Uniform Resource Locators, that includes high-level adminstrative functionality including 
+  of Persistent Uniform Resource Locators, that includes high-level administrative functionality including 
   Users, Groups, Domains, Help etc.  \footnote{ 
   The most prominent instances of such schemes are PURLexternal link, which has been used
   by the National Library of Australia, and ARKexternal link, at the California
@@ -199,8 +199,8 @@ feature development
   https://www.seegrid.csiro.au/wiki/Siss/PIDService}  
   
   \item[]LDP is a resource registry management system, however it is unknown 
-  if this includes direct support for persisent identifiers.
-    \footnote{ See 
+  if this includes direct support for persistent identifiers.
+    \footnote{ 
     https://github.com/UKGovLD/ukl-registry-poc/wiki/Principles-and-concepts
   }
 
@@ -247,9 +247,9 @@ controlled vocabularies using RDF.
   to text based labels. 
 
      \item SKOS can be decorated with other RDF based content and persisted to
-  any underlying relational or triple store independently of SISSVoc
-  functionality. However, SISSVoc provides no direct support URI patterns for the
-  search and discovery of such content. As an alternative, a SPARQL interface
+  any underlying store independently of SISSVoc
+  functionality. However, SISSVoc provides no URI patterns for the
+  search and discovery of such content. Alternatively, a SPARQL interface
   does provide a query/search mechanism for non-SKOS content such as DC, RDFS or
   OWL classes. A local-instance of SISSVoc could be modified to use this SPARQL
   with support in the GUI if such functionality was deemed important. 
@@ -268,7 +268,7 @@ controlled vocabularies using RDF.
 % 
 %   Resolvable content - can be extracted SKOS Concepts from the already developed
 %   relational vocab database demonstrates another approach which can then be
-%   ingested to a RDF persistence. An example script has been created to demonstate
+%   ingested to a RDF persistence. An example script has been created to demonstrate
 %   the feasibility of this approach. Alternately a SPARQL interface to RDF could
 %   be used over the , to form RDF/SKOS content.
 % 
@@ -282,10 +282,10 @@ controlled vocabularies using RDF.
    \item  SISSVoc provides a capable Web-client interface for read-only access
   vocabularies and their terms.
 
-   \item  In contrast to search, naviation and discovery, SISSVoc as a standalone
+   \item  In contrast to search, navigation and discovery, SISSVoc as a stand-alone
   application has no direct support for the creation and update of vocabulary
   terms. This is inherent to SISSVoc design, as a lightweight web-api implemented
-  over a read-only based SPARQL endpoint/interface.  
+  over a read-only SPARQL endpoint/interface.  
 
   %   the SISSVoc client interface supports customisation, image branding which
   %   can be achieved via changes to css and js configuration.  Examples are
@@ -310,8 +310,8 @@ controlled vocabularies using RDF.
     \begin{italicquotes} Vocabulary content may be maintained using RDF editors
   (such as Protégé 4 or TopBraid Composer 5 ), which ensure consistency of
   relationships between resources is maintained, and then generate RDF documents
-  to transfer vocabulary content from the maintenance to publication envi-
-  ronment, as outlined above. If a web-based vocabu- lary maintenance environment
+  to transfer vocabulary content from the maintenance to publication environment, 
+  as outlined above. If a web-based vocabulary maintenance environment
   is required, then tools like TopQuadrant’s Enterprise Vocabulary Net 6 , and
   the PoolParty Thesaurus Server 7 are available.  \end{italicquotes} 
 
@@ -325,7 +325,7 @@ controlled vocabularies using RDF.
   Most users require read only access to content.* 
 }
   \item SISSVoc provides an easy-to-use Web-client interface for read-only access to 
-  vocabularies and their terms.  As already noted SISSVoc has a read-only application design.
+  vocabularies and their terms. 
  
   \item LDP provides a Web-client for fine grained registry management of term
 resources. But this is a believed to be a general capability lacking SKOS specific support.
@@ -354,8 +354,8 @@ resources. But this is a believed to be a general capability lacking SKOS specif
   persistence layer and is adapted to the non-relational / graph structure of
   RDF.
 
-   \item   The SISSVoc RESTFUL URI patterns correspond quite closely with
-  specific SPARQL queries which perform the substantial computation. SISSVoc thus relies
+   \item   The SISSVoc RESTFUL URI patterns correspond closely with
+  specific SPARQL queries which perform the substantial work. SISSVoc thus relies
   on a SPARQL endpoint as the mechanism to access RDF providing a strong
   separation of concerns. It would be feasible to map the already developed IMOS
   \texttt{control\_vocab\_db} to expose a SPARQL interface using a tool such as
@@ -481,7 +481,7 @@ owner X; all terms in vocab Y) }
 download vocabularies or their terms (e.g. RDF*, text*, json, html*) }
 
   \item SISSVoc supports download in human and machine readable form including html, 
-  json, RDF, text, ttl and xml. However, the web-api has no support for downloading 
+  json, RDF, text, ttl and XML. However, the web-api has no support for downloading 
   partial or complete SKOS vocabularies except via a manually crafted SPARQL request.
 
   \item LDPs encoding support is unknown.
@@ -520,7 +520,7 @@ Response times for retrieving queried content should be ‘user-tolerable’. *
 \item During basic user-interface testing, both the local and remote ANDS
 options assume appear to be responsive.
 
-% It's expected that most of the speed will be backend / perssistence. 
+% It's expected that most of the speed will be backend / persistence. 
 
 
 % OK 
@@ -536,7 +536,7 @@ service usage).
   \item It's believed that neither SISSVoc or LDP offer any administrative control over configuration. 
 
   \item A locally deployed SISSVoc would permit the normal configuration possibilities that comes with 
-  controlling the source code - such as css, ttl and javascript and xslt changes. Extended examples are
+  controlling the source code - such as css, ttl and JavaScript and xslt changes. Extended examples are
   provided for different branding options.
 
   \item For a local deployment, usage statistics could be compiled using awstats, in the same fashion as other 
