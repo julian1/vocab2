@@ -42,7 +42,7 @@
 \newcommand\SpecialItem{\renewcommand\item[1][]{\Item[\textbullet~\bfseries##1]}}
 \renewcommand\enddescription{\endlist\global\let\item\Item}
 
-\title{Whoot!}
+\title{Investigation into Control Vocabulary Publishing Services}
 \date{}
 \begin{document}
 \SpecialItem
@@ -67,10 +67,25 @@
 
 
 \section{
-  What was done
+	Summary
 }
 
-  In order to get a better feel for the ap. practical. 
+\item[] IMOS/EMII should avoid pursuing their own ad-hoc solution and instead focus on integrating other provider's services and products to match needs 
+\item[] LDP and SISSVoc are complementary solutions rather than alternatives
+\item[] It's not evident that centralised registration management such as that provided by LDP necessarily matches IMOS/EMII organisational publishing requirements. Even LDP authors acknowledge their project is somewhat contrary to the non-federated nature of RDF
+\item[] Support for more sophisticated vocabulary authoring and development actions probably don't yet exist in the form of a web-based solution. For example, inferencing and consistency checking of OWL vocabularies which are supported by dedicated third-party Vocabulary applications.
+\item[] A non-insubstantial investment has been made around control vocab publishing database. This includes supporting the appending of geoserver paramter and unit information at download and 
+as a source of SKOS vocabulary for Geonetwork/Portal. Abandoning this effort would require establishing new work-flows
+\item[] Some options are currently unfunded, and lack project oversight, technical support, points of contact etc.
+
+
+
+\section{
+  Tasks undertaken
+}
+
+  Trying to understand the nature and scope of LDP was complicated by the absence of any production hosts. and where avilable documentation 
+  was limited internal design discussion and justifications. To try and get a more hands on feel, the following 
 
   \item[] A local instance of sissvoc, which is preconfigured to use
   external sparql endpoints as rdf source was run-up under a tomcat webserver.
@@ -83,16 +98,16 @@
   \footnote{ \url { 
   http://ukgovld-registry.s3.amazonaws.com/distribution/ukl-registry-0.0.1-SNAPSHOT-dist.tar.gz
   }}
-
+%
   Attempts to generate a dummy configuration, and investigate the app under a
 	dummy admin account was not successful, due to a bug in open-id redirection probably
   due to absent dns configuration.
-
-  An understanding of the exact features of LDP is therefore more limited.
+%
+  The features of LDP is therefore more limited.
 
   \item[] 
-  Wrote preliminary scripts to extract and encode the contents of IMOS
-  controlled vocabulary database as SKOS, suitable for input to Geonetwork 
+  Wrote preliminary scripts to try and extract and encode the contents of IMOS
+  controlled vocabulary database as SKOS to guage difficulty. this suitable for input to Geonetwork 
   and faceted search, or to upload to an external Vocab register such as ANDS.
 
   \item[] 
@@ -394,7 +409,7 @@ for associated broader and narrower terms.
 Support LDP capabilities for registrar searching are unknown.
 
 
-
+% OK
 % could include some screenshots of sissvoc ?
 % as an alternative protoge with a dedicated SKOS and OWL plugins. 
 % 8
@@ -409,8 +424,8 @@ including preferred label, definition, broader, and membership relations. Also
 other metatadata terms such as Dublic Core source. 
 
 It appears that the simple html table layout supports showing all associated rdf
-properties that resolve to literals or rdfs:label types rather than URI
-resources that would require dereferencing.
+properties if they are literals or rdfs:label types rather than URIs that
+require dereferencing.
 
 \begin{figure}[H]
 \centering
@@ -420,9 +435,110 @@ resources that would require dereferencing.
 \end{figure}
 
 
+%%%%%%%%%%%%%%
+
+% ALMOST OK.
+%9 
+\subsection{ 9. The Web-Client should be able to display categorized
+(classified) lists of discoverable content (e.g. all vocabs by provided by
+owner X; all terms in vocab Y) }
+
+%owner - meaning - repo management.  classification - ?? must learn
+
+\item[SiSSVoc] as a stand-alone application has no notion of term ownership semantics.  
+% importance of SKOS_XL Presumably  
+
+\item [ANDs] may support since it combines registry management and SISSVoc. 
+
+\item [LDP] may have support - unknown
 
 
 
+% 10 
+\subsection{ 10. The Web-Client should offer different formats in which to
+download vocabularies or their terms (e.g. RDF*, text*, json, html*) }
+
+SiSSVoc supports downloading terms as html, json, rdf, text, ttl and xml. The
+web-api has no support for downloading complete SKOS vocabularies except via a
+manually crafted SPARQL request.
+
+LDP's encoding support is unknown.
+
+% ALMOST OK
+% 11 
+\subsection{ 11. The Web-Client should offer some statistics for users on the
+type and volume of content available (e.g., number of vocabularies that can be
+accessed and the number of terms in each vocabulary).  }
+ 
+
+SISSVoc has no inherent support for compiling content statistics.
+
+Using a Sparql interface it ought to be trivial to construct queries to identy
+for example the number of concepts, schemes, collections available with varying
+search constraints applied. 
+
+% ALMOST OK
+% 12
+\subsection{ 12. The publishing and retrieval service should be capable of
+being configured to dynamically read one or more repository sources to access
+content that needs to be published. * }
+
+As has been described, a stand-alone SISSVOC test-runner can be configured to
+read from multiple end-point sources. Although the front-end GUI support is not
+very polished and uses different styling inconsistent with the rest of the
+application.
+
+
+% OK
+% 13
+\subsection{ 
+13. Response times for retrieving queried content should be ‘user-tolerable’. *
+}
+
+During basic user-interface testing, both the local and remote \(ANDS\) options assume appear to be 
+responsive. 
+
+% It's expected that most of the speed will be backend / perssistence. 
+
+
+% ROUGH
+% 14
+\subsection{  14. System should provide an administrative console/configuration
+files to enable simple maintenance and administration (e.g., small changes to
+Web-client interface displays and supported queries; to detect and fix broken
+links in client-based hypertext; detecting missing details in retrieved content
+– indicating content needs moderating/validating; provide basic statistics on
+service usage).
+}
+
+Don't believe SISSVoc or LDP offer any administrative control over configuration. 
+
+A locally deployed SISSVoc would permit the normal configuration possibilities that comes with controlling the
+source code - css, ttl and javascript changes.
+
+Usage statistics could be compiled using awstats, similar to other imos
+web-apps. 
+
+LDP usage 
+
+
+\subsection{ 
+15. There should be ‘meaningful’ error messaging provided in response to
+service calls that cannot be satisfied (or which have been framed incorrectly).
+* }
+
+SiSSVoc and LDP unknown 
+
+
+%%% now need section on compiling and supporting. - mentioning the cost of deploying a web-app.  
+
+
+
+\clearpage
+
+
+
+end crap
 
   \end{flushleft}
 
