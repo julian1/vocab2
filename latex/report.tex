@@ -72,26 +72,26 @@
 	Summary
 }
 
-\item[] IMOS/EMII should avoid pursuing their own ad-hoc solution and instead 
+\item[] IMOS/EMII should avoid pursuing our own ad-hoc solution and instead 
 focus on integrating other provider's services and products to match needs due 
 to limited development resources
-\item[] LDP and SISSVoc are complementary solutions rather than alternatives
-\item[] It is not self-evident that centralised registration management such as 
+\item[] LDP and SISSVoc should be considered complementary solutions rather than alternatives
+\item[] It is not evident that centralised registration management such as 
 that provided by LDP necessarily matches IMOS/EMII organisational publishing 
-requirements. Even LDP authors acknowledge their project is contrary to the 
-non-federated nature of RDF publishing while SISSVoc deployments appear to work
+requirements. Even LDP authors acknowledge that their project is contrary to the 
+non-federated nature of RDF publishing - while SISSVoc deployments appear to work
 well independently  
 
 \item[] Support for more sophisticated vocabulary authoring and development 
-actions probably does not exist yet in the form of a web-based solution. For 
+activity probably does not exist yet in the form of a web-based solution. For 
 example, to support inferencing and consistency checking of OWL vocabularies already 
 found in dedicated third-party vocabulary applications, or to verify the 
 reciprocal relationship of broader/narrower SKOS terms.
-\item[] An investment has already been made around a controlled vocabulary 
+\item[] An investment has already been made in the development of a controlled vocabulary 
 database. This includes supporting the appending of Geoserver parameter and 
 unit information at WFS download and 
 as a source of SKOS vocabulary for Geonetwork/Portal 123 for faceted search. 
-Abandoning this effort would require the establishment of new work-flows and infrastructure
+Abandoning this effort would require the establishment of new work-flows as well as infrastructure
 changes
 \item[] LDP is currently unfunded, lacking project oversight, technical 
 support, points of contact or active discussion forums. It clearly presents an infeasible technical-risk 
@@ -117,7 +117,7 @@ feature development
   demonstrated during Iteration review.  \footnote{ \url {
   http://github.com/jyucsiro/SISSVoc-runner }  } 
 
-    \item[] It was found to be very difficult to glean an understanding of the
+    \item[] It was very difficult to glean an understanding of the
   functionality of LDP by reading source-code and internal development
   literature. Therefore a version of UKGovLD was also run-up on a private Nectar
   VM allocation. This followed prior unsuccessful attempts to provision a vagrant
@@ -322,7 +322,7 @@ controlled vocabularies using RDF.
 % OK
 % 4
 \subsection{ 
-  4. Most users require read only access to content.* 
+  Most users require read only access to content.* 
 }
   \item SISSVoc provides an easy-to-use Web-client interface for read-only access to 
   vocabularies and their terms.  As already noted SISSVoc has a read-only application design.
@@ -458,7 +458,7 @@ need to be de-referenced.
 
 % OK although brief.
 %9 
-\subsection{ 9. The Web-Client should be able to display categorized
+\subsection{ The Web-Client should be able to display categorized
 (classified) lists of discoverable content (e.g. all vocabs by provided by
 owner X; all terms in vocab Y) }
 
@@ -477,7 +477,7 @@ owner X; all terms in vocab Y) }
 
 % OK
 % 10 
-\subsection{ 10. The Web-Client should offer different formats in which to
+\subsection{ The Web-Client should offer different formats in which to
 download vocabularies or their terms (e.g. RDF*, text*, json, html*) }
 
   \item SISSVoc supports download in human and machine readable form including html, 
@@ -488,7 +488,7 @@ download vocabularies or their terms (e.g. RDF*, text*, json, html*) }
 
 % ALMOST OK
 % 11 
-\subsection{ 11. The Web-Client should offer some statistics for users on the
+\subsection{ The Web-Client should offer some statistics for users on the
 type and volume of content available (e.g., number of vocabularies that can be
 accessed and the number of terms in each vocabulary).  }
  
@@ -501,7 +501,7 @@ accessed and the number of terms in each vocabulary).  }
 
 % ALMOST OK
 % 12
-\subsection{ 12. The publishing and retrieval service should be capable of
+\subsection{ The publishing and retrieval service should be capable of
 being configured to dynamically read one or more repository sources to access
 content that needs to be published. * }
 
@@ -514,7 +514,7 @@ content that needs to be published. * }
 % OK
 % 13
 \subsection{ 
-13. Response times for retrieving queried content should be ‘user-tolerable’. *
+Response times for retrieving queried content should be ‘user-tolerable’. *
 }
 
 \item During basic user-interface testing, both the local and remote ANDS
@@ -525,7 +525,7 @@ options assume appear to be responsive.
 
 % OK 
 % 14
-\subsection{  14. System should provide an administrative console/configuration
+\subsection{ System should provide an administrative console/configuration
 files to enable simple maintenance and administration (e.g., small changes to
 Web-client interface displays and supported queries; to detect and fix broken
 links in client-based hypertext; detecting missing details in retrieved content
@@ -545,7 +545,7 @@ service usage).
 
 
 \subsection{ 
-15. There should be ‘meaningful’ error messaging provided in response to
+There should be ‘meaningful’ error messaging provided in response to
 service calls that cannot be satisfied (or which have been framed incorrectly).
 * }
 
@@ -553,58 +553,8 @@ service calls that cannot be satisfied (or which have been framed incorrectly).
 
 
 
-\clearpage
-
-
-
-end crap
 
   \end{flushleft}
 
-
-  \textit{should be italic}
-
-
-\LaTeX{} is a document preparation system for the \TeX{}
-  typesetting program. It offers programmable desktop
-  publishing features and extensive facilities for
-  automating most aspects of typesetting and desktop
-  publishing, including numbering and cross-referencing,
-  tables and figures, page layout, bibliographies, and
-  much more. \LaTeX{} was originally written in 1984 by
-  Leslie Lamport and has become the dominant method for
-  using \TeX; few people write in plain \TeX{} anymore.
-  The current version is \LaTeXe.
-
-  \begin{flushright}
-  a para
-  \textbf{should be bold}
-  \textit{should be italic}
-
-  \end{flushright}
-
-
-
-  \begin{flushleft}
-  My footnote\footnote{An example footnote.}
-  Another footnote\footnote{Another footnote.}
-
-  \hyperref[cnn]{http://www.cnn.com}
-
-  \url{http://www.google.com}
-  \href{http://www.google.com}{my google}
-  \href{http://www.cnn.com}{http://www.cnn.com}
-
-  % http://www.google.com
-  \end{flushleft}
-  more stuff
-  more stuff2
-
-  % This is a comment, not shown in final output.
-  % The following shows typesetting power of LaTeX:
-  \begin{align}
-    E_0 &= mc^2                              \\
-    E &= \frac{mc^2}{\sqrt{1-\frac{v^2}{c^2}}}
-  \end{align}
 \end{document}
 
