@@ -220,9 +220,9 @@ feature development
 % 
 %   
 %   SISSVoc - locally or externally hosted (ANDS) supports using persistent
-%   identifiers.  Article tals branding. 4 things - expected.  Talk about rdf.
+%   identifiers.  Article tals branding. 4 things - expected.  Talk about RDF.
 % 
-%   SISSVoc is built upon rdf, and is a restful publishing api. 
+%   SISSVoc is built upon RDF, and is a restful publishing api. 
 %%   The DNS resolvable component of the uri, it is expected that ANDS will maintain
 % 
 %   ANDS and IMOS has extensive experience in managing in chef the DNS component of
@@ -354,7 +354,7 @@ persistence layer and is adapted to the non-relational / graph structure of
 RDF.
 
  \item   The SISSVoc RESTFUL URI patterns correspond quite closely with
-specific SPARQL queries which perform the substantial work. SISSVoc thus relies
+specific SPARQL queries which perform the substantial computation. SISSVoc thus relies
 on a SPARQL endpoint as the mechanism to access RDF providing a strong
 separation of concerns. It would be feasible to map the already developed IMOS
 \texttt{control\_vocab\_db} to expose a SPARQL interface using a tool such as
@@ -375,20 +375,20 @@ differing content authorities) can still be accessed via the service (if
 desired). * }
 
 {
-SISSVoc supports seamless and consistent GUI navigation between differing
+\item SISSVoc supports seamless and consistent GUI based navigation between differing
 SISSVoc instances hosted on different domains.
 %
-Alternatively, normal url de-referencing allows navigation to non-SISSVoc
-vocabulary implementations based around normal rdf resource uris.
+\item Alternatively, normal url de-referencing allows navigation to non-SISSVoc
+vocabulary implementations (eg. BODC/NERC) based around normal RDF resource uris.
 %
-Interestingly, due to the nature of the decoupled end-point design, SISSVoc 
+\item Interestingly, due to the nature of the decoupled end-point design, SISSVoc 
 can be configured to use multiple SPARQL endpoint providers. This unifies access
-to different vocabulary providers from the same SISSVoc instance. 
+to different vocabulary providers that expose SPARQL from the same SISSVoc instance. 
 
 % H=HERE
 \begin{figure}[H]
 \centering
-\caption{SISSVoc using multiple SISSVoc domains}
+\caption{SISSVoc host demonstrating access to multiple SISSVoc domains}
 \includegraphics[width=12cm]{multipleendpoints}  
 \label{fig:test}
 \end{figure}
@@ -442,8 +442,8 @@ The SISSVoc Web-Client supports user-friendly presentation of SKOS term details
 including preferred label, definition, broader, and membership relations. Also
 other metatadata terms such as Dublic Core source. 
 
-It appears that the simple html table layout supports showing all associated rdf
-properties if they are literals or rdfs:label types rather than URIs that
+It appears that the simple html table layout supports showing all associated RDF
+properties if they are literals or RDFs:label types rather than URIs that
 require dereferencing.
 
 \begin{figure}[H]
@@ -477,7 +477,7 @@ owner X; all terms in vocab Y) }
 \subsection{ 10. The Web-Client should offer different formats in which to
 download vocabularies or their terms (e.g. RDF*, text*, json, html*) }
 
-SISSVoc supports downloading terms as html, json, rdf, text, ttl and xml. The
+SISSVoc supports downloading terms as html, json, RDF, text, ttl and xml. The
 web-api has no support for downloading complete SKOS vocabularies except via a
 manually crafted SPARQL request.
 
