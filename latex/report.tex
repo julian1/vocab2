@@ -552,6 +552,26 @@ service calls that cannot be satisfied (or which have been framed incorrectly).
   \item SISSVoc and LDP appear to support basic error handling.
 
 
+\clearpage
+
+\section{ 
+  Appendium / Other Issues  }
+
+  \item A further point in favor of maintaining our db. 
+  Harvesting netcdf and the opportunity to use the existing db connection to take advantage of parameter and unit during
+    NetCDF attribute mapping .  Allows AODN contributors to mark up NetCDF using IMOS/EMII controlled vocab, and record that
+  information during harvest with possiblities for simpler generic harvesters using parameter mapping. Also 
+  much better that database data fields are controlled rather than dumb text strings. 
+
+ 
+ \item Importance of having a single authorative point of vocabulary. Use and exchange in many places - geoserver, geonetwork, sissvoc, pid. 
+    manual exchange of skos files is going to end has risk of inconsistency. 
+ 
+ \item R2R vocabularly management was unrelated to r2rml. Although SISSVoc author notes there is no reason existing realational db could not use 
+  sparql mapping system to use SISSVoc, and it's extensively specified by w3 standards.
+   
+
+
 
 
   \end{flushleft}
