@@ -1,4 +1,15 @@
 
+http://131.217.38.46:8080/elda-demo/meta/api
+
+
+# to run
+java -jar jetty-runner.jar context.xml
+
+# then navigate to,
+http://localhost:8080/elda-demo/meta/api
+
+
+-----
 
 http://www.rvdata.us/voc
 
@@ -10,14 +21,6 @@ http://www.rvdata.us/voc
 Appears to have easy ability to configure using stylesheets
 ---
 
-
----
-java -jar jetty-runner.jar context.xml
-
-
-navigate to,
-
-http://localhost:8080/elda-demo/meta/api
 
 
 # search
