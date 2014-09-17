@@ -3,5 +3,74 @@
 
 set search_path = contr_vocab_db, public;
 
-select classification_scheme_name as subject,'dc:publisher' as predicate, person_name as object from contr_vocab_db.classification_scheme_table c join contr_vocab_db.person_table p on c.person_id = p.person_id;
+-- CONCEPT SCHEME
+
+drop view if exists dc_publisher; 
+create view dc_publisher as
+select 
+	c.classification_scheme_name as subject,
+	'dc:publisher'::varchar as predicate, 
+	p.person_name as object 
+	from contr_vocab_db.classification_scheme_table c 
+	join contr_vocab_db.person_table p on c.person_id = p.person_id
+;
+
+drop view if exists dc_title; 
+create view dc_title as
+select 
+	classification_scheme_name as subject,
+	'dc:title'::varchar as predicate, 
+	classification_scheme_title as object
+	from contr_vocab_db.classification_scheme_table
+;
+
+drop view if exists dc_description; 
+create view dc_description as
+select 
+	classification_scheme_name as subject,
+	'dc:description'::varchar as predicate, 
+	classification_scheme_description as object
+	from contr_vocab_db.classification_scheme_table
+;
+
+
+-- TOP CONCEPT
+
+drop view if exists skos_definition;
+create view skos_definition as
+select 
+	classification_scheme_category_name as subject,
+	'skos:definition'::varchar as predicate, 
+	classification_scheme_category_description as object
+	from classification_scheme_category_table; 
+;
+
+drop view if exists dcterms_issued;
+create view dcterms_issued as
+select 
+	classification_scheme_category_name as subject,
+	'dcterms:issued'::varchar as predicate, 
+	date_added::varchar as object						-- do we really want to do this cast?
+	from classification_scheme_category_table; 
+;
+
+
+---- It might be possible to avoid the union, and instead do 
+---- left joins ?
+--- several ways to do this ...
+
+--- actually using some explain's it looks pretty good 
+-- psql -h 127.0.0.1 -U meteo -d vocab -c 'explain select * from contr_vocab_db. rdf where predicate = $$dcterms:issued$$ '
+
+drop view if exists rdf;
+create view rdf as
+select * from dc_title 
+union all select * from dc_publisher 
+union all select * from dc_description
+union all select * from skos_definition
+union all select * from dcterms_issued
+order by predicate; 
+;
+
+
 
