@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/">
+
+<!-- This is a sample template only and is not the complete Parameter Vocabulary. The template shows a number of Parameter Vocabulary terms. Parameters are a mixture of AODN and NERC sourced terms, but it is possible in the future that some terms will be sourced from other domains. The template shows the SKOS encoding for each sample term -->		
+	
+<skos:ConceptScheme rdf:about="http://vocab.aodn.org.au/def/parameter">
+  <dc:title>Australian Ocean Data Network parameter register</dc:title>
+  <dc:description> This register contains a controlled vocabulary for parameters that will ultimately be available in MCP metadata. The controlled vocabulary will be used by the faceted search on the AODN/IMOS portal.</dc:description>
+  <dc:creator>
+   <foaf:Organization>
+      <foaf:name>eMarine Information Infrastructure</foaf:name>
+   </foaf:Organization>
+  </dc:creator>
+  <dc:publisher>
+    <foaf:Person>
+      <foaf:name>Sebastien Mancini</foaf:name>
+    </foaf:Person>
+  </dc:publisher>
+  <dcterms:hasVersion>http://vocab/aodn.org.au/def/Version 1.0/Parameter/)</dcterms:hasVersion>
+  <dc:rights>Freely Available For Reuse</dc:rights>
+  <dcterms:issued>2012-12-10T00:00:00</dcterms:issued>
+</skos:ConceptScheme>
+	
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/parameter/383">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Current speed in the water body</skos:prefLabel>
+  <skos:definition>The speed of Eulerian flow in the water column</skos:definition>
+  <dc:source>Australian Ocean Data Network parameter register</dc:source>
+  <dc:publisher>eMarine Information Infrastructure</dc:publisher>
+  <dcterms:created> 2013-07-18T00:00:00 </dcterms:created>
+</skos:Concept>
+
+<skos:Concept rdf:about="http://vocab.nerc.ac.uk/collection/P01/current/LCDAZZ01/">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Current direction in the water body</skos:prefLabel>
+  <skos:definition>The direction towards which Eulerian current in the water column is flowing.</skos:definition>
+  <dc:source>(P011) BODC Parameter Usage Vocabulary</dc:source>
+  <dc:publisher>British Oceanographic Data Centre</dc:publisher>
+  <dcterms:created> 2013-04-11T00:00:00 </dcterms:created>
+</skos:Concept>
+	
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/parameter/411">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Significant height of waves on the water body</skos:prefLabel>
+  <skos:definition> Definition missing in DB</skos:definition>
+  <dc:source>Australian Ocean Data Network parameter register</dc:source>
+  <dc:publisher>eMarine Information Infrastructure</dc:publisher>
+  <dcterms:created> 2013-07-18T00:00:00</dcterms:created>
+</skos:Concept>	
+	
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/parameter/412">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Average height of waves on the water body</skos:prefLabel>
+  <skos:definition> Definition missing in DB</skos:definition>
+  <dc:source>Australian Ocean Data Network parameter register</dc:source>
+  <dc:publisher>eMarine Information Infrastructure</dc:publisher>
+  <dcterms:created> 2013-07-18T00:00:00 </dcterms:created>
+</skos:Concept>		
+	
+<skos:Concept rdf:about="http://vocab.nerc.ac.uk/collection/P01/current/CTMPZZ01/">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Temperature of the atmosphere</skos:prefLabel>
+  <skos:definition>The degree of hotness of the atmosphere expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</skos:definition>
+  <dc:source>(P011) BODC Parameter Usage Vocabulary</dc:source>
+  <dc:publisher>British Oceanographic Data Centre</dc:publisher>
+  <dcterms:created> 2013-04-11T00:00:00 </dcterms:created>
+</skos:Concept>	
+	
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/parameter/406">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Wind stress on the water body</skos:prefLabel>
+  <skos:definition>Definition missing in DB</skos:definition>
+  <dc:source>Australian Ocean Data Network parameter register</dc:source>
+  <dc:publisher>eMarine Information Infrastructure</dc:publisher>
+  <dcterms:created> 2013-07-18T00:00:00 </dcterms:created>
+</skos:Concept>		
+	
+</rdf:RDF>

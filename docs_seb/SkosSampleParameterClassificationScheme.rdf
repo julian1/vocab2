@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:foaf="http://xmlns.com/foaf/0.1/">
+
+<skos:ConceptScheme rdf:about="http://vocab.aodn.org.au/def/ClassScheme/parameter1">
+<dc:title>AODN Classified Parameter Vocabulary</dc:title>
+<dc:description>A classification scheme to support faceted searching across parameter types in the IMOS 123 Portal.</dc:description>
+<!-- This is only a sample of the scheme. The encoding below depicts a two-tiered category classification scheme for parameter terms. Only a sample of categories and terms have been used to demonstrate the pattern-->		
+<dc:creator>
+   <foaf:Organization>
+      <foaf:name>eMarine Information Infrastructure</foaf:name>
+   </foaf:Organization>
+</dc:creator>
+<dc:publisher>
+  <foaf:Person>
+    <foaf:name>Sebastien Mancini</foaf:name>
+  </foaf:Person>
+</dc:publisher>		
+<dc:rights>Freely Available For Reuse</dc:rights>
+<dcterms:issued>2014-06-01T00:00:00</dcterms:issued>
+	</skos:ConceptScheme>
+	
+<!-- The following describes two TopConcepts (Categories) in the scheme - Physical-Water and Physical Atmosphere-->	
+	
+    <skos:TopConcept rdf:about="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/56">
+		<skos:prefLabel>Physical-Water</skos:prefLabel>
+		<skos:definition>This category contains vocabulary terms describing physical water parameters</skos:definition>
+		<dcterms:issued>2014-06-01T00:00:00</dcterms:issued>
+		<skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+		<skos:narrower rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/3"/>
+		<skos:narrower rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/2"/>	
+	</skos:TopConcept>
+	
+	<skos:TopConcept rdf:about="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/53">
+		<skos:prefLabel>Physical-Atmosphere</skos:prefLabel>
+		<skos:definition>This category contains vocabulary terms describing physical atmosphere parameters</skos:definition>
+		<dcterms:issued>2014-06-01T00:00:00</dcterms:issued>
+		<skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+		<skos:narrower rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/7"/>
+		<skos:narrower rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/6"/>
+	</skos:TopConcept>	
+	
+<!-- The following describes four 2nd tier Concepts (Categories) in the scheme - Current, Wave, Air Temperature and Wind-->	
+	
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/3">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/56"/>		
+  <skos:prefLabel xml:lang="en">Current</skos:prefLabel>
+  <skos:definition>This category contains vocabulary terms describing current parameters</skos:definition>
+  <dcterms:issued>2014-06-01T00:00:00</dcterms:issued>
+</skos:Concept>
+
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/2">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/56"/>		
+  <skos:prefLabel xml:lang="en">Wave</skos:prefLabel>
+  <skos:definition>This category contains vocabulary terms describing waves parameters</skos:definition>
+  <dcterms:issued>2014-06-01T00:00:00</dcterms:issued>
+</skos:Concept>
+	
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/7">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/53"/>		
+  <skos:prefLabel xml:lang="en">Air Temperature</skos:prefLabel>
+  <skos:definition>This category contains vocabulary terms describing air temperature parameters</skos:definition>
+  <dcterms:issued>2014-06-01T00:00:00</dcterms:issued>
+</skos:Concept>
+	
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/6">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/53"/>		
+  <skos:prefLabel xml:lang="en">Wind</skos:prefLabel>
+  <skos:definition>This category contains vocabulary terms describing wind parameters</skos:definition>
+  <dcterms:issued>2014-06-01T00:00:00</dcterms:issued>
+</skos:Concept>
+	
+<!-- The following describes six Concepts (Parameter Terms) that are classified in this scheme-->		
+	
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/parameter/383">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/3"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/56"/>	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Current speed in the water body</skos:prefLabel>
+  <skos:definition>The speed of Eulerian flow in the water column</skos:definition>
+  <dc:source>Australian Ocean Data Network parameter register</dc:source>
+  <dc:publisher>eMarine Information Infrastructure</dc:publisher>
+  <dcterms:issued>2014-06-01T00:00:00</dcterms:issued>		
+</skos:Concept>	
+	
+<skos:Concept rdf:about="http://vocab.nerc.ac.uk/collection/P01/current/LCDAZZ01/">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/3"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/56"/>	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Current direction in the water body</skos:prefLabel>
+  <skos:definition>The direction towards which Eulerian current in the water column is flowing.</skos:definition>
+  <dc:source>(P011) BODC Parameter Usage Vocabulary</dc:source>
+  <dc:publisher>British Oceanographic Data Centre</dc:publisher>
+  <dcterms:issued>2014-06-01T00:00:00</dcterms:issued>		
+</skos:Concept>	
+	
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/parameter/411">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/2"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/56"/>	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Significant height of waves on the water body</skos:prefLabel>
+  <skos:definition>Definition missing in DB</skos:definition>
+  <dc:source>Australian Ocean Data Network parameter register</dc:source>
+  <dc:publisher>Marine Information Infrastructure</dc:publisher>
+  <dcterms:issued>2014-06-01T00:00:00</dcterms:issued>		
+</skos:Concept>	
+	
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/parameter/412">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/2"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/56"/>	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Average height of waves on the water body</skos:prefLabel>
+  <skos:definition>Definition missing in DB</skos:definition>
+  <dc:source>Australian Ocean Data Network parameter register</dc:source>
+  <dc:publisher>Marine Information Infrastructure</dc:publisher>
+  <dcterms:issued>2014-06-01T00:00:00</dcterms:issued>		
+</skos:Concept>	
+	
+<skos:Concept rdf:about="http://vocab.nerc.ac.uk/collection/P01/current/CTMPZZ01/">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/7"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/53"/>	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Temperature of the atmosphere</skos:prefLabel>
+  <skos:definition>The degree of hotness of the atmosphere expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</skos:definition>
+  <dc:source>(P011) BODC Parameter Usage Vocabulary</dc:source>
+  <dc:publisher>British Oceanographic Data Centre</dc:publisher>
+  <dcterms:issued>2014-06-01T00:00:00</dcterms:issued>		
+</skos:Concept>	
+	
+<skos:Concept rdf:about="http://vocab.aodn.org.au/def/parameter/406">	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/6"/>
+  <skos:broader rdf:resource="http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/53"/>	
+  <skos:inScheme rdf:resource="http://vocab.aodn.org.au/def/parameter"/>
+  <skos:prefLabel xml:lang="en">Wind stress on the water body</skos:prefLabel>
+  <skos:definition>Definition missing in DB</skos:definition>
+  <dc:source>Australian Ocean Data Network parameter register</dc:source>
+  <dc:publisher>Marine Information Infrastructure</dc:publisher>
+  <dcterms:issued>2014-06-01T00:00:00</dcterms:issued>		
+</skos:Concept>	
+	
+</rdf:RDF>
