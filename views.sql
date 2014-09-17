@@ -3,6 +3,21 @@
 
 set search_path = contr_vocab_db, public;
 
+
+-- Types
+
+
+drop view if exists rdf;
+
+drop view if exists rdf_types; 
+create view rdf_types as
+select classification_scheme_name as subject, 
+	'rdf:type'::varchar as predicate, 
+	'skos:ConceptScheme'::varchar as object 
+	from contr_vocab_db.classification_scheme_table
+;
+
+
 -- CONCEPT SCHEME
 
 drop view if exists dc_publisher; 
@@ -62,7 +77,6 @@ select
 --- actually using some explain's it looks pretty good 
 -- psql -h 127.0.0.1 -U meteo -d vocab -c 'explain select * from contr_vocab_db. rdf where predicate = $$dcterms:issued$$ '
 
-drop view if exists rdf;
 create view rdf as
 select * from dc_title 
 union all select * from dc_publisher 
