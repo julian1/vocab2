@@ -14,12 +14,13 @@ create database vocab;
 \c vocab;
 
 create schema contr_vocab_db ; 
-alter schema contr_vocab_db owner to contr_vocab_db ; 
-set search_path = contr_vocab_db, public;
+
+-- alter schema contr_vocab_db owner to contr_vocab_db ; 
+-- set search_path = contr_vocab_db, public;
 
 \i docs_seb/Vocab_db_table_creation_10092014.sql; 
 
 \i docs_seb/test_seb_vocab_v5.txt; 
 
-\i misc/admin93.sql
+\i /home/meteo/imos/projects/db/admin93.sql
 
