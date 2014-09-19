@@ -2,4 +2,35 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
 
+	
+
+<changeSet author="julian" id="000001">
+
+    <renameTable newTableName="affiliation_type" oldTableName="affiliation_type_table" />
+    <renameTable newTableName="amendment" oldTableName="amendment_table" />
+    <renameTable newTableName="association_type" oldTableName="association_type_table" />
+    <renameTable newTableName="classification_scheme_association" oldTableName="classification_scheme_association_table" />
+    <renameTable newTableName="classification_scheme_category" oldTableName="classification_scheme_category_table" />
+    <renameTable newTableName="classification_scheme" oldTableName="classification_scheme_table" />
+    <renameTable newTableName="external_associated_terms" oldTableName="external_associated_terms_table" />
+    <renameTable newTableName="internal_associated_terms" oldTableName="internal_associated_terms_table" />
+    <renameTable newTableName="object_term" oldTableName="object_term_table" />
+    <renameTable newTableName="organisation_name" oldTableName="organisation_name_table" />
+    <renameTable newTableName="organisation_synonym" oldTableName="organisation_synonym_table" />
+    <renameTable newTableName="person_organisational_affiliation" oldTableName="person_organisational_affiliation_table" />
+    <renameTable newTableName="person" oldTableName="person_table" />
+    <renameTable newTableName="reference_source" oldTableName="reference_source_table" />
+    <renameTable newTableName="register_manager" oldTableName="register_manager_table" />
+    <renameTable newTableName="register_owner" oldTableName="register_owner_table" />
+    <renameTable newTableName="subject_term" oldTableName="subject_term_table" />
+    <renameTable newTableName="term_category_classification" oldTableName="term_category_classification_table" />
+	<renameTable newTableName="term_proposer" oldTableName="term_proposer_table" />
+	<renameTable newTableName="vocabulary_register" oldTableName="vocabulary_register_table" />
+	<renameTable newTableName="vocabulary_term" oldTableName="vocabulary_term_table" />
+	<renameTable newTableName="vocabulary_type" oldTableName="vocabulary_type_table" />
+
+</changeSet>
+
+
+
 </databaseChangeLog>
