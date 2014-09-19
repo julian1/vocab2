@@ -7,6 +7,8 @@ set search_path = contr_vocab_db, public;
 -- Types
 
 
+
+
 drop view if exists rdf;
 
 drop view if exists rdf_types; 
@@ -14,7 +16,27 @@ create view rdf_types as
 select classification_scheme_name as subject, 
 	'rdf:type'::varchar as predicate, 
 	'skos:ConceptScheme'::varchar as object 
-	from contr_vocab_db.classification_scheme_table
+	from classification_scheme_table
+	union all
+
+	-- is this a category, concept or top concept?
+	-- how do we identify the topConcept ?  
+--	select classification_scheme_category_name as subject,
+--	'rdf:type'::varchar as predicate, 
+--	'skos:Category ?'::varchar as object 
+--	from classification_scheme_category_table
+
+	-- Not convinced we even need the association table.
+
+	select c.classification_scheme_category_name as subject,
+	'rdf:type'::varchar as predicate, 
+	'skos:TopConcept'::varchar as object 
+	from classification_scheme_category_table c 
+	join classification_scheme_association_table a 
+	on c.classification_scheme_category_id = a.classification_scheme_category_id 
+	where a.parent_category_code is null
+--	where a.hierarchy_level = '1' 
+
 ;
 
 
@@ -26,8 +48,8 @@ select
 	c.classification_scheme_name as subject,
 	'dc:publisher'::varchar as predicate, 
 	p.person_name as object 
-	from contr_vocab_db.classification_scheme_table c 
-	join contr_vocab_db.person_table p on c.person_id = p.person_id
+	from classification_scheme_table c 
+	join person_table p on c.person_id = p.person_id
 ;
 
 drop view if exists dc_title; 
@@ -36,7 +58,7 @@ select
 	classification_scheme_name as subject,
 	'dc:title'::varchar as predicate, 
 	classification_scheme_title as object
-	from contr_vocab_db.classification_scheme_table
+	from classification_scheme_table
 ;
 
 drop view if exists dc_description; 
@@ -45,7 +67,7 @@ select
 	classification_scheme_name as subject,
 	'dc:description'::varchar as predicate, 
 	classification_scheme_description as object
-	from contr_vocab_db.classification_scheme_table
+	from classification_scheme_table
 ;
 
 
