@@ -85,6 +85,31 @@
 
 	</changeSet>
 
+	
+
+	<changeSet author="julian" id="000006">
+	    <addForeignKeyConstraint 
+            constraintName="external_associated_terms_vocabulary_term_id_fkey"
+			baseColumnNames="vocabulary_term_id"
+            baseTableName="external_associated_terms"
+            referencedColumnNames="id"
+            referencedTableName="vocabulary_term"/>
+
+	</changeSet>
+
+	<changeSet author="julian" id="000007">
+		 <addNotNullConstraint columnName="vocabulary_term_id" tableName="external_associated_terms"/>
+
+	</changeSet>
+
+
+	<!--
+            constraintName="fk_address_person"
+            deferrable="true"
+            initiallyDeferred="true"
+            onDelete="CASCADE"
+            onUpdate="RESTRICT"
+	-->
 
 	
 
