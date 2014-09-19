@@ -21,5 +21,5 @@ set search_path = contr_vocab_db, public;
 
 \i docs_seb/test_seb_vocab_v5.txt; 
 
-\i /home/meteo/imos/projects/db/admin93.sql
+\i misc/admin93.sql
 
