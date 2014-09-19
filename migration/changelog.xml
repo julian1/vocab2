@@ -2,10 +2,10 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
 
+<!-- do the renaming first so any subsequent views we create will be ok --> 
 	
-
+<!-- rename tables --> 
 <changeSet author="julian" id="000001">
-
     <renameTable newTableName="affiliation_type" oldTableName="affiliation_type_table" />
     <renameTable newTableName="amendment" oldTableName="amendment_table" />
     <renameTable newTableName="association_type" oldTableName="association_type_table" />
@@ -28,8 +28,76 @@
 	<renameTable newTableName="vocabulary_register" oldTableName="vocabulary_register_table" />
 	<renameTable newTableName="vocabulary_term" oldTableName="vocabulary_term_table" />
 	<renameTable newTableName="vocabulary_type" oldTableName="vocabulary_type_table" />
-
 </changeSet>
+
+
+<!-- rename vocabulary_term_code to id - multiple primary keys not allowed. -->
+<changeSet author="julian" id="000002">
+	<!-- At some point we want to change the vocabulary_term_code into an integer primary key 
+		But we'll drop it for now - because too manu things depend on the uid.
+	-->
+	<!-- sql>  alter table vocabulary_term drop constraint vocabular_term_table_pkey  </sql-->
+    <!-- addPrimaryKey columnNames="id" tableName="vocabulary_term" /-->
+	 <!-- dropColumn columnName="vocabulary_term_code"  tableName="vocabulary_term"/-->
+
+
+	<!-- needs a not -null constraint as well -->
+    <renameColumn newColumnName="id" oldColumnName="vocabulary_term_code" tableName="vocabulary_term"/>
+	<addUniqueConstraint columnNames="id" tableName="vocabulary_term" />
+</changeSet>
+
+
+<changeSet author="julian" id="000003">
+	  <renameColumn newColumnName="name" oldColumnName="vocabulary_term_name" tableName="vocabulary_term"/>
+	  <renameColumn newColumnName="uid" oldColumnName="vocabulary_term_uid" tableName="vocabulary_term"/>
+	  <!-- to drop renameColumn newColumnName="vocabulary_instance_of" oldColumnName="vocabulary_instance_of" tableName="vocabulary_term"/ -->
+	  <renameColumn newColumnName="short_name" oldColumnName="vocabulary_term_short_name" tableName="vocabulary_term"/>
+	  <renameColumn newColumnName="ancillary_information" oldColumnName="vocabulary_term_ancillary_information" tableName="vocabulary_term"/>
+	  <renameColumn newColumnName="definition" oldColumnName="vocabulary_term_definition" tableName="vocabulary_term"/>
+</changeSet>
+
+<changeSet author="julian" id="000004">
+	  <dropColumn columnName="internal_relationship" tableName="vocabulary_term"/>
+	  <dropColumn columnName="external_relationship" tableName="vocabulary_term"/>
+	  <dropColumn columnName="vocabulary_instance_of" tableName="vocabulary_term"/>
+</changeSet>
+
+
+	<!-- we should be able to do the uid thing, using
+	
+		exec and this, 
+		select name,a.vocabulary_term_name from vocabulary_term v join external_associated_terms a on v.name = a.vocabulary_term_name ;
+	 vocabulary_type_name should also be changed - shouldn't be instrument, or platform etc - since these are in the register 
+
+		verify that it works
+		select v.id, v.name, a.vocabulary_term_id, a.vocabulary_term_name from vocabulary_term v join external_associated_terms a on v.name = a.vocabulary_term_name ;
+	-->
+
+
+	<changeSet author="julian" id="000005">
+		<addColumn tableName="external_associated_terms">
+			<column name="vocabulary_term_id" type="integer"/>  <!-- should be non- nullable  - needs to be a foreign key -->
+		</addColumn>
+
+		<sql>
+			update external_associated_terms a set vocabulary_term_id = v.id from vocabulary_term v where v.name = a.vocabulary_term_name
+		</sql>
+
+	</changeSet>
+
+
+	
+
+	<!-- changeSet author="julian" id="000006">
+    <update tableName="external_associated_terms">
+        <column name="vocabulary_term_id"  value="" />
+        <where>A String</where>
+    </update>
+	</changeSet-->
+
+
+
+
 
 
 
