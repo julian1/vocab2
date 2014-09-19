@@ -22,5 +22,5 @@ create schema contr_vocab_db ;
 
 \i docs_seb/test_seb_vocab_v5.txt; 
 
-\i /home/meteo/imos/projects/db/admin93.sql
+\i misc/admin93.sql
 
