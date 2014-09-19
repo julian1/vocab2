@@ -1,4 +1,6 @@
 
+#pushd migration
+
 java -jar liquibase.jar update
 
 #      --changeLogFile=db.changelog.xml \
