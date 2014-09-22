@@ -2,11 +2,11 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
 
-<!-- do the renaming first so any subsequent views we create will be ok --> 
-	
-	<!-- rename tables --> 
+<!-- do the renaming first so any subsequent views we create will be ok -->
+
+	<!-- rename tables -->
 	<changeSet author="julian" id="000001">
-		<renameTable newTableName="affiliation_type" oldTableName="affiliation_type_table" />											
+		<renameTable newTableName="affiliation_type" oldTableName="affiliation_type_table" />											<!-- done -->
 		<renameTable newTableName="amendment" oldTableName="amendment_table" />															<!-- done -->
 		<renameTable newTableName="association_type" oldTableName="association_type_table" />											<!-- done - one string but ok -->
 		<renameTable newTableName="classification_scheme_association" oldTableName="classification_scheme_association_table" />
@@ -15,12 +15,12 @@
 		<renameTable newTableName="external_associated_terms" oldTableName="external_associated_terms_table" />							<!-- good -->
 		<renameTable newTableName="internal_associated_terms" oldTableName="internal_associated_terms_table" />
 		<renameTable newTableName="object_term" oldTableName="object_term_table" />
-		<renameTable newTableName="organisation_name" oldTableName="organisation_name_table" />
-		<renameTable newTableName="organisation_synonym" oldTableName="organisation_synonym_table" />
-		<renameTable newTableName="person_organisational_affiliation" oldTableName="person_organisational_affiliation_table" />
-		<renameTable newTableName="person" oldTableName="person_table" />
+		<renameTable newTableName="organisation_name" oldTableName="organisation_name_table" />											<!-- good -->
+		<renameTable newTableName="organisation_synonym" oldTableName="organisation_synonym_table" />									<!-- good -->
+		<renameTable newTableName="person_organisational_affiliation" oldTableName="person_organisational_affiliation_table" />			<!-- ok but has 3 field composite key?? -->
+		<renameTable newTableName="person" oldTableName="person_table" />																<!-- good -->
 		<renameTable newTableName="reference_source" oldTableName="reference_source_table" />											<!-- good -->
-		<renameTable newTableName="register_manager" oldTableName="register_manager_table" />
+		<renameTable newTableName="register_manager" oldTableName="register_manager_table" />											<!-- good - but should use integer for vocabulary_register -->
 		<renameTable newTableName="register_owner" oldTableName="register_owner_table" />
 		<renameTable newTableName="subject_term" oldTableName="subject_term_table" />
 		<renameTable newTableName="term_category_classification" oldTableName="term_category_classification_table" />
@@ -33,7 +33,7 @@
 
 	<!-- vocabulary_term - vocabulary_term_code rename to id - multiple primary keys not allowed. -->
 	<changeSet author="julian" id="000002">
-		<!-- At some point we want to change the vocabulary_term_code into an integer primary key 
+		<!-- At some point we want to change the vocabulary_term_code into an integer primary key
 			But we'll drop it for now - because too manu things depend on the uid.
 		-->
 		<!-- sql>  alter table vocabulary_term drop constraint vocabular_term_table_pkey  </sql-->
@@ -64,24 +64,25 @@
 	</changeSet>
 
 
-	<!-- external_associated_terms 
-		reference vocabulary_term.id 
+	<!-- external_associated_terms
+		reference vocabulary_term.id
 		select v.id, v.name, a.vocabulary_term_id, a.vocabulary_term_name from vocabulary_term v join external_associated_terms a on v.name = a.vocabulary_term_name ;
 	-->
 	<changeSet author="julian" id="000005">
 		<addColumn tableName="external_associated_terms">
-			<column name="vocabulary_term_id" type="integer"/>  <!-- should be non- nullable  - needs to be a foreign key -->
+			<column name="vocabulary_term_id" type="integer"/>
 		</addColumn>
 		<sql>
 			update external_associated_terms a set vocabulary_term_id = v.id from vocabulary_term v where v.name = a.vocabulary_term_name
 		</sql>
-	    <addForeignKeyConstraint 
+	    <addForeignKeyConstraint
             constraintName="external_associated_terms_vocabulary_term_id_fkey"
 			baseColumnNames="vocabulary_term_id"
             baseTableName="external_associated_terms"
             referencedColumnNames="id"
-            referencedTableName="vocabulary_term"/>
-		 <addNotNullConstraint columnName="vocabulary_term_id" tableName="external_associated_terms"/>
+            referencedTableName="vocabulary_term"
+		/>
+		<!-- addNotNullConstraint columnName="vocabulary_term_id" tableName="external_associated_terms"/ --> <!-- primary key should be non null -->
 		<dropColumn columnName="vocabulary_term_name" tableName="external_associated_terms"/>
 	</changeSet>
 
@@ -89,7 +90,7 @@
 
 	<!-- amendment
 		select vocabulary_term_name, vocabulary_term_code, v.name, v.id  from amendment a join vocabulary_term v on a.vocabulary_term_name = v.name;
-	-->	
+	-->
 	<changeSet author="julian" id="000006">
 		<addColumn tableName="amendment">
 			<column name="vocabulary_term_id" type="integer"/>  <!-- should be non- nullable  - needs to be a foreign key -->
@@ -97,21 +98,21 @@
 		<sql>
 			update amendment a set vocabulary_term_id = v.id from vocabulary_term v where v.name = a.vocabulary_term_name
 		</sql>
-	    <addForeignKeyConstraint 
+	    <addForeignKeyConstraint
             constraintName="amendment_vocabulary_term_id_fkey"
 			baseColumnNames="vocabulary_term_id"
             baseTableName="amendment"
             referencedColumnNames="id"
             referencedTableName="vocabulary_term"/>
 		 <addNotNullConstraint columnName="vocabulary_term_id" tableName="amendment"/>
-		<!-- two non-normalized columns --> 
+		<!-- two non-normalized columns -->
 		<dropColumn columnName="vocabulary_term_name" tableName="amendment"/>
 		<dropColumn columnName="vocabulary_term_code" tableName="amendment"/>
 	</changeSet>
 
-	<!-- amendment more tidying 
+	<!-- amendment more tidying
 		register_name   still needs to link on an integer id.
-	--> 
+	-->
 	<changeSet author="julian" id="000007">
 		<addNotNullConstraint columnName="person_id" tableName="amendment"/>
 		<addNotNullConstraint columnName="organisation_name_id" tableName="amendment"/>
@@ -123,9 +124,9 @@
 
 
 
-	<!-- association_type 
+	<!-- association_type
 		name is primary key. - ok.
-		not unique constraint is not needed since it's already a primary key --> 
+		not unique constraint is not needed since it's already a primary key -->
 	<changeSet author="julian" id="000008">
 		<renameColumn newColumnName="name" oldColumnName="association_type_name" tableName="association_type"/>
 		<renameColumn newColumnName="description" oldColumnName="association_type_name_description" tableName="association_type"/>
@@ -138,26 +139,191 @@
 	</changeSet>
 
 
+	<!-- organisation name -->
+	<changeSet author="julian" id="000010">
+		<renameColumn newColumnName="id" oldColumnName="organisation_name_id" tableName="organisation_name"/>
+		<renameColumn newColumnName="name" oldColumnName="organisation_name" tableName="organisation_name"/>
+		<renameColumn newColumnName="description" oldColumnName="organisation_name_description" tableName="organisation_name"/>
+		<renameColumn newColumnName="acronym" oldColumnName="organisation_acronym" tableName="organisation_name"/>
+		<renameColumn newColumnName="address" oldColumnName="organisation_address" tableName="organisation_name"/>
+		<renameColumn newColumnName="status" oldColumnName="organisation_name_status" tableName="organisation_name"/>
+		<renameColumn newColumnName="synonym" oldColumnName="organisation_synonym" tableName="organisation_name"/>
+		<renameColumn newColumnName="notes" oldColumnName="organisation_notes" tableName="organisation_name"/>
+	</changeSet>
+
+	<!--
+	vocab=> \d  organisation_synonym ;
+         Table "contr_vocab_db.organisation_synonym"
+         Column          |          Type          | Modifiers
+			 organisation_synonym_id | integer                | not null
+			 organisation_name_id    | integer                |
+			 organisation_name       | character varying(110) |
+	-->
+	<!-- organisation synonym -->
+	<changeSet author="julian" id="000011">
+		<renameColumn newColumnName="id" oldColumnName="organisation_synonym_id" tableName="organisation_synonym"/>
+		<renameColumn newColumnName="name" oldColumnName="organisation_name" tableName="organisation_synonym"/>
+	</changeSet>
 
 
+	<!-- affiliation_type -->
+	<changeSet author="julian" id="000012">
+		<renameColumn newColumnName="name" oldColumnName="affiliation_type_name" tableName="affiliation_type"/>
+		<renameColumn newColumnName="description" oldColumnName="affiliation_description" tableName="affiliation_type"/>
+	</changeSet>
+
+
+	<!-- person -->
+	<changeSet author="julian" id="000013">
+		<renameColumn newColumnName="id" oldColumnName="person_id" tableName="person"/>
+		<renameColumn newColumnName="name" oldColumnName="person_name" tableName="person"/>
+		<renameColumn newColumnName="salutation" oldColumnName="person_salutation" tableName="person"/>
+		<renameColumn newColumnName="email" oldColumnName="contact_email" tableName="person"/>
+	</changeSet>
+
+
+	<!-- person_organisational_affiliation  -->
+
+
+
+
+
+	<!-- now we can drop, the register-name from register_owner, since it belongs to vocabulary_register -->
+	<changeSet author="julian" id="000017">
+		<dropColumn columnName="register_name" tableName="register_owner"/>
+	</changeSet>
 
 
 	<!--
-            constraintName="fk_address_person"
-            deferrable="true"
-            initiallyDeferred="true"
-            onDelete="CASCADE"
-            onUpdate="RESTRICT"
+		VERY IMPORTANT.>
+
+		should not have stray uid's around the place ...
+		should be linked from vocabulary term.
+
+		uid - should be in the vocabulary_term, not here ...
+	-->
+
+	<!-- vocabulary_register  rename fields -->
+	<changeSet author="julian" id="000018">
+		<renameColumn newColumnName="uid" oldColumnName="register_uid" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="name" oldColumnName="register_name" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="content_summary" oldColumnName="register_content_summary" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="language_name" oldColumnName="register_language_name" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="language_code" oldColumnName="register_language_code" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="language_country" oldColumnName="register_language_country" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="language_encoding" oldColumnName="register_language_encoding" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="version" oldColumnName="register_version" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="date" oldColumnName="register_date" tableName="vocabulary_register"/>
+	</changeSet>
+
+
+	<!-- vocabulary_register - use an integer primary key -->
+	<changeSet author="julian" id="000019">
+		<addColumn tableName="vocabulary_register">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<!-- this needs to be a primary key, but we can't change yet, until we update other tables to use this index --> 
+		<addUniqueConstraint columnNames="id" tableName="vocabulary_register" />
+	</changeSet>
+
+
+
+	<!-- amendment, use vocabulary_register primary key id --> 
+	<changeSet author="julian" id="000020">
+		<addColumn tableName="amendment">
+			<column name="vocabulary_register_id" type="integer"/>  
+		</addColumn>
+		<sql>
+			update amendment a set vocabulary_register_id = vr.id from vocabulary_register vr where vr.name = a.register_name
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="amendment_vocabulary_register_id_fkey"
+			baseColumnNames="vocabulary_register_id"
+            baseTableName="amendment"
+            referencedColumnNames="id"
+            referencedTableName="vocabulary_register"
+		/>
+		<dropColumn columnName="register_name" tableName="amendment"/>
+	</changeSet>
+
+
+	<!--
+		term_proposer
+		register_manager
+		register_owner
+	
+		are all tuples of person_id and organisation_id
 	-->
 
 	
+	<changeSet author="julian" id="000020-5">
+		<createTable tableName="person_organisation_tuple" >
+			<column name="id" type="serial">
+				 <constraints primaryKey="true"/>
+			</column>
+			<column name="person_id" type="integer"/>
+			<column name="organisation_name_id" type="integer"/>
+		</createTable>
+		<sql>
+			insert into person_organisation_tuple (person_id, organisation_name_id ) values (1, 2) 
+		</sql>
+	</changeSet>
 
-	<!-- changeSet author="julian" id="000006">
-    <update tableName="external_associated_terms">
-        <column name="vocabulary_term_id"  value="" />
-        <where>A String</where>
-    </update>
-	</changeSet-->
+
+
+	<!-- register_owner currently has one-to-one mapping against vocabulary_register on register_name. 
+		this leads to repeating tuples in register_name 
+		re-organize so that vocabulary_register references the register_manager 
+	-->
+	<changeSet author="julian" id="000021">
+		<sql> truncate register_manager </sql>
+		<dropColumn columnName="register_manager_id" tableName="register_manager"/>
+		<dropColumn columnName="register_name" tableName="register_manager"/>
+		<addColumn tableName="register_manager">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="register_manager" />
+		<sql>
+			insert into register_manager (person_id, organisation_name_id ) values (1, 2) 
+		</sql>
+
+		<addColumn tableName="vocabulary_register">
+			<column name="register_manager_id" type="integer"/>
+		</addColumn>
+		<sql> 
+			update vocabulary_register set register_manager_id = 1
+		</sql> 
+	</changeSet>
+
+
+	<!-- register_manager is the same as register_owner 
+		Note that this this ends up with tables that are identical containing just ( person_id and organisation_id )  
+		used elsewhere... 
+		Actually, why not just reference the same table ? 
+
+		It should be a generic table containing (person_id and organisation_id )
+
+		 register_owner_id | person_id | organisation_name_id 
+	-->
+	<changeSet author="julian" id="000022">
+		<sql> truncate register_owner </sql>
+		<dropColumn columnName="register_owner_id" tableName="register_owner"/>
+		<addColumn tableName="register_owner">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="register_owner" />
+		<sql>
+			insert into register_owner (person_id, organisation_name_id ) values (1, 2) 
+		</sql>
+
+		<addColumn tableName="vocabulary_register">
+			<column name="register_owner_id" type="integer"/>
+		</addColumn>
+		<sql> 
+			update vocabulary_register set register_owner_id = 1
+		</sql> 
+	</changeSet>
+
 
 
 
