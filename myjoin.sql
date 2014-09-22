@@ -1,7 +1,7 @@
 
  select
-trim(trailing from v.uid) as term,
-trim(trailing from v2.uid) as narrower
+trim(trailing from v.uid) as term, v.name,
+trim(trailing from v2.uid) as narrower, v2.name
 from contr_vocab_db.vocabulary_term v
 left join contr_vocab_db.reference_source r on r.reference_id = v.reference_source_id
 left join contr_vocab_db.subject_term s on s.vocabulary_term_name = v.name
