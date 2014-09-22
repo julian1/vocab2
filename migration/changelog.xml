@@ -6,9 +6,9 @@
 	
 	<!-- rename tables --> 
 	<changeSet author="julian" id="000001">
-		<renameTable newTableName="affiliation_type" oldTableName="affiliation_type_table" />
-		<renameTable newTableName="amendment" oldTableName="amendment_table" />
-		<renameTable newTableName="association_type" oldTableName="association_type_table" />											<!-- good - one string but ok -->
+		<renameTable newTableName="affiliation_type" oldTableName="affiliation_type_table" />											
+		<renameTable newTableName="amendment" oldTableName="amendment_table" />															<!-- done -->
+		<renameTable newTableName="association_type" oldTableName="association_type_table" />											<!-- done - one string but ok -->
 		<renameTable newTableName="classification_scheme_association" oldTableName="classification_scheme_association_table" />
 		<renameTable newTableName="classification_scheme_category" oldTableName="classification_scheme_category_table" />
 		<renameTable newTableName="classification_scheme" oldTableName="classification_scheme_table" />
@@ -19,7 +19,7 @@
 		<renameTable newTableName="organisation_synonym" oldTableName="organisation_synonym_table" />
 		<renameTable newTableName="person_organisational_affiliation" oldTableName="person_organisational_affiliation_table" />
 		<renameTable newTableName="person" oldTableName="person_table" />
-		<renameTable newTableName="reference_source" oldTableName="reference_source_table" />
+		<renameTable newTableName="reference_source" oldTableName="reference_source_table" />											<!-- good -->
 		<renameTable newTableName="register_manager" oldTableName="register_manager_table" />
 		<renameTable newTableName="register_owner" oldTableName="register_owner_table" />
 		<renameTable newTableName="subject_term" oldTableName="subject_term_table" />
@@ -31,7 +31,7 @@
 	</changeSet>
 
 
-	<!-- rename vocabulary_term_code to id - multiple primary keys not allowed. -->
+	<!-- vocabulary_term - vocabulary_term_code rename to id - multiple primary keys not allowed. -->
 	<changeSet author="julian" id="000002">
 		<!-- At some point we want to change the vocabulary_term_code into an integer primary key 
 			But we'll drop it for now - because too manu things depend on the uid.
@@ -124,11 +124,17 @@
 
 
 	<!-- association_type 
-		unique constraint is not needed since it's already a primary key --> 
+		name is primary key. - ok.
+		not unique constraint is not needed since it's already a primary key --> 
 	<changeSet author="julian" id="000008">
 		<renameColumn newColumnName="name" oldColumnName="association_type_name" tableName="association_type"/>
 		<renameColumn newColumnName="description" oldColumnName="association_type_name_description" tableName="association_type"/>
 		<!-- addUniqueConstraint columnNames="name" tableName="association_type" /-->
+	</changeSet>
+
+	<!-- reference_source -->
+	<changeSet author="julian" id="000009">
+		<renameColumn newColumnName="id" oldColumnName="reference_id" tableName="reference_source"/>
 	</changeSet>
 
 
