@@ -109,7 +109,7 @@
 		<dropColumn columnName="vocabulary_term_code" tableName="amendment"/>
 	</changeSet>
 
-	<!-- more tidying 
+	<!-- amendment more tidying 
 		register_name   still needs to link on an integer id.
 	--> 
 	<changeSet author="julian" id="000007">
@@ -120,6 +120,20 @@
 		<renameColumn newColumnName="request_date" oldColumnName="amendment_request_date" tableName="amendment"/>
 		<renameColumn newColumnName="approval_date" oldColumnName="amendment_approval_date" tableName="amendment"/>
 	</changeSet>
+
+
+
+	<!-- association_type 
+		unique constraint is not needed since it's already a primary key --> 
+	<changeSet author="julian" id="000008">
+		<renameColumn newColumnName="name" oldColumnName="association_type_name" tableName="association_type"/>
+		<renameColumn newColumnName="description" oldColumnName="association_type_name_description" tableName="association_type"/>
+		<!-- addUniqueConstraint columnNames="name" tableName="association_type" /-->
+	</changeSet>
+
+
+
+
 
 
 	<!--
