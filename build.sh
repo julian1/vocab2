@@ -6,7 +6,3 @@ psql -h 127.0.0.1 -U contr_vocab_db -d vocab -f build.sql > /dev/null
 
 
 
-psql -h 127.0.0.1 -U contr_vocab_db -d vocab -f build.sql
-
-
-
