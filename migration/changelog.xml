@@ -29,6 +29,15 @@
 		<renameTable newTableName="vocabulary_type" oldTableName="vocabulary_type_table" />												<!-- good -->
 	</changeSet>
 
+	<changeSet author="julian" id="000001-5">
+       <sql>	
+			CREATE or replace FUNCTION exec(text) returns text
+			language plpgsql volatile
+			AS $f$ BEGIN EXECUTE $1; RETURN $1; END; $f$;
+			grant all on function exec(text) to public;
+       </sql>	
+	</changeSet>
+
 
 
 	<!-- organisation name -->
@@ -40,8 +49,12 @@
 		<renameColumn newColumnName="address" oldColumnName="organisation_address" tableName="organisation"/>
 		<renameColumn newColumnName="status" oldColumnName="organisation_name_status" tableName="organisation"/>
 		<renameColumn newColumnName="notes" oldColumnName="organisation_notes" tableName="organisation"/>
-		<!-- normalize -->
+		<!-- normalize - use oranisatoin synonym table instead -->
 		<dropColumn columnName="organisation_synonym" tableName="organisation"/>
+		<sql>
+			select exec('create sequence organisation_id_seq start '||(select max(id) +1 from organisation)); 
+			alter table organisation alter column id set default nextval('organisation_id_seq')
+		</sql>
 	</changeSet>
 
 
