@@ -2,6 +2,30 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
 
+	<!--
+		should not have stray uid's around the place ...
+	-->
+
+	<!--
+		IMPORTANT
+			- person_organisational_affiliation, could/should have the affiliation put in
+			the responsible party. but leave for the moment.
+			- and lave as null if no affiliation. if only person or organisation is present.
+			- but leave for now.
+	-->
+	<!--
+		IMPORTANT
+		There are many nerc references in the internal_associations_table
+
+		psql -h 127.0.0.1 -U contr_vocab_db -d vocab -c 'select name,uid from vocabulary_term where uid ~ $$nerc$$ '
+
+		Ok - because uses external_associations_table  Why ?
+	-->
+	<!--
+		think we want to change responsible_party to party
+	-->
+
+
 
 	<!-- rename tables -->
 	<changeSet author="julian" id="000001">
@@ -31,10 +55,10 @@
 
 	<changeSet author="julian" id="000001-5">
        <sql>	
-			CREATE or replace FUNCTION exec(text) returns text
+			create function exec(text) returns text
 			language plpgsql volatile
-			AS $f$ BEGIN EXECUTE $1; RETURN $1; END; $f$;
-			grant all on function exec(text) to public;
+			as $$ begin execute $1; return $1; end; $$;
+			grant all on function exec(text) to public
        </sql>	
 	</changeSet>
 
@@ -49,8 +73,9 @@
 		<renameColumn newColumnName="address" oldColumnName="organisation_address" tableName="organisation"/>
 		<renameColumn newColumnName="status" oldColumnName="organisation_name_status" tableName="organisation"/>
 		<renameColumn newColumnName="notes" oldColumnName="organisation_notes" tableName="organisation"/>
-		<!-- normalize - use oranisatoin synonym table instead -->
+		<!-- normalize - use organisation synonym table instead -->
 		<dropColumn columnName="organisation_synonym" tableName="organisation"/>
+		<!-- sequence on primary key --> 
 		<sql>
 			select exec('create sequence organisation_id_seq start '||(select max(id) +1 from organisation)); 
 			alter table organisation alter column id set default nextval('organisation_id_seq')
@@ -64,6 +89,11 @@
 		<renameColumn newColumnName="name" oldColumnName="person_name" tableName="person"/>
 		<renameColumn newColumnName="salutation" oldColumnName="person_salutation" tableName="person"/>
 		<renameColumn newColumnName="email" oldColumnName="contact_email" tableName="person"/>
+		<!-- sequence on primary key --> 
+		<sql>
+			select exec('create sequence person_id_seq start '||(select max(id) +1 from person)); 
+			alter table person alter column id set default nextval('person_id_seq')
+		</sql>
 	</changeSet>
 
 
@@ -175,12 +205,15 @@
 			alter table vocabulary_term drop constraint vocabular_term_table_pkey cascade;
 		</sql>
 
-		<!-- need to change type to serial
-			perhaps should be copying values ...
-		-->
-
+		<!-- primary but not serial -->
 		<renameColumn newColumnName="id" oldColumnName="vocabulary_term_code" tableName="vocabulary_term"/>
 		<addPrimaryKey columnNames="id" tableName="vocabulary_term" />
+		<sql>
+			-- drop sequence vocabulary_term_id_seq;
+			select exec('create sequence vocabulary_term_id_seq start '||(select max(id) +1 from vocabulary_term)); 
+			alter table vocabulary_term alter column id set default nextval('vocabulary_term_id_seq')
+		</sql>
+
 
 		<!-- unique constraint on name -->
 		<renameColumn newColumnName="name" oldColumnName="vocabulary_term_name" tableName="vocabulary_term"/>
@@ -263,6 +296,7 @@
 
 	<!-- external_associated_terms -->
 	<changeSet author="julian" id="000007">
+		<!-- dont need primary keys here -->
 
 		<!-- reference vocabulary_term(id) -->
 		<addColumn tableName="external_associated_terms">
@@ -305,10 +339,16 @@
 
 
 
-
-
 	<!-- amendment -->
 	<changeSet author="julian" id="000008">
+
+		<!-- id is already primary key, but not serial -->
+		<renameColumn newColumnName="id" oldColumnName="amendment_id" tableName="amendment"/>
+		<sql>
+			select exec('create sequence amendment_id_seq start '||(select max(id) +1 from amendment)); 
+			alter table amendment alter column id set default nextval('amendment_id_seq')
+		</sql>
+
 		<addColumn tableName="amendment">
 			<column name="vocabulary_term_id" type="integer"/>
 		</addColumn>
@@ -328,10 +368,6 @@
 		<!-- normalize -->
 		<dropColumn columnName="vocabulary_term_name" tableName="amendment"/>
 		<dropColumn columnName="vocabulary_term_code" tableName="amendment"/>
-
-
-		<!--**IMPORTANT id is already primary key, but not serial -->
-		<renameColumn newColumnName="id" oldColumnName="amendment_id" tableName="amendment"/>
 
 
 		<renameColumn newColumnName="type" oldColumnName="amendment_type" tableName="amendment"/>
@@ -355,8 +391,6 @@
             referencedTableName="vocabulary_register"
 		/>
 		<dropColumn columnName="register_name" tableName="amendment"/>
-
-
 
 
 		<!-- amendment to use responsible party, and drop person,organisation fields -->
@@ -388,6 +422,7 @@
 
 	<!-- association_type -->
 	<changeSet author="julian" id="000009">
+		<!-- name is primary key -->
 		<renameColumn newColumnName="name" oldColumnName="association_type_name" tableName="association_type"/>
 		<renameColumn newColumnName="description" oldColumnName="association_type_name_description" tableName="association_type"/>
 	</changeSet>
@@ -396,21 +431,21 @@
 	<!-- reference_source -->
 	<changeSet author="julian" id="000010">
 		<renameColumn newColumnName="id" oldColumnName="reference_id" tableName="reference_source"/>
+		<sql>
+			select exec('create sequence reference_source_id_seq start '||(select max(id) +1 from reference_source)); 
+			alter table reference_source alter column id set default nextval('reference_source_id_seq')
+		</sql>
 		<renameColumn newColumnName="organisation_id" oldColumnName="organisation_name_id" tableName="reference_source"/>
 	</changeSet>
 
 
-	<!--
-	vocab=> \d  organisation_synonym ;
-         Table "contr_vocab_db.organisation_synonym"
-         Column          |          Type          | Modifiers
-			 organisation_synonym_id | integer                | not null
-			 organisation_id    | integer                |
-			 organisation       | character varying(110) |
-	-->
 	<!-- organisation synonym -->
 	<changeSet author="julian" id="000011">
 		<renameColumn newColumnName="id" oldColumnName="organisation_synonym_id" tableName="organisation_synonym"/>
+		<sql>
+			create sequence organisation_synonym_id_seq start 1; 
+			alter table organisation_synonym alter column id set default nextval('organisation_synonym_id_seq')
+		</sql>
 		<renameColumn newColumnName="name" oldColumnName="organisation_name" tableName="organisation_synonym"/>
 		<renameColumn newColumnName="organisation_id" oldColumnName="organisation_name_id" tableName="organisation_synonym"/>
 	</changeSet>
@@ -418,6 +453,7 @@
 
 	<!-- affiliation_type -->
 	<changeSet author="julian" id="000012">
+		<!-- name is primary key -->
 		<renameColumn newColumnName="name" oldColumnName="affiliation_type_name" tableName="affiliation_type"/>
 		<renameColumn newColumnName="description" oldColumnName="affiliation_description" tableName="affiliation_type"/>
 	</changeSet>
@@ -425,6 +461,9 @@
 
 
 	<!-- person_organisational_affiliation  -->
+	<!-- this is a composite primary key, should probably just be a unique constraint on the 3 terms
+		or better - combine into the responsible_party concept
+	-->
 	<changeSet author="julian" id="000014">
 		<renameColumn newColumnName="organisation_id" oldColumnName="organisation_name_id" tableName="person_organisational_affiliation"/>
 	</changeSet>
@@ -432,89 +471,15 @@
 
 	<!-- vocabulary_type -->
 	<changeSet author="julian" id="000015">
+		<!-- name is primary key -->
 		<renameColumn newColumnName="name" oldColumnName="vocabulary_type_name" tableName="vocabulary_type"/>
 		<renameColumn newColumnName="definition" oldColumnName="vocabulary_type_definition" tableName="vocabulary_type"/>
 	</changeSet>
 
 
-	<!--
-		VERY IMPORTANT.>
-
-		should not have stray uid's around the place ...
-		should be linked from vocabulary term.
-
-		uid - should be in the vocabulary_term, not here ...
-	-->
-
-
-	<!-- we need
-		serial type for all primary keys .
-	-->
-
-	<!--
-		person,organisation
-			in term_proposer
-			register_manager
-			register_owner
-		and person,organisation in amendment
-		and person,organisation classfication_scheme_id
-
-		are all tuples of person_id and organisation_id, that ought to be extracted.
-		Also they are all repeating tuples
-
-		Note. we can tighten this up futher by specifying relation between person and organisation
-		similar to affiliation, but don't bother for now.
-	-->
-	<!--
-
-		IMPORTANT
-		-
-			- person_organisational_affiliation, could/should have the affiliation put in
-			the responsible party. but leave for the moment.
-			- and lave as null if no affiliation. if only person or organisation is present.
-			- but leave for now.
-	-->
-
-
-	<!-- classification_scheme to use responsible_party in place of person,organisation fields -->
-	<changeSet author="julian" id="000016">
-		<addColumn tableName="classification_scheme">
-			<column name="responsible_party_id" type="integer"/>
-		</addColumn>
-		<sql>
-			-- update classification_scheme set responsible_party_id = 2 -- Seb, Imos
-			update classification_scheme cs set responsible_party_id = rp.id
-			from responsible_party rp
-			where cs.person_id = rp.person_id
-			and cs.organisation_name_id = rp.organisation_id
-		</sql>
-	    <addForeignKeyConstraint
-            constraintName="classification_scheme_responsible_party_fkey"
-			baseColumnNames="responsible_party_id"
-            baseTableName="classification_scheme"
-            referencedColumnNames="id"
-            referencedTableName="responsible_party"
-		/>
-
-		<dropColumn columnName="person_id" tableName="classification_scheme"/>
-		<dropColumn columnName="organisation_name_id" tableName="classification_scheme"/>
-	</changeSet>
-
-
-	<!--
-		IMPORTANT
-		There are many nerc references in the internal_associations_table
-
-		psql -h 127.0.0.1 -U contr_vocab_db -d vocab -c 'select name,uid from vocabulary_term where uid ~ $$nerc$$ '
-
-		Ok - because uses external_associations_table  Why ?
-	-->
-	<!--
-		think we want to change responsible_party to party
-	-->
-
 	<!-- internal_associated_terms  -->
 	<changeSet author="julian" id="000017">
+		<!-- nothing referencing, so doesn't need primary key -->
 
 		<!-- avoid the indirection through the object_term and subject_term tables drop tables -->
 		<addColumn tableName="internal_associated_terms">
@@ -560,8 +525,13 @@
 	</changeSet>
 
 
-	<!-- internal_associated_terms, use vocabulary_term(id), and drop vocabulary_term_name -->
+	<!--  classification stuff -->
+
+
+
+	<!-- term_category_classification -->
 	<changeSet author="julian" id="000018">
+		<!-- use vocabulary_term(id), and drop vocabulary_term_name -->
 		<addColumn tableName="term_category_classification">
 			<column name="vocabulary_term_id" type="integer"/>
 		</addColumn>
@@ -579,6 +549,35 @@
 		/>
 		<dropColumn columnName="vocabulary_term_name" tableName="term_category_classification"/>
 	</changeSet>
+
+
+
+
+
+	<!-- classification_scheme to use responsible_party in place of person,organisation fields -->
+	<changeSet author="julian" id="000016">
+		<addColumn tableName="classification_scheme">
+			<column name="responsible_party_id" type="integer"/>
+		</addColumn>
+		<sql>
+			-- update classification_scheme set responsible_party_id = 2 -- Seb, Imos
+			update classification_scheme cs set responsible_party_id = rp.id
+			from responsible_party rp
+			where cs.person_id = rp.person_id
+			and cs.organisation_name_id = rp.organisation_id
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="classification_scheme_responsible_party_fkey"
+			baseColumnNames="responsible_party_id"
+            baseTableName="classification_scheme"
+            referencedColumnNames="id"
+            referencedTableName="responsible_party"
+		/>
+
+		<dropColumn columnName="person_id" tableName="classification_scheme"/>
+		<dropColumn columnName="organisation_name_id" tableName="classification_scheme"/>
+	</changeSet>
+
 
 
 	<!-- USER VIEWS 
