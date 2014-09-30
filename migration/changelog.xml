@@ -25,7 +25,7 @@
 		<renameTable newTableName="term_category_classification" oldTableName="term_category_classification_table" />
 		<renameTable newTableName="term_proposer" oldTableName="term_proposer_table" />													<!-- removed -->
 		<renameTable newTableName="vocabulary_register" oldTableName="vocabulary_register_table" />
-		<renameTable newTableName="vocabulary_term" oldTableName="vocabulary_term_table" />												<!-- ok --> 
+		<renameTable newTableName="vocabulary_term" oldTableName="vocabulary_term_table" />												<!-- ok -->
 		<renameTable newTableName="vocabulary_type" oldTableName="vocabulary_type_table" />												<!-- good -->
 	</changeSet>
 
@@ -39,8 +39,9 @@
 		<renameColumn newColumnName="acronym" oldColumnName="organisation_acronym" tableName="organisation"/>
 		<renameColumn newColumnName="address" oldColumnName="organisation_address" tableName="organisation"/>
 		<renameColumn newColumnName="status" oldColumnName="organisation_name_status" tableName="organisation"/>
-		<renameColumn newColumnName="synonym" oldColumnName="organisation_synonym" tableName="organisation"/>
 		<renameColumn newColumnName="notes" oldColumnName="organisation_notes" tableName="organisation"/>
+		<!-- normalize -->
+		<dropColumn columnName="organisation_synonym" tableName="organisation"/>
 	</changeSet>
 
 
@@ -52,12 +53,8 @@
 		<renameColumn newColumnName="email" oldColumnName="contact_email" tableName="person"/>
 	</changeSet>
 
-<!-- 
-	select lower( regexp_replace('Natalia ATKINS', '(.*) (.*).*', '\2 \1'))  ;
 
--->
-
-	<!-- new table responsible party to replace register_owner, register_manager, term_proposer etc 
+	<!-- new table responsible party to replace register_owner, register_manager, term_proposer etc
 		should probably also incorporate affiliation_type since it's a one-to-one mapping
 	-->
 	<changeSet author="julian" id="000004">
@@ -71,13 +68,13 @@
 		<addUniqueConstraint columnNames="person_id,organisation_id" tableName="responsible_party" />
 		<sql>
 			-- this is very flexible, for adding other entries - and affiliation_type if we need
-			insert into responsible_party (person_id, organisation_id) 
-			select p.id, o.id 
-			from person p 
-			cross join organisation o 
+			insert into responsible_party (person_id, organisation_id)
+			select p.id, o.id
+			from person p
+			cross join organisation o
 			where ( o.acronym ~ 'eMII' and p.name ~ 'Seb' )
 			or ( o.acronym ~ 'IMOS' and p.name ~ 'Seb' )
-		</sql> 
+		</sql>
 	</changeSet>
 
 
@@ -92,7 +89,7 @@
 		</addColumn>
 		<addPrimaryKey columnNames="id" tableName="vocabulary_register" />
 
-		<!-- rename --> 
+		<!-- rename -->
 		<renameColumn newColumnName="uid" oldColumnName="register_uid" tableName="vocabulary_register"/>
 		<renameColumn newColumnName="name" oldColumnName="register_name" tableName="vocabulary_register"/>
 		<renameColumn newColumnName="content_summary" oldColumnName="register_content_summary" tableName="vocabulary_register"/>
@@ -115,14 +112,14 @@
 		<addColumn tableName="vocabulary_register">
 			<column name="manager_responsible_party_id" type="integer"/>
 		</addColumn>
-		<sql> 
+		<sql>
 			-- eg. 1
 			update vocabulary_register vr set manager_responsible_party_id = rp.id
 			from responsible_party rp, register_manager rm
 			where vr.name = rm.register_name
 			and rm.person_id = rp.person_id
 			and rm.organisation_name_id = rp.organisation_id
-		</sql> 
+		</sql>
 	    <addForeignKeyConstraint
             constraintName="vocabulary_register_manager_responsible_party_fkey"
 			baseColumnNames="manager_responsible_party_id"
@@ -137,14 +134,14 @@
 		<addColumn tableName="vocabulary_register">
 			<column name="owner_responsible_party_id" type="integer"/>
 		</addColumn>
-		<sql> 
+		<sql>
 			-- eg. 1
 			update vocabulary_register vr set owner_responsible_party_id = rp.id
 			from responsible_party rp, register_owner ro
 			where vr.name = ro.register_name
 			and ro.person_id = rp.person_id
 			and ro.organisation_name_id = rp.organisation_id
-		</sql> 
+		</sql>
 	    <addForeignKeyConstraint
             constraintName="vocabulary_register_owner_responsible_party_fkey"
 			baseColumnNames="owner_responsible_party_id"
@@ -165,10 +162,10 @@
 			alter table vocabulary_term drop constraint vocabular_term_table_pkey cascade;
 		</sql>
 
-		<!-- need to change type to serial 
+		<!-- need to change type to serial
 			perhaps should be copying values ...
-		--> 
-		
+		-->
+
 		<renameColumn newColumnName="id" oldColumnName="vocabulary_term_code" tableName="vocabulary_term"/>
 		<addPrimaryKey columnNames="id" tableName="vocabulary_term" />
 
@@ -192,14 +189,14 @@
 		<dropColumn columnName="external_relationship" tableName="vocabulary_term"/>
 		<dropColumn columnName="vocabulary_instance_of" tableName="vocabulary_term"/>
 
-		<!-- term_proposer responsible party and drop term_proposer table and existing ref --> 
+		<!-- term_proposer responsible party and drop term_proposer table and existing ref -->
 		<dropColumn columnName="term_proposer_id" tableName="vocabulary_term"/>
 		<addColumn tableName="vocabulary_term">
 			<column name="proposer_responsible_party_id" type="integer"/>
 		</addColumn>
-		<sql> 
+		<sql>
 			update vocabulary_term set proposer_responsible_party_id = 1
-		</sql> 
+		</sql>
 	    <addForeignKeyConstraint
             constraintName="vocabulary_term_proposer_responsible_party_fkey"
 			baseColumnNames="proposer_responsible_party_id"
@@ -214,11 +211,11 @@
 		<addColumn tableName="vocabulary_term">
 			<column name="vocabulary_register_id" type="integer"/>
 		</addColumn>
-		<sql> 
-			update vocabulary_term vt set vocabulary_register_id = vr.id 
-			from vocabulary_register vr 
-			where vr.name = vt.register_name 
-		</sql> 
+		<sql>
+			update vocabulary_term vt set vocabulary_register_id = vr.id
+			from vocabulary_register vr
+			where vr.name = vt.register_name
+		</sql>
 	    <addForeignKeyConstraint
             constraintName="vocabulary_term_vocabulary_register_fkey"
 			baseColumnNames="vocabulary_register_id"
@@ -233,11 +230,11 @@
 		<addColumn tableName="vocabulary_term">
 			<column name="added_by_person_id" type="integer"/>
 		</addColumn>
-		<sql> 
-			update vocabulary_term vt set added_by_person_id = p.id 
-			from person p 
+		<sql>
+			update vocabulary_term vt set added_by_person_id = p.id
+			from person p
 			where lower( p.name) = lower( regexp_replace(vt.added_by, '(.*) (.*).*', '\2, \1'))
-		</sql> 
+		</sql>
 	    <addForeignKeyConstraint
             constraintName="vocabulary_term_added_by_person_fkey"
 			baseColumnNames="added_by_person_id"
@@ -250,16 +247,17 @@
 
 
 
-	
+
 	<!-- external_associated_terms -->
 	<changeSet author="julian" id="000007">
-		<!-- reference vocabulary_term(i) -->
+
+		<!-- reference vocabulary_term(id) -->
 		<addColumn tableName="external_associated_terms">
 			<column name="vocabulary_term_id" type="integer"/>
 		</addColumn>
 		<sql>
-			update external_associated_terms a set vocabulary_term_id = v.id 
-			from vocabulary_term v 
+			update external_associated_terms a set vocabulary_term_id = v.id
+			from vocabulary_term v
 			where v.name = a.vocabulary_term_name
 		</sql>
 	    <addForeignKeyConstraint
@@ -270,6 +268,25 @@
             referencedTableName="vocabulary_term"
 		/>
 		<dropColumn columnName="vocabulary_term_name" tableName="external_associated_terms"/>
+
+		<renameColumn newColumnName="uid" oldColumnName="external_term_uid" tableName="external_associated_terms"/>
+
+		<!-- enforce tuple uniqueness -->
+		<addUniqueConstraint columnNames="vocabulary_term_id,uid,association_type_name" tableName="external_associated_terms" />
+		<addNotNullConstraint columnName="uid" tableName="external_associated_terms"/>
+		<addNotNullConstraint columnName="association_type_name" tableName="external_associated_terms"/>
+
+		<!-- get rid of badly loaded data whereby external terms refer to themselves via the vocabulary_table -->
+		<sql>
+			delete from external_associated_terms eat
+			using vocabulary_term vt
+			where eat.vocabulary_term_id = vt.id
+			and eat.uid = vt.uid;
+		</sql>
+
+		<!-- note the uid is correct - and represents a real external resource
+			that is not repeated anywhere else -->
+
 	</changeSet>
 
 
@@ -283,8 +300,8 @@
 			<column name="vocabulary_term_id" type="integer"/>
 		</addColumn>
 		<sql>
-			update amendment a set vocabulary_term_id = v.id 
-			from vocabulary_term v 
+			update amendment a set vocabulary_term_id = v.id
+			from vocabulary_term v
 			where v.name = a.vocabulary_term_name
 		</sql>
 	    <addForeignKeyConstraint
@@ -299,7 +316,7 @@
 		<dropColumn columnName="vocabulary_term_name" tableName="amendment"/>
 		<dropColumn columnName="vocabulary_term_code" tableName="amendment"/>
 
-	
+
 		<!--**IMPORTANT id is already primary key, but not serial -->
 		<renameColumn newColumnName="id" oldColumnName="amendment_id" tableName="amendment"/>
 
@@ -308,13 +325,13 @@
 		<renameColumn newColumnName="request_date" oldColumnName="amendment_request_date" tableName="amendment"/>
 		<renameColumn newColumnName="approval_date" oldColumnName="amendment_approval_date" tableName="amendment"/>
 
-		<!-- use vocabulary_register primary key id --> 
+		<!-- use vocabulary_register primary key id -->
 		<addColumn tableName="amendment">
-			<column name="vocabulary_register_id" type="integer"/>  
+			<column name="vocabulary_register_id" type="integer"/>
 		</addColumn>
 		<sql>
-			update amendment a set vocabulary_register_id = vr.id 
-			from vocabulary_register vr 
+			update amendment a set vocabulary_register_id = vr.id
+			from vocabulary_register vr
 			where vr.name = a.register_name
 		</sql>
 	    <addForeignKeyConstraint
@@ -329,17 +346,17 @@
 
 
 
-		<!-- amendment to use responsible party, and drop person,organisation fields --> 
+		<!-- amendment to use responsible party, and drop person,organisation fields -->
 		<addColumn tableName="amendment">
 			<column name="responsible_party_id" type="integer"/>
 		</addColumn>
-		<sql> 
+		<sql>
 			-- eg. 1
 			update amendment a set responsible_party_id = rp.id
 			from responsible_party rp
 			where a.person_id = rp.person_id
 			and a.organisation_name_id = rp.organisation_id
-		</sql> 
+		</sql>
 	    <addForeignKeyConstraint
             constraintName="amendment_responsible_party_fkey"
 			baseColumnNames="responsible_party_id"
@@ -400,7 +417,7 @@
 	</changeSet>
 
 
-	<!-- vocabulary_type --> 
+	<!-- vocabulary_type -->
 	<changeSet author="julian" id="000015">
 		<renameColumn newColumnName="name" oldColumnName="vocabulary_type_name" tableName="vocabulary_type"/>
 		<renameColumn newColumnName="definition" oldColumnName="vocabulary_type_definition" tableName="vocabulary_type"/>
@@ -417,18 +434,18 @@
 	-->
 
 
-	<!-- we need 
+	<!-- we need
 		serial type for all primary keys .
-	--> 
+	-->
 
 	<!--
-		person,organisation 
+		person,organisation
 			in term_proposer
-			register_manager  
+			register_manager
 			register_owner
 		and person,organisation in amendment
-		and person,organisation classfication_scheme_id 
-	
+		and person,organisation classfication_scheme_id
+
 		are all tuples of person_id and organisation_id, that ought to be extracted.
 		Also they are all repeating tuples
 
@@ -438,24 +455,26 @@
 	<!--
 
 		IMPORTANT
-		- 
+		-
 			- person_organisational_affiliation, could/should have the affiliation put in
 			the responsible party. but leave for the moment.
-			- and lave as null if no affiliation. if only person or organisation is present.	
+			- and lave as null if no affiliation. if only person or organisation is present.
 			- but leave for now.
 	-->
 
 
 	<!-- classification_scheme to use responsible_party in place of person,organisation fields -->
 	<changeSet author="julian" id="000016">
-		<dropColumn columnName="person_id" tableName="classification_scheme"/>
-		<dropColumn columnName="organisation_name_id" tableName="classification_scheme"/>
 		<addColumn tableName="classification_scheme">
 			<column name="responsible_party_id" type="integer"/>
 		</addColumn>
-		<sql> 
-			update classification_scheme set responsible_party_id = 2 -- Seb, Imos
-		</sql> 
+		<sql>
+			-- update classification_scheme set responsible_party_id = 2 -- Seb, Imos
+			update classification_scheme cs set responsible_party_id = rp.id
+			from responsible_party rp
+			where cs.person_id = rp.person_id
+			and cs.organisation_name_id = rp.organisation_id
+		</sql>
 	    <addForeignKeyConstraint
             constraintName="classification_scheme_responsible_party_fkey"
 			baseColumnNames="responsible_party_id"
@@ -463,26 +482,28 @@
             referencedColumnNames="id"
             referencedTableName="responsible_party"
 		/>
+
+		<dropColumn columnName="person_id" tableName="classification_scheme"/>
+		<dropColumn columnName="organisation_name_id" tableName="classification_scheme"/>
 	</changeSet>
 
 
-	<!-- 
+	<!--
 		IMPORTANT
-		There are many nerc references in the internal_associations_table	
-		
+		There are many nerc references in the internal_associations_table
+
 		psql -h 127.0.0.1 -U contr_vocab_db -d vocab -c 'select name,uid from vocabulary_term where uid ~ $$nerc$$ '
 
-		Ok - because uses external_associations_table  Why ? 
+		Ok - because uses external_associations_table  Why ?
 	-->
 	<!--
 		think we want to change responsible_party to party
 	-->
 
-	<!-- internal_associated_terms 
-		avoid the indirection through the object_term and subject_term tables
-		drop tables
-	--> 
+	<!-- internal_associated_terms  -->
 	<changeSet author="julian" id="000017">
+
+		<!-- avoid the indirection through the object_term and subject_term tables drop tables -->
 		<addColumn tableName="internal_associated_terms">
 			<column name="subject_vocabulary_term_id" type="integer"/>
 		</addColumn>
@@ -490,14 +511,14 @@
 			<column name="object_vocabulary_term_id" type="integer"/>
 		</addColumn>
 		<sql>
-			-- note they exist as one-to-one mapping, but do it properly 
-			update internal_associated_terms ia 
-				set subject_vocabulary_term_id = vs.id, 
+			-- note they exist as one-to-one mapping, but do it properly
+			update internal_associated_terms ia
+				set subject_vocabulary_term_id = vs.id,
 				object_vocabulary_term_id = vo.id
 				from subject_term s, object_term o, vocabulary_term vs, vocabulary_term vo
-				where ia.subject_term_id = s.subject_term_id 
-				 and vs.name = s.vocabulary_term_name 
-				 and ia.object_term_id = o.object_term_id 
+				where ia.subject_term_id = s.subject_term_id
+				 and vs.name = s.vocabulary_term_name
+				 and ia.object_term_id = o.object_term_id
 				 and vo.name = o.vocabulary_term_name
 		</sql>
 	    <addForeignKeyConstraint
@@ -518,18 +539,23 @@
 		<dropColumn columnName="object_term_id" tableName="internal_associated_terms"/>
 		<dropTable tableName="subject_term"/>
 		<dropTable tableName="object_term"/>
+
+		<!-- enforce tuple uniqueness - actually whole thing could be primary key -->
+		<addUniqueConstraint columnNames="subject_vocabulary_term_id,object_vocabulary_term_id,association_type_name"
+			tableName="internal_associated_terms" />
+
 	</changeSet>
 
 
-	<!-- internal_associated_terms, use vocabulary_term(id), and drop vocabulary_term_name --> 
+	<!-- internal_associated_terms, use vocabulary_term(id), and drop vocabulary_term_name -->
 	<changeSet author="julian" id="000018">
 		<addColumn tableName="term_category_classification">
 			<column name="vocabulary_term_id" type="integer"/>
 		</addColumn>
 		<sql>
-			update term_category_classification tcc set vocabulary_term_id = vt.id 
-			from vocabulary_term vt 
-			where tcc.vocabulary_term_name = vt.name 
+			update term_category_classification tcc set vocabulary_term_id = vt.id
+			from vocabulary_term vt
+			where tcc.vocabulary_term_name = vt.name
 		</sql>
 	    <addForeignKeyConstraint
             constraintName="term_category_classification_vocabulary_term_fkey"
@@ -540,6 +566,111 @@
 		/>
 		<dropColumn columnName="vocabulary_term_name" tableName="term_category_classification"/>
 	</changeSet>
+
+
+	<!-- USER VIEWS 
+			join tables up, in obvious way, to understand the data
+	-->
+
+	<!-- view of responsible party - should perhaps have association -->
+	<changeSet author="julian" id="000019">
+		<createView viewName="_responsible_party">
+			select
+				rp.id, 
+				p.name as person_name, 
+				o.acronym as organisation_acronym
+			from responsible_party rp
+			left join person p on p.id = rp.person_id
+			left join organisation o on o.id = rp.organisation_id
+		</createView>
+	</changeSet>
+
+
+	<!-- amendment -->
+	<changeSet author="julian" id="000019-5">
+		<createView viewName="_amendment">
+			select
+				trim(vt.uid) as uid,
+				a.type,
+				a.request_date,
+				a.approval_date,
+				vr.name as register_name,
+				p.name as person_name,
+				o.acronym as organisation_acronym
+			from amendment a
+			left join vocabulary_term vt on a.vocabulary_term_id = vt.id
+			left join vocabulary_register vr on a.vocabulary_register_id = vr.id
+			left join responsible_party rp on a.responsible_party_id = rp.id
+			left join person p on p.id = rp.person_id
+			left join organisation o on o.id = rp.organisation_id
+		</createView>
+	</changeSet>
+
+
+	<!-- external associated terms -->
+	<changeSet author="julian" id="000020">
+		<createView viewName="_external_associated_terms">
+			select
+				trim(vt.uid) as uid,
+				trim(vt.name) as name,
+				trim(eat.uid) as external_uid,
+				trim(association_type_name) as type
+			from external_associated_terms eat
+			left join vocabulary_term vt on eat.vocabulary_term_id = vt.id;
+		</createView>
+	</changeSet>
+
+
+
+	<!-- internal associated terms -->
+	<changeSet author="julian" id="000020-6">
+		<createView viewName="_internal_associated_terms">
+			select
+				trim(association_type_name) as type,
+				trim(svt.uid) as subject_uid,
+				trim(svt.name) as subject_name,
+				trim(ovt.uid) as object_uid,
+				trim(ovt.name) as object_name
+			from internal_associated_terms iat
+			left join vocabulary_term svt on iat.subject_vocabulary_term_id = svt.id
+			left join vocabulary_term ovt on iat.object_vocabulary_term_id = ovt.id
+		</createView>
+	</changeSet>
+
+	<!-- we should put all these in a better order -->
+
+	<changeSet author="julian" id="000020-7">
+		<createView viewName="_reference_source">
+			select 
+				trim( vt.uid) as uid, 
+				trim(vt.name) as name,
+				rs.citation_string as citation_string, 
+				rs.online_reference_resource as online_reference_resource, 
+				o.acronym as organisation_acronym 
+			from vocabulary_term vt 
+			left join reference_source rs on vt.reference_source_id = rs.id 
+			left join organisation o on rs.organisation_id = o.id 
+		</createView>
+	</changeSet>
+
+
+	<!--                                 --> 
+	<!-- RDF views -->
+
+	<!-- FUCK - IMPORTANT -  all the external association terms are also in the internal tables
+		select uid from vocabulary_term where uid ~ '.*nerc.*' ;
+	-->
+	<changeSet author="julian" id="000021">
+		<createView viewName="_dcterms_issued">
+			-- create view dcterms_issued as
+			select
+			classification_scheme_category_name as subject,
+			'dcterms:issued'::varchar as predicate,
+			date_added::varchar as object   -- do we really want to do this cast?
+			from classification_scheme_category
+		</createView>
+	</changeSet>
+
 
 
 </databaseChangeLog>

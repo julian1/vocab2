@@ -1,4 +1,86 @@
 
+select eat.uid as eat_uid,  vt.uid as vt_uid from external_associated_terms eat join vocabulary_term vt on eat.vocabulary_term_id = vt.id and eat.uid = vt.uid ;
+
+--
+select eat.uid as eat_uid,  vt.uid as vt_uid from external_associated_terms eat left join vocabulary_term vt on eat.vocabulary_term_id = vt.id;
+
+with select eat.uid as eat_uid,  vt.uid as vt_uid from external_associated_terms eat left join vocabulary_term vt on eat.vocabulary_term_id = vt.id;
+
+---
+
+select eat.uid as eat, vt.uid as vt from external_associated_terms eat left join vocabulary_term vt on trim( eat.uid) = trim( vt.uid ) order by eat.uid;
+
+select eat.uid as eat, vt.uid as vt from external_associated_terms eat left join vocabulary_term vt on eat.uid = vt.uid ;
+
+select * from vocabulary_term where uid = 'http://vocab.ndg.nerc.ac.uk/term/S030/49/S0388' ;
+
+
+select eat.association_type_name, eat.uid, eat.vocabulary_term_id, vt.uid from external_associated_terms eat left join vocabulary_term vt on eat.vocabulary_term_id = vt.id ;
+
+# 
+select eat.*, vt.vocabulary_term_uid from external_associated_terms_table  eat left join vocabulary_term_table vt on vt.vocabulary_term_name = eat.vocabulary_term_name   and eat.external_term_uid != vt.vocabulary_term_uid;
+
+
+Now try to join,
+
+
+**********
+
+select classification_scheme_name as subject, 'rdf:type'::varchar as predicate, 'skos:ConceptScheme'::varchar as object from classification_scheme_table
+
+
+ 
+
+DO WE REALLY WANT SKOS as first class ? 
+
+	- Doesn't matter if disjoin groups  - so long as its all normalized
+
+	- Meaning the resource must be recorded in only one location.
+		Eg. either in vocabulary_term or elsewhere.
+		But not both.
+	
+	Or just relational stuff - and join it all up.
+		it still should be star kind of topology though 
+
+
+	- write the rdf views - so we can see what's going on. 
+
+
+when have the same data repeated in multiple places - i don't know what's
+authoritative and what's derivative / incorrect when there are differences. 
+
+	- need to investigate why bodc terms are in the main vocabulary_term as well
+		as external associated terms.
+
+		- More ideally - keep in associated terms - to capture nesting the nesting ? 
+			- and then just have a link off from the external term to the external stuff.
+
+
+		vocab=> select vocabulary_term_uid from term_category_classification where vocabulary_term_uid ~ 'nerc' limit 5;
+                   vocabulary_term_uid                    
+		----------------------------------------------------------
+		 http://vocab.nerc.ac.uk/collection/P01/current/CNDCZZ01/
+		 http://vocab.nerc.ac.uk/collection/L06/current/32/
+		 http://vocab.nerc.ac.uk/collection/P01/current/LCDAZZ01/
+		 http://vocab.nerc.ac.uk/collection/L06/current/11/
+		 http://vocab.nerc.ac.uk/collection/L06/current/14/
+		(5 rows)
+
+
+
+	- use serial primary keys (non null), and set the serial to the max value.
+
+
+	- register - internal table.
+
+	- classification - internal table.
+
+
+	- change internal association table name to skos_associations ?  
+
+
+---
+
 psql -h 127.0.0.1 -U meteo -d vocab -c  'select * from admin.objects where schema = $$contr_vocab_db$$'
 psql -h 127.0.0.1 -U meteo -d vocab -c  'set search_path=contr_vocab_db,public;select * from classification_scheme_table '
 
