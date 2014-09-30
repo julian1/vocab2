@@ -323,7 +323,7 @@
 		<addNotNullConstraint columnName="uid" tableName="external_associated_terms"/>
 		<addNotNullConstraint columnName="association_type_name" tableName="external_associated_terms"/>
 
-		<!-- get rid of badly loaded data whereby external terms refer to themselves via the vocabulary_table -->
+		<!-- delete badly loaded data, whereby external terms refer to themselves via the vocabulary_table -->
 		<sql>
 			delete from external_associated_terms eat
 			using vocabulary_term vt
@@ -581,7 +581,7 @@
 
 
 	<!-- USER VIEWS 
-			join tables up, in obvious way, to understand the data
+			join up some tables, in obvious ways, to understand the data
 	-->
 
 	<!-- view of responsible party - should perhaps have association -->
@@ -669,12 +669,8 @@
 	<!--                                 --> 
 	<!-- RDF views -->
 
-	<!-- FUCK - IMPORTANT -  all the external association terms are also in the internal tables
-		select uid from vocabulary_term where uid ~ '.*nerc.*' ;
-	-->
 	<changeSet author="julian" id="000021">
-		<createView viewName="_dcterms_issued">
-			-- create view dcterms_issued as
+		<createView viewName="_rdf_dcterms_issued">
 			select
 			classification_scheme_category_name as subject,
 			'dcterms:issued'::varchar as predicate,
@@ -682,6 +678,9 @@
 			from classification_scheme_category
 		</createView>
 	</changeSet>
+
+
+
 
 
 
