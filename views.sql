@@ -35,6 +35,7 @@ select classification_scheme_name as subject,
 	join classification_scheme_association_table a 
 	on c.classification_scheme_category_id = a.classification_scheme_category_id 
 	where a.parent_category_code is null
+
 --	where a.hierarchy_level = '1' 
 
 ;
@@ -42,6 +43,7 @@ select classification_scheme_name as subject,
 
 -- CONCEPT SCHEME
 
+DONE
 drop view if exists dc_publisher; 
 create view dc_publisher as
 select 
@@ -52,6 +54,8 @@ select
 	join person_table p on c.person_id = p.person_id
 ;
 
+
+DONE
 drop view if exists dc_title; 
 create view dc_title as
 select 

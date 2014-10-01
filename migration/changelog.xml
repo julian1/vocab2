@@ -54,12 +54,12 @@
 	</changeSet>
 
 	<changeSet author="julian" id="000001-5">
-       <sql>	
+       <sql>
 			create function exec(text) returns text
 			language plpgsql volatile
 			as $$ begin execute $1; return $1; end; $$;
 			grant all on function exec(text) to public
-       </sql>	
+       </sql>
 	</changeSet>
 
 
@@ -75,9 +75,9 @@
 		<renameColumn newColumnName="notes" oldColumnName="organisation_notes" tableName="organisation"/>
 		<!-- normalize - use organisation synonym table instead -->
 		<dropColumn columnName="organisation_synonym" tableName="organisation"/>
-		<!-- sequence on primary key --> 
+		<!-- sequence on primary key -->
 		<sql>
-			select exec('create sequence organisation_id_seq start '||(select max(id) +1 from organisation)); 
+			select exec('create sequence organisation_id_seq start '||(select max(id) +1 from organisation));
 			alter table organisation alter column id set default nextval('organisation_id_seq')
 		</sql>
 	</changeSet>
@@ -89,9 +89,9 @@
 		<renameColumn newColumnName="name" oldColumnName="person_name" tableName="person"/>
 		<renameColumn newColumnName="salutation" oldColumnName="person_salutation" tableName="person"/>
 		<renameColumn newColumnName="email" oldColumnName="contact_email" tableName="person"/>
-		<!-- sequence on primary key --> 
+		<!-- sequence on primary key -->
 		<sql>
-			select exec('create sequence person_id_seq start '||(select max(id) +1 from person)); 
+			select exec('create sequence person_id_seq start '||(select max(id) +1 from person));
 			alter table person alter column id set default nextval('person_id_seq')
 		</sql>
 	</changeSet>
@@ -210,7 +210,7 @@
 		<addPrimaryKey columnNames="id" tableName="vocabulary_term" />
 		<sql>
 			-- drop sequence vocabulary_term_id_seq;
-			select exec('create sequence vocabulary_term_id_seq start '||(select max(id) +1 from vocabulary_term)); 
+			select exec('create sequence vocabulary_term_id_seq start '||(select max(id) +1 from vocabulary_term));
 			alter table vocabulary_term alter column id set default nextval('vocabulary_term_id_seq')
 		</sql>
 
@@ -345,7 +345,7 @@
 		<!-- id is already primary key, but not serial -->
 		<renameColumn newColumnName="id" oldColumnName="amendment_id" tableName="amendment"/>
 		<sql>
-			select exec('create sequence amendment_id_seq start '||(select max(id) +1 from amendment)); 
+			select exec('create sequence amendment_id_seq start '||(select max(id) +1 from amendment));
 			alter table amendment alter column id set default nextval('amendment_id_seq')
 		</sql>
 
@@ -432,7 +432,7 @@
 	<changeSet author="julian" id="000010">
 		<renameColumn newColumnName="id" oldColumnName="reference_id" tableName="reference_source"/>
 		<sql>
-			select exec('create sequence reference_source_id_seq start '||(select max(id) +1 from reference_source)); 
+			select exec('create sequence reference_source_id_seq start '||(select max(id) +1 from reference_source));
 			alter table reference_source alter column id set default nextval('reference_source_id_seq')
 		</sql>
 		<renameColumn newColumnName="organisation_id" oldColumnName="organisation_name_id" tableName="reference_source"/>
@@ -443,7 +443,7 @@
 	<changeSet author="julian" id="000011">
 		<renameColumn newColumnName="id" oldColumnName="organisation_synonym_id" tableName="organisation_synonym"/>
 		<sql>
-			create sequence organisation_synonym_id_seq start 1; 
+			create sequence organisation_synonym_id_seq start 1;
 			alter table organisation_synonym alter column id set default nextval('organisation_synonym_id_seq')
 		</sql>
 		<renameColumn newColumnName="name" oldColumnName="organisation_name" tableName="organisation_synonym"/>
@@ -580,7 +580,7 @@
 
 
 
-	<!-- USER VIEWS 
+	<!-- USER VIEWS
 			join up some tables, in obvious ways, to understand the data
 	-->
 
@@ -588,8 +588,8 @@
 	<changeSet author="julian" id="000019">
 		<createView viewName="_responsible_party">
 			select
-				rp.id, 
-				p.name as person_name, 
+				rp.id,
+				p.name as person_name,
 				o.acronym as organisation_acronym
 			from responsible_party rp
 			left join person p on p.id = rp.person_id
@@ -653,23 +653,41 @@
 
 	<changeSet author="julian" id="000020-7">
 		<createView viewName="_reference_source">
-			select 
-				trim( vt.uid) as uid, 
+			select
+				trim( vt.uid) as uid,
 				trim(vt.name) as name,
-				rs.citation_string as citation_string, 
-				rs.online_reference_resource as online_reference_resource, 
-				o.acronym as organisation_acronym 
-			from vocabulary_term vt 
-			left join reference_source rs on vt.reference_source_id = rs.id 
-			left join organisation o on rs.organisation_id = o.id 
+				rs.citation_string as citation_string,
+				rs.online_reference_resource as online_reference_resource,
+				o.acronym as organisation_acronym
+			from vocabulary_term vt
+			left join reference_source rs on vt.reference_source_id = rs.id
+			left join organisation o on rs.organisation_id = o.id
 		</createView>
 	</changeSet>
 
 
-	<!--                                 --> 
+
+	<!--                                 -->
 	<!-- RDF views -->
 
-	<changeSet author="julian" id="000021">
+	<!-- are dcterms equivalent to dc -->
+
+
+	<!-- concept scheme type -->
+	<changeSet author="julian" id="000100-5">
+		<createView viewName="_rdf_type">    <!-- for classification scheme -->
+			select classification_scheme_name as subject, 
+			'rdf:type'::varchar as predicate, 
+			'skos:ConceptScheme'::varchar as object 
+			from classification_scheme
+		</createView>
+	</changeSet>
+
+
+
+
+	<!-- category -->
+	<changeSet author="julian" id="000101">
 		<createView viewName="_rdf_dcterms_issued">
 			select
 			classification_scheme_category_name as subject,
@@ -679,6 +697,62 @@
 		</createView>
 	</changeSet>
 
+
+
+
+
+	<!-- we're dealing with persons not organisations here
+		Mappings doc, suggests, should not include organisation here.
+	-->
+	<changeSet author="julian" id="000102">
+		<createView viewName="_rdf_dc_publisher">
+			select
+			c.classification_scheme_name as subject,
+			'dc:publisher'::varchar as predicate,
+			p.name as object
+			from classification_scheme c
+			join responsible_party rp on rp.id = c.responsible_party_id
+			join person p on rp.person_id = p.id
+		</createView>
+	</changeSet>
+
+	<changeSet author="julian" id="000103">
+		<createView viewName="_rdf_dc_title">
+			select
+			classification_scheme_name as subject,
+			'dc:title'::varchar as predicate,
+			classification_scheme_title as object
+			from classification_scheme
+		</createView>
+	</changeSet>
+
+	<changeSet author="julian" id="000104">
+		<createView viewName="_rdf_dc_description">
+			select
+			classification_scheme_name as subject,
+			'dc:description'::varchar as predicate,
+			classification_scheme_description as object
+			from classification_scheme
+		</createView>
+	</changeSet>
+
+
+
+
+
+
+	<changeSet author="julian" id="000105">
+		<createView viewName="_rdf">
+			select * from _rdf_dcterms_issued
+
+			union all select * from _rdf_type 
+			union all select * from _rdf_dc_publisher
+			union all select * from _rdf_dc_title
+			union all select * from _rdf_dc_description
+			-- union all select * from skos_definition
+			order by predicate
+		</createView>
+	</changeSet>
 
 
 
