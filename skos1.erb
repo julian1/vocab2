@@ -8,28 +8,32 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
     
 <% for @conceptScheme in @conn.exec(
-  'select * from _rdf where predicate = $$rdf:type$$ and object = $$skos:ConceptScheme$$ and subject = $1',[ 'http://vocab.aodn.org.au/def/ClassScheme/parameter1'] )
-  %>
+  'select * from _rdf 
+    where predicate = $$rdf:type$$ 
+    and object = $$skos:ConceptScheme$$ 
+    and subject = $1',
+    ['http://vocab.aodn.org.au/def/ClassScheme/parameter1']
+  ) %>
   <skos:ConceptScheme rdf:about="<%= @conceptScheme['subject'] %>">
 
   <% for @e in @conn.exec(
     'select * from _rdf where predicate = $$dc:title$$ and subject = $1',
-    [@conceptScheme['subject']]  )
-  %>
+    [@conceptScheme['subject']]  
+  ) %>
     <dc:title><%= @e['object'] %></dc:title>
   <% end%>
 
   <% for @e in @conn.exec(
     'select * from _rdf where predicate = $$dc:description$$ and subject = $1',
-    [@conceptScheme['subject']]  )
-  %>
+    [@conceptScheme['subject']]  
+  ) %>
     <dc:description><%= @e['object'] %></dc:description>
   <% end %>
 
   <% for @e in @conn.exec(
     'select * from _rdf where predicate = $$dc:creator$$ and subject = $1',
-    [@conceptScheme['subject']]  )
-  %>
+    [@conceptScheme['subject']]  
+  ) %>
     <dc:creator>
       <foaf:Organisation>
         <foaf:name><%= @e['object'] %></foaf:name>
@@ -39,8 +43,8 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
   <% for @e in @conn.exec(
     'select * from _rdf where predicate = $$dc:publisher$$ and subject = $1',
-    [@conceptScheme['subject']]  )
-  %>
+    [@conceptScheme['subject']]  
+  ) %>
     <dc:publisher>
       <foaf:Organisation>
         <foaf:name><%= @e['object'] %></foaf:name>
