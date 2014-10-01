@@ -686,20 +686,29 @@
 
 
 
-	<!-- category -->
+	<!-- category 
 	<changeSet author="julian" id="000101">
 		<createView viewName="_rdf_dcterms_issued">
 			select
 			classification_scheme_category_name as subject,
 			'dcterms:issued'::varchar as predicate,
-			date_added::varchar as object   -- do we really want to do this cast?
+			date_added::varchar as object   - do we really want to do this cast?
 			from classification_scheme_category
 		</createView>
 	</changeSet>
+	-->
 
 
 
-
+	<changeSet author="julian" id="000100-6">
+		<createView viewName="_rdf_dcterms_issued">
+			select
+			classification_scheme_name as subject,
+			'dcterms:issued'::varchar as predicate,
+			date_added::varchar as object
+			from classification_scheme
+		</createView>
+	</changeSet>
 
 
 
