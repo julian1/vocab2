@@ -667,26 +667,22 @@
 
 
 
-	<!--                                 -->
 	<!-- RDF views -->
 
-	<!-- are dcterms equivalent to dc -->
+	<!-- Concept Scheme -->
 
-
-	<!-- concept scheme type -->
+	<!-- concept scheme -->
 	<changeSet author="julian" id="000100-5">
 		<createView viewName="_rdf_type_concept_scheme">    <!-- for classification scheme -->
-			select classification_scheme_name as subject,
+			select
+			classification_scheme_name as subject,
 			'rdf:type'::varchar as predicate,
 			'skos:ConceptScheme'::varchar as object
 			from classification_scheme
 		</createView>
 	</changeSet>
 
-
-
-
-	<!-- category 
+	<!-- category
 	<changeSet author="julian" id="000101">
 		<createView viewName="_rdf_dcterms_issued">
 			select
@@ -697,8 +693,6 @@
 		</createView>
 	</changeSet>
 	-->
-
-
 
 	<changeSet author="julian" id="000100-6">
 		<createView viewName="_rdf_dcterms_issued">
@@ -766,25 +760,52 @@
 	<!-- TopConcept -->
 
 	<changeSet author="julian" id="000106-1">
-		<createView viewName="_rdf_type_top_concept">   <!-- ok this is another type -->
-			select 
-			classification_scheme_category_name as subject, 
+		<createView viewName="_rdf_type_top_concept">
+			select
+			classification_scheme_category_name as subject,
 			'rdf:type'::varchar as predicate,
 			'skos:TopConcept'::varchar as object
-			from classification_scheme_category c 
-			join classification_scheme_association a on c.classification_scheme_category_id = a.classification_scheme_category_id 
+			from classification_scheme_category c
+			join classification_scheme_association a on c.classification_scheme_category_id = a.classification_scheme_category_id
 			where parent_category_code is null
+		</createView>
+	</changeSet>
+
+
+	<!-- should we capitalize the skos xml namespace ? --> 
+
+	<!-- this is for any category - not just top concept -->
+	<changeSet author="julian" id="000107">
+		<createView viewName="_rdf_skos_preflabel">
+			select classification_scheme_category_name as subject,  
+			'Skos:prefLabel'::varchar as predicate,
+			classification_scheme_category_label
+			from classification_scheme_category
+		</createView>
+	</changeSet>
+
+
+	<changeSet author="julian" id="000108">
+		<createView viewName="_rdf_skos_definition">
+			select classification_scheme_category_name as subject,  
+			'Skos:definition'::varchar as predicate,
+			classification_scheme_category_description 
+			from classification_scheme_category
 		</createView>
 	</changeSet>
 
 
 
 
-	<changeSet author="julian" id="000107">
+
+
+	<!-- aggregate -->
+
+	<changeSet author="julian" id="000307">
 		<createView viewName="_rdf">
 			select * from _rdf_dcterms_issued
 
-			union all select * from _rdf_type_concept_scheme 
+			union all select * from _rdf_type_concept_scheme
 
 				-- rename to _rdf_concept_scheme_dc_publisher etc
 			union all select * from _rdf_dc_publisher
@@ -793,9 +814,13 @@
 			union all select * from _rdf_dc_creator
 			union all select * from _rdf_dc_publisher
 
-			union all select * from _rdf_type_top_concept  
+			union all select * from _rdf_type_top_concept
 
-			order by predicate
+			union all select * from _rdf_skos_preflabel
+			union all select * from _rdf_skos_definition
+
+			-- get rid of this later for performance 
+			order by predicate, subject
 		</createView>
 	</changeSet>
 
