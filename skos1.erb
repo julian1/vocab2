@@ -1,38 +1,59 @@
-hi
-    <DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?xml version="1.0" encoding="windows-1252"?>
+<rdf:RDF 
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+xmlns:dc="http://purl.org/dc/elements/1.1/" 
+xmlns:dcterms="http://purl.org/dc/terms/" 
+xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
-    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-            <title>List for <%= @date.strftime('%A, %d %B %Y') %></title>
-	</head>
-	<body>
+    
+<% for @conceptScheme in @conn.exec(
+  'select * from _rdf where predicate = $$rdf:type$$ and object = $$skos:ConceptScheme$$ and subject = $1',[ 'http://vocab.aodn.org.au/def/ClassScheme/parameter1'] )
+  %>
+  <skos:ConceptScheme rdf:about="<%= @conceptScheme['subject'] %>">
 
+  <% for @e in @conn.exec(
+    'select * from _rdf where predicate = $$dc:title$$ and subject = $1',
+    [@conceptScheme['subject']]  )
+  %>
+    <dc:title><%= @e['object'] %></dc:title>
+  <% end%>
 
-	</body>
-	</html>
-
-
-  <% for @conceptScheme in @conn.exec(
-		'select * from _rdf where predicate = $$rdf:type$$ and object = $$skos:ConceptScheme$$',[] ) 
-		%> 
-		<skos:ConceptScheme rdf:about="<%= @conceptScheme['subject'] %>"> 
-
-		<% for @e in @conn.exec(
-			'select * from _rdf where predicate = $$dc:title$$ and subject = $1', 
-			[@conceptScheme['subject']]  )
-		%> 
-			<dc:title><%= @e['object'] %></dc:title> 
-		<% end%> 
-
-		<% for @e in @conn.exec(
-			'select * from _rdf where predicate = $$dc:description$$ and subject = $1', 
-			[@conceptScheme['subject']]  )
-		%> 
-			<dc:description><%= @e['object'] %></dc:description> 
-		<% end %> 
-		</skos:ConceptScheme>
+  <% for @e in @conn.exec(
+    'select * from _rdf where predicate = $$dc:description$$ and subject = $1',
+    [@conceptScheme['subject']]  )
+  %>
+    <dc:description><%= @e['object'] %></dc:description>
   <% end %>
+
+  <% for @e in @conn.exec(
+    'select * from _rdf where predicate = $$dc:creator$$ and subject = $1',
+    [@conceptScheme['subject']]  )
+  %>
+    <dc:creator>
+      <foaf:Organisation>
+        <foaf:name><%= @e['object'] %></foaf:name>
+      <foaf:/Organisation>
+    </dc:creator>
+  <% end %>
+
+  <% for @e in @conn.exec(
+    'select * from _rdf where predicate = $$dc:publisher$$ and subject = $1',
+    [@conceptScheme['subject']]  )
+  %>
+    <dc:publisher>
+      <foaf:Organisation>
+        <foaf:name><%= @e['object'] %></foaf:name>
+      <foaf:/Organisation>
+    </dc:publisher>
+  <% end %>
+
+
+
+
+
+
+  </skos:ConceptScheme>
+<% end %>
 
 

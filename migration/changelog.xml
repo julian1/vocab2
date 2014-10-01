@@ -676,9 +676,9 @@
 	<!-- concept scheme type -->
 	<changeSet author="julian" id="000100-5">
 		<createView viewName="_rdf_type">    <!-- for classification scheme -->
-			select classification_scheme_name as subject, 
-			'rdf:type'::varchar as predicate, 
-			'skos:ConceptScheme'::varchar as object 
+			select classification_scheme_name as subject,
+			'rdf:type'::varchar as predicate,
+			'skos:ConceptScheme'::varchar as object
 			from classification_scheme
 		</createView>
 	</changeSet>
@@ -701,20 +701,7 @@
 
 
 
-	<!-- we're dealing with persons not organisations here
-		Mappings doc, suggests, should not include organisation here.
-	-->
-	<changeSet author="julian" id="000102">
-		<createView viewName="_rdf_dc_publisher">
-			select
-			c.classification_scheme_name as subject,
-			'dc:publisher'::varchar as predicate,
-			p.name as object
-			from classification_scheme c
-			join responsible_party rp on rp.id = c.responsible_party_id
-			join person p on rp.person_id = p.id
-		</createView>
-	</changeSet>
+
 
 	<changeSet author="julian" id="000103">
 		<createView viewName="_rdf_dc_title">
@@ -737,18 +724,50 @@
 	</changeSet>
 
 
-
-
-
+	<!-- we're dealing with persons not organisations here
+		Mappings doc, suggests, should not include organisation here.
+	-->
 
 	<changeSet author="julian" id="000105">
+		<createView viewName="_rdf_dc_creator">
+			select
+			classification_scheme_name as subject,
+			'dc:creator'::varchar as predicate,
+			o.name as object
+			from classification_scheme c
+			join responsible_party rp on rp.id = c.responsible_party_id
+			join organisation o on rp.organisation_id = o.id
+		</createView>
+	</changeSet>
+
+
+	<changeSet author="julian" id="000106">
+		<createView viewName="_rdf_dc_publisher">
+			select
+			c.classification_scheme_name as subject,
+			'dc:publisher'::varchar as predicate,
+			p.name as object
+			from classification_scheme c
+			join responsible_party rp on rp.id = c.responsible_party_id
+			join person p on rp.person_id = p.id
+		</createView>
+	</changeSet>
+
+
+
+
+
+
+	<changeSet author="julian" id="000107">
 		<createView viewName="_rdf">
 			select * from _rdf_dcterms_issued
 
-			union all select * from _rdf_type 
+			union all select * from _rdf_type
 			union all select * from _rdf_dc_publisher
 			union all select * from _rdf_dc_title
 			union all select * from _rdf_dc_description
+			union all select * from _rdf_dc_creator
+			union all select * from _rdf_dc_publisher
 			-- union all select * from skos_definition
 			order by predicate
 		</createView>

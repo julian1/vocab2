@@ -22,8 +22,8 @@ class MyBinding
   end
 
   def render()
-#    s = ERB.new(@template).result(binding)
-    s = ERB.new(@template, nil, '>').result(binding)
+    s = ERB.new(@template).result(binding)
+#    s = ERB.new(@template, nil, '>').result(binding)
 
 
 	s = s.gsub /^[ \t]*$\n/, ''
