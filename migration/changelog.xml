@@ -675,7 +675,7 @@
 
 	<!-- concept scheme type -->
 	<changeSet author="julian" id="000100-5">
-		<createView viewName="_rdf_type">    <!-- for classification scheme -->
+		<createView viewName="_rdf_type_concept_scheme">    <!-- for classification scheme -->
 			select classification_scheme_name as subject,
 			'rdf:type'::varchar as predicate,
 			'skos:ConceptScheme'::varchar as object
@@ -763,6 +763,19 @@
 	</changeSet>
 
 
+	<!-- TopConcept -->
+
+	<changeSet author="julian" id="000106-1">
+		<createView viewName="_rdf_type_top_concept">   <!-- ok this is another type -->
+			select 
+			classification_scheme_category_name as subject, 
+			'rdf:type'::varchar as predicate,
+			'skos:TopConcept'::varchar as object
+			from classification_scheme_category c 
+			join classification_scheme_association a on c.classification_scheme_category_id = a.classification_scheme_category_id 
+			where parent_category_code is null
+		</createView>
+	</changeSet>
 
 
 
@@ -771,13 +784,17 @@
 		<createView viewName="_rdf">
 			select * from _rdf_dcterms_issued
 
-			union all select * from _rdf_type
+			union all select * from _rdf_type_concept_scheme 
+
+				-- rename to _rdf_concept_scheme_dc_publisher etc
 			union all select * from _rdf_dc_publisher
 			union all select * from _rdf_dc_title
 			union all select * from _rdf_dc_description
 			union all select * from _rdf_dc_creator
 			union all select * from _rdf_dc_publisher
-			-- union all select * from skos_definition
+
+			union all select * from _rdf_type_top_concept  
+
 			order by predicate
 		</createView>
 	</changeSet>
