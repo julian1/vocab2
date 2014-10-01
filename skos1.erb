@@ -1,0 +1,38 @@
+hi
+    <DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            <title>List for <%= @date.strftime('%A, %d %B %Y') %></title>
+	</head>
+	<body>
+
+
+	</body>
+	</html>
+
+
+  <% for @conceptScheme in @conn.exec(
+		'select * from _rdf where predicate = $$rdf:type$$ and object = $$skos:ConceptScheme$$',[] ) 
+		%> 
+		<skos:ConceptScheme rdf:about="<%= @conceptScheme['subject'] %>"> 
+
+		<% for @e in @conn.exec(
+			'select * from _rdf where predicate = $$dc:title$$ and subject = $1', 
+			[@conceptScheme['subject']]  )
+		%> 
+			<dc:title><%= @e['object'] %></dc:title> 
+		<% end%> 
+
+		<% for @e in @conn.exec(
+			'select * from _rdf where predicate = $$dc:description$$ and subject = $1', 
+			[@conceptScheme['subject']]  )
+		%> 
+			<dc:description><%= @e['object'] %></dc:description> 
+		<% end %> 
+		</skos:ConceptScheme>
+  <% end %>
+
+
