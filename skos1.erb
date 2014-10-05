@@ -99,6 +99,14 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
     <Skos:definition><%= @e['object'] %></Skos:definition>
     <% end %>
 
+    <% for @e in @conn.exec(
+      'select * from _rdf where predicate = $$dcterms:issued$$ and subject = $1',
+      [@topConcept['subject']]  
+    ) %>
+    <dcterms:issued><%= @e['object'] %></dcterms:issued>
+    <% end %>
+
+
 
 
 

@@ -682,18 +682,6 @@
 		</createView>
 	</changeSet>
 
-	<!-- category
-	<changeSet author="julian" id="000101">
-		<createView viewName="_rdf_dcterms_issued">
-			select
-			classification_scheme_category_name as subject,
-			'dcterms:issued'::varchar as predicate,
-			date_added::varchar as object   - do we really want to do this cast?
-			from classification_scheme_category
-		</createView>
-	</changeSet>
-	-->
-
 	<changeSet author="julian" id="000100-6">
 		<createView viewName="_rdf_dcterms_issued">
 			select
@@ -756,7 +744,7 @@
 		</createView>
 	</changeSet>
 
-
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 	<!-- TopConcept -->
 
 	<changeSet author="julian" id="000106-1">
@@ -772,12 +760,14 @@
 	</changeSet>
 
 
-	<!-- should we capitalize the skos xml namespace ? --> 
+	<!-- concept --> 
+
+	<!-- should we capitalize the skos xml namespace ? -->
 
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107">
 		<createView viewName="_rdf_skos_preflabel">
-			select classification_scheme_category_name as subject,  
+			select classification_scheme_category_name as subject,
 			'Skos:prefLabel'::varchar as predicate,
 			classification_scheme_category_label
 			from classification_scheme_category
@@ -785,11 +775,36 @@
 	</changeSet>
 
 
-	<changeSet author="julian" id="000108">
+	<!-- this is for any category - not just top concept -->
+	<changeSet author="julian" id="000107-5">
 		<createView viewName="_rdf_skos_definition">
-			select classification_scheme_category_name as subject,  
+			select classification_scheme_category_name as subject,
 			'Skos:definition'::varchar as predicate,
-			classification_scheme_category_description 
+	classification_scheme_category_description 
+			from classification_scheme_category
+		</createView>
+	</changeSet>
+
+
+	<!-- ok we have a naming conflict issue -->
+
+	<!--changeSet author="julian" id="000108">
+		<createView viewName="_rdf_dcterms_issued">
+			select classification_scheme_category_name as subject,
+			'Skos:definition'::varchar as predicate,
+			date_added
+			from classification_scheme_category
+		</createView>
+	</changeSet -->
+
+	<!-- why not build aggregated views but group  somewhat -->  
+
+	<changeSet author="julian" id="000108">
+		<createView viewName="_rdf_dcterms_issued_2">
+			select
+			classification_scheme_category_name as subject,
+			'dcterms:issued'::varchar as predicate,
+			date_added::varchar as object
 			from classification_scheme_category
 		</createView>
 	</changeSet>
@@ -819,7 +834,9 @@
 			union all select * from _rdf_skos_preflabel
 			union all select * from _rdf_skos_definition
 
-			-- get rid of this later for performance 
+			union all select * from _rdf_dcterms_issued_2
+
+			-- get rid of this later for performance
 			order by predicate, subject
 		</createView>
 	</changeSet>

@@ -2,6 +2,7 @@
 require 'erb'
 require 'pg'
 
+# Important - we ought to pass the skos file to use as an argument. 
 
 
 class MyBinding
