@@ -1,21 +1,21 @@
 vocab2
 ======
 
-* build db
+build db
 
     ./build.sh
 
-* run migrations
+run migrations
 
     cd migration/
     ./run_migrations.sh 
 
-* show rdf 
+show rdf 
 
     ./connect
     select * from _rdf ;
 
-* render skos 
+render skos 
 
     ruby render.rb
 
