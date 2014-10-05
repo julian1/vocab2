@@ -2,7 +2,11 @@
 <!-- doing it like this makes it amenable to using sparql instead -->
 
 <!-- should change the encoding to charset=ISO-8859-1  -->
-<!-- should hard code rather than pass literals as parameter ->
+<!-- should hard code rather than pass literals as parameter -->
+
+<!-- an element  dc publisher thats getting repeated twice probably because of the rp person outside join -->
+
+
 
 <?xml version="1.0" encoding="windows-1252"?>
 <rdf:RDF 
@@ -17,8 +21,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
   'select * from _rdf 
     where predicate = $$rdf:type$$ 
     and object = $$skos:ConceptScheme$$ 
-    and subject = $1',
-    ['http://vocab.aodn.org.au/def/ClassScheme/parameter1']
+    and subject = $$http://vocab.aodn.org.au/def/ClassScheme/parameter1$$'
   ) %>
 <skos:ConceptScheme rdf:about="<%= @conceptScheme['subject'] %>">
 
