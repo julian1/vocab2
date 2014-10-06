@@ -844,9 +844,10 @@
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107-5">
 		<createView viewName="_rdf_skos_definition">
-			select c.name as subject,
-			'skos:definition'::varchar as predicate,
-			c.description
+			select 
+				c.name as subject,
+				'skos:definition'::varchar as predicate,
+				c.description
 			from classification_scheme_category c
 		</createView>
 	</changeSet>
@@ -868,9 +869,9 @@
 	<changeSet author="julian" id="000108">
 		<createView viewName="_rdf_dcterms_issued_2">
 			select
-			c.name as subject,
-			'dcterms:issued'::varchar as predicate,
-			c.date_added::varchar as object
+				c.name as subject,
+				'dcterms:issued'::varchar as predicate,
+				c.date_added::varchar as object
 			from classification_scheme_category c
 		</createView>
 	</changeSet>
@@ -879,14 +880,27 @@
 	<changeSet author="julian" id="000109">
 		<createView viewName="_skos_inscheme">
 			select 
-			c.name as subject, 
-			'skos:inScheme' as predicate, 
-			s.name as object 
+				c.name as subject, 
+				'skos:inScheme' as predicate, 
+				s.name as object 
 			from classification_scheme_category c 
 			join classification_scheme s on c.classification_scheme_id = s.id;
 		</createView>
 	</changeSet>
 
+
+	<changeSet author="julian" id="000110">
+		<createView viewName="_skos_narrower">
+			select 
+				c2.name as subject, 
+				'skos:narrower' as predicate, 
+				c1.name as object
+			from classification_scheme_association a 
+			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id 
+			join classification_scheme_category c2 on a.parent_category_code = c2.id 
+			-- order by c2.name, c1.name	
+		</createView>
+	</changeSet>
 
 
 
@@ -917,6 +931,8 @@
 
 			union all select * from _skos_inscheme
 
+			union all select * from _skos_narrower
+
 			-- get rid of this later for performance
 			order by predicate, subject
 		</createView>
@@ -924,6 +940,17 @@
 
 
 
+	<!--changeSet author="julian" id="000308">
+		<sql>
+			CREATE FUNCTION rdf_object( predicate_ varchar, subject_ varchar  ) 
+			RETURNS varchar AS $$
+			DECLARE
+			BEGIN
+				select object from _rdf where predicate = $1 and subject = $2 ; 
+			END;
+			$$ LANGUAGE plpgsql;	
+		</sql>
+	</changeSet-->
 
 
 </databaseChangeLog>
