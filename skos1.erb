@@ -169,15 +169,11 @@ i think that we also need to tighten this up, so we only deal with parameters.
     <skos:prefLabel><%= @e['object'] %></skos:prefLabel>
     <% end %>
 
-    <% for @e in @conn.exec(
-      'select object from _rdf where predicate = $$skos:definition$$ and subject = $1',
-      [@concept['subject']]  
-    ) %>
+    <% for @e in query_objects( 'skos:definition',  @concept['subject'] ) %>
     <skos:definition><%= @e['object'] %></skos:definition>
     <% end %>
 
-    <% for @e in query_objects( 'dcterms:issued',  @concept['subject'] ) 
-	  %>
+    <% for @e in query_objects( 'dcterms:issued',  @concept['subject'] ) %>
     <skos:issued><%= @e['object'] %></skos:issued>
     <% end %>
 
