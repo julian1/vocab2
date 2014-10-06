@@ -147,25 +147,15 @@ i think that we also need to tighten this up, so we only deal with parameters.
   ) %>
   <skos:Concept rdf:about="<%= @concept['subject'] %>">
 
-    <% for @e in @conn.exec(
-      'select object from _rdf where predicate = $$skos:inScheme$$ and subject = $1',
-      [@concept['subject']]  
-    ) %>
+    <% for @e in query_objects( 'skos:inScheme',  @concept['subject'] ) %>
     <skos:inScheme><%= @e['object'] %></skos:inScheme>
     <% end %>
 
-
-    <% for @e in @conn.exec(
-      'select object from _rdf where predicate = $$skos:broader$$ and subject = $1',
-      [@concept['subject']]  
-    ) %>
+    <% for @e in query_objects( 'skos:broader',  @concept['subject'] ) %>
     <skos:broader><%= @e['object'] %></skos:broader>
     <% end %>
 
-    <% for @e in @conn.exec(
-      'select object from _rdf where predicate = $$skos:prefLabel$$ and subject = $1',
-      [@concept['subject']]  
-    ) %>
+    <% for @e in query_objects( 'skos:prefLabel',  @concept['subject'] ) %>
     <skos:prefLabel><%= @e['object'] %></skos:prefLabel>
     <% end %>
 
@@ -176,8 +166,6 @@ i think that we also need to tighten this up, so we only deal with parameters.
     <% for @e in query_objects( 'dcterms:issued',  @concept['subject'] ) %>
     <skos:issued><%= @e['object'] %></skos:issued>
     <% end %>
-
-
 
 
   </skos:Concept>
