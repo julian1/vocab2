@@ -1,5 +1,5 @@
 
-# Important - we ought to pass the skos file to use as an argument. 
+# Important - we ought to pass the skos file to use as an argument.
 
 require 'erb'
 require 'pg'
@@ -13,18 +13,24 @@ class MyBinding
   def initialize( template, date=Time.now)
     @date = date
     @template = template
-	@conn = PG::Connection.open(
-		:host => "127.0.0.1", 
-		:dbname => "vocab",   
-		:user => "contr_vocab_db", 
-		:password => "contr_vocab_db" )
+    @conn = PG::Connection.open(
+      :host => "127.0.0.1",
+      :dbname => "vocab",
+      :user => "contr_vocab_db",
+      :password => "contr_vocab_db"
+    )
+  end
+
+
+  def query( s, a )
+    @conn.exec( s, a)
   end
 
   def render()
     s = ERB.new(@template).result(binding)
-	# s = ERB.new(@template, nil, '>').result(binding)
-	s = s.gsub /^[ \t]*$\n/, ''
-	puts s
+    # s = ERB.new(@template, nil, '>').result(binding)
+    s = s.gsub /^[ \t]*$\n/, ''
+    puts s
   end
 
 #   def save(file)
@@ -32,119 +38,119 @@ class MyBinding
 #       f.write(render)
 #     end
 #   end
-# 
+#
 #   def save()
 #       $stdout.write(render)
 #   end
-# 
+#
 
 end
 
 list = MyBinding.new( File.read('skos1.erb') )
 #list.save(File.join('./list.html'))
-# it's almost certainly ok, to spit it to stdout 
+# it's almost certainly ok, to spit it to stdout
 list.render()
 
 
 
 
 
-# 
-# 
+#
+#
 # def mapquery( conn, query, args, &code )
 # 	result = conn.exec( query, args )
 # 	ia = []
 # 	result.each do |row|
 # 		# puts "-> #{row['subject']}"
-# 		ia << code.call( row ) 	
+# 		ia << code.call( row )
 # 	end
 # 	ia
 # end
-# 
-# 
-# 
-# 
-# 	# the question is do we want to build an intermediate data structure, or else just execute 
-# 	# if we use map easily then we ought to be able to do it. 
-# 
+#
+#
+#
+#
+# 	# the question is do we want to build an intermediate data structure, or else just execute
+# 	# if we use map easily then we ought to be able to do it.
+#
 # #	@rows = conn.exec('select * from _rdf where predicate = $$rdf:type$$ ', ['http://vocab.aodn.org.au/def/ClassScheme/platform1/Category/'])
-# 
+#
 # 	# now we need dc title
-# 
-# 	# we don't want prepared 
-# 
-# 	# so we can loop this stuff, herre to build up the model... 
-# 	# or else create the predicate  
-# 
+#
+# 	# we don't want prepared
+#
+# 	# so we can loop this stuff, herre to build up the model...
+# 	# or else create the predicate
+#
 # 	# we're building up a tree- graph. which is kind of crap.
-# 
+#
 # 	# we're going to build  a data structure
-# 
+#
 # 	@conceptSchemes = @conn.exec('select * from _rdf where predicate = $$rdf:type$$ and object = $$skos:ConceptScheme$$' )
-# 
+#
 # 	@dc_titles = @conn.exec('select * from _rdf where predicate = $$dc:title$$' )
-# 
+#
 # 	@dc_descriptions = @conn.exec('select * from _rdf where predicate = $$dc:description$$' )
-# 
-# 
-# 	puts "*** here #{ @dc_titles[0]['subject'] } " 
-# 
-# 
-# 
+#
+#
+# 	puts "*** here #{ @dc_titles[0]['subject'] } "
+#
+#
+#
 # 	# how can we do a map?
-# 
+#
 # # 	@conn.exec('select * from _rdf where predicate = $$rdf:type$$ and object = $$skos:ConceptScheme$$' ).each do |j|
-# # 
+# #
 # # 		puts "-> #{j['subject']}"
-# # 	
+# #
 # # 	end
-# # 
+# #
 # 	puts "***********\nhere"
-# 
+#
 # 	j = mapquery( @conn, 'select * from _rdf where predicate = $$rdf:type$$ and object = $$skos:ConceptScheme$$', nil) do |x|
-# 
-# 		conceptScheme = { } 
-# 		conceptScheme['subject'] = x 
-# 	
+#
+# 		conceptScheme = { }
+# 		conceptScheme['subject'] = x
+#
 # 		# dc_title = @conn.exec('select * from _rdf where predicate = $$dc:title$$ and subject = $1', [conceptScheme] )
-# 
-# 		conceptScheme['dc_term'] = mapquery( @conn, 'select object from _rdf where predicate = $$dc:title$$ and subject = $1',	
-# 			[conceptScheme['subject']]) do |u| u end 
-# 
-# 
-# 	end 
-# 
+#
+# 		conceptScheme['dc_term'] = mapquery( @conn, 'select object from _rdf where predicate = $$dc:title$$ and subject = $1',
+# 			[conceptScheme['subject']]) do |u| u end
+#
+#
+# 	end
+#
 # 	puts j
-# 
+#
 	#abort()
-	# we can build the graph in the template ?? 
+	# we can build the graph in the template ??
 	# or in the other class
 
-	# Ok, we could actually just index everything ... in the template. 
+	# Ok, we could actually just index everything ... in the template.
 	# in fact we have to do it this way.
 	# the loop is in the template. so we need to build everything from there...
 
-	# pass the connection into the template - or build a tree 
+	# pass the connection into the template - or build a tree
 
 
 
 #		rdf:type       | skos:ConceptScheme
 
-	# ok, we can index like this. 
+	# ok, we can index like this.
 	# but it's not clear
 #	puts @rows[0]['subject']
-	
-# 	# we want to map to ruby objects, or is it even necessary? 
+
+# 	# we want to map to ruby objects, or is it even necessary?
 # 	rdf = rows.map do |row|
 # 		puts row
-# 		{ :x => row['subject'] }  
+# 		{ :x => row['subject'] }
 # 	end
-# 
 #
-# note that directly embedding the sql would be a bit like sparql 
-# 		<% for @dc_title in @dc_titles %> 
+#
+# note that directly embedding the sql would be a bit like sparql
+# 		<% for @dc_title in @dc_titles %>
 # 			<dc:title> <%= @dc_title['object'] %>   </dc:title> <% end %>
-# 
+#
 
 #	<li><%= @rows[0]['subject'] %></li>
 

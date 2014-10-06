@@ -133,6 +133,8 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 VERY IMPORTANT - we don't have to work with @conn here. instead just call a method
 				to get our rdf objects
 
+i think that we also need to tighten this up, so we only deal with parameters.
+
 <% for @concept in @conn.exec(
     ' -- we dont actually need this
     select subject from _rdf 
@@ -144,7 +146,6 @@ VERY IMPORTANT - we don't have to work with @conn here. instead just call a meth
     '
   ) %>
   <skos:Concept rdf:about="<%= @concept['subject'] %>">
-
 
     <% for @e in @conn.exec(
       'select object from _rdf where predicate = $$skos:inScheme$$ and subject = $1',
@@ -175,9 +176,8 @@ VERY IMPORTANT - we don't have to work with @conn here. instead just call a meth
     <skos:definition><%= @e['object'] %></skos:definition>
     <% end %>
 
-    <% for @e in @conn.exec(
-      'select object from _rdf where predicate = $$dcterms:issued$$ and subject = $1',
-      [@concept['subject']]  
+    <% for @e in query(
+      'select object from _rdf where predicate = $$dcterms:issued$$ and subject = $1', [@concept['subject']]  
     ) %>
     <skos:issued><%= @e['object'] %></skos:issued>
     <% end %>
