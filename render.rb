@@ -26,6 +26,15 @@ class MyBinding
     @conn.exec( s, a)
   end
 
+  def query_objects( predicate, subject )
+
+      # --, [@concept['subject']]  
+    query( 'select object from _rdf where predicate = $1 and subject = $2', [predicate, subject])
+  end
+
+
+
+
   def render()
     s = ERB.new(@template).result(binding)
     # s = ERB.new(@template, nil, '>').result(binding)

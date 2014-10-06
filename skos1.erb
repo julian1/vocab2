@@ -176,9 +176,8 @@ i think that we also need to tighten this up, so we only deal with parameters.
     <skos:definition><%= @e['object'] %></skos:definition>
     <% end %>
 
-    <% for @e in query(
-      'select object from _rdf where predicate = $$dcterms:issued$$ and subject = $1', [@concept['subject']]  
-    ) %>
+    <% for @e in query_objects( 'dcterms:issued',  @concept['subject'] ) 
+	  %>
     <skos:issued><%= @e['object'] %></skos:issued>
     <% end %>
 
