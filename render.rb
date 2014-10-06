@@ -32,6 +32,12 @@ class MyBinding
     query( 'select object from _rdf where predicate = $1 and subject = $2', [predicate, subject])
   end
 
+  def query_subjects( predicate, object )
+
+      # --, [@concept['subject']]  
+    query( 'select subject from _rdf where predicate = $1 and object = $2', [predicate, object ])
+  end
+
 
 
 

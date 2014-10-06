@@ -135,16 +135,9 @@ VERY IMPORTANT - we don't have to work with @conn here. instead just call a meth
 
 i think that we also need to tighten this up, so we only deal with parameters.
 
-<% for @concept in @conn.exec(
-    ' -- we dont actually need this
-    select subject from _rdf 
-    where predicate = $$rdf:type$$ 
-    and object = $$skos:Concept$$
-	
-	-- order by
-	--	((regexp_matches( _rdf.subject, $$.*/([0-9]*)$ $$  ))[1]::int)
-    '
-  ) %>
+
+<% for @concept in query_subjects( 'rdf:type',  'skos:Concept'  ) %>
+
   <skos:Concept rdf:about="<%= @concept['subject'] %>">
 
     <% for @e in query_objects( 'skos:inScheme',  @concept['subject'] ) %>
