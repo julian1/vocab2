@@ -84,18 +84,12 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
 
 
-<% for @topConcept in @conn.exec(
-  'select subject from _rdf 
-    where predicate = $$rdf:type$$ 
-    and object = $$skos:TopConcept$$' 
-  ) %>
+<% for @topConcept in query_subjects( 'rdf:type',  'skos:TopConcept') %>
 <skos:TopConcept rdf:about="<%= @topConcept['subject'] %>">
-
 
     <% for @e in query_objects( 'skos:prefLabel',  @topConcept['subject'] ) %>
     <skos:prefLabel><%= @e['object'] %></skos:prefLabel>
     <% end %>
-
 
     <% for @e in query_objects( 'skos:definition',  @topConcept['subject'] ) %>
     <skos:definition><%= @e['object'] %></skos:definition>
@@ -112,44 +106,38 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
     <% for @e in query_objects( 'skos:narrower',  @topConcept['subject'] ) %>
     <skos:narrower><%= @e['object'] %></skos:narrower>
     <% end %>
+
 </skos:TopConcept>
-
-
 <% end %>
 
-VERY IMPORTANT - we don't have to work with @conn here. instead just call a method
-				to get our rdf objects
 
-i think that we also need to tighten this up, so we only deal with parameters.
+- it would be very nice if we could do this without indexing 
+- with the name. eg. e instead of @concept['subject]
 
-- it would be very nice if we could avoid having to do the indexing with the name.
+<% for @concept in query_subjects( 'rdf:type',  'skos:Concept') %>
+<skos:Concept rdf:about="<%= @concept['subject'] %>">
 
-<% for @concept in query_subjects( 'rdf:type',  'skos:Concept'  ) %>
-
-  <skos:Concept rdf:about="<%= @concept['subject'] %>">
-
-    <% for @e in query_objects( 'skos:inScheme',  @concept['subject'] ) %>
+    <% for @e in query_objects( 'skos:inScheme',  @concept['subject']) %>
     <skos:inScheme><%= @e['object'] %></skos:inScheme>
     <% end %>
 
-    <% for @e in query_objects( 'skos:broader',  @concept['subject'] ) %>
+    <% for @e in query_objects( 'skos:broader',  @concept['subject']) %>
     <skos:broader><%= @e['object'] %></skos:broader>
     <% end %>
 
-    <% for @e in query_objects( 'skos:prefLabel',  @concept['subject'] ) %>
+    <% for @e in query_objects( 'skos:prefLabel',  @concept['subject']) %>
     <skos:prefLabel><%= @e['object'] %></skos:prefLabel>
     <% end %>
 
-    <% for @e in query_objects( 'skos:definition',  @concept['subject'] ) %>
+    <% for @e in query_objects( 'skos:definition',  @concept['subject']) %>
     <skos:definition><%= @e['object'] %></skos:definition>
     <% end %>
 
-    <% for @e in query_objects( 'dcterms:issued',  @concept['subject'] ) %>
+    <% for @e in query_objects( 'dcterms:issued',  @concept['subject']) %>
     <skos:issued><%= @e['object'] %></skos:issued>
     <% end %>
 
-  </skos:Concept>
-
+</skos:Concept>
 <% end %>
 
 
