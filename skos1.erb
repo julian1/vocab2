@@ -21,7 +21,12 @@ xmlns:dc="http://purl.org/dc/elements/1.1/"
 xmlns:dcterms="http://purl.org/dc/terms/" 
 xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
-    
+
+-- I think we need further constraints ...
+-- to restrict things to the parameter scheme .  how do we code this extra xml ? 
+   
+-- I think we just need to refine the outer query a little more ...
+ 
 <% for @conceptScheme in @conn.exec(
     ' -- we dont actually need this
     select subject from _rdf 
@@ -48,7 +53,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
     </dc:creator>
   <% end %>
 
-  <!-- TODO element is repeated twice -->
+  -- TODO element is repeated twice
   
 	<% for @e in query_objects( 'dc:publisher',  @conceptScheme['subject'] ) %>
     <dc:publisher>
