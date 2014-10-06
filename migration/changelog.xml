@@ -535,9 +535,6 @@
 	</changeSet>
 
 
-	<!--  classification stuff -->
-
-
 
 	<!-- term_category_classification -->
 	<changeSet author="julian" id="000018">
@@ -559,9 +556,6 @@
 		/>
 		<dropColumn columnName="vocabulary_term_name" tableName="term_category_classification"/>
 	</changeSet>
-
-
-
 
 
 	<!-- classification_scheme to use responsible_party in place of person,organisation fields -->
@@ -601,6 +595,9 @@
 
 	<!-- classification_scheme_category -->
 	<changeSet author="julian" id="000016-5">
+		<!-- should name be called uri here 
+			from rdf/skos pov yes, but maybe not from higher level pov
+		--> 
 		<renameColumn newColumnName="id" oldColumnName="classification_scheme_category_id" tableName="classification_scheme_category"/>
 		<renameColumn newColumnName="name" oldColumnName="classification_scheme_category_name" tableName="classification_scheme_category"/>
 		<renameColumn newColumnName="description" oldColumnName="classification_scheme_category_description" tableName="classification_scheme_category"/>
@@ -614,12 +611,9 @@
 
 
 	<!-- classification_scheme_association -->
-	<!-- TODO - drop all the crap, that can be inferred
-
-		also needs an id. although not clear anything linking it.
-	-->
-
 	<changeSet author="julian" id="000016-7">
+
+		<!-- TODO make sure there's some good user views for this -->
 
 		<!-- normalize -->
 		<dropColumn columnName="hierarchy_level" tableName="classification_scheme_association"/>
@@ -629,44 +623,27 @@
 
 		<!-- classification_scheme_id is available via classification_scheme_id field of 
 			of classification_scheme_category table which can be joined using classification_scheme_category_id 
-			and appears to obtain a more complete set.
+			and appears to contain more complete data.
 		--> 
 		<dropColumn columnName="classification_scheme_id" tableName="classification_scheme_association"/>
 
-
+		<!-- can be null, when it's root of the tree -->
 		<renameColumn newColumnName="parent_classification_scheme_category_id" oldColumnName="parent_category_code" tableName="classification_scheme_association"/>
-
-		
-
-		
-
-		<!-- the parent category code, needs to point at the id -->
-
-		<!-- TODO rename the parent_category_code to just parent_id or something ?   not sure.
-			should be foreign key enforced-->
-
-		<!-- having a primary id  makes it easy to write with cte expresssions
-			but we haven't done it for internal associated terms, or external associated terms
-		-->
+	    <addForeignKeyConstraint
+            constraintName="classification_scheme_association_parent_classification_scheme_category_fkey"
+			baseColumnNames="parent_classification_scheme_category_id"
+            baseTableName="classification_scheme_association"
+            referencedColumnNames="id"
+            referencedTableName="classification_scheme_category"
+		/>
 	</changeSet>
 
-	<!-- should name be called uri, since it's a rdf, skos uri ? 
-			not if it's from the point of view of higher level stuff.
-	--> 
 
-<!--
- contr_vocab_db | classification_scheme_association | r    | classification_scheme_id             | int4(-1)      | NO   | | FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(id)
- contr_vocab_db | classification_scheme_association | r    | classification_scheme_category_id    | int4(-1)      | NO   |  | FOREIGN KEY (classification_scheme_category_id) REFERENCES classification_scheme_category(id)
- contr_vocab_db | classification_scheme_association | r    | hierarchy_level                      | int4(-1)      | NO   |                                                         |
- contr_vocab_db | classification_scheme_association | r    | parent_category_code                 | int4(-1)      | NO   |                                                         |
- contr_vocab_db | classification_scheme_association | r    | parent_category_name                 | varchar(114)  | NO   |                                                         |
- contr_vocab_db | classification_scheme_association | r    | parent_category_label                | varchar(114)  | NO   |                                                         |
- contr_vocab_db | classification_scheme_association | r    | classification_scheme_category_label | varchar(114)  | NO   |
--->
 
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 	<!-- USER VIEWS
-		join up some tables, in obvious ways, to understand the data
+		join the tables up in some obvious ways, to aid understanding
 	-->
 
 	<!-- view of responsible party - should perhaps have association -->
@@ -752,11 +729,11 @@
 
 
 
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 	<!-- RDF views -->
 
 	<!-- Concept Scheme -->
 
-	<!-- concept scheme -->
 	<changeSet author="julian" id="000100-5">
 		<createView viewName="_rdf_type_concept_scheme">    <!-- for classification scheme -->
 			select
