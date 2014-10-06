@@ -585,22 +585,14 @@
 		<renameColumn newColumnName="description" oldColumnName="classification_scheme_category_description" tableName="classification_scheme_category"/>
 		<renameColumn newColumnName="label" oldColumnName="classification_scheme_category_label" tableName="classification_scheme_category"/>
 
-		<!-- id should be made primary - although not sure anything links to it 
-			also classification_scheme_id  should be foreign key constraint. 
-		-->
+		<!-- id is already primary but needs a sequence	-->
+		<sql>
+			select exec('create sequence classification_scheme_category_seq start '||(select max(id) +1 from classification_scheme_category));
+			alter table classification_scheme_category alter column id set default nextval('classification_scheme_category_seq')
+		</sql>
 
-		<!-- we can't just do text replacement because -->  
+
 	</changeSet>
-<!-- 
-
-	 classification_scheme_category_id          | integer                 | not null
- classification_scheme_category_name        | character varying(1010) | 
- classification_scheme_category_description | character varying(1010) | 
- classification_scheme_id                   | integer                 | 
- classification_scheme_category_label       | character varying(1010) | 
- date_added                                 | date                    | 
--->
-
 
 
 
