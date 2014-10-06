@@ -834,7 +834,7 @@
 	<changeSet author="julian" id="000107">
 		<createView viewName="_rdf_skos_preflabel">
 			select c.name as subject,
-			'Skos:prefLabel'::varchar as predicate,
+			'skos:prefLabel'::varchar as predicate,
 			c.label
 			from classification_scheme_category c
 		</createView>
@@ -845,7 +845,7 @@
 	<changeSet author="julian" id="000107-5">
 		<createView viewName="_rdf_skos_definition">
 			select c.name as subject,
-			'Skos:definition'::varchar as predicate,
+			'skos:definition'::varchar as predicate,
 			c.description
 			from classification_scheme_category c
 		</createView>
@@ -857,7 +857,7 @@
 	<!--changeSet author="julian" id="000108">
 		<createView viewName="_rdf_dcterms_issued">
 			select classification_scheme_category_name as subject,
-			'Skos:definition'::varchar as predicate,
+			'skos:definition'::varchar as predicate,
 			date_added
 			from classification_scheme_category
 		</createView>
@@ -880,11 +880,10 @@
 		<createView viewName="_skos_inscheme">
 			select 
 			c.name as subject, 
-			'soks:inScheme' as predicate, 
+			'skos:inScheme' as predicate, 
 			s.name as object 
 			from classification_scheme_category c 
-			join classification_scheme s 
-			on c.classification_scheme_id = s.id;
+			join classification_scheme s on c.classification_scheme_id = s.id;
 		</createView>
 	</changeSet>
 
@@ -915,6 +914,8 @@
 			union all select * from _rdf_skos_definition
 
 			union all select * from _rdf_dcterms_issued_2
+
+			union all select * from _skos_inscheme
 
 			-- get rid of this later for performance
 			order by predicate, subject

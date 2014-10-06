@@ -91,25 +91,33 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 <skos:TopConcept rdf:about="<%= @topConcept['subject'] %>">
 
     <% for @e in @conn.exec(
-      'select * from _rdf where predicate = $$Skos:prefLabel$$ and subject = $1',
+      'select object from _rdf where predicate = $$skos:prefLabel$$ and subject = $1',
       [@topConcept['subject']]  
     ) %>
-    <Skos:prefLabel><%= @e['object'] %></Skos:prefLabel>
+    <skos:prefLabel><%= @e['object'] %></skos:prefLabel>
     <% end %>
 
     <% for @e in @conn.exec(
-      'select * from _rdf where predicate = $$Skos:definition$$ and subject = $1',
+      'select object from _rdf where predicate = $$skos:definition$$ and subject = $1',
       [@topConcept['subject']]  
     ) %>
-    <Skos:definition><%= @e['object'] %></Skos:definition>
+    <skos:definition><%= @e['object'] %></skos:definition>
     <% end %>
 
     <% for @e in @conn.exec(
-      'select * from _rdf where predicate = $$dcterms:issued$$ and subject = $1',
+      'select object from _rdf where predicate = $$dcterms:issued$$ and subject = $1',
       [@topConcept['subject']]  
     ) %>
     <dcterms:issued><%= @e['object'] %></dcterms:issued>
     <% end %>
+
+    <% for @e in @conn.exec(
+      'select object from _rdf where predicate = $$skos:inScheme$$ and subject = $1',
+      [@topConcept['subject']]  
+    ) %>
+    <skos:inScheme><%= @e['object'] %></skos:inScheme>
+    <% end %>
+
 
 
 
