@@ -603,6 +603,41 @@
 	</changeSet>
 
 
+	<!-- classification_scheme_association -->
+	<!-- TODO - drop all the crap, that can be inferred
+
+		also needs an id. although not clear anything linking it.
+	-->
+
+	<changeSet author="julian" id="000016-7">
+
+		<renameColumn newColumnName="label" oldColumnName="classification_scheme_category_label" tableName="classification_scheme_association"/>
+
+		<!-- normalize -->
+		<dropColumn columnName="hierarchy_level" tableName="classification_scheme_association"/>
+		<dropColumn columnName="parent_category_name" tableName="classification_scheme_association"/>
+		<dropColumn columnName="parent_category_label" tableName="classification_scheme_association"/>
+
+		<!-- TODO rename the parent_category_code to just parent_id or something ?   not sure.
+			should be foreign key enforced-->
+
+
+		<!-- having a primary id  makes it easy to write with cte expresssions
+			but we haven't done it for internal associated terms, or external associated terms
+		-->
+	</changeSet>
+
+
+<!--
+	 contr_vocab_db | classification_scheme_association | r    | classification_scheme_id             | int4(-1)      | NO   | | FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(id)
+ contr_vocab_db | classification_scheme_association | r    | classification_scheme_category_id    | int4(-1)      | NO   |  | FOREIGN KEY (classification_scheme_category_id) REFERENCES classification_scheme_category(id)
+ contr_vocab_db | classification_scheme_association | r    | hierarchy_level                      | int4(-1)      | NO   |                                                         |
+ contr_vocab_db | classification_scheme_association | r    | parent_category_code                 | int4(-1)      | NO   |                                                         |
+ contr_vocab_db | classification_scheme_association | r    | parent_category_name                 | varchar(114)  | NO   |                                                         |
+ contr_vocab_db | classification_scheme_association | r    | parent_category_label                | varchar(114)  | NO   |                                                         |
+ contr_vocab_db | classification_scheme_association | r    | classification_scheme_category_label | varchar(114)  | NO   |
+	-->
+
 
 	<!-- USER VIEWS
 			join up some tables, in obvious ways, to understand the data
@@ -788,7 +823,7 @@
 	</changeSet>
 
 
-	<!-- concept --> 
+	<!-- concept -->
 
 	<!-- should we capitalize the skos xml namespace ? -->
 
@@ -808,7 +843,7 @@
 		<createView viewName="_rdf_skos_definition">
 			select c.name as subject,
 			'Skos:definition'::varchar as predicate,
-			c.description 
+			c.description
 			from classification_scheme_category c
 		</createView>
 	</changeSet>
@@ -825,7 +860,7 @@
 		</createView>
 	</changeSet -->
 
-	<!-- why not build aggregated views but group  somewhat -->  
+	<!-- why not build aggregated views but group  somewhat -->
 
 	<changeSet author="julian" id="000108">
 		<createView viewName="_rdf_dcterms_issued_2">
