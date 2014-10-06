@@ -6,7 +6,12 @@
 
 <!-- an element  dc publisher thats getting repeated twice probably because of the rp person outside join -->
 
+<!-- perhaps swap the ordering to read more cleanly - same as sparql 
+  eg. 
 
+    'select object from _rdf where subject = $1 and predicate = $$dc:title$$ ',
+  s p o
+-->
 
 <?xml version="1.0" encoding="windows-1252"?>
 <rdf:RDF 
@@ -18,15 +23,15 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
     
 <% for @conceptScheme in @conn.exec(
-  'select * from _rdf 
-    where predicate = $$rdf:type$$ 
-    and object = $$skos:ConceptScheme$$ 
-    and subject = $$http://vocab.aodn.org.au/def/ClassScheme/parameter1$$'
+    'select * from _rdf 
+    where subject = $$http://vocab.aodn.org.au/def/ClassScheme/parameter1$$
+    and predicate = $$rdf:type$$ 
+    and object = $$skos:ConceptScheme$$' 
   ) %>
 <skos:ConceptScheme rdf:about="<%= @conceptScheme['subject'] %>">
 
   <% for @e in @conn.exec(
-    'select * from _rdf where predicate = $$dc:title$$ and subject = $1',
+    'select object from _rdf where predicate = $$dc:title$$ and subject = $1',
     [@conceptScheme['subject']]  
   ) %>
     <dc:title><%= @e['object'] %></dc:title>
