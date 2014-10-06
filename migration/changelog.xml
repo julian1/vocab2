@@ -577,15 +577,19 @@
 		<dropColumn columnName="person_id" tableName="classification_scheme"/>
 		<dropColumn columnName="organisation_name_id" tableName="classification_scheme"/>
 
-
 		<renameColumn newColumnName="id" oldColumnName="classification_scheme_id" tableName="classification_scheme"/>
 		<renameColumn newColumnName="name" oldColumnName="classification_scheme_name" tableName="classification_scheme"/>
 		<renameColumn newColumnName="description" oldColumnName="classification_scheme_description" tableName="classification_scheme"/>
 		<renameColumn newColumnName="title" oldColumnName="classification_scheme_title" tableName="classification_scheme"/>
-
+		<!-- id is already primary but needs a sequence	-->
+		<sql>
+			select exec('create sequence classification_scheme_seq start '||(select max(id) +1 from classification_scheme));
+			alter table classification_scheme alter column id set default nextval('classification_scheme_seq')
+		</sql>
 	</changeSet>
 
 
+	<!-- classification_scheme_category -->
 	<changeSet author="julian" id="000016-5">
 		<renameColumn newColumnName="id" oldColumnName="classification_scheme_category_id" tableName="classification_scheme_category"/>
 		<renameColumn newColumnName="name" oldColumnName="classification_scheme_category_name" tableName="classification_scheme_category"/>
@@ -702,6 +706,9 @@
 		</createView>
 	</changeSet>
 
+
+	<!-- classification scheme -->
+
 	<changeSet author="julian" id="000100-6">
 		<createView viewName="_rdf_dcterms_issued">
 			select
@@ -762,6 +769,8 @@
 			join person p on rp.person_id = p.id
 		</createView>
 	</changeSet>
+
+
 
 	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 	<!-- TopConcept -->
