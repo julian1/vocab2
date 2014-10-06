@@ -168,6 +168,21 @@ VERY IMPORTANT - we don't have to work with @conn here. instead just call a meth
     <skos:prefLabel><%= @e['object'] %></skos:prefLabel>
     <% end %>
 
+    <% for @e in @conn.exec(
+      'select object from _rdf where predicate = $$skos:definition$$ and subject = $1',
+      [@concept['subject']]  
+    ) %>
+    <skos:definition><%= @e['object'] %></skos:definition>
+    <% end %>
+
+    <% for @e in @conn.exec(
+      'select object from _rdf where predicate = $$dcterms:issued$$ and subject = $1',
+      [@concept['subject']]  
+    ) %>
+    <skos:issued><%= @e['object'] %></skos:issued>
+    <% end %>
+
+
 
 
   </skos:Concept>
