@@ -2,6 +2,15 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
 
+	<!-- TODO 
+		work out if we really need the trim. 
+		
+		also there are plenty of places that we are not using it. 
+		
+		eg. the classification_scheme tables.
+	-->
+
+
 	<!--
 		should not have stray uid's around the place ...
 	-->
@@ -24,6 +33,7 @@
 	<!--
 		think we want to change responsible_party to party
 	-->
+
 
 
 
@@ -611,16 +621,29 @@
 
 	<changeSet author="julian" id="000016-7">
 
-		<renameColumn newColumnName="label" oldColumnName="classification_scheme_category_label" tableName="classification_scheme_association"/>
-
 		<!-- normalize -->
 		<dropColumn columnName="hierarchy_level" tableName="classification_scheme_association"/>
 		<dropColumn columnName="parent_category_name" tableName="classification_scheme_association"/>
 		<dropColumn columnName="parent_category_label" tableName="classification_scheme_association"/>
+		<dropColumn columnName="classification_scheme_category_label" tableName="classification_scheme_association"/>
+
+		<!-- classification_scheme_id is available via classification_scheme_id field of 
+			of classification_scheme_category table which can be joined using classification_scheme_category_id 
+			and appears to obtain a more complete set.
+		--> 
+		<dropColumn columnName="classification_scheme_id" tableName="classification_scheme_association"/>
+
+
+		<renameColumn newColumnName="parent_classification_scheme_category_id" oldColumnName="parent_category_code" tableName="classification_scheme_association"/>
+
+		
+
+		
+
+		<!-- the parent category code, needs to point at the id -->
 
 		<!-- TODO rename the parent_category_code to just parent_id or something ?   not sure.
 			should be foreign key enforced-->
-
 
 		<!-- having a primary id  makes it easy to write with cte expresssions
 			but we haven't done it for internal associated terms, or external associated terms
@@ -737,9 +760,9 @@
 	<changeSet author="julian" id="000100-5">
 		<createView viewName="_rdf_type_concept_scheme">    <!-- for classification scheme -->
 			select
-			s.name as subject,
-			'rdf:type'::varchar as predicate,
-			'skos:ConceptScheme'::varchar as object
+				s.name as subject,
+				'rdf:type'::varchar as predicate,
+				'skos:ConceptScheme'::varchar as object
 			from classification_scheme s
 		</createView>
 	</changeSet>
@@ -750,9 +773,9 @@
 	<changeSet author="julian" id="000100-6">
 		<createView viewName="_rdf_dcterms_issued">
 			select
-			s.name as subject,
-			'dcterms:issued'::varchar as predicate,
-			s.date_added::varchar as object
+				s.name as subject,
+				'dcterms:issued'::varchar as predicate,
+				s.date_added::varchar as object
 			from classification_scheme s
 		</createView>
 	</changeSet>
@@ -761,9 +784,9 @@
 	<changeSet author="julian" id="000103">
 		<createView viewName="_rdf_dc_title">
 			select
-			s.name as subject,
-			'dc:title'::varchar as predicate,
-			s.title as object
+				s.name as subject,
+				'dc:title'::varchar as predicate,
+				s.title as object
 			from classification_scheme s
 		</createView>
 	</changeSet>
@@ -771,9 +794,9 @@
 	<changeSet author="julian" id="000104">
 		<createView viewName="_rdf_dc_description">
 			select
-			s.name as subject,
-			'dc:description'::varchar as predicate,
-			s.description as object
+				s.name as subject,
+				'dc:description'::varchar as predicate,
+				s.description as object
 			from classification_scheme s
 		</createView>
 	</changeSet>
@@ -786,9 +809,9 @@
 	<changeSet author="julian" id="000105">
 		<createView viewName="_rdf_dc_creator">
 			select
-			s.name as subject,
-			'dc:creator'::varchar as predicate,
-			o.name as object
+				s.name as subject,
+				'dc:creator'::varchar as predicate,
+				o.name as object
 			from classification_scheme s
 			join responsible_party rp on rp.id = s.responsible_party_id
 			join organisation o on rp.organisation_id = o.id
@@ -799,9 +822,9 @@
 	<changeSet author="julian" id="000106">
 		<createView viewName="_rdf_dc_publisher">
 			select
-			s.name as subject,
-			'dc:publisher'::varchar as predicate,
-			p.name as object
+				s.name as subject,
+				'dc:publisher'::varchar as predicate,
+				p.name as object
 			from classification_scheme s
 			join responsible_party rp on rp.id = s.responsible_party_id
 			join person p on rp.person_id = p.id
@@ -816,12 +839,12 @@
 	<changeSet author="julian" id="000106-1">
 		<createView viewName="_rdf_type_top_concept">
 			select
-			c.name as subject,
-			'rdf:type'::varchar as predicate,
-			'skos:TopConcept'::varchar as object
+				c.name as subject,
+				'rdf:type'::varchar as predicate,
+				'skos:TopConcept'::varchar as object
 			from classification_scheme_category c
 			join classification_scheme_association a on c.id = a.classification_scheme_category_id
-			where parent_category_code is null
+			where parent_classification_scheme_category_id is null
 		</createView>
 	</changeSet>
 
@@ -833,9 +856,10 @@
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107">
 		<createView viewName="_rdf_skos_preflabel">
-			select c.name as subject,
-			'skos:prefLabel'::varchar as predicate,
-			c.label
+			select 
+				c.name as subject,
+				'skos:prefLabel'::varchar as predicate,
+				c.label
 			from classification_scheme_category c
 		</createView>
 	</changeSet>
@@ -897,7 +921,7 @@
 				c1.name as object
 			from classification_scheme_association a 
 			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id 
-			join classification_scheme_category c2 on a.parent_category_code = c2.id 
+			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id 
 			-- order by c2.name, c1.name	
 		</createView>
 	</changeSet>
