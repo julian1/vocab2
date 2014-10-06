@@ -27,25 +27,21 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
    
 -- I think we just need to refine the outer query a little more ...
  
-<% for @conceptScheme in @conn.exec(
-    ' -- we dont actually need this
-    select subject from _rdf 
-    where subject = $$http://vocab.aodn.org.au/def/ClassScheme/parameter1$$
-    and predicate = $$rdf:type$$ 
-    and object = $$skos:ConceptScheme$$' 
-  ) %>
-<skos:ConceptScheme rdf:about="<%= @conceptScheme['subject'] %>">
 
+<% @conceptScheme = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1' 
+   %>
 
-	<% for @e in query_objects( 'dc:title',  @conceptScheme['subject'] ) %>
+<skos:ConceptScheme rdf:about="<%= @conceptScheme %>">
+
+	<% for @e in query_objects( 'dc:title',  @conceptScheme ) %>
     <dc:title><%= @e['object'] %></dc:title>
   <% end%>
 
-	<% for @e in query_objects( 'dc:description',  @conceptScheme['subject'] ) %>
+	<% for @e in query_objects( 'dc:description',  @conceptScheme ) %>
     <dc:description><%= @e['object'] %></dc:description>
   <% end %>
 
-	<% for @e in query_objects( 'dc:creator',  @conceptScheme['subject'] ) %>
+	<% for @e in query_objects( 'dc:creator',  @conceptScheme ) %>
     <dc:creator>
       <foaf:Organisation>
         <foaf:name><%= @e['object'] %></foaf:name>
@@ -55,7 +51,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
   -- TODO element is repeated twice
   
-	<% for @e in query_objects( 'dc:publisher',  @conceptScheme['subject'] ) %>
+	<% for @e in query_objects( 'dc:publisher',  @conceptScheme ) %>
     <dc:publisher>
       <foaf:Organisation>
         <foaf:name><%= @e['object'] %></foaf:name>
@@ -65,12 +61,12 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
   <dc:rights>Freely Available For Reuse</dc:rights>
 
-	<% for @e in query_objects( 'dcterms:issued',  @conceptScheme['subject'] ) %>
+	<% for @e in query_objects( 'dcterms:issued',  @conceptScheme ) %>
   <dcterms:issued><%= @e['object'] %></dcterms:issued>
   <% end %>
 
 </skos:ConceptScheme>
-<% end %>
+
 
 
 
