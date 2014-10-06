@@ -920,7 +920,29 @@
 	</changeSet>
 
 
+	<!--
+		vocab=> select regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  )    ;
+			 regexp_matches 
+			 {34}
+			(1 row)
 
+		vocab=> select  regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '(.*)/.*$'  )    ;
+             regexp_matches
+			 {http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category}
+			(1 row)
+
+		But we can't manage to cast the result to an int ...
+
+
+		select (regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  ))[1]::int
+
+		Adding this kind of order clause - prevents us from getting the values
+		which is really odd.
+			
+		order by
+        ((regexp_matches( _rdf.subject, $$.*/([0-9]*)$ $$  ))[1]::int)
+
+	-->
 
 	<!-- lets do all the views and then decide how we want to aggregate them 
 

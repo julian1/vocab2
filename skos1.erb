@@ -134,12 +134,16 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
     ' -- we dont actually need this
     select subject from _rdf 
     where predicate = $$rdf:type$$ 
-    and object = $$skos:Concept$$' 
+    and object = $$skos:Concept$$
+	
+	order by
+		((regexp_matches( _rdf.subject, $$.*/([0-9]*)$ $$  ))[1]::int)
+    '
   ) %>
+  <skos:Concept rdf:about="<%= @concept['subject'] %>">
 
 
-  <%= @concept['subject'] %>
-
+  </skos:Concept>
 <% end %>
 
 <% end %>
