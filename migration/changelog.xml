@@ -579,6 +579,30 @@
 	</changeSet>
 
 
+	<changeSet author="julian" id="000016-5">
+		<renameColumn newColumnName="id" oldColumnName="classification_scheme_category_id" tableName="classification_scheme_category"/>
+		<renameColumn newColumnName="name" oldColumnName="classification_scheme_category_name" tableName="classification_scheme_category"/>
+		<renameColumn newColumnName="description" oldColumnName="classification_scheme_category_description" tableName="classification_scheme_category"/>
+		<renameColumn newColumnName="label" oldColumnName="classification_scheme_category_label" tableName="classification_scheme_category"/>
+
+		<!-- id should be made primary - although not sure anything links to it 
+			also classification_scheme_id  should be foreign key constraint. 
+		-->
+
+		<!-- we can't just do text replacement because -->  
+	</changeSet>
+<!-- 
+
+	 classification_scheme_category_id          | integer                 | not null
+ classification_scheme_category_name        | character varying(1010) | 
+ classification_scheme_category_description | character varying(1010) | 
+ classification_scheme_id                   | integer                 | 
+ classification_scheme_category_label       | character varying(1010) | 
+ date_added                                 | date                    | 
+-->
+
+
+
 
 	<!-- USER VIEWS
 			join up some tables, in obvious ways, to understand the data
@@ -750,11 +774,11 @@
 	<changeSet author="julian" id="000106-1">
 		<createView viewName="_rdf_type_top_concept">
 			select
-			classification_scheme_category_name as subject,
+			c.name as subject,
 			'rdf:type'::varchar as predicate,
 			'skos:TopConcept'::varchar as object
 			from classification_scheme_category c
-			join classification_scheme_association a on c.classification_scheme_category_id = a.classification_scheme_category_id
+			join classification_scheme_association a on c.id = a.classification_scheme_category_id
 			where parent_category_code is null
 		</createView>
 	</changeSet>
@@ -767,10 +791,10 @@
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107">
 		<createView viewName="_rdf_skos_preflabel">
-			select classification_scheme_category_name as subject,
+			select c.name as subject,
 			'Skos:prefLabel'::varchar as predicate,
-			classification_scheme_category_label
-			from classification_scheme_category
+			c.label
+			from classification_scheme_category c
 		</createView>
 	</changeSet>
 
@@ -778,10 +802,10 @@
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107-5">
 		<createView viewName="_rdf_skos_definition">
-			select classification_scheme_category_name as subject,
+			select c.name as subject,
 			'Skos:definition'::varchar as predicate,
-	classification_scheme_category_description 
-			from classification_scheme_category
+			c.description 
+			from classification_scheme_category c
 		</createView>
 	</changeSet>
 
@@ -802,10 +826,10 @@
 	<changeSet author="julian" id="000108">
 		<createView viewName="_rdf_dcterms_issued_2">
 			select
-			classification_scheme_category_name as subject,
+			c.name as subject,
 			'dcterms:issued'::varchar as predicate,
-			date_added::varchar as object
-			from classification_scheme_category
+			c.date_added::varchar as object
+			from classification_scheme_category c
 		</createView>
 	</changeSet>
 
