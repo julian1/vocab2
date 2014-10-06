@@ -129,6 +129,19 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
 
 
+
+<% for @concept in @conn.exec(
+    ' -- we dont actually need this
+    select subject from _rdf 
+    where predicate = $$rdf:type$$ 
+    and object = $$skos:Concept$$' 
+  ) %>
+
+
+  <%= @concept['subject'] %>
+
+<% end %>
+
 <% end %>
 
 

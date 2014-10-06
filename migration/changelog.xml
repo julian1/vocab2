@@ -613,7 +613,11 @@
 	<!-- classification_scheme_association -->
 	<changeSet author="julian" id="000016-7">
 
-		<!-- TODO make sure there's some good user views for this -->
+		<!-- TODO make sure there's some good user views for this 
+			especially to show the hierarchy_level. 
+			- We could even annotate this within a custom namespace
+			if we wanted
+		-->
 
 		<!-- normalize -->
 		<dropColumn columnName="hierarchy_level" tableName="classification_scheme_association"/>
@@ -854,16 +858,6 @@
 	</changeSet>
 
 
-	<!-- ok we have a naming conflict issue -->
-
-	<!--changeSet author="julian" id="000108">
-		<createView viewName="_rdf_dcterms_issued">
-			select classification_scheme_category_name as subject,
-			'skos:definition'::varchar as predicate,
-			date_added
-			from classification_scheme_category
-		</createView>
-	</changeSet -->
 
 	<!-- why not build aggregated views but group  somewhat -->
 
@@ -904,9 +898,34 @@
 	</changeSet>
 
 
+	<!-- TO DO irrespective of how we organize, it doesn't make much
+		sense to have separate change sets for every view 
+
+		we should be grouping  in the one changeset
+
+		Also - Having an sql view of all the rdf is really useful,
+			even if we didn't use it for template generation. 
+	-->
+
+	<!-- Concept -->
+
+	<changeSet author="julian" id="000111">
+		<createView viewName="_rdf_type_category">
+			select
+				c.name as subject,
+				'rdf:type'::varchar as predicate,
+				'skos:Concept'::varchar as object
+			from classification_scheme_category c
+		</createView>
+	</changeSet>
 
 
 
+
+	<!-- lets do all the views and then decide how we want to aggregate them 
+
+		organizing according to predicate. 
+	-->
 
 	<!-- aggregate -->
 
@@ -934,7 +953,10 @@
 
 			union all select * from _skos_narrower
 
-			-- get rid of this later for performance
+
+			union all select * from _rdf_type_category
+
+			-- TODO get rid of this later for performance
 			order by predicate, subject
 		</createView>
 	</changeSet>
