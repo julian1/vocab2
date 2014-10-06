@@ -1,8 +1,9 @@
 
+# Important - we ought to pass the skos file to use as an argument. 
+
 require 'erb'
 require 'pg'
 
-# Important - we ought to pass the skos file to use as an argument. 
 
 
 class MyBinding
@@ -12,43 +13,36 @@ class MyBinding
   def initialize( template, date=Time.now)
     @date = date
     @template = template
-
 	@conn = PG::Connection.open(
 		:host => "127.0.0.1", 
 		:dbname => "vocab",   
 		:user => "contr_vocab_db", 
 		:password => "contr_vocab_db" )
-
-
   end
 
   def render()
     s = ERB.new(@template).result(binding)
-#    s = ERB.new(@template, nil, '>').result(binding)
-
-
+	# s = ERB.new(@template, nil, '>').result(binding)
 	s = s.gsub /^[ \t]*$\n/, ''
-
 	puts s
-
   end
 
-  def save(file)
-    File.open(file, "w+") do |f|
-      f.write(render)
-    end
-  end
-
-  def save()
-      $stdout.write(render)
-  end
-
-
+#   def save(file)
+#     File.open(file, "w+") do |f|
+#       f.write(render)
+#     end
+#   end
+# 
+#   def save()
+#       $stdout.write(render)
+#   end
+# 
 
 end
 
 list = MyBinding.new( File.read('skos1.erb') )
 #list.save(File.join('./list.html'))
+# it's almost certainly ok, to spit it to stdout 
 list.render()
 
 
