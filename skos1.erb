@@ -23,7 +23,8 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
     
 <% for @conceptScheme in @conn.exec(
-    'select * from _rdf 
+    ' -- we dont actually need this
+    select subject from _rdf 
     where subject = $$http://vocab.aodn.org.au/def/ClassScheme/parameter1$$
     and predicate = $$rdf:type$$ 
     and object = $$skos:ConceptScheme$$' 
@@ -38,14 +39,14 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
   <% end%>
 
   <% for @e in @conn.exec(
-    'select * from _rdf where predicate = $$dc:description$$ and subject = $1',
+    'select object from _rdf where predicate = $$dc:description$$ and subject = $1',
     [@conceptScheme['subject']]  
   ) %>
     <dc:description><%= @e['object'] %></dc:description>
   <% end %>
 
   <% for @e in @conn.exec(
-    'select * from _rdf where predicate = $$dc:creator$$ and subject = $1',
+    'select object from _rdf where predicate = $$dc:creator$$ and subject = $1',
     [@conceptScheme['subject']]  
   ) %>
     <dc:creator>
@@ -57,7 +58,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
   <!-- element is repeated twice -->
   <% for @e in @conn.exec(
-    'select * from _rdf where predicate = $$dc:publisher$$ and subject = $1',
+    'select object from _rdf where predicate = $$dc:publisher$$ and subject = $1',
     [@conceptScheme['subject']]  
   ) %>
     <dc:publisher>
@@ -70,7 +71,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
   <dc:rights>Freely Available For Reuse</dc:rights>
 
   <% for @e in @conn.exec(
-    'select * from _rdf where predicate = $$dcterms:issued$$ and subject = $1',
+    'select object from _rdf where predicate = $$dcterms:issued$$ and subject = $1',
     [@conceptScheme['subject']]  
   ) %>
   <dcterms:issued><%= @e['object'] %></dcterms:issued>
@@ -84,7 +85,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
 
 <% for @topConcept in @conn.exec(
-  'select * from _rdf 
+  'select subject from _rdf 
     where predicate = $$rdf:type$$ 
     and object = $$skos:TopConcept$$' 
   ) %>
