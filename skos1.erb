@@ -152,6 +152,12 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
     <% end %>
 
 
+    <% for @e in @conn.exec(
+      'select object from _rdf where predicate = $$skos:broader$$ and subject = $1',
+      [@concept['subject']]  
+    ) %>
+    <skos:broader><%= @e['object'] %></skos:broader>
+    <% end %>
 
 
   </skos:Concept>

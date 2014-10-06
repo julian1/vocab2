@@ -920,6 +920,22 @@
 	</changeSet>
 
 
+	<changeSet author="julian" id="000112">
+		<createView viewName="_skos_broader">
+			select 
+				c1.name as subject, 
+				'skos:broader' as predicate, 
+				c2.name as object
+			from classification_scheme_association a 
+			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id 
+			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id 
+			-- order by c2.name, c1.name	
+		</createView>
+	</changeSet>
+
+
+
+
 	<!--
 		vocab=> select regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  )    ;
 			 regexp_matches 
@@ -974,6 +990,7 @@
 			union all select * from _skos_inscheme
 
 			union all select * from _skos_narrower
+			union all select * from _skos_broader
 
 
 			union all select * from _rdf_type_category
