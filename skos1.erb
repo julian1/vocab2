@@ -31,24 +31,16 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
   ) %>
 <skos:ConceptScheme rdf:about="<%= @conceptScheme['subject'] %>">
 
-  <% for @e in @conn.exec(
-    'select object from _rdf where predicate = $$dc:title$$ and subject = $1',
-    [@conceptScheme['subject']]  
-  ) %>
+
+	<% for @e in query_objects( 'dc:title',  @conceptScheme['subject'] ) %>
     <dc:title><%= @e['object'] %></dc:title>
   <% end%>
 
-  <% for @e in @conn.exec(
-    'select object from _rdf where predicate = $$dc:description$$ and subject = $1',
-    [@conceptScheme['subject']]  
-  ) %>
+	<% for @e in query_objects( 'dc:description',  @conceptScheme['subject'] ) %>
     <dc:description><%= @e['object'] %></dc:description>
   <% end %>
 
-  <% for @e in @conn.exec(
-    'select object from _rdf where predicate = $$dc:creator$$ and subject = $1',
-    [@conceptScheme['subject']]  
-  ) %>
+	<% for @e in query_objects( 'dc:creator',  @conceptScheme['subject'] ) %>
     <dc:creator>
       <foaf:Organisation>
         <foaf:name><%= @e['object'] %></foaf:name>
@@ -56,11 +48,9 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
     </dc:creator>
   <% end %>
 
-  <!-- element is repeated twice -->
-  <% for @e in @conn.exec(
-    'select object from _rdf where predicate = $$dc:publisher$$ and subject = $1',
-    [@conceptScheme['subject']]  
-  ) %>
+  <!-- TODO element is repeated twice -->
+  
+	<% for @e in query_objects( 'dc:publisher',  @conceptScheme['subject'] ) %>
     <dc:publisher>
       <foaf:Organisation>
         <foaf:name><%= @e['object'] %></foaf:name>
@@ -70,10 +60,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
   <dc:rights>Freely Available For Reuse</dc:rights>
 
-  <% for @e in @conn.exec(
-    'select object from _rdf where predicate = $$dcterms:issued$$ and subject = $1',
-    [@conceptScheme['subject']]  
-  ) %>
+	<% for @e in query_objects( 'dcterms:issued',  @conceptScheme['subject'] ) %>
   <dcterms:issued><%= @e['object'] %></dcterms:issued>
   <% end %>
 
