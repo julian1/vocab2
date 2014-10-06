@@ -128,6 +128,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 </skos:TopConcept>
 
 
+<% end %>
 
 
 <% for @concept in @conn.exec(
@@ -136,15 +137,15 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
     where predicate = $$rdf:type$$ 
     and object = $$skos:Concept$$
 	
-	order by
-		((regexp_matches( _rdf.subject, $$.*/([0-9]*)$ $$  ))[1]::int)
+	-- order by
+	--	((regexp_matches( _rdf.subject, $$.*/([0-9]*)$ $$  ))[1]::int)
     '
   ) %>
   <skos:Concept rdf:about="<%= @concept['subject'] %>">
 
 
   </skos:Concept>
-<% end %>
+
 
 <% end %>
 
