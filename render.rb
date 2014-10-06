@@ -22,23 +22,21 @@ class MyBinding
   end
 
 
-  def query( s, a )
+  def sql_query( s, a )
     @conn.exec( s, a)
   end
 
-  def query_objects( predicate, subject )
+  # and query rdf ?  
+  # change name to rdf_objects and rdf_subjects ?
+# or query_rdf_objects ?
 
-      # --, [@concept['subject']]  
-    query( 'select object from _rdf where predicate = $1 and subject = $2', [predicate, subject])
+  def query_objects( predicate, subject )
+    sql_query( 'select object from _rdf where predicate = $1 and subject = $2', [predicate, subject])
   end
 
   def query_subjects( predicate, object )
-
-      # --, [@concept['subject']]  
-    query( 'select subject from _rdf where predicate = $1 and object = $2', [predicate, object ])
+    sql_query( 'select subject from _rdf where predicate = $1 and object = $2', [predicate, object ])
   end
-
-
 
 
   def render()

@@ -91,38 +91,25 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
   ) %>
 <skos:TopConcept rdf:about="<%= @topConcept['subject'] %>">
 
-    <% for @e in @conn.exec(
-      'select object from _rdf where predicate = $$skos:prefLabel$$ and subject = $1',
-      [@topConcept['subject']]  
-    ) %>
+
+    <% for @e in query_objects( 'skos:prefLabel',  @topConcept['subject'] ) %>
     <skos:prefLabel><%= @e['object'] %></skos:prefLabel>
     <% end %>
 
-    <% for @e in @conn.exec(
-      'select object from _rdf where predicate = $$skos:definition$$ and subject = $1',
-      [@topConcept['subject']]  
-    ) %>
+
+    <% for @e in query_objects( 'skos:definition',  @topConcept['subject'] ) %>
     <skos:definition><%= @e['object'] %></skos:definition>
     <% end %>
 
-    <% for @e in @conn.exec(
-      'select object from _rdf where predicate = $$dcterms:issued$$ and subject = $1',
-      [@topConcept['subject']]  
-    ) %>
+    <% for @e in query_objects( 'dcterms:issued',  @topConcept['subject'] ) %>
     <dcterms:issued><%= @e['object'] %></dcterms:issued>
     <% end %>
 
-    <% for @e in @conn.exec(
-      'select object from _rdf where predicate = $$skos:inScheme$$ and subject = $1',
-      [@topConcept['subject']]  
-    ) %>
+    <% for @e in query_objects( 'skos:inScheme',  @topConcept['subject'] ) %>
     <skos:inScheme><%= @e['object'] %></skos:inScheme>
     <% end %>
 
-    <% for @e in @conn.exec(
-      'select object from _rdf where predicate = $$skos:narrower$$ and subject = $1',
-      [@topConcept['subject']]  
-    ) %>
+    <% for @e in query_objects( 'skos:narrower',  @topConcept['subject'] ) %>
     <skos:narrower><%= @e['object'] %></skos:narrower>
     <% end %>
 </skos:TopConcept>
@@ -135,6 +122,7 @@ VERY IMPORTANT - we don't have to work with @conn here. instead just call a meth
 
 i think that we also need to tighten this up, so we only deal with parameters.
 
+- it would be very nice if we could avoid having to do the indexing with the name.
 
 <% for @concept in query_subjects( 'rdf:type',  'skos:Concept'  ) %>
 
@@ -160,12 +148,8 @@ i think that we also need to tighten this up, so we only deal with parameters.
     <skos:issued><%= @e['object'] %></skos:issued>
     <% end %>
 
-
   </skos:Concept>
 
-
 <% end %>
-
-
 
 
