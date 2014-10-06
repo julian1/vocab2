@@ -130,6 +130,8 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
 <% end %>
 
+VERY IMPORTANT - we don't have to work with @conn here. instead just call a method
+				to get our rdf objects
 
 <% for @concept in @conn.exec(
     ' -- we dont actually need this
