@@ -576,6 +576,13 @@
 
 		<dropColumn columnName="person_id" tableName="classification_scheme"/>
 		<dropColumn columnName="organisation_name_id" tableName="classification_scheme"/>
+
+
+		<renameColumn newColumnName="id" oldColumnName="classification_scheme_id" tableName="classification_scheme"/>
+		<renameColumn newColumnName="name" oldColumnName="classification_scheme_name" tableName="classification_scheme"/>
+		<renameColumn newColumnName="description" oldColumnName="classification_scheme_description" tableName="classification_scheme"/>
+		<renameColumn newColumnName="title" oldColumnName="classification_scheme_title" tableName="classification_scheme"/>
+
 	</changeSet>
 
 
@@ -584,14 +591,11 @@
 		<renameColumn newColumnName="name" oldColumnName="classification_scheme_category_name" tableName="classification_scheme_category"/>
 		<renameColumn newColumnName="description" oldColumnName="classification_scheme_category_description" tableName="classification_scheme_category"/>
 		<renameColumn newColumnName="label" oldColumnName="classification_scheme_category_label" tableName="classification_scheme_category"/>
-
 		<!-- id is already primary but needs a sequence	-->
 		<sql>
 			select exec('create sequence classification_scheme_category_seq start '||(select max(id) +1 from classification_scheme_category));
 			alter table classification_scheme_category alter column id set default nextval('classification_scheme_category_seq')
 		</sql>
-
-
 	</changeSet>
 
 
@@ -691,42 +695,41 @@
 	<changeSet author="julian" id="000100-5">
 		<createView viewName="_rdf_type_concept_scheme">    <!-- for classification scheme -->
 			select
-			classification_scheme_name as subject,
+			s.name as subject,
 			'rdf:type'::varchar as predicate,
 			'skos:ConceptScheme'::varchar as object
-			from classification_scheme
+			from classification_scheme s
 		</createView>
 	</changeSet>
 
 	<changeSet author="julian" id="000100-6">
 		<createView viewName="_rdf_dcterms_issued">
 			select
-			classification_scheme_name as subject,
+			s.name as subject,
 			'dcterms:issued'::varchar as predicate,
-			date_added::varchar as object
-			from classification_scheme
+			s.date_added::varchar as object
+			from classification_scheme s
 		</createView>
 	</changeSet>
-
 
 
 	<changeSet author="julian" id="000103">
 		<createView viewName="_rdf_dc_title">
 			select
-			classification_scheme_name as subject,
+			s.name as subject,
 			'dc:title'::varchar as predicate,
-			classification_scheme_title as object
-			from classification_scheme
+			s.title as object
+			from classification_scheme s
 		</createView>
 	</changeSet>
 
 	<changeSet author="julian" id="000104">
 		<createView viewName="_rdf_dc_description">
 			select
-			classification_scheme_name as subject,
+			s.name as subject,
 			'dc:description'::varchar as predicate,
-			classification_scheme_description as object
-			from classification_scheme
+			s.description as object
+			from classification_scheme s
 		</createView>
 	</changeSet>
 
@@ -738,11 +741,11 @@
 	<changeSet author="julian" id="000105">
 		<createView viewName="_rdf_dc_creator">
 			select
-			classification_scheme_name as subject,
+			s.name as subject,
 			'dc:creator'::varchar as predicate,
 			o.name as object
-			from classification_scheme c
-			join responsible_party rp on rp.id = c.responsible_party_id
+			from classification_scheme s
+			join responsible_party rp on rp.id = s.responsible_party_id
 			join organisation o on rp.organisation_id = o.id
 		</createView>
 	</changeSet>
@@ -751,11 +754,11 @@
 	<changeSet author="julian" id="000106">
 		<createView viewName="_rdf_dc_publisher">
 			select
-			c.classification_scheme_name as subject,
+			s.name as subject,
 			'dc:publisher'::varchar as predicate,
 			p.name as object
-			from classification_scheme c
-			join responsible_party rp on rp.id = c.responsible_party_id
+			from classification_scheme s
+			join responsible_party rp on rp.id = s.responsible_party_id
 			join person p on rp.person_id = p.id
 		</createView>
 	</changeSet>
