@@ -627,20 +627,23 @@
 		-->
 	</changeSet>
 
+	<!-- should name be called uri, since it's a rdf, skos uri ? 
+			not if it's from the point of view of higher level stuff.
+	--> 
 
 <!--
-	 contr_vocab_db | classification_scheme_association | r    | classification_scheme_id             | int4(-1)      | NO   | | FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(id)
+ contr_vocab_db | classification_scheme_association | r    | classification_scheme_id             | int4(-1)      | NO   | | FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(id)
  contr_vocab_db | classification_scheme_association | r    | classification_scheme_category_id    | int4(-1)      | NO   |  | FOREIGN KEY (classification_scheme_category_id) REFERENCES classification_scheme_category(id)
  contr_vocab_db | classification_scheme_association | r    | hierarchy_level                      | int4(-1)      | NO   |                                                         |
  contr_vocab_db | classification_scheme_association | r    | parent_category_code                 | int4(-1)      | NO   |                                                         |
  contr_vocab_db | classification_scheme_association | r    | parent_category_name                 | varchar(114)  | NO   |                                                         |
  contr_vocab_db | classification_scheme_association | r    | parent_category_label                | varchar(114)  | NO   |                                                         |
  contr_vocab_db | classification_scheme_association | r    | classification_scheme_category_label | varchar(114)  | NO   |
-	-->
+-->
 
 
 	<!-- USER VIEWS
-			join up some tables, in obvious ways, to understand the data
+		join up some tables, in obvious ways, to understand the data
 	-->
 
 	<!-- view of responsible party - should perhaps have association -->
@@ -871,6 +874,20 @@
 			from classification_scheme_category c
 		</createView>
 	</changeSet>
+
+
+	<changeSet author="julian" id="000109">
+		<createView viewName="_skos_inscheme">
+			select 
+			c.name as subject, 
+			'soks:inScheme' as predicate, 
+			s.name as object 
+			from classification_scheme_category c 
+			join classification_scheme s 
+			on c.classification_scheme_id = s.id;
+		</createView>
+	</changeSet>
+
 
 
 
