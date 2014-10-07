@@ -14,7 +14,6 @@
 -->
 
 
-<%= ERB.new(File.read("x.erb")).result(binding) %>
 
 <?xml version="1.0" encoding="windows-1252"?>
 <rdf:RDF 
@@ -40,6 +39,8 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 <% @conceptScheme = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1' %>
 
 <skos:ConceptScheme rdf:about="<%= @conceptScheme %>">
+
+<%= ERB.new(File.read("x.erb")).result(binding) %>
 
 	<% for @object in query_rdf_objects( 'dc:title', @conceptScheme ) %>
   <dc:title><%= @object %></dc:title>
