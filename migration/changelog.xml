@@ -960,7 +960,6 @@
 		</createView>
 	</changeSet>
 				
-	<!-- title is name --> 
 	<changeSet author="julian" id="000115">
 		<createView viewName="_rdf_dc_description_2">
 			select 
@@ -971,8 +970,22 @@
 		</createView>
 	</changeSet>
 	
+	<changeSet author="julian" id="000116">
+		<createView viewName="_rdf_dc_creator_2">
+			select 
+				vr.uid as subject, 
+				'dc:creator'::varchar as predicate, 
+				o.name
+			from vocabulary_register vr
+			join responsible_party rp on rp.id = vr. owner_responsible_party_id
+			join organisation o on rp.organisation_id = o.id
 
+		</createView>
+	</changeSet>
+	
+		<!--	select vr.uid as subject, 'dc:creator'::varchar as predicate, o.name from vocabulary_register vr join responsible_party rp on rp.id = vr. owner_responsible_party_id join organisation o on rp.organisation_id = o.id
 
+	-->
 
 	<!--
 		vocab=> select regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  )    ;
@@ -1021,6 +1034,7 @@
 			union all select * from _rdf_type_concept_scheme_2
 			union all select * from _rdf_dc_title_2
 			union all select * from _rdf_dc_description_2
+			union all select * from _rdf_dc_creator_2
 
 			-- TODO get rid of this later for performance
 			order by predicate, subject
