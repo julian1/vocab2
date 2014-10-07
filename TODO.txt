@@ -1,4 +1,9 @@
 
+	- very not sure about the inscheme thing. it should be derived from the top
+	of the narrower.  
+	- i think there must be urls repeated in the tables.
+
+----
 TODO
 
 - Need to tighten up skos1 so it's only outputting stuff for parameter
@@ -14,4 +19,7 @@ TODO
 ---
 
 Lets have a stab at the other skos. file.
+
+
+
 
