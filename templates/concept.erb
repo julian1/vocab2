@@ -1,0 +1,25 @@
+
+<skos:Concept rdf:about="<%= @concept %>">
+
+    <% for @object in query_rdf_objects( 'skos:inScheme', @concept) %>
+    <skos:inScheme><%= @object %></skos:inScheme>
+    <% end %>
+
+    <% for @object in query_rdf_objects( 'skos:broader', @concept) %>
+    <skos:broader><%= @object %></skos:broader>
+    <% end %>
+
+    <% for @object in query_rdf_objects( 'skos:prefLabel', @concept) %>
+    <skos:prefLabel><%= @object %></skos:prefLabel>
+    <% end %>
+
+    <% for @object in query_rdf_objects( 'skos:definition', @concept) %>
+    <skos:definition><%= @object %></skos:definition>
+    <% end %>
+
+    <% for @object in query_rdf_objects( 'dcterms:issued', @concept) %>
+    <skos:issued><%= @object %></skos:issued>
+    <% end %>
+
+</skos:Concept>
+

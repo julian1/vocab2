@@ -41,58 +41,17 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 <%= render "templates/concept_scheme.erb" %>
 
 
-
 <% for @topConcept in query_rdf_subjects( 'rdf:type', 'skos:TopConcept') %>
-<skos:TopConcept rdf:about="<%= @topConcept %>">
 
-    <% for @object in query_rdf_objects( 'skos:prefLabel', @topConcept ) %>
-    <skos:prefLabel><%= @object %></skos:prefLabel>
-    <% end %>
+	<%= render "templates/top_concept.erb" %>
 
-    <% for @object in query_rdf_objects( 'skos:definition', @topConcept ) %>
-    <skos:definition><%= @object %></skos:definition>
-    <% end %>
-
-    <% for @object in query_rdf_objects( 'dcterms:issued', @topConcept ) %>
-    <dcterms:issued><%= @object %></dcterms:issued>
-    <% end %>
-
-    <% for @object in query_rdf_objects( 'skos:inScheme', @topConcept ) %>
-    <skos:inScheme><%= @object %></skos:inScheme>
-    <% end %>
-
-    <% for @object in query_rdf_objects( 'skos:narrower', @topConcept ) %>
-    <skos:narrower><%= @object %></skos:narrower>
-    <% end %>
-
-</skos:TopConcept>
 <% end %>
 
 
 <% for @concept in query_rdf_subjects( 'rdf:type', 'skos:Concept') %>
-<skos:Concept rdf:about="<%= @concept %>">
 
-    <% for @object in query_rdf_objects( 'skos:inScheme', @concept) %>
-    <skos:inScheme><%= @object %></skos:inScheme>
-    <% end %>
+	<%= render "templates/concept.erb" %>
 
-    <% for @object in query_rdf_objects( 'skos:broader', @concept) %>
-    <skos:broader><%= @object %></skos:broader>
-    <% end %>
-
-    <% for @object in query_rdf_objects( 'skos:prefLabel', @concept) %>
-    <skos:prefLabel><%= @object %></skos:prefLabel>
-    <% end %>
-
-    <% for @object in query_rdf_objects( 'skos:definition', @concept) %>
-    <skos:definition><%= @object %></skos:definition>
-    <% end %>
-
-    <% for @object in query_rdf_objects( 'dcterms:issued', @concept) %>
-    <skos:issued><%= @object %></skos:issued>
-    <% end %>
-
-</skos:Concept>
 <% end %>
 
 
