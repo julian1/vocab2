@@ -37,21 +37,14 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
 
 <% @conceptScheme = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1' %>
-
 <%= render "templates/concept_scheme.erb" %>
 
-
 <% for @topConcept in query_rdf_subjects( 'rdf:type', 'skos:TopConcept') %>
-
 	<%= render "templates/top_concept.erb" %>
-
 <% end %>
 
-
 <% for @concept in query_rdf_subjects( 'rdf:type', 'skos:Concept') %>
-
 	<%= render "templates/concept.erb" %>
-
 <% end %>
 
 
