@@ -1,6 +1,6 @@
 
 # Usage
-# ruby render.rb  -t skos1.erb
+# ruby render.rb  -t templates/skos1.erb  | less
 
 
 require 'erb'
@@ -48,6 +48,7 @@ class RDFBinding
 
   def render( os)
     s = ERB.new(@template).result(binding)
+
     # s = ERB.new(@template, nil, '>').result(binding)
     s = s.gsub /^[ \t]*$\n/, ''
     os.puts s
@@ -81,32 +82,8 @@ else
 end
 
 
-#
-# # need to feed the template as the first argument.
-#
-# list = RDFBinding.new( File.read('skos1.erb') )
-# #list.save(File.join('./list.html'))
-# # it's almost certainly ok, to spit it to stdout
-# list.render()
-#
 
 
-
-
-#
-#
-# def mapquery( conn, query, args, &code )
-# 	result = conn.exec( query, args )
-# 	ia = []
-# 	result.each do |row|
-# 		# puts "-> #{row['subject']}"
-# 		ia << code.call( row )
-# 	end
-# 	ia
-# end
-#
-#
-#
 #
 # 	# the question is do we want to build an intermediate data structure, or else just execute
 # 	# if we use map easily then we ought to be able to do it.
