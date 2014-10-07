@@ -44,10 +44,8 @@ class RDFBinding
   end
 
   def render( filename )
-    # pass a filename here, in place of an already opened stream 
-    # to make it easier, to call with nested templates within templates
-
-    # instead we should be passing the os as an initializing argument
+    # pass a filename here, in place of an already opened stream
+    # to simplify use when calling recursively from nested templates
 
     [ filename, "templates/#{filename}"].each do |path|
       if File.exists?( path)
