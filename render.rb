@@ -22,18 +22,14 @@ end
 
 
 class RDFBinding
+
   include ERB::Util
   attr_accessor  :template, :date
 
-  def initialize( template, date=Time.now)
+  def initialize( conn, template, date)
+    @conn = conn
     @date = date
     @template = template
-    @conn = PG::Connection.open(
-      :host => "127.0.0.1",
-      :dbname => "vocab",
-      :user => "contr_vocab_db",
-      :password => "contr_vocab_db"
-    )
   end
 
   # we are going to need a more general sql, to limit everything
@@ -53,13 +49,16 @@ class RDFBinding
     end
   end
 
-
-  def render()
+  # we should be passing in the stream to output
+  # 
+  def render( os)
     s = ERB.new(@template).result(binding)
     # s = ERB.new(@template, nil, '>').result(binding)
     s = s.gsub /^[ \t]*$\n/, ''
-    puts s
+    os.puts s
   end
+
+
 
 #   def save(file)
 #     File.open(file, "w+") do |f|
@@ -86,9 +85,17 @@ OptionParser.new do |opts|
 end.parse!
 if options[:template_file]
 
+  conn = PG::Connection.open(
+      :host => "127.0.0.1",
+      :dbname => "vocab",
+      :user => "contr_vocab_db",
+      :password => "contr_vocab_db"
+    )
+
+
   #list = RDFBinding.new( File.read('skos1.erb') )
-  list = RDFBinding.new( File.read(options[:template_file] ) )
-  list.render()
+  list = RDFBinding.new( conn, File.read(options[:template_file]), Time.now ) 
+  list.render( $stdout )
 else
   puts 'no file specified!'
 
