@@ -1,5 +1,5 @@
 
 <% @conceptScheme = 'http://vocab.aodn.org.au/def/parameter' %>
 
-<%= ERB.new(File.read("concept_scheme.erb")).result(binding) %>
+<%= render "templates/concept_scheme.erb" %>
 
