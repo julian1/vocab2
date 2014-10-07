@@ -32,15 +32,15 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
 <skos:ConceptScheme rdf:about="<%= @conceptScheme %>">
 
-	<% for @object in query_objects2( 'dc:title',  @conceptScheme ) %>
+	<% for @object in query_objects2( 'dc:title', @conceptScheme ) %>
     <dc:title><%= @object %></dc:title>
   <% end%>
 
-	<% for @object in query_objects2( 'dc:description',  @conceptScheme ) %>
+	<% for @object in query_objects2( 'dc:description', @conceptScheme ) %>
     <dc:description><%= @object %></dc:description>
   <% end %>
 
-	<% for @object in query_objects2( 'dc:creator',  @conceptScheme ) %>
+	<% for @object in query_objects2( 'dc:creator', @conceptScheme ) %>
     <dc:creator>
       <foaf:Organisation>
         <foaf:name><%= @object %></foaf:name>
@@ -50,7 +50,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
   -- TODO element is repeated twice
   
-	<% for @object in query_objects2( 'dc:publisher',  @conceptScheme ) %>
+	<% for @object in query_objects2( 'dc:publisher', @conceptScheme ) %>
     <dc:publisher>
       <foaf:Organisation>
         <foaf:name><%= @object %></foaf:name>
@@ -60,7 +60,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
   <dc:rights>Freely Available For Reuse</dc:rights>
 
-	<% for @object in query_objects2( 'dcterms:issued',  @conceptScheme ) %>
+	<% for @object in query_objects2( 'dcterms:issued', @conceptScheme ) %>
   <dcterms:issued><%= @object %></dcterms:issued>
   <% end %>
 
@@ -72,23 +72,23 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 <% for @topConcept in query_subjects2( 'rdf:type', 'skos:TopConcept') %>
 <skos:TopConcept rdf:about="<%= @topConcept %>">
 
-    <% for @object in query_objects( 'skos:prefLabel', @topConcept ) %>
+    <% for @object in query_objects2( 'skos:prefLabel', @topConcept ) %>
     <skos:prefLabel><%= @object %></skos:prefLabel>
     <% end %>
 
-    <% for @object in query_objects( 'skos:definition', @topConcept ) %>
+    <% for @object in query_objects2( 'skos:definition', @topConcept ) %>
     <skos:definition><%= @object %></skos:definition>
     <% end %>
 
-    <% for @object in query_objects( 'dcterms:issued', @topConcept ) %>
+    <% for @object in query_objects2( 'dcterms:issued', @topConcept ) %>
     <dcterms:issued><%= @object %></dcterms:issued>
     <% end %>
 
-    <% for @object in query_objects( 'skos:inScheme', @topConcept ) %>
+    <% for @object in query_objects2( 'skos:inScheme', @topConcept ) %>
     <skos:inScheme><%= @object %></skos:inScheme>
     <% end %>
 
-    <% for @object in query_objects( 'skos:narrower', @topConcept ) %>
+    <% for @object in query_objects2( 'skos:narrower', @topConcept ) %>
     <skos:narrower><%= @object %></skos:narrower>
     <% end %>
 
