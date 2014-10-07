@@ -13,6 +13,9 @@
   s p o
 -->
 
+
+<%= ERB.new(File.read("x.erb")).result(binding) %>
+
 <?xml version="1.0" encoding="windows-1252"?>
 <rdf:RDF 
 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
@@ -26,7 +29,13 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 -- to restrict things to the parameter scheme .  how do we code this extra xml ? 
    
 -- I think we just need to refine the outer query a little more ...
- 
+
+-- there's actually quite a lot of opportunities to factor this stuff
+-- because it's only the controlling variable that changes 
+
+
+-- EXTREMELY IMPORTANT - we can use the same template. to generate.  
+
 
 <% @conceptScheme = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1' %>
 

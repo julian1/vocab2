@@ -2,7 +2,6 @@
 # Usage
 # ruby render.rb  -t skos1.erb
 
-# Important - we ought to pass the skos file to use as an argument.
 
 require 'erb'
 require 'pg'
