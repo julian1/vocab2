@@ -106,20 +106,23 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 <% for @concept in query_subjects( 'rdf:type',  'skos:Concept') %>
 <skos:Concept rdf:about="<%= @concept['subject'] %>">
 
-    <% for @e in query_objects( 'skos:inScheme',  @concept['subject']) %>
-    <skos:inScheme><%= @e['object'] %></skos:inScheme>
+
+    <% for @object in query_objects2( 'skos:inScheme', @concept['subject']) %>
+    <skos:inScheme><%= @object %></skos:inScheme>
     <% end %>
 
-    <% for @e in query_objects( 'skos:broader',  @concept['subject']) %>
-    <skos:broader><%= @e['object'] %></skos:broader>
+    <% for @object in query_objects2( 'skos:broader', @concept['subject']) %>
+    <skos:broader><%= @object %></skos:broader>
     <% end %>
 
-    <% for @e in query_objects( 'skos:prefLabel',  @concept['subject']) %>
-    <skos:prefLabel><%= @e['object'] %></skos:prefLabel>
+
+    <% for @object in query_objects2( 'skos:prefLabel', @concept['subject']) %>
+    <skos:prefLabel><%= @object %></skos:prefLabel>
     <% end %>
 
-    <% for @e in query_objects( 'skos:definition',  @concept['subject']) %>
-    <skos:definition><%= @e['object'] %></skos:definition>
+
+    <% for @object in query_objects2( 'skos:definition', @concept['subject']) %>
+    <skos:definition><%= @object %></skos:definition>
     <% end %>
 
     <% for @e in query_objects( 'dcterms:issued',  @concept['subject']) %>
@@ -127,8 +130,8 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
     <% end %>
 
 
-    <% for @e in query_objects2( 'dcterms:issued',  @concept['subject']) %>
-      <skos:issued><%= @e %></skos:issued>
+    <% for @object in query_objects2( 'dcterms:issued', @concept['subject']) %>
+      <skos:issued><%= @object %></skos:issued>
     <% end %>
 
 
