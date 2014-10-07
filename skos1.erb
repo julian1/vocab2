@@ -75,24 +75,24 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 <% for @topConcept in query_subjects2( 'rdf:type',  'skos:TopConcept') %>
 <skos:TopConcept rdf:about="<%= @topConcept %>">
 
-    <% for @e in query_objects( 'skos:prefLabel',  @topConcept ) %>
-    <skos:prefLabel><%= @e['object'] %></skos:prefLabel>
+    <% for @object in query_objects( 'skos:prefLabel',  @topConcept ) %>
+    <skos:prefLabel><%= @object %></skos:prefLabel>
     <% end %>
 
-    <% for @e in query_objects( 'skos:definition',  @topConcept ) %>
-    <skos:definition><%= @e['object'] %></skos:definition>
+    <% for @object in query_objects( 'skos:definition',  @topConcept ) %>
+    <skos:definition><%= @object %></skos:definition>
     <% end %>
 
-    <% for @e in query_objects( 'dcterms:issued',  @topConcept ) %>
-    <dcterms:issued><%= @e['object'] %></dcterms:issued>
+    <% for @object in query_objects( 'dcterms:issued',  @topConcept ) %>
+    <dcterms:issued><%= @object %></dcterms:issued>
     <% end %>
 
-    <% for @e in query_objects( 'skos:inScheme',  @topConcept ) %>
-    <skos:inScheme><%= @e['object'] %></skos:inScheme>
+    <% for @object in query_objects( 'skos:inScheme',  @topConcept ) %>
+    <skos:inScheme><%= @object %></skos:inScheme>
     <% end %>
 
-    <% for @e in query_objects( 'skos:narrower',  @topConcept ) %>
-    <skos:narrower><%= @e['object'] %></skos:narrower>
+    <% for @object in query_objects( 'skos:narrower',  @topConcept ) %>
+    <skos:narrower><%= @object %></skos:narrower>
     <% end %>
 
 </skos:TopConcept>
