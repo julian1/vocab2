@@ -103,27 +103,27 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 - it would be very nice if we could do this without indexing 
 - with the name. eg. e instead of @concept['subject]
 
-<% for @concept in query_subjects( 'rdf:type',  'skos:Concept') %>
-<skos:Concept rdf:about="<%= @concept['subject'] %>">
+<% for @concept in query_subjects2( 'rdf:type',  'skos:Concept') %>
 
+<skos:Concept rdf:about="<%= @concept %>">
 
-    <% for @object in query_objects2( 'skos:inScheme', @concept['subject']) %>
+    <% for @object in query_objects2( 'skos:inScheme', @concept) %>
     <skos:inScheme><%= @object %></skos:inScheme>
     <% end %>
 
-    <% for @object in query_objects2( 'skos:broader', @concept['subject']) %>
+    <% for @object in query_objects2( 'skos:broader', @concept) %>
     <skos:broader><%= @object %></skos:broader>
     <% end %>
 
-    <% for @object in query_objects2( 'skos:prefLabel', @concept['subject']) %>
+    <% for @object in query_objects2( 'skos:prefLabel', @concept) %>
     <skos:prefLabel><%= @object %></skos:prefLabel>
     <% end %>
 
-    <% for @object in query_objects2( 'skos:definition', @concept['subject']) %>
+    <% for @object in query_objects2( 'skos:definition', @concept) %>
     <skos:definition><%= @object %></skos:definition>
     <% end %>
 
-    <% for @object in query_objects2( 'dcterms:issued', @concept['subject']) %>
+    <% for @object in query_objects2( 'dcterms:issued', @concept) %>
     <skos:issued><%= @object %></skos:issued>
     <% end %>
 
