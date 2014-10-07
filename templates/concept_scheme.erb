@@ -1,4 +1,6 @@
 
+  <!-- TODO fix organisation element which is repeated twice -->
+
 <skos:ConceptScheme rdf:about="<%= @conceptScheme %>">
 
 	<% for @object in query_rdf_objects( 'dc:title', @conceptScheme ) %>
@@ -17,17 +19,16 @@
     <dc:creator>
       <foaf:Organisation>
         <foaf:name><%= @object %></foaf:name>
-      <foaf:/Organisation>
+      </foaf:Organisation>
     </dc:creator>
   <% end %>
 
-  -- TODO element is repeated twice
   
 	<% for @object in query_rdf_objects( 'dc:publisher', @conceptScheme ) %>
     <dc:publisher>
       <foaf:Organisation>
         <foaf:name><%= @object %></foaf:name>
-      <foaf:/Organisation>
+      </foaf:Organisation>
     </dc:publisher>
   <% end %>
 
