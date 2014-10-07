@@ -3,19 +3,15 @@
 
 <skos:ConceptScheme rdf:about="<%= @conceptScheme %>">
 
-	<% for @object in query_rdf_objects( 'dc:title', @conceptScheme ) %>
+  <% for @object in query_rdf_objects( 'dc:title', @conceptScheme ) %>
   <dc:title><%= @object %></dc:title>
   <% end%>
 
-	<% for @object in query_rdf_objects( 'dc:title', @conceptScheme ) %>
-  <dc:title><%= @object %></dc:title>
-  <% end%>
-
-	<% for @object in query_rdf_objects( 'dc:description', @conceptScheme ) %>
+  <% for @object in query_rdf_objects( 'dc:description', @conceptScheme ) %>
  <dc:description><%= @object %></dc:description>
   <% end %>
 
-	<% for @object in query_rdf_objects( 'dc:creator', @conceptScheme ) %>
+  <% for @object in query_rdf_objects( 'dc:creator', @conceptScheme ) %>
     <dc:creator>
       <foaf:Organisation>
         <foaf:name><%= @object %></foaf:name>
@@ -24,7 +20,7 @@
   <% end %>
 
   
-	<% for @object in query_rdf_objects( 'dc:publisher', @conceptScheme ) %>
+  <% for @object in query_rdf_objects( 'dc:publisher', @conceptScheme ) %>
     <dc:publisher>
       <foaf:Organisation>
         <foaf:name><%= @object %></foaf:name>
@@ -34,7 +30,7 @@
 
   <dc:rights>Freely Available For Reuse</dc:rights>
 
-	<% for @object in query_rdf_objects( 'dcterms:issued', @conceptScheme ) %>
+  <% for @object in query_rdf_objects( 'dcterms:issued', @conceptScheme ) %>
   <dcterms:issued><%= @object %></dcterms:issued>
   <% end %>
 

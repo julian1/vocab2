@@ -898,7 +898,7 @@
 	</changeSet>
 
 
-	<!-- TO DO irrespective of how we organize, it doesn't make much
+	<!-- TO DO irrespective of how we organize the union code, it doesn't make
 		sense to have separate change sets for every view 
 
 		we should be grouping  in the one changeset
@@ -935,6 +935,7 @@
 
 
 
+	<!-- ConceptScheme for parameter vocabulary --> 
 
 	<changeSet author="julian" id="000113">
 		<createView viewName="_rdf_type_concept_scheme_2"> <!-- for vocaublary register -->
@@ -946,7 +947,30 @@
 		</createView>
 	</changeSet>
 
-			<!-- title is name --> 
+	
+
+	<!-- title is name --> 
+	<changeSet author="julian" id="000114">
+		<createView viewName="_rdf_dc_title_2">
+			select 
+				vr.uid as subject, 
+				'dc:title'::varchar as predicate, 
+				vr.name as object 
+			from vocabulary_register vr
+		</createView>
+	</changeSet>
+				
+	<!-- title is name --> 
+	<changeSet author="julian" id="000115">
+		<createView viewName="_rdf_dc_description_2">
+			select 
+				vr.uid as subject, 
+				'dc:description'::varchar as predicate, 
+				vr.content_summary as object
+			from vocabulary_register vr
+		</createView>
+	</changeSet>
+	
 
 
 
@@ -955,30 +979,18 @@
 			 regexp_matches 
 			 {34}
 			(1 row)
-
 		vocab=> select  regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '(.*)/.*$'  )    ;
              regexp_matches
 			 {http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category}
 			(1 row)
-
 		But we can't manage to cast the result to an int ...
-
-
 		select (regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  ))[1]::int
-
 		Adding this kind of order clause - prevents us from getting the values
 		which is really odd.
-			
 		order by
         ((regexp_matches( _rdf.subject, $$.*/([0-9]*)$ $$  ))[1]::int)
-
 	-->
-
-	<!-- lets do all the views and then decide how we want to aggregate them 
-
-		organizing according to predicate. 
-	-->
-
+	<!-- lets do all the views and then decide how we want to aggregate them organizing according to predicate.  -->
 	<!-- aggregate -->
 
 	<changeSet author="julian" id="000307">
@@ -1000,17 +1012,15 @@
 			union all select * from _rdf_skos_definition
 
 			union all select * from _rdf_dcterms_issued_2
-
 			union all select * from _skos_inscheme
-
 			union all select * from _skos_narrower
 			union all select * from _skos_broader
-
 
 			union all select * from _rdf_type_category
 
 			union all select * from _rdf_type_concept_scheme_2
-
+			union all select * from _rdf_dc_title_2
+			union all select * from _rdf_dc_description_2
 
 			-- TODO get rid of this later for performance
 			order by predicate, subject
