@@ -115,26 +115,17 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
     <skos:broader><%= @object %></skos:broader>
     <% end %>
 
-
     <% for @object in query_objects2( 'skos:prefLabel', @concept['subject']) %>
     <skos:prefLabel><%= @object %></skos:prefLabel>
     <% end %>
-
 
     <% for @object in query_objects2( 'skos:definition', @concept['subject']) %>
     <skos:definition><%= @object %></skos:definition>
     <% end %>
 
-    <% for @e in query_objects( 'dcterms:issued',  @concept['subject']) %>
-    <skos:issued><%= @e['object'] %></skos:issued>
-    <% end %>
-
-
     <% for @object in query_objects2( 'dcterms:issued', @concept['subject']) %>
-      <skos:issued><%= @object %></skos:issued>
+    <skos:issued><%= @object %></skos:issued>
     <% end %>
-
-
 
 </skos:Concept>
 <% end %>

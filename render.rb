@@ -49,6 +49,13 @@ class MyBinding
     end
   end
 
+  def query_subjects2( predicate, subject )
+    map_query( @conn, 'select subject from _rdf where predicate = $1 and object = $2', [predicate, object]) do |row|
+      row['subject']
+    end
+  end
+
+
 
   def query_objects( predicate, subject )
     sql_query( 'select object from _rdf where predicate = $1 and subject = $2', [predicate, subject])
