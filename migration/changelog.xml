@@ -936,6 +936,20 @@
 
 
 
+	<changeSet author="julian" id="000113">
+		<createView viewName="_rdf_type_concept_scheme_2"> <!-- for vocaublary register -->
+			select
+				r.uid as subject,
+				'rdf:type'::varchar as predicate,
+				'skos:ConceptScheme'::varchar as object
+			from vocabulary_register r
+		</createView>
+	</changeSet>
+
+			<!-- title is name --> 
+
+
+
 	<!--
 		vocab=> select regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  )    ;
 			 regexp_matches 
@@ -994,6 +1008,9 @@
 
 
 			union all select * from _rdf_type_category
+
+			union all select * from _rdf_type_concept_scheme_2
+
 
 			-- TODO get rid of this later for performance
 			order by predicate, subject

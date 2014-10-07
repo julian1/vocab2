@@ -1,8 +1,12 @@
 
+# Usage
+# ruby render.rb  -t skos1.erb
+
 # Important - we ought to pass the skos file to use as an argument.
 
 require 'erb'
 require 'pg'
+require 'optparse'
 
 
 def map_query( conn, query, args, &code )
@@ -17,7 +21,7 @@ end
 
 
 
-class MyBinding
+class RDFBinding
   include ERB::Util
   attr_accessor  :template, :date
 
@@ -70,11 +74,35 @@ class MyBinding
 
 end
 
-list = MyBinding.new( File.read('skos1.erb') )
-#list.save(File.join('./list.html'))
-# it's almost certainly ok, to spit it to stdout
-list.render()
 
+
+
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: example.rb [options]"
+  opts.on('-t', '--templatefile NAME', 'templatefile') { |v| options[:template_file] = v }
+end.parse!
+if options[:template_file]
+
+  #list = RDFBinding.new( File.read('skos1.erb') )
+  list = RDFBinding.new( File.read(options[:template_file] ) )
+  list.render()
+else
+  puts 'no file specified!'
+
+end
+
+
+# 
+# # need to feed the template as the first argument.
+# 
+# list = RDFBinding.new( File.read('skos1.erb') )
+# #list.save(File.join('./list.html'))
+# # it's almost certainly ok, to spit it to stdout
+# list.render()
+# 
 
 
 
