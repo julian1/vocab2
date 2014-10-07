@@ -1,0 +1,172 @@
+
+select eat.uid as eat_uid,  vt.uid as vt_uid from external_associated_terms eat join vocabulary_term vt on eat.vocabulary_term_id = vt.id and eat.uid = vt.uid ;
+
+--
+select eat.uid as eat_uid,  vt.uid as vt_uid from external_associated_terms eat left join vocabulary_term vt on eat.vocabulary_term_id = vt.id;
+
+with select eat.uid as eat_uid,  vt.uid as vt_uid from external_associated_terms eat left join vocabulary_term vt on eat.vocabulary_term_id = vt.id;
+
+---
+
+select eat.uid as eat, vt.uid as vt from external_associated_terms eat left join vocabulary_term vt on trim( eat.uid) = trim( vt.uid ) order by eat.uid;
+
+select eat.uid as eat, vt.uid as vt from external_associated_terms eat left join vocabulary_term vt on eat.uid = vt.uid ;
+
+select * from vocabulary_term where uid = 'http://vocab.ndg.nerc.ac.uk/term/S030/49/S0388' ;
+
+
+select eat.association_type_name, eat.uid, eat.vocabulary_term_id, vt.uid from external_associated_terms eat left join vocabulary_term vt on eat.vocabulary_term_id = vt.id ;
+
+# 
+select eat.*, vt.vocabulary_term_uid from external_associated_terms_table  eat left join vocabulary_term_table vt on vt.vocabulary_term_name = eat.vocabulary_term_name   and eat.external_term_uid != vt.vocabulary_term_uid;
+
+
+Now try to join,
+
+
+**********
+
+select classification_scheme_name as subject, 'rdf:type'::varchar as predicate, 'skos:ConceptScheme'::varchar as object from classification_scheme_table
+
+
+ 
+
+DO WE REALLY WANT SKOS as first class ? 
+
+	- Doesn't matter if disjoin groups  - so long as its all normalized
+
+	- Meaning the resource must be recorded in only one location.
+		Eg. either in vocabulary_term or elsewhere.
+		But not both.
+	
+	Or just relational stuff - and join it all up.
+		it still should be star kind of topology though 
+
+
+	- write the rdf views - so we can see what's going on. 
+
+
+when have the same data repeated in multiple places - i don't know what's
+authoritative and what's derivative / incorrect when there are differences. 
+
+	- need to investigate why bodc terms are in the main vocabulary_term as well
+		as external associated terms.
+
+		- More ideally - keep in associated terms - to capture nesting the nesting ? 
+			- and then just have a link off from the external term to the external stuff.
+
+
+		vocab=> select vocabulary_term_uid from term_category_classification where vocabulary_term_uid ~ 'nerc' limit 5;
+                   vocabulary_term_uid                    
+		----------------------------------------------------------
+		 http://vocab.nerc.ac.uk/collection/P01/current/CNDCZZ01/
+		 http://vocab.nerc.ac.uk/collection/L06/current/32/
+		 http://vocab.nerc.ac.uk/collection/P01/current/LCDAZZ01/
+		 http://vocab.nerc.ac.uk/collection/L06/current/11/
+		 http://vocab.nerc.ac.uk/collection/L06/current/14/
+		(5 rows)
+
+
+
+	- use serial primary keys (non null), and set the serial to the max value.
+
+
+	- register - internal table.
+
+	- classification - internal table.
+
+
+	- change internal association table name to skos_associations ?  
+
+
+---
+
+psql -h 127.0.0.1 -U meteo -d vocab -c  'select * from admin.objects where schema = $$contr_vocab_db$$'
+psql -h 127.0.0.1 -U meteo -d vocab -c  'set search_path=contr_vocab_db,public;select * from classification_scheme_table '
+
+select classification_scheme_name as subject,'dc:publisher' as predicate, person_name as object from contr_vocab_db.classification_scheme_table c join contr_vocab_db.person_table p on c.person_id = p.person_id;
+
+-------
+	The association table  which has hierarchy - seems to have elements like 'parent name' that perhaps shouldn't be there
+
+----
+	Views to compose the entries together 
+	Stored procedures - to do insertion -etc
+-----
+
+	done - don't need to append table name to all tables.
+
+	done - inconsistent field naming - using the qualified table name
+
+	done - table_name_id rather than just id. makes it more confusing to do joins
+
+	done - non-normalized - lots of duplicated fields in  classification_scheme_association_table
+		parent_category_name   , parent_category_label
+		not normalized.
+
+	done - hierarchy_level - is derivable from the nesting. and shouldn't be coded
+
+
+	done - Don't think we even need the association table. just drag across the parent field. 
+
+	done - alternative labels - are coded in the same table.  no they use an alternatt
+		when 
+
+	done - vocabulary_type_name is hard coded - 
+
+
+	done -  what is internal_relationship / external relationship ? 
+
+
+	------------------
+	select * from  classification_scheme_table ;
+
+----
+	there ought to be a single Concept term table  - that has the uids ?
+
+	- and then tables hanging off of that to indicate
+
+	psql -h 127.0.0.1 -U meteo -d vocab -c 'set search_path=contr_vocab_db,public; select classification_scheme_category_name  from classification_scheme_category_table '
+	psql -h 127.0.0.1 -U meteo -d vocab -c 'set search_path=contr_vocab_db,public; select vocabulary_term_uid  from vocabulary_term_table  '
+
+-----
+	Summary
+
+
+
+Hi Seb and Kim,
+
+I've had a closer look at some of the db changes, and have made a note of some thoughts that I had,
+
+- Are the subject_term_table and object_term_table tables required to 'recast' the vocabulary term to an id for use by the internal_associations_table? Since these appear to be a 1:1 mapping, why not just use the vocabularly_term uid's directly in the internal_associations_table?  Related to this - would it be better to use an integer as primary key for the vocabulary_term_table so this value is automaticall available? Note that the vocabulary_term_code would appear to be already available as a unique integer and not related to the integer in the vocabulary_term_uid.
+
+-  The hierarchy_level, parent_category_name and, parent_category_label should be removed from the classification_scheme_assocation_table, since this information can be obtained by joining on the parent_category_id - eg. it's not normalized. 	
+
+- Also the test as to whether the node is a root node and therefore a skos:TopConcept, can be performed by testing whether the parent_category_code is null, rather than testing the hierachy depth.
+
+- Rather than create the parameter classification system with three new tables - was there any consideration given to using the existing generic mechanism in the internal_assocations_table, for capturing nested relationships between terms?. Or in a more limited form, by using the internal_associations_table to hold the information in the classification_scheme_assocation_table - especially if many of the fields (hierarchy_level, parent_catogry_name, parent_category_label) are not needed? 
+
+- Related - there's confusion that when we query the classification_scheme_table, we only return 2 of the 3 classification schemes. The others come from the vocabulary_register_table. This doesn't feel right to me, and I wonder if it's possible to extract the common elements into a classfication table. 
+
+- The Internal_relationship and external_relationship fields of the vocabulary_term_table are unnecessary - as these relationships can be inferred with inner/outer joins as needed. 
+
+- Similarly, the Vocabulary_instance_of field in vocabulary_term_table is derivative of information already available in the internal_associations_terms_table.	
+
+- The alternative_term_expression should definitely use another table or at worst a postgres array in place of a string - so it's easy to work with without having to parse comma separated lists in sql.
+
+- Should vocabulary_register_table use an integer primary key. The current scheme prevents renaming the register which might be useful. 
+
+- In a lot of cases there are string primary keys, when string uri's which are probably more immutable are available. Also, it's not clear why integers for primary keys are sometimes used and sometimes rejected.
+
+- The added_by field of vocabulary_term_table ought to reference the person table rather than be a orphaned charString. 
+
+- Should the Vocabulary_type_name reference the register_uid rather than the register_name of the vocabulary_register_table? Or use an integer?
+
+
+Stylistically,
+
+- There's some inconsistent field naming which leads to verbosity. For example, it would be simpler to call the primary id field just id rather than table_name_id. Note that when joining in postgres, it's customary to alias the joined relation so it's usually clear where the field is coming from. 
+
+- Also appending '_table' to all tables makes for longer queries.   
+
+
