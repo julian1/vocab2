@@ -28,41 +28,40 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 -- I think we just need to refine the outer query a little more ...
  
 
-<% @conceptScheme = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1' 
-   %>
+<% @conceptScheme = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1' %>
 
 <skos:ConceptScheme rdf:about="<%= @conceptScheme %>">
 
-	<% for @e in query_objects( 'dc:title',  @conceptScheme ) %>
-    <dc:title><%= @e['object'] %></dc:title>
+	<% for @object in query_objects2( 'dc:title',  @conceptScheme ) %>
+    <dc:title><%= @object %></dc:title>
   <% end%>
 
-	<% for @e in query_objects( 'dc:description',  @conceptScheme ) %>
-    <dc:description><%= @e['object'] %></dc:description>
+	<% for @object in query_objects2( 'dc:description',  @conceptScheme ) %>
+    <dc:description><%= @object %></dc:description>
   <% end %>
 
-	<% for @e in query_objects( 'dc:creator',  @conceptScheme ) %>
+	<% for @object in query_objects2( 'dc:creator',  @conceptScheme ) %>
     <dc:creator>
       <foaf:Organisation>
-        <foaf:name><%= @e['object'] %></foaf:name>
+        <foaf:name><%= @object %></foaf:name>
       <foaf:/Organisation>
     </dc:creator>
   <% end %>
 
   -- TODO element is repeated twice
   
-	<% for @e in query_objects( 'dc:publisher',  @conceptScheme ) %>
+	<% for @object in query_objects2( 'dc:publisher',  @conceptScheme ) %>
     <dc:publisher>
       <foaf:Organisation>
-        <foaf:name><%= @e['object'] %></foaf:name>
+        <foaf:name><%= @object %></foaf:name>
       <foaf:/Organisation>
     </dc:publisher>
   <% end %>
 
   <dc:rights>Freely Available For Reuse</dc:rights>
 
-	<% for @e in query_objects( 'dcterms:issued',  @conceptScheme ) %>
-  <dcterms:issued><%= @e['object'] %></dcterms:issued>
+	<% for @object in query_objects2( 'dcterms:issued',  @conceptScheme ) %>
+  <dcterms:issued><%= @object %></dcterms:issued>
   <% end %>
 
 </skos:ConceptScheme>
@@ -70,41 +69,34 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
 
 
-
-
-<% for @topConcept in query_subjects2( 'rdf:type',  'skos:TopConcept') %>
+<% for @topConcept in query_subjects2( 'rdf:type', 'skos:TopConcept') %>
 <skos:TopConcept rdf:about="<%= @topConcept %>">
 
-    <% for @object in query_objects( 'skos:prefLabel',  @topConcept ) %>
+    <% for @object in query_objects( 'skos:prefLabel', @topConcept ) %>
     <skos:prefLabel><%= @object %></skos:prefLabel>
     <% end %>
 
-    <% for @object in query_objects( 'skos:definition',  @topConcept ) %>
+    <% for @object in query_objects( 'skos:definition', @topConcept ) %>
     <skos:definition><%= @object %></skos:definition>
     <% end %>
 
-    <% for @object in query_objects( 'dcterms:issued',  @topConcept ) %>
+    <% for @object in query_objects( 'dcterms:issued', @topConcept ) %>
     <dcterms:issued><%= @object %></dcterms:issued>
     <% end %>
 
-    <% for @object in query_objects( 'skos:inScheme',  @topConcept ) %>
+    <% for @object in query_objects( 'skos:inScheme', @topConcept ) %>
     <skos:inScheme><%= @object %></skos:inScheme>
     <% end %>
 
-    <% for @object in query_objects( 'skos:narrower',  @topConcept ) %>
+    <% for @object in query_objects( 'skos:narrower', @topConcept ) %>
     <skos:narrower><%= @object %></skos:narrower>
     <% end %>
 
 </skos:TopConcept>
 <% end %>
 
--- should be able to use query map function ...
 
-- it would be very nice if we could do this without indexing 
-- with the name. eg. e instead of @concept['subject]
-
-<% for @concept in query_subjects2( 'rdf:type',  'skos:Concept') %>
-
+<% for @concept in query_subjects2( 'rdf:type', 'skos:Concept') %>
 <skos:Concept rdf:about="<%= @concept %>">
 
     <% for @object in query_objects2( 'skos:inScheme', @concept) %>
