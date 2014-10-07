@@ -98,6 +98,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 </skos:TopConcept>
 <% end %>
 
+-- should be able to use query map function ...
 
 - it would be very nice if we could do this without indexing 
 - with the name. eg. e instead of @concept['subject]
@@ -124,6 +125,13 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
     <% for @e in query_objects( 'dcterms:issued',  @concept['subject']) %>
     <skos:issued><%= @e['object'] %></skos:issued>
     <% end %>
+
+
+    <% for @e in query_objects2( 'dcterms:issued',  @concept['subject']) %>
+      <skos:issued><%= @e %></skos:issued>
+    <% end %>
+
+
 
 </skos:Concept>
 <% end %>

@@ -5,6 +5,18 @@ require 'erb'
 require 'pg'
 
 
+def map_query( conn, query, args, &code )
+  # map a proc/block over postgres query result
+	xs = []
+	conn.exec( query, args ).each do |row|
+		# puts "-> #{row['subject']}"
+		xs << code.call( row ) 	
+	end
+	xs
+end
+
+
+
 
 class MyBinding
   include ERB::Util
@@ -30,6 +42,14 @@ class MyBinding
   # change name to rdf_objects and rdf_subjects ?
 # or query_rdf_objects ?
 
+
+  def query_objects2( predicate, subject )
+    map_query( @conn, 'select object from _rdf where predicate = $1 and subject = $2', [predicate, subject]) do |row|
+      row['object']
+    end
+  end
+
+
   def query_objects( predicate, subject )
     sql_query( 'select object from _rdf where predicate = $1 and subject = $2', [predicate, subject])
   end
@@ -37,6 +57,9 @@ class MyBinding
   def query_subjects( predicate, object )
     sql_query( 'select subject from _rdf where predicate = $1 and object = $2', [predicate, object ])
   end
+
+
+  
 
 
   def render()

@@ -21,6 +21,7 @@ conn = PG::Connection.open(
 
 
 def map_query( conn, query, args, &code )
+  # map a proc/block over postgres query result
 	xs = []
 	conn.exec( query, args ).each do |row|
 		# puts "-> #{row['subject']}"
@@ -31,7 +32,6 @@ end
 
 
 def fold_query( conn, query, args, xs, &code )
-
 	conn.exec( query, args ).each do |row|
 		# puts "-> #{row['subject']}"
 		code.call( row, xs ) 	
@@ -41,16 +41,18 @@ end
 
 
 
-# 
-# j = map_query( conn, 'select * from _rdf where predicate = $$rdf:type$$ and object = $1 ', ['skos:ConceptScheme']) do |x|
-# 	x['subject']
-# end 
-# 
 
-j = fold_query( conn, 'select * from _rdf where predicate = $$rdf:type$$ and object = $1 ', ['skos:ConceptScheme'], []) do |row, xs|
-	xs << row['subject']
+
+
+j = map_query( conn, 'select * from _rdf where predicate = $$rdf:type$$ and object = $1 ', ['skos:ConceptScheme']) do |x|
+	x['subject']
 end 
 
+
+# j = fold_query( conn, 'select * from _rdf where predicate = $$rdf:type$$ and object = $1 ', ['skos:ConceptScheme'], []) do |row, xs|
+# 	xs << row['subject']
+# end 
+# 
 
 
 puts j
