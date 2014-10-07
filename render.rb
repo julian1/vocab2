@@ -20,11 +20,10 @@ end
 
 class RDFBinding
 
-  include ERB::Util
-
-  def initialize( conn, date)
+  def initialize( conn, date, os)
     @conn = conn
     @date = date
+    @os = os
   end
 
   # we are going to need a more general sql, to limit everything
@@ -44,23 +43,22 @@ class RDFBinding
     end
   end
 
+  def render( filename )
+    # pass a filename here, in place of an already opened stream 
+    # to make it easier, to call with nested templates within templates
 
-  ### actually we shouldn't be passing os, we should be instead passing
-  ### the template
+    # instead we should be passing the os as an initializing argument
 
-  # we should pass the file name here... 
-	# to make it easier for nested templates to work
-
-  def render( filename  )
-	# we pass the filename here, rather than an already opened 
-	# stream to make it easier, to use with nested templates
-	
-	t = File.read( filename )
-    s = ERB.new( t).result(binding)
-
-    # s = ERB.new(@template, nil, '>').result(binding)
-    s = s.gsub /^[ \t]*$\n/, ''
-    puts s
+    [ filename, "templates/#{filename}"].each do |path|
+      if File.exists?( path)
+        # puts "opening #{path}"
+        s = ERB.new( File.read(path)).result(binding)
+        # s = ERB.new(@template, nil, '>').result(binding)
+        s = s.gsub /^[ \t]*$\n/, ''
+        @os.puts s
+        break
+      end
+    end
   end
 
 end
@@ -83,7 +81,7 @@ if options[:template_file]
   )
 
   #list = RDFBinding.new( File.read('skos1.erb') )
-  list = RDFBinding.new( conn, Time.now )
+  list = RDFBinding.new( conn, Time.now, $stdout )
   list.render( options[:template_file] )
 else
   puts 'no file specified!'

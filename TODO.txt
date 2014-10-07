@@ -22,4 +22,39 @@ Lets have a stab at the other skos. file.
 
 
 
+<!-- doing it like this makes it amenable to using sparql instead -->
+
+<!-- should change the encoding to charset=ISO-8859-1  -->
+<!-- should hard code rather than pass literals as parameter -->
+
+<!-- an element  dc publisher thats getting repeated twice probably because of the rp person outside join -->
+
+<!-- perhaps swap the ordering to read more cleanly - same as sparql 
+  eg. 
+
+    'select object from _rdf where subject = $1 and predicate = $$dc:title$$ ',
+  s p o
+-->
+
+
+
+<?xml version="1.0" encoding="windows-1252"?>
+<rdf:RDF 
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+xmlns:dc="http://purl.org/dc/elements/1.1/" 
+xmlns:dcterms="http://purl.org/dc/terms/" 
+xmlns:foaf="http://xmlns.com/foaf/0.1/">
+
+
+-- I think we need further constraints ...
+-- to restrict things to the parameter scheme .  how do we code this extra xml ? 
+   
+-- I think we just need to refine the outer query a little more ...
+
+-- there's actually quite a lot of opportunities to factor this stuff
+-- because it's only the controlling variable that changes 
+
+
+-- EXTREMELY IMPORTANT - we can use the same template. to generate.  
 
