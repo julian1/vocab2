@@ -9,7 +9,6 @@ def map_query( conn, query, args, &code )
   # map a proc/block over postgres query result
 	xs = []
 	conn.exec( query, args ).each do |row|
-		# puts "-> #{row['subject']}"
 		xs << code.call( row ) 	
 	end
 	xs
@@ -33,40 +32,22 @@ class MyBinding
     )
   end
 
-
-  def sql_query( s, a )
-    @conn.exec( s, a)
-  end
-
-  # and query rdf ?  
-  # change name to rdf_objects and rdf_subjects ?
-# or query_rdf_objects ?
-
+  # we are going to need a more general sql, to limit everything
+  # to the general parameter scheme
 
   def query_rdf_objects( predicate, subject )
-    map_query( @conn, 'select object from _rdf where predicate = $1 and subject = $2', [predicate, subject]) do |row|
+    map_query( @conn, 'select object from _rdf where predicate = $1 and subject = $2',
+    [predicate, subject]) do |row|
       row['object']
     end
   end
 
   def query_rdf_subjects( predicate, object )
-    map_query( @conn, 'select subject from _rdf where predicate = $1 and object = $2', [predicate, object]) do |row|
+    map_query( @conn, 'select subject from _rdf where predicate = $1 and object = $2',
+    [predicate, object]) do |row|
       row['subject']
     end
   end
-
-
-# 
-#   def query_objects( predicate, subject )
-#     sql_query( 'select object from _rdf where predicate = $1 and subject = $2', [predicate, subject])
-#   end
-# 
-#   def query_subjects( predicate, object )
-#     sql_query( 'select subject from _rdf where predicate = $1 and object = $2', [predicate, object ])
-#   end
-# 
-# 
-  
 
 
   def render()

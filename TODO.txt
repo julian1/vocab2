@@ -1,0 +1,17 @@
+
+TODO
+
+- Need to tighten up skos1 so it's only outputting stuff for parameter
+	should just be the outer loops that needs more constraint. 
+
+	- although the indirection is difficult. - we have to be able to trace it 
+	back. this might be hard.
+
+- need a view to tell us the nesting level of a concept.
+
+- need to verify that we've got 2nd and 3rd tier being outputted correctly
+
+---
+
+Lets have a stab at the other skos. file.
+
