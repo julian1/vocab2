@@ -50,10 +50,10 @@ class RDFBinding
     [ filename, "templates/#{filename}"].each do |path|
       if File.exists?( path)
         # puts "opening #{path}"
-        s = ERB.new( File.read(path)).result(binding)
-        # s = ERB.new(@template, nil, '>').result(binding)
-        s = s.gsub /^[ \t]*$\n/, ''
-        @os.puts s
+        result = ERB.new( File.read(path)).result(binding)
+        # result = ERB.new(@template, nil, '>').result(binding)
+        result = result.gsub /^[ \t]*$\n/, ''
+        @os.puts result
         break
       end
     end
