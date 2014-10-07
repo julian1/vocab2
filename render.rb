@@ -11,14 +11,12 @@ require 'optparse'
 
 def map_query( conn, query, args, &code )
   # map a proc/block over postgres query result
-	xs = []
-	conn.exec( query, args ).each do |row|
-		xs << code.call( row ) 	
-	end
-	xs
+  xs = []
+  conn.exec( query, args ).each do |row|
+    xs << code.call( row )
+  end
+  xs
 end
-
-
 
 
 class RDFBinding
@@ -49,8 +47,6 @@ class RDFBinding
     end
   end
 
-  # we should be passing in the stream to output
-  # 
   def render( os)
     s = ERB.new(@template).result(binding)
     # s = ERB.new(@template, nil, '>').result(binding)
@@ -58,22 +54,7 @@ class RDFBinding
     os.puts s
   end
 
-
-
-#   def save(file)
-#     File.open(file, "w+") do |f|
-#       f.write(render)
-#     end
-#   end
-#
-#   def save()
-#       $stdout.write(render)
-#   end
-#
-
 end
-
-
 
 
 
@@ -86,15 +67,14 @@ end.parse!
 if options[:template_file]
 
   conn = PG::Connection.open(
-      :host => "127.0.0.1",
-      :dbname => "vocab",
-      :user => "contr_vocab_db",
-      :password => "contr_vocab_db"
-    )
-
+    :host => '127.0.0.1',   # options[:dbhost] || '127.0.0.1'  etc
+    :dbname => 'vocab',
+    :user => 'contr_vocab_db',
+    :password => 'contr_vocab_db'
+  )
 
   #list = RDFBinding.new( File.read('skos1.erb') )
-  list = RDFBinding.new( conn, File.read(options[:template_file]), Time.now ) 
+  list = RDFBinding.new( conn, File.read(options[:template_file]), Time.now )
   list.render( $stdout )
 else
   puts 'no file specified!'
@@ -102,14 +82,14 @@ else
 end
 
 
-# 
+#
 # # need to feed the template as the first argument.
-# 
+#
 # list = RDFBinding.new( File.read('skos1.erb') )
 # #list.save(File.join('./list.html'))
 # # it's almost certainly ok, to spit it to stdout
 # list.render()
-# 
+#
 
 
 
