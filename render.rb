@@ -21,7 +21,6 @@ end
 class RDFBinding
 
   include ERB::Util
-#  attr_accessor  :template, :date
 
   def initialize( conn, date)
     @conn = conn
@@ -53,9 +52,8 @@ class RDFBinding
 	# to make it easier for nested templates to work
 
   def render( filename  )
-	# we pass the file name here, rather than an open stream here or in the 
-	# destructor to make it easier 
-
+	# we pass the filename here, rather than an already opened 
+	# stream to make it easier, to use with nested templates
 	
 	t = File.read( filename )
     s = ERB.new( t).result(binding)

@@ -38,7 +38,7 @@ xmlns:foaf="http://xmlns.com/foaf/0.1/">
 
 <% @conceptScheme = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1' %>
 
-<%= ERB.new(File.read("templates/concept_scheme.erb")).result(binding) %>
+<%= render "templates/concept_scheme.erb" %>
 
 
 
