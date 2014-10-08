@@ -30,6 +30,8 @@ class RDFBinding
   # we are going to need a more general sql, to limit everything
   # to the general parameter scheme
 
+  # change name sql_query_returning_subject ?
+
   def query_sql_subject( query, args )
     map_query( @conn, query, args) do |row|
       row['subject']
