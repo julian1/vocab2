@@ -1028,8 +1028,18 @@
 		</createView>
 	</changeSet>
 
+	<changeSet author="julian" id="000121">
+		<createView viewName="_skos_inscheme2">
+			select 
+				vt.uid as subject, 
+				'skos:inScheme' as predicate, 
+				vr.uid as object 
+			from vocabulary_term vt 
+			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id;
+		</createView>
+	</changeSet>
 
-	
+			
 
 	<!--
 		vocab=> select regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  )    ;
@@ -1086,7 +1096,7 @@
 			union all select * from _rdf_dcterms_issued_3
 
 			union all select * from _rdf_type_concept_2
-
+			union all select * from _skos_inscheme2
 
 			-- TODO get rid of this later for performance
 			order by predicate, subject

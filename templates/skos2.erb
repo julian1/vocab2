@@ -6,7 +6,11 @@
 <%= render "templates/concept_scheme.erb" %>
 
 
+<% for @concept in query_rdf_subjects( 'rdf:type', 'skos:Concept') %>
+	<%= render "templates/concept.erb" %>
+<% end %>
 
+<!-- we need the inScheme thing to be set before we can do proper predicates -->
 
 <%= render "templates/footer.erb" %>
 
