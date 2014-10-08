@@ -2,11 +2,11 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
 
-	<!-- TODO 
-		work out if we really need the trim. 
-		
-		also there are plenty of places that we are not using it. 
-		
+	<!-- TODO
+		work out if we really need the trim.
+
+		also there are plenty of places that we are not using it.
+
 		eg. the classification_scheme tables.
 	-->
 
@@ -595,9 +595,9 @@
 
 	<!-- classification_scheme_category -->
 	<changeSet author="julian" id="000016-5">
-		<!-- should name be called uri here 
+		<!-- should name be called uri here
 			from rdf/skos pov yes, but maybe not from higher level pov
-		--> 
+		-->
 		<renameColumn newColumnName="id" oldColumnName="classification_scheme_category_id" tableName="classification_scheme_category"/>
 		<renameColumn newColumnName="name" oldColumnName="classification_scheme_category_name" tableName="classification_scheme_category"/>
 		<renameColumn newColumnName="description" oldColumnName="classification_scheme_category_description" tableName="classification_scheme_category"/>
@@ -613,8 +613,8 @@
 	<!-- classification_scheme_association -->
 	<changeSet author="julian" id="000016-7">
 
-		<!-- TODO make sure there's some good user views for this 
-			especially to show the hierarchy_level. 
+		<!-- TODO make sure there's some good user views for this
+			especially to show the hierarchy_level.
 			- We could even annotate this within a custom namespace
 			if we wanted
 		-->
@@ -625,10 +625,10 @@
 		<dropColumn columnName="parent_category_label" tableName="classification_scheme_association"/>
 		<dropColumn columnName="classification_scheme_category_label" tableName="classification_scheme_association"/>
 
-		<!-- classification_scheme_id is available via classification_scheme_id field of 
-			of classification_scheme_category table which can be joined using classification_scheme_category_id 
+		<!-- classification_scheme_id is available via classification_scheme_id field of
+			of classification_scheme_category table which can be joined using classification_scheme_category_id
 			and appears to contain more complete data.
-		--> 
+		-->
 		<dropColumn columnName="classification_scheme_id" tableName="classification_scheme_association"/>
 
 		<!-- can be null, when it's root of the tree -->
@@ -837,7 +837,7 @@
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107">
 		<createView viewName="_rdf_skos_pref_label">
-			select 
+			select
 				c.name as subject,
 				'skos:prefLabel'::varchar as predicate,
 				c.label
@@ -849,7 +849,7 @@
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107-5">
 		<createView viewName="_rdf_skos_definition">
-			select 
+			select
 				c.name as subject,
 				'skos:definition'::varchar as predicate,
 				c.description
@@ -874,11 +874,11 @@
 
 	<changeSet author="julian" id="000109">
 		<createView viewName="_rdf_skos_inscheme">
-			select 
-				c.name as subject, 
-				'skos:inScheme' as predicate, 
-				s.name as object 
-			from classification_scheme_category c 
+			select
+				c.name as subject,
+				'skos:inScheme' as predicate,
+				s.name as object
+			from classification_scheme_category c
 			join classification_scheme s on c.classification_scheme_id = s.id;
 		</createView>
 	</changeSet>
@@ -886,25 +886,25 @@
 
 	<changeSet author="julian" id="000110">
 		<createView viewName="_rdf_skos_narrower">
-			select 
-				c2.name as subject, 
-				'skos:narrower' as predicate, 
+			select
+				c2.name as subject,
+				'skos:narrower' as predicate,
 				c1.name as object
-			from classification_scheme_association a 
-			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id 
-			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id 
-			-- order by c2.name, c1.name	
+			from classification_scheme_association a
+			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id
+			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id
+			-- order by c2.name, c1.name
 		</createView>
 	</changeSet>
 
 
 	<!-- TO DO irrespective of how we organize the union code, it doesn't make
-		sense to have separate change sets for every view 
+		sense to have separate change sets for every view
 
 		we should be grouping  in the one changeset
 
 		Also - Having an sql view of all the rdf is really useful,
-			even if we didn't use it for template generation. 
+			even if we didn't use it for template generation.
 	-->
 
 	<!-- Concept -->
@@ -922,20 +922,20 @@
 
 	<changeSet author="julian" id="000112">
 		<createView viewName="_rdf_skos_broader">
-			select 
-				c1.name as subject, 
-				'skos:broader' as predicate, 
+			select
+				c1.name as subject,
+				'skos:broader' as predicate,
 				c2.name as object
-			from classification_scheme_association a 
-			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id 
-			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id 
-			-- order by c2.name, c1.name	
+			from classification_scheme_association a
+			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id
+			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id
+			-- order by c2.name, c1.name
 		</createView>
 	</changeSet>
 
 
 
-	<!-- ConceptScheme for parameter vocabulary --> 
+	<!-- ConceptScheme for parameter vocabulary -->
 
 	<changeSet author="julian" id="000113">
 		<createView viewName="_rdf_type_concept_scheme_2"> <!-- for vocaublary register -->
@@ -947,34 +947,34 @@
 		</createView>
 	</changeSet>
 
-	
 
-	<!-- title is name --> 
+
+	<!-- title is name -->
 	<changeSet author="julian" id="000114">
 		<createView viewName="_rdf_dc_title_2">
-			select 
-				vr.uid as subject, 
-				'dc:title'::varchar as predicate, 
-				vr.name as object 
+			select
+				vr.uid as subject,
+				'dc:title'::varchar as predicate,
+				vr.name as object
 			from vocabulary_register vr
 		</createView>
 	</changeSet>
-				
+
 	<changeSet author="julian" id="000115">
 		<createView viewName="_rdf_dc_description_2">
-			select 
-				vr.uid as subject, 
-				'dc:description'::varchar as predicate, 
+			select
+				vr.uid as subject,
+				'dc:description'::varchar as predicate,
 				vr.content_summary as object
 			from vocabulary_register vr
 		</createView>
 	</changeSet>
-	
+
 	<changeSet author="julian" id="000116">
 		<createView viewName="_rdf_dc_creator_2">
-			select 
-				vr.uid as subject, 
-				'dc:creator'::varchar as predicate, 
+			select
+				vr.uid as subject,
+				'dc:creator'::varchar as predicate,
 				o.name
 			from vocabulary_register vr
 			join responsible_party rp on rp.id = vr. owner_responsible_party_id
@@ -984,9 +984,9 @@
 
 	<changeSet author="julian" id="000117">
 		<createView viewName="_rdf_dc_publisher_2">
-			select 
-				vr.uid as subject, 
-				'dc:publisher'::varchar as predicate, 
+			select
+				vr.uid as subject,
+				'dc:publisher'::varchar as predicate,
 				p.name
 			from vocabulary_register vr
 			join responsible_party rp on rp.id = vr. owner_responsible_party_id
@@ -997,9 +997,9 @@
 
 	<changeSet author="julian" id="000118">
 		<createView viewName="_rdf_dcterms_has_version">
-			select 
-				vr.uid as subject, 
-				'dcterms:hasVersion'::varchar as predicate, 
+			select
+				vr.uid as subject,
+				'dcterms:hasVersion'::varchar as predicate,
 				vr.version
 			from vocabulary_register vr
 		</createView>
@@ -1007,34 +1007,34 @@
 
 	<changeSet author="julian" id="000119">
 		<createView viewName="_rdf_dcterms_issued_3">
-			select 
-				vr.uid as subject, 
-				'dcterms:issued'::varchar as predicate, 
+			select
+				vr.uid as subject,
+				'dcterms:issued'::varchar as predicate,
 				vr.date::varchar as object
 			from vocabulary_register vr
 		</createView>
 	</changeSet>
 
 
-	<!-- --> 
+	<!-- -->
 
 	<changeSet author="julian" id="000120">
 		<createView viewName="_rdf_type_concept_2">
-			select 
-				vt.uid as subject, 
-				'rdf:type'::varchar as predicate, 
-				'skos:Concept'::varchar as object 
-			from vocabulary_term vt 
+			select
+				vt.uid as subject,
+				'rdf:type'::varchar as predicate,
+				'skos:Concept'::varchar as object
+			from vocabulary_term vt
 		</createView>
 	</changeSet>
 
 	<changeSet author="julian" id="000121">
 		<createView viewName="_rdf_skos_inscheme2">
-			select 
-				vt.uid as subject, 
-				'skos:inScheme' as predicate, 
-				vr.uid as object 
-			from vocabulary_term vt 
+			select
+				vt.uid as subject,
+				'skos:inScheme' as predicate,
+				vr.uid as object
+			from vocabulary_term vt
 			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id
 		</createView>
 	</changeSet>
@@ -1042,10 +1042,10 @@
 
 	<changeSet author="julian" id="000122">
 		<createView viewName="_rdf_skos_pref_label_2">
-			select 
-				vt.uid as subject, 
-				'skos:prefLabel'::varchar as predicate, 
-				vt.name as object 
+			select
+				vt.uid as subject,
+				'skos:prefLabel'::varchar as predicate,
+				vt.name as object
 			from vocabulary_term vt
 		</createView>
 	</changeSet>
@@ -1053,24 +1053,40 @@
 
 	<changeSet author="julian" id="000123">
 		<createView viewName="_rdf_skos_definition_2">
-			select 
-				vt.uid as subject, 
-				'skos:definition'::varchar as predicate, 
-				vt.definition as object 
+			select
+				vt.uid as subject,
+				'skos:definition'::varchar as predicate,
+				vt.definition as object
 			from vocabulary_term vt
 		</createView>
 	</changeSet>
 
 
+	<changeSet author="julian" id="000124">
+		<createView viewName="_rdf_dc_source">
+			select
+				vt.uid as subject,
+				'dc:source'::varchar as predicate,
+				case when rs.citation_string is not null
+					then rs.citation_string
+					else vr.name
+				end as object
+			from vocabulary_term vt
+			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id
+			left join reference_source rs on vt.reference_source_id = rs.id
+		</createView>
+	</changeSet>
 
-	<!-- IMPORTANT - we could denormalize everything if we wanted, for speed 
+
+
+
+
+	<!-- IMPORTANT - we could denormalize everything if we wanted, for speed
 		this would be easy in a script.
 	-->
-			
-
 	<!--
 		vocab=> select regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  )    ;
-			 regexp_matches 
+			 regexp_matches
 			 {34}
 			(1 row)
 		vocab=> select  regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '(.*)/.*$'  )    ;
@@ -1119,7 +1135,7 @@
 			union all select * from _rdf_dc_publisher_2
 
 			union all select * from _rdf_dcterms_has_version
-		
+
 			union all select * from _rdf_dcterms_issued_3
 
 			union all select * from _rdf_type_concept_2
@@ -1128,6 +1144,8 @@
 			union all select * from _rdf_skos_pref_label_2
 
 			union all select * from _rdf_skos_definition_2
+			union all select * from _rdf_dc_source
+
 
 			-- TODO get rid of this later for performance
 			-- order by predicate, subject
@@ -1138,13 +1156,13 @@
 
 	<!--changeSet author="julian" id="000308">
 		<sql>
-			CREATE FUNCTION rdf_object( predicate_ varchar, subject_ varchar  ) 
+			CREATE FUNCTION rdf_object( predicate_ varchar, subject_ varchar  )
 			RETURNS varchar AS $$
 			DECLARE
 			BEGIN
-				select object from _rdf where predicate = $1 and subject = $2 ; 
+				select object from _rdf where predicate = $1 and subject = $2 ;
 			END;
-			$$ LANGUAGE plpgsql;	
+			$$ LANGUAGE plpgsql;
 		</sql>
 	</changeSet-->
 
