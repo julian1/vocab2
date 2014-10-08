@@ -1119,7 +1119,7 @@
 			union all select * from _rdf_skos_pref_label_2
 
 			-- TODO get rid of this later for performance
-			order by predicate, subject
+			-- order by predicate, subject
 		</createView>
 	</changeSet>
 
