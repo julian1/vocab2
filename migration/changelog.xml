@@ -1036,7 +1036,7 @@
 	</changeSet>
 
 	<changeSet author="julian" id="000121">
-		<createView viewName="_rdf_skos_inscheme2">
+		<createView viewName="_rdf_skos_inscheme_2">
 			select
 				vt.uid as subject,
 				'skos:inScheme' as predicate,
@@ -1101,7 +1101,7 @@
 			left join reference_source rs on vt.reference_source_id = rs.id
 			left join organisation rso on rs.organisation_id = rso.id
 			-- vocabulary register organisation
-			-- Bad Data? contains references to value 52 but there is no corresponding organisation  
+			-- Bad Data? or migration - contains references to value 52 but there is no corresponding organisation  
 			-- in the original data
 			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id
 			left join responsible_party rp on vr.owner_responsible_party_id = rp.id
@@ -1117,6 +1117,21 @@
 			'dcterms:created'::varchar as predicate,
 			vt.date_added::varchar as object
 			from vocabulary_term vt
+		</createView>
+	</changeSet>
+
+
+	<!-- we want to do inScheme -->
+
+	<changeSet author="julian" id="000127">
+		<createView viewName="_rdf_skos_inscheme_3">
+			select
+				vt.uid as subject,
+				'skos:inScheme'::varchar as predicate,
+				s.name as object
+			from vocabulary_term vt
+			left join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
+			left join classification_scheme s on tcc.classification_scheme_id = s.id
 		</createView>
 	</changeSet>
 
@@ -1185,7 +1200,7 @@
 			union all select * from _rdf_dcterms_issued_3
 
 			union all select * from _rdf_type_concept_2
-			union all select * from _rdf_skos_inscheme2
+			union all select * from _rdf_skos_inscheme_2
 
 			union all select * from _rdf_skos_pref_label_2
 
@@ -1195,6 +1210,8 @@
 			union all select * from _rdf_dc_publisher_3
 
 			union all select * from _rdf_dcterms_created
+
+			union all select * from _rdf_skos_inscheme_3 
 
 			-- TODO get rid of this later for performance
 			-- order by predicate, subject
