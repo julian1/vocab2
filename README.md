@@ -10,10 +10,12 @@ run migrations
     cd migration/
     ./run_migrations.sh 
 
-example show rdf 
+Sql query examples for rdf view, 
 
-    ./connect
+	./connect.sh
     select * from _rdf ;
+	select * from _rdf where predicate = 'skos:inScheme' order by subject;
+	select subject,predicate,object from _rdf where predicate = 'rdf:type' order by object;
 
 render skos 
 
