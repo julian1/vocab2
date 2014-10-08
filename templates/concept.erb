@@ -29,5 +29,9 @@
     <skos:issued><%= @object %></skos:issued>
     <% end %>
 
+    <% for @object in query_rdf_objects( 'dcterms:created', @concept) %>
+    <skos:created><%= @object %></skos:created>
+    <% end %>
+
 </skos:Concept>
 

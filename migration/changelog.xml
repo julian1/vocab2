@@ -1103,6 +1103,18 @@
 	</changeSet>
 
 
+	<changeSet author="julian" id="000126">
+		<createView viewName="_rdf_dcterms_created">
+			select
+			vt.uid as subject,
+			'dcterms:created'::varchar as predicate,
+			vt.date_added::varchar as object
+			from vocabulary_term vt
+		</createView>
+	</changeSet>
+
+
+
 
 
 	<!-- we need to go back over the handbook - and see if there are any other dual things that we missed -->
@@ -1174,6 +1186,8 @@
 			union all select * from _rdf_dc_source
 
 			union all select * from _rdf_dc_publisher_3
+
+			union all select * from _rdf_dcterms_created
 
 			-- TODO get rid of this later for performance
 			-- order by predicate, subject
