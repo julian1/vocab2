@@ -1051,6 +1051,15 @@
 	</changeSet>
 
 
+	<changeSet author="julian" id="000123">
+		<createView viewName="_rdf_skos_definition_2">
+			select 
+				vt.uid as subject, 
+				'skos:definition'::varchar as predicate, 
+				vt.definition as object 
+			from vocabulary_term vt
+		</createView>
+	</changeSet>
 
 
 
@@ -1117,6 +1126,8 @@
 			union all select * from _rdf_skos_inscheme2
 
 			union all select * from _rdf_skos_pref_label_2
+
+			union all select * from _rdf_skos_definition_2
 
 			-- TODO get rid of this later for performance
 			-- order by predicate, subject
