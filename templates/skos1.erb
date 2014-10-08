@@ -4,7 +4,17 @@
 <% @conceptScheme = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1' %>
 <%= render "concept_scheme.erb" %>
 
-<% for @topConcept in query_rdf_subjects( 'rdf:type', 'skos:TopConcept') %>
+-- http://vocab.aodn.org.au/def/ClassScheme/parameter1
+
+select * from _rdf r1 where r1.predicate = 'skos:inScheme' and r1.object = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1' order by object ;
+
+
+<% for @topConcept in query_sql_subject( 
+	'select r1.subject
+	from _rdf r1
+	left join _rdf r2 on r2.subject = r1.subject
+	where r1.predicate = $$skos:inScheme$$ and r1.object = $$http://vocab.aodn.org.au/def/ClassScheme/parameter1$$
+	and r2.predicate = $$rdf:type$$ and r2.object = $$skos:TopConcept$$' , nil ) %>
 	<%= render "top_concept.erb" %>
 <% end %>
 
