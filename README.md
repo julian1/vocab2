@@ -10,12 +10,13 @@ run migrations
     cd migration/
     ./run_migrations.sh 
 
-show rdf 
+example show rdf 
 
     ./connect
     select * from _rdf ;
 
 render skos 
 
-    ruby render.rb
+	./render.rb  -t AODNParameterVocabulary.erb 
+	./render.rb  -t parameterClassificationScheme.erb
 
