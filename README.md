@@ -1,6 +1,10 @@
 vocab2
 ======
 
+checkout
+
+    git clone https://github.com/julian1/vocab2
+
 build db
 
     ./build.sh
@@ -10,7 +14,7 @@ run migrations
     cd migration/
     ./run_migrations.sh 
 
-Sql query examples for rdf view, 
+sql query examples for rdf view, 
 
     ./connect.sh
     select * from _rdf ;
@@ -19,6 +23,6 @@ Sql query examples for rdf view,
 
 render skos 
 
-	./render.rb  -t AODNParameterVocabulary.erb 
-	./render.rb  -t parameterClassificationScheme.erb
+    ./render.rb -t AODNParameterVocabulary.erb 
+    ./render.rb -t parameterClassificationScheme.erb
 
