@@ -910,7 +910,7 @@
 	<!-- Concept -->
 
 	<changeSet author="julian" id="000111">
-		<createView viewName="_rdf_type_category">
+		<createView viewName="_rdf_type_concept">
 			select
 				c.name as subject,
 				'rdf:type'::varchar as predicate,
@@ -1015,6 +1015,20 @@
 		</createView>
 	</changeSet>
 
+
+	<!-- --> 
+
+	<changeSet author="julian" id="000120">
+		<createView viewName="_rdf_type_concept_2">
+			select 
+				vt.uid as subject, 
+				'rdf:type'::varchar as predicate, 
+				'skos:Concept'::varchar as object 
+			from vocabulary_term vt ;
+		</createView>
+	</changeSet>
+
+
 	
 
 	<!--
@@ -1059,7 +1073,7 @@
 			union all select * from _skos_narrower
 			union all select * from _skos_broader
 
-			union all select * from _rdf_type_category
+			union all select * from _rdf_type_concept
 
 			union all select * from _rdf_type_concept_scheme_2
 			union all select * from _rdf_dc_title_2
@@ -1070,6 +1084,8 @@
 			union all select * from _rdf_dcterms_has_version
 		
 			union all select * from _rdf_dcterms_issued_3
+
+			union all select * from _rdf_type_concept_2
 
 
 			-- TODO get rid of this later for performance
