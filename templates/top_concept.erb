@@ -9,10 +9,6 @@
     <skos:definition><%= @object %></skos:definition>
     <% end %>
 
-    <% for @object in query_rdf_objects( 'dc:source', @topConcept ) %>
-    <dc:source><%= @object %></dc:source>
-    <% end %>
-
     <% for @object in query_rdf_objects( 'dcterms:issued', @topConcept ) %>
     <dcterms:issued><%= @object %></dcterms:issued>
     <% end %>
