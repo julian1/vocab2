@@ -836,7 +836,7 @@
 
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107">
-		<createView viewName="_rdf_rdf_skos_preflabel">
+		<createView viewName="_rdf_skos_pref_label">
 			select 
 				c.name as subject,
 				'skos:prefLabel'::varchar as predicate,
@@ -848,7 +848,7 @@
 
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107-5">
-		<createView viewName="_rdf_rdf_skos_definition">
+		<createView viewName="_rdf_skos_definition">
 			select 
 				c.name as subject,
 				'skos:definition'::varchar as predicate,
@@ -1039,6 +1039,24 @@
 		</createView>
 	</changeSet>
 
+
+	<changeSet author="julian" id="000122">
+		<createView viewName="_rdf_skos_pref_label_2">
+			select 
+				vt.uid as subject, 
+				'skos:prefLabel'::varchar as predicate, 
+				vt.name as object 
+			from vocabulary_term vt ;
+		</createView>
+	</changeSet>
+
+
+
+
+
+	<!-- IMPORTANT - we could denormalize everything if we wanted, for speed 
+		this would be easy in a script.
+	-->
 			
 
 	<!--
@@ -1075,8 +1093,8 @@
 
 			union all select * from _rdf_type_top_concept
 
-			union all select * from _rdf_rdf_skos_preflabel
-			union all select * from _rdf_rdf_skos_definition
+			union all select * from _rdf_skos_pref_label
+			union all select * from _rdf_skos_definition
 
 			union all select * from _rdf_dcterms_issued_2
 			union all select * from _rdf_skos_inscheme
@@ -1097,6 +1115,8 @@
 
 			union all select * from _rdf_type_concept_2
 			union all select * from _rdf_skos_inscheme2
+
+			union all select * from _rdf_skos_pref_label_2
 
 			-- TODO get rid of this later for performance
 			order by predicate, subject

@@ -30,9 +30,9 @@ class RDFBinding
   # we are going to need a more general sql, to limit everything
   # to the general parameter scheme
 
-  def query_sql( query, args )
+  def query_sql_subject( query, args )
     map_query( @conn, query, args) do |row|
-      row
+      row['subject']
     end
   end
 
@@ -48,7 +48,6 @@ class RDFBinding
 #     end
 #   end
 # 
-
 
   def query_rdf_objects( predicate, subject )
     map_query( @conn, 'select object from _rdf where predicate = $1 and subject = $2',

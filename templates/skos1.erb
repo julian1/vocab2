@@ -1,5 +1,5 @@
 
-<%= render "templates/header.erb" %>
+<%= render "header.erb" %>
 
 <% @conceptScheme = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1' %>
 <%= render "concept_scheme.erb" %>
@@ -9,8 +9,8 @@
 <% end %>
 
 <% for @concept in query_rdf_subjects( 'rdf:type', 'skos:Concept') %>
-	<%= render "templates/concept.erb" %>
+	<%= render "concept.erb" %>
 <% end %>
 
-<%= render "templates/footer.erb" %>
+<%= render "footer.erb" %>
 
