@@ -1005,6 +1005,17 @@
 		</createView>
 	</changeSet>
 
+	<changeSet author="julian" id="000119">
+		<createView viewName="_rdf_dcterms_issued_3">
+			select 
+				vr.uid as subject, 
+				'dcterms:issued'::varchar as predicate, 
+				vr.date::varchar as object
+			from vocabulary_register vr
+		</createView>
+	</changeSet>
+
+
 
 	
 
@@ -1059,6 +1070,9 @@
 			union all select * from _rdf_dc_publisher_2
 
 			union all select * from _rdf_dcterms_has_version
+		
+			union all select * from _rdf_dcterms_issued_3
+
 
 			-- TODO get rid of this later for performance
 			order by predicate, subject
