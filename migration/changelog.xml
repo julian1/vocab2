@@ -836,7 +836,7 @@
 
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107">
-		<createView viewName="_rdf_skos_preflabel">
+		<createView viewName="_rdf_rdf_skos_preflabel">
 			select 
 				c.name as subject,
 				'skos:prefLabel'::varchar as predicate,
@@ -848,7 +848,7 @@
 
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107-5">
-		<createView viewName="_rdf_skos_definition">
+		<createView viewName="_rdf_rdf_skos_definition">
 			select 
 				c.name as subject,
 				'skos:definition'::varchar as predicate,
@@ -873,7 +873,7 @@
 
 
 	<changeSet author="julian" id="000109">
-		<createView viewName="_skos_inscheme">
+		<createView viewName="_rdf_skos_inscheme">
 			select 
 				c.name as subject, 
 				'skos:inScheme' as predicate, 
@@ -885,7 +885,7 @@
 
 
 	<changeSet author="julian" id="000110">
-		<createView viewName="_skos_narrower">
+		<createView viewName="_rdf_skos_narrower">
 			select 
 				c2.name as subject, 
 				'skos:narrower' as predicate, 
@@ -921,7 +921,7 @@
 
 
 	<changeSet author="julian" id="000112">
-		<createView viewName="_skos_broader">
+		<createView viewName="_rdf_skos_broader">
 			select 
 				c1.name as subject, 
 				'skos:broader' as predicate, 
@@ -1029,7 +1029,7 @@
 	</changeSet>
 
 	<changeSet author="julian" id="000121">
-		<createView viewName="_skos_inscheme2">
+		<createView viewName="_rdf_skos_inscheme2">
 			select 
 				vt.uid as subject, 
 				'skos:inScheme' as predicate, 
@@ -1075,13 +1075,13 @@
 
 			union all select * from _rdf_type_top_concept
 
-			union all select * from _rdf_skos_preflabel
-			union all select * from _rdf_skos_definition
+			union all select * from _rdf_rdf_skos_preflabel
+			union all select * from _rdf_rdf_skos_definition
 
 			union all select * from _rdf_dcterms_issued_2
-			union all select * from _skos_inscheme
-			union all select * from _skos_narrower
-			union all select * from _skos_broader
+			union all select * from _rdf_skos_inscheme
+			union all select * from _rdf_skos_narrower
+			union all select * from _rdf_skos_broader
 
 			union all select * from _rdf_type_concept
 
@@ -1096,7 +1096,7 @@
 			union all select * from _rdf_dcterms_issued_3
 
 			union all select * from _rdf_type_concept_2
-			union all select * from _skos_inscheme2
+			union all select * from _rdf_skos_inscheme2
 
 			-- TODO get rid of this later for performance
 			order by predicate, subject
