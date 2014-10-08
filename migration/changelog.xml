@@ -643,6 +643,13 @@
 	</changeSet>
 
 
+	<changeSet author="julian" id="000021">
+		<!-- normalize -->
+		<dropColumn columnName="vocabulary_term_code" tableName="term_category_classification"/>
+		<dropColumn columnName="vocabulary_term_uid" tableName="term_category_classification"/>
+		<!-- consistent field naming -->
+		<renameColumn newColumnName="date_added" oldColumnName="date_added_to_association" tableName="term_category_classification"/>
+	</changeSet>
 
 	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
