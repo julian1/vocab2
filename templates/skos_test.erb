@@ -1,0 +1,7 @@
+
+
+<% for @concept1 in query_sql( 'select * from _rdf r2  where r2.predicate = $$skos:inScheme$$ and object = $$http://vocab.aodn.org.au/def/parameter$$'; @concept = concept1['subject'] )
+	<%= render "templates/concept.erb" %>
+<% end %>
+
+

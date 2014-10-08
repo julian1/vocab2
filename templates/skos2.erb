@@ -6,9 +6,10 @@
 <%= render "templates/concept_scheme.erb" %>
 
 
-<% for @concept in query_rdf_subjects( 'rdf:type', 'skos:Concept') %>
+<% for @concept in query_rdf_subjects( 'skos:inScheme', 'http://vocab.aodn.org.au/def/parameter' ) %>
 	<%= render "templates/concept.erb" %>
 <% end %>
+
 
 <!-- we need the inScheme thing to be set before we can do proper predicates -->
 
