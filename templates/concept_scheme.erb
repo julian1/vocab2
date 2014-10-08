@@ -11,8 +11,6 @@
  <dc:description><%= @object %></dc:description>
   <% end %>
 
-  trailing whitespace ...  
-  here
   <% for @object in query_rdf_objects( 'dc:creator', @conceptScheme ) %>
     <dc:creator>
       <foaf:Organisation>
@@ -20,7 +18,6 @@
       </foaf:Organisation>
     </dc:creator>
   <% end %>
-
   
   <% for @object in query_rdf_objects( 'dc:publisher', @conceptScheme ) %>
     <dc:publisher>
@@ -28,6 +25,10 @@
         <foaf:name><%= @object %></foaf:name>
       </foaf:Organisation>
     </dc:publisher>
+  <% end %>
+
+ <% for @object in query_rdf_objects( 'dcterms:hasVersion', @conceptScheme ) %>
+  <dcterms:hasVersion><%= @object %></dcterms:hasVersion>
   <% end %>
 
   <dc:rights>Freely Available For Reuse</dc:rights>

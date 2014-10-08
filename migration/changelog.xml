@@ -979,13 +979,34 @@
 			from vocabulary_register vr
 			join responsible_party rp on rp.id = vr. owner_responsible_party_id
 			join organisation o on rp.organisation_id = o.id
-
 		</createView>
 	</changeSet>
-	
-		<!--	select vr.uid as subject, 'dc:creator'::varchar as predicate, o.name from vocabulary_register vr join responsible_party rp on rp.id = vr. owner_responsible_party_id join organisation o on rp.organisation_id = o.id
 
-	-->
+	<changeSet author="julian" id="000117">
+		<createView viewName="_rdf_dc_publisher_2">
+			select 
+				vr.uid as subject, 
+				'dc:publisher'::varchar as predicate, 
+				p.name
+			from vocabulary_register vr
+			join responsible_party rp on rp.id = vr. owner_responsible_party_id
+			join person p on rp.person_id = p.id
+			join organisation o on rp.organisation_id = o.id
+		</createView>
+	</changeSet>
+
+	<changeSet author="julian" id="000118">
+		<createView viewName="_rdf_dcterms_has_version">
+			select 
+				vr.uid as subject, 
+				'dcterms:hasVersion'::varchar as predicate, 
+				vr.version
+			from vocabulary_register vr
+		</createView>
+	</changeSet>
+
+
+	
 
 	<!--
 		vocab=> select regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  )    ;
@@ -1035,6 +1056,9 @@
 			union all select * from _rdf_dc_title_2
 			union all select * from _rdf_dc_description_2
 			union all select * from _rdf_dc_creator_2
+			union all select * from _rdf_dc_publisher_2
+
+			union all select * from _rdf_dcterms_has_version
 
 			-- TODO get rid of this later for performance
 			order by predicate, subject
