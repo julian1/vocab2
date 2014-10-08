@@ -1,6 +1,7 @@
+#!/usr/bin/ruby 
 
 # Usage
-# ruby render.rb  -t templates/skos1.erb  | less
+#  ./render.rb -h 127.0.0.1 -p 'contr_vocab_db' -t templates/skos2.erb  | less 
 
 
 require 'erb'
@@ -68,10 +69,10 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: example.rb [options]"
   opts.on('-t', '--templatefile NAME', 'templatefile') { |v| options[:template_file] = v }
-  opts.on('-h', '--host NAME', 'host') { |v| options[:host] = v }
-  opts.on('-d', '--database NAME', 'database') { |v| options[:database] = v }
-  opts.on('-u', '--user NAME', 'user') { |v| options[:user] = v }
-  opts.on('-p', '--password NAME', 'password') { |v| options[:password] = v }
+  opts.on('-h', '--host NAME', 'host')          { |v| options[:host] = v }
+  opts.on('-d', '--database NAME', 'database')  { |v| options[:database] = v }
+  opts.on('-u', '--user NAME', 'user')          { |v| options[:user] = v }
+  opts.on('-p', '--password NAME', 'password')  { |v| options[:password] = v }
 end.parse!
 if options[:template_file]
 
