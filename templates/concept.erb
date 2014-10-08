@@ -21,6 +21,9 @@
     <dc:source><%= @object %></dc:source>
     <% end %>
 
+	<% for @object in query_rdf_objects( 'dc:publisher', @concept) %>
+    <dc:publisher><%= @object %></dc:publisher>
+    <% end %>
 
     <% for @object in query_rdf_objects( 'dcterms:issued', @concept) %>
     <skos:issued><%= @object %></skos:issued>

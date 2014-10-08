@@ -1078,7 +1078,34 @@
 	</changeSet>
 
 
+	<changeSet author="julian" id="000125">
+		<createView viewName="_rdf_dc_publisher_3">
+			select
+			vt.uid as subject,
+			-- rs.organisation_id, 
+			'dc:publisher'::varchar as predicate,
+			case
+				when rso.name is not null
+				then rso.name
+				else vro.name
+			end as object
+			from vocabulary_term vt
+			-- reference source organisation
+			left join reference_source rs on vt.reference_source_id = rs.id
+			left join organisation rso on rs.organisation_id = rso.id
+			-- vocabulary register organisation
+			-- Bad Data? contains references to value 52 but there is no corresponding organisation  
+			-- in the original data
+			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id
+			left join responsible_party rp on vr.owner_responsible_party_id = rp.id
+			left join organisation vro on rp.organisation_id = vro.id
+		</createView>
+	</changeSet>
 
+
+
+
+	<!-- we need to go back over the handbook - and see if there are any other dual things that we missed -->
 
 
 	<!-- IMPORTANT - we could denormalize everything if we wanted, for speed
@@ -1146,6 +1173,7 @@
 			union all select * from _rdf_skos_definition_2
 			union all select * from _rdf_dc_source
 
+			union all select * from _rdf_dc_publisher_3
 
 			-- TODO get rid of this later for performance
 			-- order by predicate, subject
