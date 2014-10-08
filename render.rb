@@ -68,14 +68,18 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: example.rb [options]"
   opts.on('-t', '--templatefile NAME', 'templatefile') { |v| options[:template_file] = v }
+  opts.on('-h', '--host NAME', 'host') { |v| options[:host] = v }
+  opts.on('-d', '--database NAME', 'database') { |v| options[:database] = v }
+  opts.on('-u', '--user NAME', 'user') { |v| options[:user] = v }
+  opts.on('-p', '--password NAME', 'password') { |v| options[:password] = v }
 end.parse!
 if options[:template_file]
 
   conn = PG::Connection.open(
-    :host => '127.0.0.1',   # options[:dbhost] || '127.0.0.1'  etc
-    :dbname => 'vocab',
-    :user => 'contr_vocab_db',
-    :password => 'contr_vocab_db'
+    :host =>    options[:host] || '127.0.0.1',
+    :dbname =>  options[:database] || 'vocab',
+    :user =>    options[:user] || 'contr_vocab_db',
+    :password => options[:password] || 'contr_vocab_db'
   )
 
   #list = RDFBinding.new( File.read('skos1.erb') )
