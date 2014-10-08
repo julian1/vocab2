@@ -20,6 +20,7 @@ sql query examples for rdf view,
     select * from _rdf ;
     select * from _rdf where predicate = 'skos:inScheme' order by subject;
     select * from _rdf where predicate = 'rdf:type' order by object;
+    select object from _rdf where predicate = 'skos:inScheme' and subject = 'http://vocab.aodn.org.au/def/parameter/383';
 
 render skos 
 
