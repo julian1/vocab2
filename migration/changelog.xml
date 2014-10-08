@@ -1024,7 +1024,7 @@
 				vt.uid as subject, 
 				'rdf:type'::varchar as predicate, 
 				'skos:Concept'::varchar as object 
-			from vocabulary_term vt ;
+			from vocabulary_term vt 
 		</createView>
 	</changeSet>
 
@@ -1035,7 +1035,7 @@
 				'skos:inScheme' as predicate, 
 				vr.uid as object 
 			from vocabulary_term vt 
-			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id;
+			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id
 		</createView>
 	</changeSet>
 
@@ -1046,7 +1046,7 @@
 				vt.uid as subject, 
 				'skos:prefLabel'::varchar as predicate, 
 				vt.name as object 
-			from vocabulary_term vt ;
+			from vocabulary_term vt
 		</createView>
 	</changeSet>
 
