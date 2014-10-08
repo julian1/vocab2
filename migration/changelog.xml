@@ -1136,6 +1136,30 @@
 	</changeSet>
 
 
+	<changeSet author="julian" id="000128">
+		<createView viewName="_rdf_skos_broader_2">
+			select
+				vt.uid as subject,
+				'skos:broader' as predicate,
+				csc.name as object
+			from vocabulary_term vt
+			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
+			join classification_scheme_category csc on tcc.classification_scheme_category_id = csc.id
+		</createView>
+	</changeSet>
+
+	<changeSet author="julian" id="000129">
+		<createView viewName="_rdf_skos_narrower_2">
+			select 
+				csc.name as subject,
+				'skos:narrower' as predicate,
+				vt.uid as object
+			from vocabulary_term vt 
+			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id 
+			join classification_scheme_category csc on tcc.classification_scheme_category_id = csc.id
+		</createView>
+	</changeSet>
+
 
 
 
@@ -1212,6 +1236,9 @@
 			union all select * from _rdf_dcterms_created
 
 			union all select * from _rdf_skos_inscheme_3 
+
+			union all select * from _rdf_skos_broader_2
+			union all select * from _rdf_skos_narrower_2
 
 			-- TODO get rid of this later for performance
 			-- order by predicate, subject
