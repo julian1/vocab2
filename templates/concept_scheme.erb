@@ -8,7 +8,7 @@
   <% end%>
 
   <% for @object in query_rdf_objects( 'dc:description', @conceptScheme ) %>
- <dc:description><%= @object %></dc:description>
+  <dc:description><%= @object %></dc:description>
   <% end %>
 
   <% for @object in query_rdf_objects( 'dc:creator', @conceptScheme ) %>

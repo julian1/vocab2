@@ -1,7 +1,7 @@
 #!/usr/bin/ruby 
 
-# Usage
-#  ./render.rb -h 127.0.0.1 -p 'contr_vocab_db' -t templates/skos2.erb  | less 
+# Example Usage
+# ./render.rb -t AODNParameterVocabulary.erb 
 
 
 require 'erb'
@@ -38,6 +38,8 @@ class RDFBinding
     end
   end
 
+#   inline exapanded queries don't seem to run any faster
+#
 #   def query_rdf_objects( predicate, subject )
 #     map_query( @conn, "select object from _rdf where predicate = $$#{predicate}$$ and subject = $$#{ subject }$$", nil) do |row|
 #       row['object']
@@ -49,7 +51,6 @@ class RDFBinding
 #       row['subject']
 #     end
 #   end
-# 
 
   def query_rdf_objects( predicate, subject )
     map_query( @conn, 'select object from _rdf where predicate = $1 and subject = $2',
@@ -66,7 +67,7 @@ class RDFBinding
   end
 
   def render( filename )
-    # pass a filename here, in place of an already opened stream
+    # pass a filename here in place of an already opened stream
     # to simplify use when calling recursively from nested templates
 
     [ filename, "templates/#{filename}"].each do |path|
@@ -106,9 +107,9 @@ if options[:template_file]
     :password => options[:password] || 'contr_vocab_db'
   )
 
-  #list = RDFBinding.new( File.read('skos1.erb') )
-  list = RDFBinding.new( conn, Time.now, $stdout )
-  list.render( options[:template_file] )
+  #context = RDFBinding.new( File.read('skos1.erb') )
+  context = RDFBinding.new( conn, Time.now, $stdout )
+  context.render( options[:template_file] )
 else
   puts 'no file specified!'
 

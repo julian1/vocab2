@@ -10,6 +10,8 @@ TODO,
 
 	impose some ordering. - perhaps in the query_rdf_objects() method 
 
+	create a view over classifications etc. maybe maybe not until after refactor.
+
 ----
 
 	- very not sure about the inscheme thing. it should be derived from the top
