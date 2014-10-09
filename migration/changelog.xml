@@ -659,7 +659,7 @@
 
 	<!-- view of responsible party - should perhaps have association -->
 	<changeSet author="julian" id="000019">
-		<createView viewName="_responsible_party">
+		<createView viewName="_user_responsible_party">
 			select
 				rp.id,
 				p.name as person_name,
@@ -673,7 +673,7 @@
 
 	<!-- amendment -->
 	<changeSet author="julian" id="000019-5">
-		<createView viewName="_amendment">
+		<createView viewName="_user_amendment">
 			select
 				trim(vt.uid) as uid,
 				a.type,
@@ -694,7 +694,7 @@
 
 	<!-- external associated terms -->
 	<changeSet author="julian" id="000020">
-		<createView viewName="_external_associated_terms">
+		<createView viewName="_user_external_associated_terms">
 			select
 				trim(vt.uid) as uid,
 				trim(vt.name) as name,
@@ -709,7 +709,7 @@
 
 	<!-- internal associated terms -->
 	<changeSet author="julian" id="000020-6">
-		<createView viewName="_internal_associated_terms">
+		<createView viewName="_user_internal_associated_terms">
 			select
 				trim(association_type_name) as type,
 				trim(svt.uid) as subject_uid,
@@ -725,7 +725,7 @@
 	<!-- we should put all these in a better order -->
 
 	<changeSet author="julian" id="000020-7">
-		<createView viewName="_reference_source">
+		<createView viewName="_user_reference_source">
 			select
 				trim( vt.uid) as uid,
 				trim(vt.name) as name,
@@ -1154,7 +1154,6 @@
 
 	<changeSet author="julian" id="000128">
 		<createView viewName="_rdf_skos_broader_2">
-
 			select
 			vt.uid as subject,
 			'skos:broader' as predicate,
@@ -1164,7 +1163,6 @@
 			-- get second-tier category
 			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
 			join classification_scheme_category t2_csc on tcc.classification_scheme_category_id = t2_csc.id
-
 		</createView>
 	</changeSet>
 
