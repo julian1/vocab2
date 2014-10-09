@@ -68,44 +68,6 @@ class RDFBinding
     end
   end
 
-  def render_new( filename )
-    # pass a filename here in place of an already opened stream
-    # to simplify use when calling recursively from nested templates
-
-    processed = false
-    [ filename, "templates/#{filename}"].each do |path|
-      if File.exists?( path)
-        # puts "opening #{path}"
-        result = ERB.new( File.read(path)).result(binding)
-        # result = ERB.new(@template, nil, '>').result(binding)
-        result = result.gsub /^[ \t]*$\n/, ''
-        @os.puts result
-        processed = true
-        break
-      end
-    end
-    if !processed
-      raise "Could not find template '#{filename}'!"
-    end
-  end
-
-# 
-#   def render( filename )
-#     # pass a filename here, in place of an already opened stream
-#     # to simplify use when calling recursively from nested templates
-#     [ filename, "templates/#{filename}"].each do |path|
-#       if File.exists?( path)
-#         # puts "opening #{path}"
-#         result = ERB.new( File.read(path)).result(binding)
-#         # result = ERB.new(@template, nil, '>').result(binding)
-#         result = result.gsub /^[ \t]*$\n/, ''
-#         @os.puts result
-#         break
-#       end
-#     end
-#   end
-# 
-
   def render( filename )
     # we need to use string temporaries, rather than output stream in order to get
     # proper sequencing in the recursive expansion of nested templates
@@ -126,8 +88,6 @@ class RDFBinding
     end
     result
   end
-
-
 
 end
 
