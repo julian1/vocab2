@@ -738,6 +738,23 @@
 		</createView>
 	</changeSet>
 
+	<changeSet author="julian" id="000020-8">
+		<createView viewName="_user_term_category_classification">
+			select
+			trim( vt.uid) as uid,
+			csc.name as classification_scheme_name,
+			csc.label as label,
+			csc.date_added as date_added
+
+			from vocabulary_term vt
+			-- get second-tier category
+			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
+			join classification_scheme_category csc on tcc.classification_scheme_category_id = csc.id
+
+			-- select label, date_added, description from  classification_scheme_category
+		</createView>
+	</changeSet>
+
 
 
 	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
@@ -1157,12 +1174,11 @@
 			select
 			vt.uid as subject,
 			'skos:broader' as predicate,
-			t2_csc.name as object
-
+			csc.name as object
 			from vocabulary_term vt
 			-- get second-tier category
 			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
-			join classification_scheme_category t2_csc on tcc.classification_scheme_category_id = t2_csc.id
+			join classification_scheme_category csc on tcc.classification_scheme_category_id = csc.id
 		</createView>
 	</changeSet>
 
