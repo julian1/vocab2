@@ -1136,7 +1136,7 @@
 	</changeSet>
 
 
-	<changeSet author="julian" id="000128">
+	<!--changeSet author="julian" id="000128">
 		<createView viewName="_rdf_skos_broader_2">
 			select
 				vt.uid as subject,
@@ -1158,7 +1158,7 @@
 			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id 
 			join classification_scheme_category csc on tcc.classification_scheme_category_id = csc.id
 		</createView>
-	</changeSet>
+	</changeSet -->
 
 
 
@@ -1237,8 +1237,6 @@
 
 			union all select * from _rdf_skos_inscheme_3 
 
-			union all select * from _rdf_skos_broader_2
-			union all select * from _rdf_skos_narrower_2
 
 			-- TODO get rid of this later for performance
 			-- order by predicate, subject
