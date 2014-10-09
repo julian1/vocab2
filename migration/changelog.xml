@@ -891,20 +891,7 @@
 	</changeSet>
 
 
-	<changeSet author="julian" id="000110">
-		<createView viewName="_rdf_skos_narrower">
-			select
-				c2.name as subject,
-				'skos:narrower' as predicate,
-				c1.name as object
-			from classification_scheme_association a
-			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id
-			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id
-			-- order by c2.name, c1.name
-		</createView>
-	</changeSet>
-
-
+	
 	<!-- TO DO irrespective of how we organize the union code, it doesn't make
 		sense to have separate change sets for every view
 
@@ -939,6 +926,18 @@
 			-- order by c2.name, c1.name
 		</createView>
 	</changeSet>
+
+
+	<changeSet author="julian" id="000112-1">
+		<createView viewName="_rdf_skos_narrower">
+			select
+				b.object as subject,
+				'skos:narrower' as predicate,
+				b.subject as object
+			from _rdf_skos_broader b
+		</createView>
+	</changeSet>
+
 
 
 
