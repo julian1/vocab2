@@ -27,12 +27,8 @@ class RDFBinding
     @os = os
   end
 
-  # we are going to need a more general sql, to limit everything
-  # to the general parameter scheme
-
-  # change name sql_query_returning_subject ?
-
   def query_sql_subject( query, args )
+    # supports composing general sql queries and returns the subject row
     map_query( @conn, query, args) do |row|
       row['subject']
     end
@@ -70,6 +66,7 @@ class RDFBinding
     # pass a filename here in place of an already opened stream
     # to simplify use when calling recursively from nested templates
 
+    processed = false
     [ filename, "templates/#{filename}"].each do |path|
       if File.exists?( path)
         # puts "opening #{path}"
@@ -77,8 +74,12 @@ class RDFBinding
         # result = ERB.new(@template, nil, '>').result(binding)
         result = result.gsub /^[ \t]*$\n/, ''
         @os.puts result
+        processed = true
         break
       end
+    end
+    if !processed
+      raise "Could not find template '#{filename}'!"
     end
   end
 
