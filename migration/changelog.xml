@@ -1161,6 +1161,53 @@
 	</changeSet -->
 
 
+	<changeSet author="julian" id="000128">
+		<createView viewName="_rdf_skos_broader_2">
+
+			select
+			vt.uid as subject,
+			'skos:broader' as predicate,
+			t2_csc.name as object
+
+			from vocabulary_term vt
+			-- get second-tier category
+			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
+			join classification_scheme_category t2_csc on tcc.classification_scheme_category_id = t2_csc.id
+
+			union all 
+
+			select 
+			vt.uid as subject,
+			'skos:broader' as predicate,
+			t1_csc.name as object
+
+			from vocabulary_term vt
+			-- get second-tier category
+			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
+			join classification_scheme_category t2_csc on tcc.classification_scheme_category_id = t2_csc.id
+			-- get first-tier category
+			join classification_scheme_association csa on csa.classification_scheme_category_id = t2_csc.id
+			join classification_scheme_category t1_csc on csa.parent_classification_scheme_category_id = t1_csc.id
+
+
+		</createView>
+	</changeSet>
+
+
+
+	<changeSet author="julian" id="000129">
+		<createView viewName="_rdf_skos_narrower_2">
+			select 
+			b.object as subject,
+			'skos:narrower'::varchar as predicate,
+			b.subject as object 
+			from _rdf_skos_broader_2 b order by subject;
+		</createView>
+	</changeSet>
+
+
+
+
 
 
 	<!-- we need to go back over the handbook - and see if there are any other dual things that we missed -->
@@ -1237,6 +1284,8 @@
 
 			union all select * from _rdf_skos_inscheme_3 
 
+			union all select * from _rdf_skos_broader_2
+			union all select * from _rdf_skos_narrower_2
 
 			-- TODO get rid of this later for performance
 			-- order by predicate, subject
