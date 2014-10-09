@@ -1,7 +1,7 @@
-#!/usr/bin/ruby 
+#!/usr/bin/ruby
 
 # Example Usage,
-# ./render.rb -t AODNParameterVocabulary.erb 
+# ./render.rb -t AODNParameterVocabulary.erb
 
 
 require 'erb'
@@ -21,7 +21,7 @@ end
 
 class RDFBinding
 
-  # we avoid building an intermediate data structure, and instead just expose an 
+  # we avoid building an intermediate data structure, and instead just expose an
   # interface for the template to directly query the rdf view
 
   def initialize( conn, date, os)
@@ -37,14 +37,15 @@ class RDFBinding
     end
   end
 
-#   inline exapanded queries don't appear to run any faster
+#   inline exapanded queries despite giving the optimiser a better look
+#   at the data, don't appear to run any faster
 #
 #   def query_rdf_objects( predicate, subject )
 #     map_query( @conn, "select object from _rdf where predicate = $$#{predicate}$$ and subject = $$#{ subject }$$", nil) do |row|
 #       row['object']
 #     end
 #   end
-# 
+#
 #   def query_rdf_subjects( predicate, object )
 #     map_query( @conn, "select subject from _rdf where predicate = $$#{predicate}$$ and object = $$#{object}$$", nil) do |row|
 #       row['subject']
@@ -52,8 +53,8 @@ class RDFBinding
 #   end
 
   def query_rdf_objects( predicate, subject )
-    map_query( @conn, %{  
-      select object from _rdf where predicate = $1 and subject = $2 
+    map_query( @conn, %{
+      select object from _rdf where predicate = $1 and subject = $2
       }, [predicate, subject]) do |row|
       row['object']
     end
@@ -61,7 +62,7 @@ class RDFBinding
 
   def query_rdf_subjects( predicate, object )
     map_query( @conn, %{
-      select subject from _rdf where predicate = $1 and object = $2 
+      select subject from _rdf where predicate = $1 and object = $2
       }, [predicate, object]) do |row|
       row['subject']
     end
