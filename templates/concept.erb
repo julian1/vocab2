@@ -2,15 +2,15 @@
 <skos:Concept rdf:about="<%= @concept %>">
 
     <% for @object in query_rdf_objects( 'skos:inScheme', @concept) %>
-    <skos:inScheme><%= @object %></skos:inScheme>
+    <skos:inScheme rdf:resource="<%= @object %>"/>
     <% end %>
 
     <% for @object in query_rdf_objects( 'skos:broader', @concept) %>
-    <skos:broader><%= @object %></skos:broader>
+    <skos:broader rdf:resource="<%= @object %>"/>
     <% end %>
 
     <% for @object in query_rdf_objects( 'skos:prefLabel', @concept) %>
-    <skos:prefLabel><%= @object %></skos:prefLabel>
+    <skos:prefLabel xml:lang="en"><%= @object %></skos:prefLabel>
     <% end %>
 
     <% for @object in query_rdf_objects( 'skos:definition', @concept) %>
