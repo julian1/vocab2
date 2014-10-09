@@ -9,6 +9,10 @@
     <skos:broader rdf:resource="<%= @object %>"/>
     <% end %>
 
+    <% for @object in query_rdf_objects( 'skos:narrower', @concept) %>
+    <skos:narrower rdf:resource="<%= @object %>"/>
+    <% end %>
+
     <% for @object in query_rdf_objects( 'skos:prefLabel', @concept) %>
     <skos:prefLabel xml:lang="en"><%= @object %></skos:prefLabel>
     <% end %>
