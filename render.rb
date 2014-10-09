@@ -68,7 +68,7 @@ class RDFBinding
     end
   end
 
-  def render( filename )
+  def render_new( filename )
     # pass a filename here in place of an already opened stream
     # to simplify use when calling recursively from nested templates
 
@@ -88,6 +88,40 @@ class RDFBinding
       raise "Could not find template '#{filename}'!"
     end
   end
+
+# 
+#   def render( filename )
+#     # pass a filename here, in place of an already opened stream
+#     # to simplify use when calling recursively from nested templates
+#     [ filename, "templates/#{filename}"].each do |path|
+#       if File.exists?( path)
+#         # puts "opening #{path}"
+#         result = ERB.new( File.read(path)).result(binding)
+#         # result = ERB.new(@template, nil, '>').result(binding)
+#         result = result.gsub /^[ \t]*$\n/, ''
+#         @os.puts result
+#         break
+#       end
+#     end
+#   end
+# 
+
+  def render( filename )
+    # we need to use string temporaries, rather than output stream to correctly deal with recursion
+    result = ""
+    [ filename, "templates/#{filename}"].each do |path|
+      if File.exists?( path)
+        # puts "opening #{path}"
+        x = ERB.new( File.read(path)).result(binding)
+        x = x.gsub /^[ \t]*$\n/, ''
+        result += x
+        break
+      end
+    end
+    result
+  end
+
+
 
 end
 
@@ -115,7 +149,9 @@ if options[:template_file]
   )
 
   context = RDFBinding.new( conn, Time.now, $stdout )
-  context.render( options[:template_file] )
+  result = context.render( options[:template_file] )
+
+  $stdout.puts result
 else
   puts 'no file specified!'
 
