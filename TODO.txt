@@ -1,4 +1,17 @@
 
+TODO, 
+	PAR remove
+	add platforms - find example
+	refacctor to get rid of top concept
+	refactor to use more generic nesting
+	refactor so terms don't specify their concept scheme - (check this / maybe)
+
+	go through other notes - for other things. 
+
+	impose some ordering. - perhaps in the query_rdf_objects() method 
+
+----
+
 	- very not sure about the inscheme thing. it should be derived from the top
 	of the narrower.  
 	- i think there must be urls repeated in the tables.
