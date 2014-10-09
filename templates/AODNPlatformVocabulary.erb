@@ -1,0 +1,13 @@
+
+<%= render "header.erb" %>
+
+<% @conceptScheme = 'http://vocab.aodn.org.au/def/platform' %>
+
+<%= render "concept_scheme.erb" %>
+
+<% for @concept in query_rdf_subjects( 'skos:inScheme', @conceptScheme  ) %>
+	<%= render "concept.erb" %>
+<% end %>
+
+<%= render "footer.erb" %>
+
