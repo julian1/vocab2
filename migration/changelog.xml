@@ -654,10 +654,12 @@
 	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 	<!-- USER VIEWS
-		join the tables up in some obvious ways, to aid understanding
+		join the tables up in some obvious ways, to aid logical presentation to human user
 	-->
 
-	<!-- view of responsible party - should perhaps have association -->
+	<!-- view of responsible party - should probably also have the association type
+		when we refactor this
+	-->
 	<changeSet author="julian" id="000019">
 		<createView viewName="_user_responsible_party">
 			select
@@ -722,14 +724,13 @@
 		</createView>
 	</changeSet>
 
-	<!-- we should put all these in a better order -->
 
 	<changeSet author="julian" id="000020-7">
 		<createView viewName="_user_reference_source">
 			select
 				trim( vt.uid) as uid,
 				trim(vt.name) as name,
-				rs.citation_string as citation_string,
+				trim( rs.citation_string) as citation_string,
 				rs.online_reference_resource as online_reference_resource,
 				o.acronym as organisation_acronym
 			from vocabulary_term vt
@@ -738,22 +739,40 @@
 		</createView>
 	</changeSet>
 
+
 	<changeSet author="julian" id="000020-8">
 		<createView viewName="_user_term_category_classification">
 			select
 			trim( vt.uid) as uid,
-			csc.name as classification_scheme_name,
-			csc.label as label,
+			trim( csc.name) as classification_scheme_category,
+			trim( csc.label) as label,
 			csc.date_added as date_added
-
 			from vocabulary_term vt
 			-- get second-tier category
 			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
 			join classification_scheme_category csc on tcc.classification_scheme_category_id = csc.id
-
-			-- select label, date_added, description from  classification_scheme_category
+			order by csc.name
 		</createView>
 	</changeSet>
+
+
+	<changeSet author="julian" id="000020-9">
+		<createView viewName="_user_classification_scheme_category">
+			select
+				trim( c2.name) as parent_name,
+				trim( c2.label) as parent_label,
+				trim( c1.name) as child_name,
+				trim( c1.label) as child_label
+			from classification_scheme_association a
+			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id
+			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id
+			order by c2.name
+			-- order by c2.name, c1.name
+		</createView>
+	</changeSet>
+
+
+
 
 
 
@@ -908,7 +927,7 @@
 	</changeSet>
 
 
-	
+
 	<!-- TO DO irrespective of how we organize the union code, it doesn't make
 		sense to have separate change sets for every view
 
@@ -1105,7 +1124,7 @@
 		<createView viewName="_rdf_dc_publisher_3">
 			select
 			vt.uid as subject,
-			-- rs.organisation_id, 
+			-- rs.organisation_id,
 			'dc:publisher'::varchar as predicate,
 			case
 				when rso.name is not null
@@ -1117,7 +1136,7 @@
 			left join reference_source rs on vt.reference_source_id = rs.id
 			left join organisation rso on rs.organisation_id = rso.id
 			-- vocabulary register organisation
-			-- Bad Data? or migration - contains references to value 52 but there is no corresponding organisation  
+			-- Bad Data? or migration - contains references to value 52 but there is no corresponding organisation
 			-- in the original data
 			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id
 			left join responsible_party rp on vr.owner_responsible_party_id = rp.id
@@ -1152,9 +1171,9 @@
 	</changeSet>
 
 
-   <!--     union all 
+   <!--     union all
 
-			select 
+			select
 			vt.uid as subject,
 			'skos:broader' as predicate,
 			t1_csc.name as object
@@ -1186,10 +1205,10 @@
 
 	<changeSet author="julian" id="000129">
 		<createView viewName="_rdf_skos_narrower_2">
-			select 
+			select
 			b.object as subject,
 			'skos:narrower'::varchar as predicate,
-			b.subject as object 
+			b.subject as object
 			from _rdf_skos_broader_2 b order by subject;
 		</createView>
 	</changeSet>
@@ -1271,7 +1290,7 @@
 
 			union all select * from _rdf_dcterms_created
 
-			union all select * from _rdf_skos_inscheme_3 
+			union all select * from _rdf_skos_inscheme_3
 
 			union all select * from _rdf_skos_broader_2
 			union all select * from _rdf_skos_narrower_2
