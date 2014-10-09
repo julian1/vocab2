@@ -107,16 +107,22 @@ class RDFBinding
 # 
 
   def render( filename )
-    # we need to use string temporaries, rather than output stream to correctly deal with recursion
+    # we need to use string temporaries, rather than output stream in order to get
+    # proper sequencing in the recursive expansion of nested templates
+    processed = false
     result = ""
     [ filename, "templates/#{filename}"].each do |path|
       if File.exists?( path)
         # puts "opening #{path}"
-        x = ERB.new( File.read(path)).result(binding)
-        x = x.gsub /^[ \t]*$\n/, ''
-        result += x
+        s = ERB.new( File.read(path)).result(binding)
+        s = s.gsub /^[ \t]*$\n/, ''
+        result += s
+        processed = true
         break
       end
+    end
+    if !processed
+      raise "Could not find template '#{filename}'!"
     end
     result
   end
