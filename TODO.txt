@@ -1,6 +1,12 @@
 
 TODO, 
 
+	- CONCEPT SCHEME IS REPEATED FOR PLATFORM.
+		and this causes the broader /narrower to be missing.
+
+		
+		 select * from _rdf where predicate = 'rdf:type' and subject = 'http://vocab.aodn.org.au/def/ClassScheme/platform1/Category/36' ;
+
 	- we have issue with platform1/Category/3 doesn't exist
 		- need platform classification category
 	
