@@ -642,7 +642,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	-->
 
 	<changeSet author="julian" id="000021-5">
-		<createView viewName="_uids">
+		<createView viewName="_user_uids">
 			select 'external_associated_terms' as relation, 'uid' as field, uid as uid  from external_associated_terms
 			union all
 			select 'classification_scheme', 'name', name from classification_scheme
