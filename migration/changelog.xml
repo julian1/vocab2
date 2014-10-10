@@ -1,68 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+<databaseChangeLog
+xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
 
 	<!-- TODO
-		work out if we really need the trim.
+		- work out if we really need the trim.
 
-		also there are plenty of places that we are not using it.
-
-		eg. the classification_scheme tables.
-	-->
-
-
-	<!--
-		should not have stray uid's around the place ...
-	-->
-
-	<!--
-		IMPORTANT
+		- IMPORTANT
 			- person_organisational_affiliation, could/should have the affiliation put in
 			the responsible party. but leave for the moment.
-			- and lave as null if no affiliation. if only person or organisation is present.
-			- but leave for now.
+			- and leave as null if no affiliation. if only person or organisation is present.
+			- but avoid for now.
+
+		- maybe change name responsible_party to just party to distinguish from iso concept
+
+		- group in the one changeset. - Irrespective of how we organize the union code, it doesn't make
+		sense to have separate change sets for every view
+
+		- need to go back over the handbook - and see if there are any other case/when handling that we missed
+
+		- we could denormalize everything if we wanted, for speed this would be easy in a script.
+
 	-->
-	<!--
-		IMPORTANT
-		There are many nerc references in the internal_associations_table
-
-		psql -h 127.0.0.1 -U contr_vocab_db -d vocab -c 'select name,uid from vocabulary_term where uid ~ $$nerc$$ '
-
-		Ok - because uses external_associations_table  Why ?
-	-->
-	<!--
-		think we want to change responsible_party to party
-	-->
 
 
-
-
-	<!-- rename tables -->
+	<!-- rename tables to get rid of _table suffix -->
 	<changeSet author="julian" id="000001">
-		<renameTable newTableName="affiliation_type" oldTableName="affiliation_type_table" />											<!-- done -->
-		<renameTable newTableName="amendment" oldTableName="amendment_table" />															<!-- done -->
-		<renameTable newTableName="association_type" oldTableName="association_type_table" />											<!-- done - one string but ok -->
+		<renameTable newTableName="affiliation_type" oldTableName="affiliation_type_table" />
+		<renameTable newTableName="amendment" oldTableName="amendment_table" />
+		<renameTable newTableName="association_type" oldTableName="association_type_table" />
 		<renameTable newTableName="classification_scheme_association" oldTableName="classification_scheme_association_table" />
 		<renameTable newTableName="classification_scheme_category" oldTableName="classification_scheme_category_table" />
 		<renameTable newTableName="classification_scheme" oldTableName="classification_scheme_table" />
-		<renameTable newTableName="external_associated_terms" oldTableName="external_associated_terms_table" />							<!-- good -->
+		<renameTable newTableName="external_associated_terms" oldTableName="external_associated_terms_table" />
 		<renameTable newTableName="internal_associated_terms" oldTableName="internal_associated_terms_table" />
 		<renameTable newTableName="object_term" oldTableName="object_term_table" />
-		<renameTable newTableName="organisation" oldTableName="organisation_name_table" />												<!-- good -->
-		<renameTable newTableName="organisation_synonym" oldTableName="organisation_synonym_table" />									<!-- good -->
-		<renameTable newTableName="person_organisational_affiliation" oldTableName="person_organisational_affiliation_table" />			<!-- ok but has 3 field composite key?? -->
-		<renameTable newTableName="person" oldTableName="person_table" />																<!-- good -->
-		<renameTable newTableName="reference_source" oldTableName="reference_source_table" />											<!-- good -->
-		<renameTable newTableName="register_manager" oldTableName="register_manager_table" />											<!-- removed -->
-		<renameTable newTableName="register_owner" oldTableName="register_owner_table" />												<!-- removed -->
+		<renameTable newTableName="organisation" oldTableName="organisation_name_table" />
+		<renameTable newTableName="organisation_synonym" oldTableName="organisation_synonym_table" />
+		<renameTable newTableName="person_organisational_affiliation" oldTableName="person_organisational_affiliation_table" />
+		<renameTable newTableName="person" oldTableName="person_table" />
+		<renameTable newTableName="reference_source" oldTableName="reference_source_table" />
+		<renameTable newTableName="register_manager" oldTableName="register_manager_table" />
+		<renameTable newTableName="register_owner" oldTableName="register_owner_table" />
 		<renameTable newTableName="subject_term" oldTableName="subject_term_table" />
 		<renameTable newTableName="term_category_classification" oldTableName="term_category_classification_table" />
-		<renameTable newTableName="term_proposer" oldTableName="term_proposer_table" />													<!-- removed -->
+		<renameTable newTableName="term_proposer" oldTableName="term_proposer_table" />
 		<renameTable newTableName="vocabulary_register" oldTableName="vocabulary_register_table" />
-		<renameTable newTableName="vocabulary_term" oldTableName="vocabulary_term_table" />												<!-- ok -->
-		<renameTable newTableName="vocabulary_type" oldTableName="vocabulary_type_table" />												<!-- good -->
+		<renameTable newTableName="vocabulary_term" oldTableName="vocabulary_term_table" />
+		<renameTable newTableName="vocabulary_type" oldTableName="vocabulary_type_table" />
 	</changeSet>
 
+
+	<!-- support for DDL actions --> 
 	<changeSet author="julian" id="000001-5">
        <sql>
 			create function exec(text) returns text
@@ -71,7 +62,6 @@
 			grant all on function exec(text) to public
        </sql>
 	</changeSet>
-
 
 
 	<!-- organisation name -->
@@ -207,7 +197,6 @@
 	</changeSet>
 
 
-
 	<!-- vocabulary_term -->
 	<changeSet author="julian" id="000006">
 		<!-- remove old primary key, add new integer one -->
@@ -302,11 +291,9 @@
 	</changeSet>
 
 
-
-
 	<!-- external_associated_terms -->
 	<changeSet author="julian" id="000007">
-		<!-- dont need primary keys here -->
+		<!-- not necessary for primary key here since nothing references -->
 
 		<!-- reference vocabulary_term(id) -->
 		<addColumn tableName="external_associated_terms">
@@ -345,8 +332,6 @@
 			that is not repeated anywhere else -->
 
 	</changeSet>
-
-
 
 
 	<!-- amendment -->
@@ -427,9 +412,6 @@
 	</changeSet>
 
 
-
-
-
 	<!-- association_type -->
 	<changeSet author="julian" id="000009">
 		<!-- name is primary key -->
@@ -472,7 +454,7 @@
 
 	<!-- person_organisational_affiliation  -->
 	<!-- this is a composite primary key, should probably just be a unique constraint on the 3 terms
-		or better - combine into the responsible_party concept
+		or and then link with integer id. better - combine into the responsible_party concept
 	-->
 	<changeSet author="julian" id="000014">
 		<renameColumn newColumnName="organisation_id" oldColumnName="organisation_name_id" tableName="person_organisational_affiliation"/>
@@ -535,7 +517,6 @@
 	</changeSet>
 
 
-
 	<!-- term_category_classification -->
 	<changeSet author="julian" id="000018">
 		<!-- use vocabulary_term(id), and drop vocabulary_term_name -->
@@ -595,8 +576,8 @@
 
 	<!-- classification_scheme_category -->
 	<changeSet author="julian" id="000016-5">
-		<!-- should name be called uri here
-			from rdf/skos pov yes, but maybe not from higher level pov
+		<!-- should name be called uri here?
+			from rdf/skos pov yes, but maybe not from higher level conceptual pov
 		-->
 		<renameColumn newColumnName="id" oldColumnName="classification_scheme_category_id" tableName="classification_scheme_category"/>
 		<renameColumn newColumnName="name" oldColumnName="classification_scheme_category_name" tableName="classification_scheme_category"/>
@@ -612,12 +593,6 @@
 
 	<!-- classification_scheme_association -->
 	<changeSet author="julian" id="000016-7">
-
-		<!-- TODO make sure there's some good user views for this
-			especially to show the hierarchy_level.
-			- We could even annotate this within a custom namespace
-			if we wanted
-		-->
 
 		<!-- normalize -->
 		<dropColumn columnName="hierarchy_level" tableName="classification_scheme_association"/>
@@ -651,6 +626,7 @@
 		<renameColumn newColumnName="date_added" oldColumnName="date_added_to_association" tableName="term_category_classification"/>
 	</changeSet>
 
+
 	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 	<!-- USER VIEWS
@@ -658,8 +634,7 @@
 	-->
 
 	<!-- view of responsible party - should probably also have the association type
-		when we refactor this
-	-->
+		when we refactor this -->
 	<changeSet author="julian" id="000019">
 		<createView viewName="_user_responsible_party">
 			select
@@ -706,7 +681,6 @@
 			left join vocabulary_term vt on eat.vocabulary_term_id = vt.id;
 		</createView>
 	</changeSet>
-
 
 
 	<!-- internal associated terms -->
@@ -772,15 +746,10 @@
 	</changeSet>
 
 
-
-
-
-
 	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 	<!-- RDF views -->
 
 	<!-- Concept Scheme -->
-
 	<changeSet author="julian" id="000100-5">
 		<createView viewName="_rdf_type_concept_scheme">    <!-- for classification scheme -->
 			select
@@ -793,7 +762,6 @@
 
 
 	<!-- classification scheme -->
-
 	<changeSet author="julian" id="000100-6">
 		<createView viewName="_rdf_dcterms_issued">
 			select
@@ -815,6 +783,7 @@
 		</createView>
 	</changeSet>
 
+
 	<changeSet author="julian" id="000104">
 		<createView viewName="_rdf_dc_description">
 			select
@@ -827,9 +796,7 @@
 
 
 	<!-- we're dealing with persons not organisations here
-		Mappings doc, suggests, should not include organisation here.
-	-->
-
+		Mappings doc, suggests, should not include organisation here -->
 	<changeSet author="julian" id="000105">
 		<createView viewName="_rdf_dc_creator">
 			select
@@ -856,10 +823,7 @@
 	</changeSet>
 
 
-
-	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 	<!-- TopConcept -->
-
 	<changeSet author="julian" id="000106-1">
 		<createView viewName="_rdf_type_top_concept">
 			select
@@ -874,9 +838,6 @@
 
 
 	<!-- concept -->
-
-	<!-- should we capitalize the skos xml namespace ? -->
-
 	<!-- this is for any category - not just top concept -->
 	<changeSet author="julian" id="000107">
 		<createView viewName="_rdf_skos_pref_label">
@@ -901,9 +862,7 @@
 	</changeSet>
 
 
-
 	<!-- why not build aggregated views but group  somewhat -->
-
 	<changeSet author="julian" id="000108">
 		<createView viewName="_rdf_dcterms_issued_2">
 			select
@@ -928,17 +887,8 @@
 
 
 
-	<!-- TO DO irrespective of how we organize the union code, it doesn't make
-		sense to have separate change sets for every view
-
-		we should be grouping  in the one changeset
-
-		Also - Having an sql view of all the rdf is really useful,
-			even if we didn't use it for template generation.
-	-->
 
 	<!-- Concept -->
-
 	<changeSet author="julian" id="000111">
 		<createView viewName="_rdf_type_concept">
 			select
@@ -1156,8 +1106,6 @@
 	</changeSet>
 
 
-	<!-- we want to do inScheme -->
-
 	<changeSet author="julian" id="000127">
 		<createView viewName="_rdf_skos_inscheme_3">
 			select
@@ -1171,20 +1119,22 @@
 	</changeSet>
 
 
-   <!--     union all
+   <!--     
+		sql for first and second tier broader predicate    
+		union all
 
-			select
-			vt.uid as subject,
-			'skos:broader' as predicate,
-			t1_csc.name as object
+		select
+		vt.uid as subject,
+		'skos:broader' as predicate,
+		t1_csc.name as object
 
-			from vocabulary_term vt
-			- get second-tier category
-			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
-			join classification_scheme_category t2_csc on tcc.classification_scheme_category_id = t2_csc.id
-			- get first-tier category
-			join classification_scheme_association csa on csa.classification_scheme_category_id = t2_csc.id
-			join classification_scheme_category t1_csc on csa.parent_classification_scheme_category_id = t1_csc.id
+		from vocabulary_term vt
+		- get second-tier category
+		join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
+		join classification_scheme_category t2_csc on tcc.classification_scheme_category_id = t2_csc.id
+		- get first-tier category
+		join classification_scheme_association csa on csa.classification_scheme_category_id = t2_csc.id
+		join classification_scheme_category t1_csc on csa.parent_classification_scheme_category_id = t1_csc.id
 	-->
 
 
@@ -1202,7 +1152,6 @@
 	</changeSet>
 
 
-
 	<changeSet author="julian" id="000129">
 		<createView viewName="_rdf_skos_narrower_2">
 			select
@@ -1215,34 +1164,21 @@
 
 
 
-
-
-
-	<!-- we need to go back over the handbook - and see if there are any other dual things that we missed -->
-
-
-	<!-- IMPORTANT - we could denormalize everything if we wanted, for speed
-		this would be easy in a script.
-	-->
 	<!--
+		Would be nice to order term results better, eg.
+
 		vocab=> select regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  )    ;
 			 regexp_matches
 			 {34}
-			(1 row)
+
 		vocab=> select  regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '(.*)/.*$'  )    ;
              regexp_matches
 			 {http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category}
-			(1 row)
-		But we can't manage to cast the result to an int ...
-		select (regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  ))[1]::int
-		Adding this kind of order clause - prevents us from getting the values
-		which is really odd.
-		order by
+
         ((regexp_matches( _rdf.subject, $$.*/([0-9]*)$ $$  ))[1]::int)
 	-->
-	<!-- lets do all the views and then decide how we want to aggregate them organizing according to predicate.  -->
-	<!-- aggregate -->
 
+	<!-- aggregate rdf view -->
 	<changeSet author="julian" id="000307">
 		<createView viewName="_rdf">
 			select * from _rdf_dcterms_issued
@@ -1278,11 +1214,10 @@
 			union all select * from _rdf_skos_broader_2
 			union all select * from _rdf_skos_narrower_2
 
-			-- TODO get rid of this later for performance
+			-- TODO this is useful in develop, but slows things down so get rid of it later for performance
 			-- order by predicate, subject
 		</createView>
 	</changeSet>
-
 
 
 	<!--changeSet author="julian" id="000308">
