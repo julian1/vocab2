@@ -8,6 +8,6 @@ mkdir "$output"
 ./render.rb -t AODNParameterVocabulary.erb			> $output/AODNParameterVocabulary.xml
 ./render.rb -t parameterClassificationScheme.erb	> $output/parameterClassificationScheme.xml
 
-./render.rb -t platformClassificationScheme.erb		> $output/platformClassificationScheme.erb
+./render.rb -t platformClassificationScheme.erb		> $output/platformClassificationScheme.xml
 
 
