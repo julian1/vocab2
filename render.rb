@@ -34,7 +34,7 @@ class RDFBinding
   def query_sql_subject( query, args )
     # supports composing general sql queries and returns the subject row
     map_query( @conn, query, args) do |row|
-      row['subject']
+      row['subject'].encode(:xml => :text)
     end
   end
 
@@ -53,11 +53,12 @@ class RDFBinding
 #     end
 #   end
 
+
   def query_rdf_objects( predicate, subject )
     map_query( @conn, %{
       select object from _rdf where predicate = $1 and subject = $2
       }, [predicate, subject]) do |row|
-      row['object']
+      row['object'].encode(:xml => :text)
     end
   end
 
@@ -65,7 +66,7 @@ class RDFBinding
     map_query( @conn, %{
       select subject from _rdf where predicate = $1 and object = $2
       }, [predicate, object]) do |row|
-      row['subject']
+      row['subject'].encode(:xml => :text)
     end
   end
 
