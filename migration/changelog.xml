@@ -1165,8 +1165,8 @@
 				'skos:inScheme'::varchar as predicate,
 				s.name as object
 			from vocabulary_term vt
-			left join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
-			left join classification_scheme s on tcc.classification_scheme_id = s.id
+			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
+			join classification_scheme s on tcc.classification_scheme_id = s.id
 		</createView>
 	</changeSet>
 
