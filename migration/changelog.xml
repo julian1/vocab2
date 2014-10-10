@@ -1246,52 +1246,35 @@
 	<changeSet author="julian" id="000307">
 		<createView viewName="_rdf">
 			select * from _rdf_dcterms_issued
-
 			union all select * from _rdf_type_concept_scheme
-
-				-- rename to _rdf_concept_scheme_dc_publisher etc
 			union all select * from _rdf_dc_publisher
 			union all select * from _rdf_dc_title
 			union all select * from _rdf_dc_description
 			union all select * from _rdf_dc_creator
 			union all select * from _rdf_dc_publisher
-
 			union all select * from _rdf_type_top_concept
-
 			union all select * from _rdf_skos_pref_label
 			union all select * from _rdf_skos_definition
-
 			union all select * from _rdf_dcterms_issued_2
 			union all select * from _rdf_skos_inscheme
 			union all select * from _rdf_skos_narrower
 			union all select * from _rdf_skos_broader
-
 			union all select * from _rdf_type_concept
-
 			union all select * from _rdf_type_concept_scheme_2
 			union all select * from _rdf_dc_title_2
 			union all select * from _rdf_dc_description_2
 			union all select * from _rdf_dc_creator_2
 			union all select * from _rdf_dc_publisher_2
-
 			union all select * from _rdf_dcterms_has_version
-
 			union all select * from _rdf_dcterms_issued_3
-
 			union all select * from _rdf_type_concept_2
 			union all select * from _rdf_skos_inscheme_2
-
 			union all select * from _rdf_skos_pref_label_2
-
 			union all select * from _rdf_skos_definition_2
 			union all select * from _rdf_dc_source
-
 			union all select * from _rdf_dc_publisher_3
-
 			union all select * from _rdf_dcterms_created
-
 			union all select * from _rdf_skos_inscheme_3
-
 			union all select * from _rdf_skos_broader_2
 			union all select * from _rdf_skos_narrower_2
 
