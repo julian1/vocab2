@@ -1163,6 +1163,32 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
+	<!-- broader for platforms -->
+	<changeSet author="julian" id="000130">
+		<createView viewName="_rdf_skos_broader_3">
+			select
+                svt.uid as subject,
+                'skos:broader' as predicate,
+                ovt.uid as object
+            from internal_associated_terms iat
+            left join vocabulary_term svt on iat.subject_vocabulary_term_id = svt.id
+            left join vocabulary_term ovt on iat.object_vocabulary_term_id = ovt.id
+            where association_type_name = 'isInstanceOf'
+		</createView>
+	</changeSet>
+
+
+	<changeSet author="julian" id="000131">
+		<createView viewName="_rdf_skos_narrower_3">
+			select
+			b.object as subject,
+			'skos:narrower'::varchar as predicate,
+			b.subject as object
+			from _rdf_skos_broader_3 b order by subject;
+		</createView>
+	</changeSet>
+
+
 
 	<!--
 		Would be nice to order term results better, eg.
@@ -1213,6 +1239,8 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			union all select * from _rdf_skos_inscheme_3
 			union all select * from _rdf_skos_broader_2
 			union all select * from _rdf_skos_narrower_2
+			union all select * from _rdf_skos_broader_3
+			union all select * from _rdf_skos_narrower_3
 
 			-- TODO this is useful in develop, but slows things down so get rid of it later for performance
 			-- order by predicate, subject
