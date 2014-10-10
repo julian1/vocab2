@@ -28,8 +28,7 @@ class RDFBinding
     @conn = conn
     @date = date
     @os = os
-
-    @buf = ""
+    # @buf = ""
   end
 
   def query_sql_subject( query, args )
@@ -91,9 +90,11 @@ class RDFBinding
     result
   end
 
+#
 #   this approach of using a buffer, and flushing before expanding a nested
 #   template doesn't work, because ERB chooses to expand templates, in an inintial
-#   pass, before expanding the non nested content 
+#   pass, before expanding the non nested content so we don't get an opportunity
+#   to flush before expanding. 
 #
 #   def flush_buffer()
 #     puts 'flushing'
