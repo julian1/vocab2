@@ -28,6 +28,8 @@ class RDFBinding
     @conn = conn
     @date = date
     @os = os
+
+    @buf = ""
   end
 
   def query_sql_subject( query, args )
@@ -89,6 +91,40 @@ class RDFBinding
     result
   end
 
+#   this approach of using a buffer, and flushing before expanding a nested
+#   template doesn't work, because ERB chooses to expand templates, in an inintial
+#   pass, before expanding the non nested content 
+#
+#   def flush_buffer()
+#     puts 'flushing'
+#     @os.puts @buf 
+#     @buf = ""
+#   end  
+# 
+#   def render( filename )
+#     # we need to use string temporaries, rather than output stream in order to get
+#     # proper sequencing in the recursive expansion of nested templates
+#     flush_buffer()
+#     processed = false
+#     [ filename, "templates/#{filename}"].each do |path|
+#       if File.exists?( path)
+#         # puts "opening #{path}"
+#         s = ERB.new( File.read(path), 0, '>',  'buf' ).result(binding)
+#         s = s.gsub /^[ \t]*$\n/, ''
+#         @buf += s
+#         processed = true
+#         break
+#       end
+#     end
+#     if !processed
+#       raise "Could not find template '#{filename}'!"
+#     end
+#     flush_buffer()
+#   end
+# 
+
+
+
 end
 
 
@@ -116,8 +152,10 @@ if options[:template_file]
 
   context = RDFBinding.new( conn, Time.now, $stdout )
   result = context.render( options[:template_file] )
-
   $stdout.puts result
+
+  # context.render( options[:template_file] )
+
 else
   puts 'no file specified!'
 
