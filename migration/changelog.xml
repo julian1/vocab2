@@ -627,11 +627,39 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
+	<!-- strip trailing slashes from uris --> 
+	<changeSet author="julian" id="000021-4">
+		<sql>
+			update external_associated_terms set uid = regexp_replace( uid, '\/$', '');
+			update vocabulary_term set uid = regexp_replace( uid, '\/$', '') 
+		</sql>
+	</changeSet>
+
 	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 	<!-- USER VIEWS
 		join the tables up in some obvious ways, to aid logical presentation to human user
 	-->
+
+	<changeSet author="julian" id="000021-5">
+		<createView viewName="_uids">
+			select 'external_associated_terms' as relation, 'uid' as field, uid as uid  from external_associated_terms
+			union all
+			select 'classification_scheme', 'name', name from classification_scheme
+			union all
+			select 'classification_scheme_category', 'name', name  from classification_scheme_category
+			union all
+			select 'external_associated_terms', 'uid', uid from external_associated_terms
+			union all 
+			select 'reference_source', 'online_ref..', online_reference_resource from reference_source
+			union all
+			select 'vocabulary_register', 'uid', uid from vocabulary_register
+			union all
+			select 'vocabulary_term', 'uid', uid from vocabulary_term
+			order by relation, field
+		</createView>
+	</changeSet>
+
 
 	<!-- view of responsible party - should probably also have the association type
 		when we refactor this -->
