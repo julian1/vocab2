@@ -1,5 +1,11 @@
 
 TODO, 
+
+	- we have issue with platform1/Category/3 doesn't exist
+		- need platform classification category
+	
+	- issue with trailing slashes. 
+
 	PAR remove
 	add platforms - find example
 	refacctor to get rid of top concept
@@ -16,6 +22,9 @@ TODO,
 
 
 	issue with empty inScheme references 
+
+
+	
 
 ----
 
