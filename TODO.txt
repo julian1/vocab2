@@ -12,6 +12,9 @@ TODO,
 
 	create a view over classifications etc. maybe maybe not until after refactor.
 
+	user view - change name of user views so it's easier to distinguish
+
+
 ----
 
 	- very not sure about the inscheme thing. it should be derived from the top
