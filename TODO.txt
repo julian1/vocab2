@@ -1,4 +1,6 @@
 
+- test script to verify that all references are correctly referenced. 
+
 TODO, 
 
 	- CONCEPT SCHEME IS REPEATED FOR PLATFORM.
