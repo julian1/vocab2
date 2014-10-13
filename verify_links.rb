@@ -21,23 +21,30 @@ xml.xpath('/rdf:RDF/skos:Concept').each do |path|
 end
 
 
-# puts concepts
-
-
 xml.xpath('/rdf:RDF/skos:Concept').each do |concept|
 
-	puts "concept uri #{ concept.attr('rdf:about') }"
+	concept_uri = concept.attr('rdf:about')
+	puts "concept uri #{ concept_uri }"
 
 	concept.xpath('./skos:narrower').each  do |narrower|
-		puts "  narrower #{ narrower  }" 
+		# puts "  narrower #{ narrower  }" 
+		narrower_uri = narrower.attr('rdf:resource') 
+		puts "  narrower resource uri #{ narrower_uri }  #{ concepts[narrower_uri]  ? "found" : "*not found" }"
 	end
 	
+	concept.xpath('./skos:broader').each  do |broader|
+		# puts "  broader #{ broader  }" 
+		broader_uri = broader.attr('rdf:resource') 
+		puts "  broader resource uri #{ broader_uri }  #{ concepts[broader_uri]  ? "found" : "*not found" }"
+	end
+end
+
+
+
 # 	# puts "resource #{resource}"
 # 	if concepts[resource].nil?
 # 		puts "narrower resource #{resource} not found!"
 # 	end
-end
-
 
 # 
 # xml.xpath('/rdf:RDF/skos:Concept/skos:narrower').each do |narrower|
