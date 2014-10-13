@@ -15,4 +15,15 @@
 # 
 #	 puts xml.xpath('/rdf:RDF')   # works
 
-	 puts xml.xpath('/rdf:RDF/skos:Concept')
+
+	 xml.xpath('/rdf:RDF/skos:Concept/skos:narrower[@rdf:resource]').each do |path|
+
+
+#	 xml.xpath('/rdf:RDF/skos:Concept/skos:narrower').each do |path|
+
+		puts "path is #{path}"
+		# now we want to pull out the resource attribute
+
+	#	path elems[0].attr('messageId')
+
+	end
