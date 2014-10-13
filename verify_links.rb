@@ -24,22 +24,38 @@ end
 # puts concepts
 
 
-xml.xpath('/rdf:RDF/skos:Concept/skos:narrower').each do |narrower|
-	resource = narrower.attr('rdf:resource')
-	# puts "resource #{resource}"
-	if concepts[resource].nil?
-		puts "resource #{resource} not found!"
+xml.xpath('/rdf:RDF/skos:Concept').each do |concept|
+
+	puts "concept uri #{ concept.attr('rdf:about') }"
+
+	concept.xpath('./skos:narrower').each  do |narrower|
+		puts "  narrower #{ narrower  }" 
 	end
+	
+# 	# puts "resource #{resource}"
+# 	if concepts[resource].nil?
+# 		puts "narrower resource #{resource} not found!"
+# 	end
 end
 
-xml.xpath('/rdf:RDF/skos:Concept/skos:broader').each do |broader|
-	resource = broader.attr('rdf:resource')
-	# puts "resource #{resource}"
-	if concepts[resource].nil?
-		puts "resource #{resource} not found!"
-	end
-end
 
+# 
+# xml.xpath('/rdf:RDF/skos:Concept/skos:narrower').each do |narrower|
+# 	resource = narrower.attr('rdf:resource')
+# 	# puts "resource #{resource}"
+# 	if concepts[resource].nil?
+# 		puts "narrower resource #{resource} not found!"
+# 	end
+# end
+# 
+# xml.xpath('/rdf:RDF/skos:Concept/skos:broader').each do |broader|
+# 	resource = broader.attr('rdf:resource')
+# 	# puts "resource #{resource}"
+# 	if concepts[resource].nil?
+# 		puts "broader resource #{resource} not found!"
+# 	end
+# end
+# 
 
 
 # 
