@@ -2,7 +2,8 @@
  require 'nokogiri'
   
 	# decode xml 
-xml = Nokogiri::XML(File.open( 'skos_files12/AODNPlatformVocabulary.xml' ))
+#xml = Nokogiri::XML(File.open( 'skos_files12/AODNPlatformVocabulary.xml' ))
+xml = Nokogiri::XML(File.open( 'skos_files12/platformClassificationScheme.xml' ))
 
 # puts xml
 # xml.xpath('/rdf:RDF/skos:Concept/skos:narrower').each do |path|
@@ -13,28 +14,33 @@ xml = Nokogiri::XML(File.open( 'skos_files12/AODNPlatformVocabulary.xml' ))
 concepts = { }
 
 xml.xpath('/rdf:RDF/skos:Concept').each do |path|
-	puts "path --> #{path}"
-
-
+#	puts "path --> #{path}"
 	uri = path.attr('rdf:about')
-
-	puts "uri --> #{uri}" 
-	
-
-# 	path.xpath( '/skos:Concept[@rdf:about]').each do |uri|
-# 		puts "uri #{uri}"
-# 	end
-
-	#.attr('rdf:about') 
-# 	uri = path.xpath('/skos:Concept[@rdf:about]')[0].attr('rdf:about') 
-
-
-# 	puts "uri -> #{uri}"
-# 	concepts[uri] = true
+#	puts "uri --> #{uri}" 
+	concepts[uri] = true	
 end
 
 
-puts concepts
+# puts concepts
+
+
+xml.xpath('/rdf:RDF/skos:Concept/skos:narrower').each do |narrower|
+	resource = narrower.attr('rdf:resource')
+	# puts "resource #{resource}"
+	if concepts[resource].nil?
+		puts "resource #{resource} not found!"
+	end
+end
+
+xml.xpath('/rdf:RDF/skos:Concept/skos:broader').each do |broader|
+	resource = broader.attr('rdf:resource')
+	# puts "resource #{resource}"
+	if concepts[resource].nil?
+		puts "resource #{resource} not found!"
+	end
+end
+
+
 
 # 
 # 	 xml.xpath('/rdf:RDF/skos:Concept/skos:narrower[@rdf:resource]').each do |path|
