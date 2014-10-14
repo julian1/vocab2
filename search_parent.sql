@@ -1,6 +1,6 @@
 
 
-create or replace view fuck_view as
+create or replace view helper_view as
 
 select 
 	vt.uid as child, 
@@ -11,9 +11,9 @@ left join internal_associated_terms  iat on iat.subject_vocabulary_term_id = vt.
 left join vocabulary_term iat_vt on iat.object_vocabulary_term_id = iat_vt.id  and iat.association_type_name = 'isInstanceOf' 
 ;
 
--- drop table fuck_viewx; 
--- create table fuck_viewx (parent varchar, child varchar) ;
--- insert into fuck_viewx( parent, child) values (('a', 'b' ) ); 
+-- drop table helper_viewx; 
+-- create table helper_viewx (parent varchar, child varchar) ;
+-- insert into helper_viewx( parent, child) values (('a', 'b' ) ); 
 
 -- *****
 -- find everything that exists in the tree above where we are. 
@@ -34,8 +34,7 @@ WITH RECURSIVE t( child, parent ) AS (
 
 	-- this is not a terminating condition . it's an initial condition.  
 	select v1.child, v1.parent  
-		from fuck_view v1 where v1.child = child and v1.parent is not null
-
+		from helper_view v1 where v1.child = child and v1.parent is not null
 
 	union all
 
@@ -45,8 +44,9 @@ WITH RECURSIVE t( child, parent ) AS (
 --	ON (at.old_email = a.new_email)
 
 
+	-- we s
 	select fv.child, fv.parent  
-		from fuck_view fv join t on (fv.parent = t.child )
+		from helper_view fv join t on (fv.parent = t.child and fv.parent is not null )
 
 
 	-- but is this actually self-referential here ? 
