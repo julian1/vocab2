@@ -1,6 +1,6 @@
 
 
-create or replace fuck_view as
+create or replace view fuck_view as
 
 select 
 	vt.uid as child, 
@@ -15,18 +15,18 @@ left join vocabulary_term iat_vt on iat.object_vocabulary_term_id = iat_vt.id  a
 
 
 
-WITH RECURSIVE t( fuck ) AS (
+WITH RECURSIVE t( child, parent ) AS (
 
-	select  1 as fuck
+	select  v.child, v.parent from fuck_view v where v.child = child
 
 	union all
 
-	select fuck + 1 from t where fuck < 10 
+	select child, parent from t where t.parent = child 
 
 	--  this doesn't seem to be used.	
 )
 
-	select  fuck from t; 
+	select  parent from t where child = 'http://vocab.aodn.org.au/def/platform/271'; 
 
 
 
