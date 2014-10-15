@@ -11,9 +11,9 @@ select
 from vocabulary_term vt1 
 left join term_category_classification tcc1 on tcc1.vocabulary_term_id = vt1.id
 left join classification_scheme_category csc1 on tcc1.classification_scheme_category_id = csc1.id
--- join through the iat
-left join internal_associated_terms iat on iat.subject_vocabulary_term_id = vt1.id
-left join term_category_classification tcc2 on tcc2.vocabulary_term_id = iat.object_vocabulary_term_id
+-- join through one level of the iat
+left join internal_associated_terms iat on iat.subject_vocabulary_term_id = vt1.id and iat.association_type_name = 'isInstanceOf'
+left join term_category_classification tcc2 on tcc2.vocabulary_term_id = iat.object_vocabulary_term_id 
 left join classification_scheme_category csc2 on tcc2.classification_scheme_category_id = csc2.id
 ; 
 
