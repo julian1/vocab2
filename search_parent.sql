@@ -1,17 +1,4 @@
 
-
-create or replace view helper_view as
-
-select 
-	vt.uid as child, 
-	iat_vt.uid as parent
-from vocabulary_term vt 
--- left join term_category_classification tcc on tcc.vocabulary_term_id = vt.id 
-left join internal_associated_terms  iat on iat.subject_vocabulary_term_id = vt.id 
-left join vocabulary_term iat_vt on iat.object_vocabulary_term_id = iat_vt.id  and iat.association_type_name = 'isInstanceOf' 
-;
-
-
 -- Strategy is to return all child, parent relationships via the recursion .
 -- then filter for where there's no parent and the start leaf is matched.
 
@@ -20,8 +7,22 @@ left join vocabulary_term iat_vt on iat.object_vocabulary_term_id = iat_vt.id  a
 -- see example here, http://practiceovertheory.com/blog/2013/07/12/recursive-query-is-recursive/
 -- it's complicated because we want to maintain the starting position
 
--- ok in fact we want this to be another view
-create or replace view myview2
+-- set of child,parent ids in internal terms table
+-- we don't even need this bastard ...
+ create or replace view helper_view as
+ select 
+	vt.uid as child, 
+	iat_vt.uid as parent
+ from vocabulary_term vt 
+ left join internal_associated_terms  iat on iat.subject_vocabulary_term_id = vt.id 
+ left join vocabulary_term iat_vt on iat.object_vocabulary_term_id = iat_vt.id  and iat.association_type_name = 'isInstanceOf' 
+ ;
+
+
+
+
+-- this gives us all the roots of any node
+create or replace view helper_view2
 as 
 WITH RECURSIVE t( start, child, parent ) AS (
 	-- intitial state - find initial child,parent tuple and record with start leaf
@@ -33,17 +34,18 @@ WITH RECURSIVE t( start, child, parent ) AS (
 		from helper_view h 
 		join t on (h.child = t.parent )
 )
-
-	select  start, child from t
-	-- from t where start = 'http://vocab.aodn.org.au/def/platform/271' -- 'http://vocab.nerc.ac.uk/collection/L06/current/32' -- 'http://vocab.aodn.org.au/def/platform/271' -- and parent is not null  
+	select  start, child as root from t
 	where parent is null
 ;
 
+select  child from helper_view2 where start = 'http://vocab.nerc.ac.uk/collection/L06/current/32'; 
+
+-- create or replace view term_classification as
+-- select * from helper_view2 hv2 where
+-- left join term_category_classification tcc on tcc.vocabulary_term_id = vt.id 
 
 
 
-
---	 select  * from t where child = 'http://vocab.nerc.ac.uk/collection/L06/current/32'; 
 -- maybe we don't specify - the root - and this thing just iterates everything. 
 
 
