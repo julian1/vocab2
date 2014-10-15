@@ -13,17 +13,17 @@ left join vocabulary_term iat_vt on iat.object_vocabulary_term_id = iat_vt.id  a
 
 
 -- Strategy is to return all child, parent relationships via the recursion .
--- then filter for where there's no parent.
+-- then filter for where there's no parent and the start leaf is matched.
 
--- the issue is that the initial starting point has to be be placed in the clause...
+-- note that it may return multiple roots,
 
 -- see example here, http://practiceovertheory.com/blog/2013/07/12/recursive-query-is-recursive/
 -- it's complicated because we want to maintain the starting position
 
--- note that it may return multiple roots,
+-- ok in fact we want another view ...
 
-WITH RECURSIVE t( begin, child, parent ) AS (
-	-- intitial state - find the parent and record the beginial position
+WITH RECURSIVE t( start, child, parent ) AS (
+	-- intitial state - find the parent and record the startial position
 	select h.child, h.child, h.parent 
 		from helper_view h 
 	union all
@@ -33,7 +33,7 @@ WITH RECURSIVE t( begin, child, parent ) AS (
 )
 
 	select  trim( child) as child 
-	from t where begin = 'http://vocab.nerc.ac.uk/collection/L06/current/32' -- 'http://vocab.aodn.org.au/def/platform/271' -- and parent is not null  
+	from t where start = 'http://vocab.aodn.org.au/def/platform/271' -- 'http://vocab.nerc.ac.uk/collection/L06/current/32' -- 'http://vocab.aodn.org.au/def/platform/271' -- and parent is not null  
 	and parent is null
 ;
 
