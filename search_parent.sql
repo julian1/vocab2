@@ -17,20 +17,24 @@ left join vocabulary_term iat_vt on iat.object_vocabulary_term_id = iat_vt.id  a
 
 -- the issue is that the initial starting point has to be be placed in the clause...
 
-WITH RECURSIVE t( init, child, parent ) AS (
+-- see example here, http://practiceovertheory.com/blog/2013/07/12/recursive-query-is-recursive/
+-- it's complicated because we want to maintain the starting position
 
-	-- add the v	
+-- note that it may return multiple roots,
+
+WITH RECURSIVE t( begin, child, parent ) AS (
+	-- intitial state - find the parent and record the beginial position
 	select h.child, h.child, h.parent 
 		from helper_view h 
---		where h.child = 'http://vocab.aodn.org.au/def/platform/271' -- 'http://vocab.nerc.ac.uk/collection/L06/current/32' -- 'http://vocab.aodn.org.au/def/platform/271'
 	union all
-	-- this looks correct
 	select t.child, h.child, h.parent  
 		from helper_view h 
 		join t on (h.child = t.parent )
 )
 
-	select  trim( init) as init, trim( child) as child, trim( parent) as parent from t  where init = 'http://vocab.aodn.org.au/def/platform/271' -- and parent is not null  
+	select  trim( child) as child 
+	from t where begin = 'http://vocab.nerc.ac.uk/collection/L06/current/32' -- 'http://vocab.aodn.org.au/def/platform/271' -- and parent is not null  
+	and parent is null
 ;
 
 
