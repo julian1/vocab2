@@ -1,5 +1,5 @@
 
-- test script to verify that all references are correctly referenced. 
+- test script to verify that all broader/narrower temers actually exist in the file. 
 
 TODO, 
 
@@ -17,7 +17,7 @@ TODO,
 	PAR remove
 	add platforms - find example
 	refacctor to get rid of top concept
-	refactor to use more generic nesting
+	refactor to use more generic nesting of templates
 	refactor so terms don't specify their concept scheme - (check this / maybe)
 
 	go through other notes - for other things. 
