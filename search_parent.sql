@@ -20,22 +20,27 @@ left join vocabulary_term iat_vt on iat.object_vocabulary_term_id = iat_vt.id  a
 -- see example here, http://practiceovertheory.com/blog/2013/07/12/recursive-query-is-recursive/
 -- it's complicated because we want to maintain the starting position
 
--- ok in fact we want another view ...
-
+-- ok in fact we want this to be another view
+create or replace view myview2
+as 
 WITH RECURSIVE t( start, child, parent ) AS (
-	-- intitial state - find the parent and record the startial position
+	-- intitial state - find initial child,parent tuple and record with start leaf
 	select h.child, h.child, h.parent 
 		from helper_view h 
 	union all
+	-- recurse - trace new child, parent tuples and record against leaf
 	select t.child, h.child, h.parent  
 		from helper_view h 
 		join t on (h.child = t.parent )
 )
 
-	select  trim( child) as child 
-	from t where start = 'http://vocab.aodn.org.au/def/platform/271' -- 'http://vocab.nerc.ac.uk/collection/L06/current/32' -- 'http://vocab.aodn.org.au/def/platform/271' -- and parent is not null  
-	and parent is null
+	select  start, child from t
+	-- from t where start = 'http://vocab.aodn.org.au/def/platform/271' -- 'http://vocab.nerc.ac.uk/collection/L06/current/32' -- 'http://vocab.aodn.org.au/def/platform/271' -- and parent is not null  
+	where parent is null
 ;
+
+
+
 
 
 --	 select  * from t where child = 'http://vocab.nerc.ac.uk/collection/L06/current/32'; 
