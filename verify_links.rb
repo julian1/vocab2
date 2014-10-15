@@ -1,19 +1,19 @@
 
- require 'nokogiri'
+require 'nokogiri'
   
-	# decode xml 
-#xml = Nokogiri::XML(File.open( 'skos_files12/AODNPlatformVocabulary.xml' ))
-xml = Nokogiri::XML(File.open( 'skos_files12/platformClassificationScheme.xml' ))
+	# decode root 
+root = Nokogiri::XML(File.open( 'skos_files12/AODNPlatformVocabulary.xml' ))
+#root = Nokogiri::XML(File.open( 'skos_files12/platformClassificationScheme.xml' ))
 
-# puts xml
-# xml.xpath('/rdf:RDF/skos:Concept/skos:narrower').each do |path|
+# puts root
+# root.xpath('/rdf:RDF/skos:Concept/skos:narrower').each do |path|
 # now we want to pull out the resource attribute
 # needs to be topConcept as well.
 # we need to index the uris not the concepts.
 
 concepts = { }
 
-xml.xpath('/rdf:RDF/skos:Concept').each do |path|
+root.xpath('/rdf:RDF/skos:Concept').each do |path|
 #	puts "path --> #{path}"
 	uri = path.attr('rdf:about')
 #	puts "uri --> #{uri}" 
@@ -21,19 +21,19 @@ xml.xpath('/rdf:RDF/skos:Concept').each do |path|
 end
 
 
-xml.xpath('/rdf:RDF/skos:Concept').each do |concept|
+root.xpath('/rdf:RDF/skos:Concept').each do |concept|
 
 	concept_uri = concept.attr('rdf:about')
 	puts "concept uri #{ concept_uri }"
 
 	concept.xpath('./skos:narrower').each  do |narrower|
-		# puts "  narrower #{ narrower  }" 
+		# puts "  narrower #{ narrower }" 
 		narrower_uri = narrower.attr('rdf:resource') 
 		puts "  narrower resource uri #{ narrower_uri }  #{ concepts[narrower_uri]  ? "found" : "*not found" }"
 	end
 	
 	concept.xpath('./skos:broader').each  do |broader|
-		# puts "  broader #{ broader  }" 
+		# puts "  broader #{ broader }" 
 		broader_uri = broader.attr('rdf:resource') 
 		puts "  broader resource uri #{ broader_uri }  #{ concepts[broader_uri]  ? "found" : "*not found" }"
 	end
