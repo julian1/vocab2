@@ -56,7 +56,7 @@ class RDFBinding
 
   def query_rdf_objects( predicate, subject )
     map_query( @conn, %{
-      select object from _rdf where predicate = $1 and subject = $2
+      select object from _rdf_m where predicate = $1 and subject = $2
       }, [predicate, subject]) do |row|
       row['object'].encode(:xml => :text)
     end
@@ -64,7 +64,7 @@ class RDFBinding
 
   def query_rdf_subjects( predicate, object )
     map_query( @conn, %{
-      select subject from _rdf where predicate = $1 and object = $2
+      select subject from _rdf_m where predicate = $1 and object = $2
       }, [predicate, object]) do |row|
       row['subject'].encode(:xml => :text)
     end
@@ -152,6 +152,11 @@ if options[:template_file]
     :password => options[:password] || 'contr_vocab_db'
   )
 
+  # need to ensure this doesn't write to anything... 
+  $stderr.puts 'refreshing mat view'
+  conn.exec( 'refresh materialized view _rdf_m',  nil )
+  $stderr.puts 'done'
+
   context = RDFBinding.new( conn, Time.now, $stdout )
   result = context.render( options[:template_file] )
   $stdout.puts result
@@ -160,7 +165,6 @@ if options[:template_file]
 
 else
   puts 'no file specified!'
-
 end
 
 
