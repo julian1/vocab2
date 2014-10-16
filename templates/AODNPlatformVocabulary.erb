@@ -13,7 +13,7 @@
 	where r1.predicate = 'skos:inScheme' and r1.object = '#{ @conceptScheme }'
 	and r2.predicate = 'rdf:type' and r2.object = 'skos:Concept' },
 	nil )%>
-	<%= render "concept.erb" %>
+<%= render "concept.erb" %>
 <% end %>
 
 <%= render "footer.erb" %>

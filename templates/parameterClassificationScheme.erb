@@ -12,7 +12,7 @@
 	and r2.predicate = 'rdf:type' and r2.object = 'skos:TopConcept' },
 	nil )
 %>
-	<%= render "top_concept.erb" %>
+<%= render "top_concept.erb" %>
 <% end %>
 
 <% for @concept in query_sql_subject( %{
@@ -23,7 +23,7 @@
 	and r2.predicate = 'rdf:type' and r2.object = 'skos:Concept' },
 	nil )
 %>
-	<%= render "concept.erb" %>
+<%= render "concept.erb" %>
 <% end %>
 
 <%= render "footer.erb" %>
