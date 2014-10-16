@@ -12,7 +12,7 @@
     where r1.predicate = 'rdf:type' 
     and r1.object = 'skos:TopConcept'
     and r2.predicate = 'skos:inScheme' 
-    and r2.object = $$#{ @conceptScheme }$$ ; } , nil )%>
+    and r2.object = '#{ @conceptScheme }' ; } , nil )%>
   <%= @topConcept %>
 
     <% for @narrower in query_sql_subject( %{
@@ -23,7 +23,7 @@
       where r1.predicate = 'rdf:type' 
       and r1.object = 'skos:Concept'
       and r2.predicate = 'skos:broader' 
-      and r2.object = $$#{ @topConcept}$$ ; } , nil )%>
+      and r2.object = '#{ @topConcept}' ; } , nil )%>
     <%= @narrower%>
 
 
@@ -35,7 +35,7 @@
         where r1.predicate = 'rdf:type' 
         and r1.object = 'skos:Concept'
         and r2.predicate = 'skos:broader' 
-        and r2.object = $$#{ @narrower}$$ ; } , nil )%>
+        and r2.object = '#{ @narrower}' ; } , nil )%>
       <%= @narrower2%>
       <% end %>
     <% end %>
@@ -52,11 +52,12 @@
         r1.subject 
       from _rdf_m r1 
       join _rdf_m r2 on r2.subject = r1.subject 
-      join _rdf_m r3 on r3.subject = r1.subject 
-      where r1.predicate = 'rdf:type' 
-      and r1.object = 'skos:Concept'
-      and r2.predicate = 'skos:inScheme' 
-      and r2.object = $$#{ @conceptScheme}$$ ; } , nil )%>
+      left join _rdf_m r3 on r3.subject = r1.subject 
+      where r1.predicate = 'rdf:type' and r1.object = 'skos:Concept'
+      and r2.predicate = 'skos:inScheme' and r2.object = '#{ @conceptScheme}' 
+      and r3.predicate = 'skos:broader' and r3.object is null 
+      ;
+      } , nil )%>
     <%= @concept%>
   <% end %>
 
