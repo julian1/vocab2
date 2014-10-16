@@ -325,7 +325,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			delete from external_associated_terms eat
 			using vocabulary_term vt
 			where eat.vocabulary_term_id = vt.id
-			and eat.uid = vt.uid;
+			and eat.uid = vt.uid
 		</sql>
 
 		<!-- note the uid is correct - and represents a real external resource
@@ -675,7 +675,9 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
-	<!-- amendment -->
+	<!-- amendment 
+			this is organised in terms of amendment, although we use vt.uid as first ref 
+	-->
 	<changeSet author="julian" id="000019-5">
 		<createView viewName="_get_amendment">
 			select
@@ -705,25 +707,28 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 				trim(eat.uid) as external_uid,
 				trim(association_type_name) as type
 			from external_associated_terms eat
-			left join vocabulary_term vt on eat.vocabulary_term_id = vt.id;
+			left join vocabulary_term vt on eat.vocabulary_term_id = vt.id
+			order by uid, external_uid
 		</createView>
 	</changeSet>
 
 
 
+	<!-- 	this should probably have the reference souce as the uid 
 	<changeSet author="julian" id="000020-7">
 		<createView viewName="_get_reference_source">
 			select
 				trim( vt.uid) as uid,
 				trim( vt.name) as name,
 				trim( rs.citation_string) as citation_string,
-				rs.online_reference_resource as online_reference_resource,
-				o.acronym as organisation_acronym
+				trim( rs.online_reference_resource) as online_reference_resource,
+				trim( o.acronym) as organisation_acronym
 			from vocabulary_term vt
 			join reference_source rs on vt.reference_source_id = rs.id
 			left join organisation o on rs.organisation_id = o.id
+			order by vt.uid, rs.online_reference_resource 
 		</createView>
-	</changeSet>
+	</changeSet -->
 
 
 
@@ -739,32 +744,37 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			from internal_associated_terms iat
 			left join vocabulary_term svt on iat.subject_vocabulary_term_id = svt.id
 			left join vocabulary_term ovt on iat.object_vocabulary_term_id = ovt.id
+			order by svt.uid, ovt.uid
 		</createView>
 	</changeSet>
 
 
 
-	<!-- term -> category -->
+	<!-- term -> category 
+		should this be category as primary thing first...?
+
+		should be rewritten to select from  term_category_classification
+	-->
 	<changeSet author="julian" id="000020-8">
 		<createView viewName="_get_term_category_classification">
 			select
-			trim( vt.uid) as uid,
-			trim( vt.name) as name,
-			trim( csc.name) as category_name,
-			trim( csc.label) as category_label,
-			csc.date_added as date_added
+				trim( vt.uid) as uid,
+				trim( vt.name) as name,
+				trim( csc.name) as category_name,
+				trim( csc.label) as category_label,
+				csc.date_added as date_added
 			from vocabulary_term vt
 			-- get second-tier category
 			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
 			join classification_scheme_category csc on tcc.classification_scheme_category_id = csc.id
-			order by csc.name
+			order by vt.uid, csc.name
 		</createView>
 	</changeSet>
 
 
-	<!-- category -> category -->
+	<!-- category -> other category -->
 	<changeSet author="julian" id="000020-9">
-		<createView viewName="_get_classification_scheme_category">
+		<createView viewName="_get_classification_scheme_association">
 			select
 				trim( c1.name) as uid,
 				trim( c1.label) as label,
@@ -773,8 +783,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			from classification_scheme_association a
 			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id
 			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id
-			order by c2.name
-			-- order by c2.name, c1.name
+			order by c1.name, c2.name
 		</createView>
 	</changeSet>
 
