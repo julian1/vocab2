@@ -1,0 +1,11 @@
+
+
+
+<% for @concept in query_sql_subject( %{
+	select subject from _rdf_m where predicate = 'rdf:type' and object = 'skos:ConceptScheme'; }, nil )%>
+
+<%= @concept %>
+
+<% end %>
+
+
