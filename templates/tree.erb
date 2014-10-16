@@ -38,15 +38,30 @@
         and r2.object = $$#{ @narrower}$$ ; } , nil )%>
       <%= @narrower2%>
       <% end %>
-      
-
     <% end %>
-    
-
-
   <% end %>
 
 
+
+  -- this isn't correct 
+  -- we need to constrain this with a test that there's no broader indicating that it's a parent 
+
+
+    <% for @concept in query_sql_subject( %{
+      select 
+        r1.subject 
+      from _rdf_m r1 
+      join _rdf_m r2 on r2.subject = r1.subject 
+      join _rdf_m r3 on r3.subject = r1.subject 
+      where r1.predicate = 'rdf:type' 
+      and r1.object = 'skos:Concept'
+      and r2.predicate = 'skos:inScheme' 
+      and r2.object = $$#{ @conceptScheme}$$ ; } , nil )%>
+    <%= @concept%>
+  <% end %>
+
+
+  
 
 <% end %>
 
