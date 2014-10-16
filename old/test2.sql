@@ -54,7 +54,11 @@ join vocabulary_term vt on vt.id = tcs.vocabulary_term_id
 join classification_scheme cs on cs.id = tcs.classification_scheme_id; 
 
 
-select * from _get_term_classification_scheme where uid = 'http://vocab.nerc.ac.uk/collection/L06/current/32'
+-- select * from _get_term_classification_scheme where uid = 'http://vocab.nerc.ac.uk/collection/L06/current/32'
+select * from _get_term_classification_scheme where uid = 'http://vocab.aodn.org.au/def/platform/271'
+
+
+-- 'http://vocab.aodn.org.au/def/platform/271'
 
 
  --  where vt.uid = 'http://vocab.nerc.ac.uk/collection/L06/current/32'

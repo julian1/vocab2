@@ -1,4 +1,46 @@
 
+
+drop view helper_view2; 
+
+
+-- this gives us all the roots of any node
+create view helper_view2
+as 
+WITH RECURSIVE t( start, child, parent ) AS (
+	-- intitial state - find initial child,parent tuple and record with start leaf
+	select 
+		h.subject_vocabulary_term_id, 
+		h.subject_vocabulary_term_id,
+		h.subject_vocabulary_term_id
+		-- h.object_vocabulary_term_id
+	from  internal_associated_terms h 
+	union all
+	-- recurse - trace new child, parent tuples and record against leaf
+	select 
+		t.child, 
+		h.subject_vocabulary_term_id,
+		h.object_vocabulary_term_id
+	from internal_associated_terms h 
+	join t on (h.subject_vocabulary_term_id = t.parent )
+)
+	select  parent from t 
+	left join vocabulary_term vt on vt.id = t.start 
+--	where vt.uid = 'http://vocab.aodn.org.au/def/platform/271'
+	where vt.uid = 'http://vocab.nerc.ac.uk/collection/L06/current/32'
+
+	order by start
+;
+
+select * from helper_view2 ; 
+
+
+--	 select  * from t where child = 'http://vocab.nerc.ac.uk/collection/L06/current/32'; 
+
+
+
+-- the only 
+
+
 -- Strategy is to return all child, parent relationships via the recursion .
 -- then filter for where there's no parent and the start leaf is matched.
 
@@ -9,36 +51,17 @@
 
 -- set of child,parent ids in internal terms table
 -- we don't even need this bastard ...
- create or replace view helper_view as
- select 
-	vt.uid as child, 
-	iat_vt.uid as parent
- from vocabulary_term vt 
- left join internal_associated_terms  iat on iat.subject_vocabulary_term_id = vt.id 
- left join vocabulary_term iat_vt on iat.object_vocabulary_term_id = iat_vt.id  and iat.association_type_name = 'isInstanceOf' 
- ;
+-- create or replace view helper_view as
+ -- select 
+--	vt.uid as child, 
+--	iat_vt.uid as parent
+-- from vocabulary_term vt 
+-- left join internal_associated_terms  iat on iat.subject_vocabulary_term_id = vt.id 
+-- left join vocabulary_term iat_vt on iat.object_vocabulary_term_id = iat_vt.id  and iat.association_type_name = 'isInstanceOf' 
+-- ;
 
 
-
-
--- this gives us all the roots of any node
-create or replace view helper_view2
-as 
-WITH RECURSIVE t( start, child, parent ) AS (
-	-- intitial state - find initial child,parent tuple and record with start leaf
-	select h.child, h.child, h.parent 
-		from helper_view h 
-	union all
-	-- recurse - trace new child, parent tuples and record against leaf
-	select t.child, h.child, h.parent  
-		from helper_view h 
-		join t on (h.child = t.parent )
-)
-	select  start, child as root from t
-	where parent is null
-;
-
-select  child from helper_view2 where start = 'http://vocab.nerc.ac.uk/collection/L06/current/32'; 
+--select  child from helper_view2 where start = 271 --'http://vocab.nerc.ac.uk/collection/L06/current/32'; 
 
 -- create or replace view term_classification as
 -- select * from helper_view2 hv2 where
