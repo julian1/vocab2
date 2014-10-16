@@ -118,6 +118,21 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			where ( o.acronym ~ 'eMII' and p.name ~ 'Seb' )
 			or ( o.acronym ~ 'IMOS' and p.name ~ 'Seb' )
 		</sql>
+
+	    <addForeignKeyConstraint
+            constraintName="responsible_party_person_fkey"
+			baseColumnNames="person_id"
+            baseTableName="responsible_party"
+            referencedColumnNames="id"
+            referencedTableName="person"
+		/>
+	    <addForeignKeyConstraint
+            constraintName="responsible_party_organisation_fkey"
+			baseColumnNames="organisation_id"
+            baseTableName="responsible_party"
+            referencedColumnNames="id"
+            referencedTableName="organisation"
+		/>
 	</changeSet>
 
 
