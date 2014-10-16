@@ -33,7 +33,20 @@
         where type.predicate = 'rdf:type' and type.object = 'skos:Concept'
         and narrower.predicate = 'skos:broader' and narrower.object = '#{ @narrower}' ; 
       } , nil )%>
-      <%= @narrowenarrower%>
+      <%= @narrower2%>
+
+          <% for @narrower3 in query_sql_subject( %{
+            select
+              type.subject
+            from _rdf_m type
+            join _rdf_m broader on broader.subject = type.subject
+            where type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+            and broader.predicate = 'skos:broader' and broader.object = '#{ @narrower2}' ; 
+          } , nil )%>
+          <%= @narrower3%>
+          <% end %>
+
+
       <% end %>
     <% end %>
   <% end %>
@@ -77,6 +90,20 @@
           and broader.predicate = 'skos:broader' and broader.object = '#{ @narrower}' ; 
         } , nil )%>
         <%= @narrower2%>
+
+
+          <% for @narrower3 in query_sql_subject( %{
+            select
+              type.subject
+            from _rdf_m type
+            join _rdf_m broader on broader.subject = type.subject
+            where type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+            and broader.predicate = 'skos:broader' and broader.object = '#{ @narrower2}' ; 
+          } , nil )%>
+          <%= @narrower3%>
+          <% end %>
+
+
         <% end %>
 
 
