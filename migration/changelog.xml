@@ -1374,8 +1374,21 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet-->
 
 
-</databaseChangeLog>
+	<!-- Seb request. Move entries under PAR category into Physical-Water->Optical Properties, 
+	and remove PAR category --> 
+	<changeSet author="julian" id="000400">
+		<sql>	
+			update term_category_classification 
+			set classification_scheme_category_id = 45 
+			where classification_scheme_category_id = 29; 
 
+			delete from classification_scheme_category 
+			where id = 29;
+		</sql>	
+	</changeSet>
+
+
+</databaseChangeLog>
 
 
 
