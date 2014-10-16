@@ -1,10 +1,38 @@
 
-
-
-<% for @concept in query_sql_subject( %{
+<% for @conceptScheme in query_sql_subject( %{
 	select subject from _rdf_m where predicate = 'rdf:type' and object = 'skos:ConceptScheme'; }, nil )%>
 
-<%= @concept %>
+<%= @conceptScheme %>
+
+	<% for @topConcept in query_sql_subject( %{
+		select 
+			r1.subject 
+		from _rdf_m r1 
+		join _rdf_m r2 on r2.subject = r1.subject 
+		where r1.predicate = 'rdf:type' 
+		and r1.object = 'skos:TopConcept'
+		and r2.predicate = 'skos:inScheme' 
+		and r2.object = $$#{ @conceptScheme }$$ ; } , nil )%>
+	<%= @topConcept %>
+
+		<% for @narrower in query_sql_subject( %{
+			select 
+				r1.subject 
+			from _rdf_m r1 
+			join _rdf_m r2 on r2.subject = r1.subject 
+			where r1.predicate = 'rdf:type' 
+			and r1.object = 'skos:Concept'
+			and r2.predicate = 'skos:broader' 
+			and r2.object = $$#{ @topConcept}$$ ; } , nil )%>
+		<%= @narrower%>
+
+		<% end %>
+		
+
+
+	<% end %>
+
+
 
 <% end %>
 
