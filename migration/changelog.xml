@@ -53,7 +53,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
-	<!-- support for DDL actions --> 
+	<!-- support for DDL actions -->
 	<changeSet author="julian" id="000001-5">
        <sql>
 			create function exec(text) returns text
@@ -542,7 +542,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 		<dropColumn columnName="date_added_to_association" tableName="term_category_classification"/>
 		<dropColumn columnName="classification_scheme_id" tableName="term_category_classification"/>
 
-		<!-- normalize 
+		<!-- normalize
 		these are available by joining on the new vocabulary_term_id
 		-->
 		<dropColumn columnName="vocabulary_term_code" tableName="term_category_classification"/>
@@ -632,11 +632,11 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 
-	<!-- strip trailing slashes from uris --> 
+	<!-- strip trailing slashes from uris -->
 	<changeSet author="julian" id="000021-4">
 		<sql>
 			update external_associated_terms set uid = regexp_replace( uid, '\/$', '');
-			update vocabulary_term set uid = regexp_replace( uid, '\/$', '') 
+			update vocabulary_term set uid = regexp_replace( uid, '\/$', '')
 		</sql>
 	</changeSet>
 
@@ -648,6 +648,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 	<changeSet author="julian" id="000021-5">
 		<createView viewName="_get_uid">
+			-- helps us to find the source of misc terms
 			select 'external_associated_terms' as relation, 'uid' as field, uid as uid  from external_associated_terms
 			union all
 			select 'classification_scheme', 'name', name from classification_scheme
@@ -655,7 +656,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			select 'classification_scheme_category', 'name', name  from classification_scheme_category
 			union all
 			select 'external_associated_terms', 'uid', uid from external_associated_terms
-			union all 
+			union all
 			select 'reference_source', 'online_ref..', online_reference_resource from reference_source
 			union all
 			select 'vocabulary_register', 'uid', uid from vocabulary_register
@@ -680,8 +681,8 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
-	<!-- amendment 
-			this is organised in terms of amendment, although we use vt.uid as first ref 
+	<!-- amendment
+			this is organised in terms of amendment, although we use vt.uid as first ref
 	-->
 	<changeSet author="julian" id="000019-5">
 		<createView viewName="_get_amendment">
@@ -690,7 +691,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 				a.type,
 				a.request_date,
 				a.approval_date,
-				vr.name as register_name,
+				trim( vr.name) as register_name,
 				p.name as person_name,
 				o.acronym as organisation_acronym
 			from amendment a
@@ -719,7 +720,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 
-	<!-- 	this should probably have the reference souce as the uid 
+	<!-- 	this should probably have the reference souce as the uid
 	<changeSet author="julian" id="000020-7">
 		<createView viewName="_get_reference_source">
 			select
@@ -731,7 +732,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			from vocabulary_term vt
 			join reference_source rs on vt.reference_source_id = rs.id
 			left join organisation o on rs.organisation_id = o.id
-			order by vt.uid, rs.online_reference_resource 
+			order by vt.uid, rs.online_reference_resource
 		</createView>
 	</changeSet -->
 
@@ -755,7 +756,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 
-	<!-- term -> category 
+	<!-- term -> category
 		should this be category as primary thing first...?
 
 		should be rewritten to select from  term_category_classification
@@ -1067,7 +1068,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 		</createView>
 	</changeSet>
 
-	<!-- in the register scheme --> 
+	<!-- in the register scheme -->
 	<changeSet author="julian" id="000121">
 		<createView viewName="_rdf_skos_inscheme_2">
 			select
@@ -1167,11 +1168,10 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet -->
 
 
-
 	<changeSet author="julian" id="000127">
 
 		<createView viewName="_term_classification_scheme_category">
-			-- get the classification_scheme_category id's with the term id
+			-- map the classification_scheme_category id's with the term id.
 			-- we only deal with one level of indirection via the iat, because
 			-- that's all that the data requires
 			select
@@ -1192,36 +1192,33 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 		</createView>
 
 		<createView viewName="_term_classification_scheme">
-			-- get the classification_scheme id's with the the term id, by looking through the 
+			-- map the classification_scheme id's with the the term id, by looking through the
 			-- classification_scheme_category.
 			-- note that all classification_scheme_category's maintain a ref to the classification_scheme
-			-- not just the root ones.
-			select 
-				mv.vocabulary_term_id as vocabulary_term_id, 
+			-- not just root ones.
+			select
+				mv.vocabulary_term_id as vocabulary_term_id,
 				csc.classification_scheme_id as classification_scheme_id
-			from _term_classification_scheme_category mv 
+			from _term_classification_scheme_category mv
 			join classification_scheme_category csc on csc.id =  mv.classification_scheme_category_id
 			join classification_scheme cs on cs.id = csc.classification_scheme_id
 		</createView>
 
 		<createView viewName="_rdf_skos_inscheme_3">
-			select 
+			select
 				trim(vt.uid) as uid,
 				'skos:inScheme'::varchar as predicate,
-				trim( cs.name) as classification_scheme_name  
+				trim( cs.name) as classification_scheme_name
 			from _term_classification_scheme  tcs
-			join vocabulary_term vt on vt.id = tcs.vocabulary_term_id 
-			join classification_scheme cs on cs.id = tcs.classification_scheme_id; 
+			join vocabulary_term vt on vt.id = tcs.vocabulary_term_id
+			join classification_scheme cs on cs.id = tcs.classification_scheme_id
 		</createView>
 
 	</changeSet>
 
 
-
-
-
-   <!--     
-		sql for first and second tier broader predicate    
+   <!--
+		sql for first and second tier broader predicate
 		union all
 
 		select
