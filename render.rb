@@ -31,9 +31,20 @@ class RDFBinding
     # @buf = ""
   end
 
+
+  def query_sql_subject1( query, args )
+    # supports composing general sql queries and returns the subject row
+    map_query( @conn, query, args) do |row|
+      row
+    end
+  end
+
+
+
   def query_sql_subject( query, args )
     # supports composing general sql queries and returns the subject row
     map_query( @conn, query, args) do |row|
+      # row['target'].encode(:xml => :text)
       row['subject'].encode(:xml => :text)
     end
   end
