@@ -6,37 +6,34 @@
 
   <% for @topConcept in query_sql_subject( %{
     select
-      r1.subject
-    from _rdf_m r1
-    join _rdf_m r2 on r2.subject = r1.subject
-    where r1.predicate = 'rdf:type'
-    and r1.object = 'skos:TopConcept'
-    and r2.predicate = 'skos:inScheme'
-    and r2.object = '#{ @conceptScheme }' ; } , nil )%>
+      type.subject
+    from _rdf_m type
+    join _rdf_m inScheme on inScheme.subject = type.subject
+    where type.predicate = 'rdf:type' and type.object = 'skos:TopConcept'
+    and inScheme.predicate = 'skos:inScheme' and inScheme.object = '#{ @conceptScheme }' ; 
+  } , nil )%>
   <%= @topConcept %>
 
     <% for @narrower in query_sql_subject( %{
       select
-        r1.subject
-      from _rdf_m r1
-      join _rdf_m r2 on r2.subject = r1.subject
-      where r1.predicate = 'rdf:type'
-      and r1.object = 'skos:Concept'
-      and r2.predicate = 'skos:broader'
-      and r2.object = '#{ @topConcept}' ; } , nil )%>
+        type.subject
+      from _rdf_m type
+      join _rdf_m broader on broader.subject = type.subject
+      where type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+      and broader.predicate = 'skos:broader' and broader.object = '#{ @topConcept}' ; 
+    } , nil )%>
     <%= @narrower%>
 
 
       <% for @narrower2 in query_sql_subject( %{
         select
-          r1.subject
-        from _rdf_m r1
-        join _rdf_m r2 on r2.subject = r1.subject
-        where r1.predicate = 'rdf:type'
-        and r1.object = 'skos:Concept'
-        and r2.predicate = 'skos:broader'
-        and r2.object = '#{ @narrower}' ; } , nil )%>
-      <%= @narrower2%>
+          type.subject
+        from _rdf_m type
+        join _rdf_m narrower on narrower.subject = type.subject
+        where type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+        and narrower.predicate = 'skos:broader' and narrower.object = '#{ @narrower}' ; 
+      } , nil )%>
+      <%= @narrowenarrower%>
       <% end %>
     <% end %>
   <% end %>
@@ -48,7 +45,6 @@
 
 
     <% for @concept in query_sql_subject( %{
-
       select
         type.subject
       from _rdf_m type
@@ -59,8 +55,6 @@
         and broader.object is null
         and inScheme.object = '#{ @conceptScheme}'
       order by type.subject
-
-
     } , nil )%>
     <%= @concept%>
   <% end %>
