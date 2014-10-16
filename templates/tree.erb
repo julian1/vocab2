@@ -4,6 +4,7 @@
 
 <%= @conceptScheme %>
 
+  
   <% for @topConcept in query_sql_subject( %{
     select
       type.subject
@@ -52,9 +53,6 @@
   <% end %>
 
 
-
-  -- this isn't correct
-  -- we need to constrain this with a test that there's no broader indicating that it's a parent
 
 
     <% for @concept in query_sql_subject( %{
