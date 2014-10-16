@@ -536,7 +536,20 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
             referencedTableName="vocabulary_term"
 		/>
 		<dropColumn columnName="vocabulary_term_name" tableName="term_category_classification"/>
+
+		<!-- normalize - these should come from the classification_scheme table which can be joined through the
+		classification_scheme_category -->
+		<dropColumn columnName="date_added_to_association" tableName="term_category_classification"/>
+		<dropColumn columnName="classification_scheme_id" tableName="term_category_classification"/>
+
+		<!-- normalize 
+		these are available by joining on the new vocabulary_term_id
+		-->
+		<dropColumn columnName="vocabulary_term_code" tableName="term_category_classification"/>
+		<dropColumn columnName="vocabulary_term_uid" tableName="term_category_classification"/>
 	</changeSet>
+
+
 
 
 	<!-- classification_scheme to use responsible_party in place of person,organisation fields -->
@@ -617,14 +630,6 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 		/>
 	</changeSet>
 
-
-	<changeSet author="julian" id="000021">
-		<!-- normalize -->
-		<dropColumn columnName="vocabulary_term_code" tableName="term_category_classification"/>
-		<dropColumn columnName="vocabulary_term_uid" tableName="term_category_classification"/>
-		<!-- consistent field naming -->
-		<renameColumn newColumnName="date_added" oldColumnName="date_added_to_association" tableName="term_category_classification"/>
-	</changeSet>
 
 
 	<!-- strip trailing slashes from uris --> 
