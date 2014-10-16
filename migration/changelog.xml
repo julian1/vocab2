@@ -642,7 +642,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	-->
 
 	<changeSet author="julian" id="000021-5">
-		<createView viewName="_user_uids">
+		<createView viewName="_get_uid">
 			select 'external_associated_terms' as relation, 'uid' as field, uid as uid  from external_associated_terms
 			union all
 			select 'classification_scheme', 'name', name from classification_scheme
@@ -664,9 +664,8 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	<!-- view of responsible party - should probably also have the association type
 		when we refactor this -->
 	<changeSet author="julian" id="000019">
-		<createView viewName="_user_responsible_party">
+		<createView viewName="_get_responsible_party">
 			select
-				rp.id,
 				p.name as person_name,
 				o.acronym as organisation_acronym
 			from responsible_party rp
@@ -678,7 +677,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 	<!-- amendment -->
 	<changeSet author="julian" id="000019-5">
-		<createView viewName="_user_amendment">
+		<createView viewName="_get_amendment">
 			select
 				trim(vt.uid) as uid,
 				a.type,
@@ -699,7 +698,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 	<!-- external associated terms -->
 	<changeSet author="julian" id="000020">
-		<createView viewName="_user_external_associated_terms">
+		<createView viewName="_get_external_associated_terms">
 			select
 				trim(vt.uid) as uid,
 				trim(vt.name) as name,
@@ -711,15 +710,32 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
-	<!-- internal associated terms -->
-	<changeSet author="julian" id="000020-6">
-		<createView viewName="_user_internal_associated_terms">
+
+	<changeSet author="julian" id="000020-7">
+		<createView viewName="_get_reference_source">
 			select
+				trim( vt.uid) as uid,
+				trim( vt.name) as name,
+				trim( rs.citation_string) as citation_string,
+				rs.online_reference_resource as online_reference_resource,
+				o.acronym as organisation_acronym
+			from vocabulary_term vt
+			join reference_source rs on vt.reference_source_id = rs.id
+			left join organisation o on rs.organisation_id = o.id
+		</createView>
+	</changeSet>
+
+
+
+	<!-- term -> other term -->
+	<changeSet author="julian" id="000020-6">
+		<createView viewName="_get_internal_associated_terms">
+			select
+				trim(svt.uid) as uid,					-- subject
+				trim(svt.name) as name,
 				trim(association_type_name) as type,
-				trim(svt.uid) as subject_uid,
-				trim(svt.name) as subject_name,
-				trim(ovt.uid) as object_uid,
-				trim(ovt.name) as object_name
+				trim(ovt.uid) as parent_uid,
+				trim(ovt.name) as parent_name
 			from internal_associated_terms iat
 			left join vocabulary_term svt on iat.subject_vocabulary_term_id = svt.id
 			left join vocabulary_term ovt on iat.object_vocabulary_term_id = ovt.id
@@ -727,27 +743,15 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
-	<changeSet author="julian" id="000020-7">
-		<createView viewName="_user_reference_source">
-			select
-				trim( vt.uid) as uid,
-				trim(vt.name) as name,
-				trim( rs.citation_string) as citation_string,
-				rs.online_reference_resource as online_reference_resource,
-				o.acronym as organisation_acronym
-			from vocabulary_term vt
-			left join reference_source rs on vt.reference_source_id = rs.id
-			left join organisation o on rs.organisation_id = o.id
-		</createView>
-	</changeSet>
 
-
+	<!-- term -> category -->
 	<changeSet author="julian" id="000020-8">
-		<createView viewName="_user_term_category_classification">
+		<createView viewName="_get_term_category_classification">
 			select
 			trim( vt.uid) as uid,
-			trim( csc.name) as classification_scheme_category,
-			trim( csc.label) as label,
+			trim( vt.name) as name,
+			trim( csc.name) as category_name,
+			trim( csc.label) as category_label,
 			csc.date_added as date_added
 			from vocabulary_term vt
 			-- get second-tier category
@@ -758,13 +762,14 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
+	<!-- category -> category -->
 	<changeSet author="julian" id="000020-9">
-		<createView viewName="_user_classification_scheme_category">
+		<createView viewName="_get_classification_scheme_category">
 			select
-				trim( c2.name) as parent_name,
-				trim( c2.label) as parent_label,
-				trim( c1.name) as child_name,
-				trim( c1.label) as child_label
+				trim( c1.name) as uid,
+				trim( c1.label) as label,
+				trim( c2.name) as parent_uid,
+				trim( c2.label) as parent_label
 			from classification_scheme_association a
 			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id
 			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id
