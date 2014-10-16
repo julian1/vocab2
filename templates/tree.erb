@@ -50,15 +50,15 @@
     <% for @concept in query_sql_subject( %{
 
       select
-        r1.subject
-      from _rdf_m r1
-      left join _rdf_m r2 on r2.subject = r1.subject and r2.predicate = 'skos:broader'
-      left join _rdf_m r3 on r3.subject = r1.subject and r3.predicate = 'skos:inScheme'
+        type.subject
+      from _rdf_m type
+      left join _rdf_m broader on broader.subject = type.subject and broader.predicate = 'skos:broader'
+      left join _rdf_m inScheme on inScheme.subject = type.subject and inScheme.predicate = 'skos:inScheme'
       where
-        r1.predicate = 'rdf:type' and r1.object = 'skos:Concept'
-        and r2.object is null
-        and r3.object = '#{ @conceptScheme}'
-      order by r1.subject
+        type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+        and broader.object is null
+        and inScheme.object = '#{ @conceptScheme}'
+      order by type.subject
 
 
     } , nil )%>
