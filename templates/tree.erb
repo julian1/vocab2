@@ -48,16 +48,20 @@
 
 
     <% for @concept in query_sql_subject( %{
-      select 
-        r1.subject 
-      from _rdf_m r1 
-      join _rdf_m r2 on r2.subject = r1.subject 
-      left join _rdf_m r3 on r3.subject = r1.subject 
-      where r1.predicate = 'rdf:type' and r1.object = 'skos:Concept'
-      and r2.predicate = 'skos:inScheme' and r2.object = '#{ @conceptScheme}' 
-      and r3.predicate = 'skos:broader' and r3.object is null 
-      ;
-      } , nil )%>
+
+      select
+        r1.subject -- , r2.predicate, r2.object, r3.object
+      from _rdf_m r1
+      left join _rdf_m r2 on r2.subject = r1.subject and r2.predicate = 'skos:broader' 
+      left join _rdf_m r3 on r3.subject = r1.subject and r3.predicate = 'skos:inScheme'
+      where
+        r1.predicate = 'rdf:type' and r1.object = 'skos:Concept'
+        and r2.object is null
+        and r3.object = '#{ @conceptScheme}'
+      order by r1.subject
+
+
+    } , nil )%>
     <%= @concept%>
   <% end %>
 
