@@ -1388,6 +1388,18 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
+	<!-- create a matview -->
+	<changeSet author="julian" id="000401">
+		<sql>	
+			create materialized view _rdf_m as select * from _rdf;
+			create index on _rdf_m( object ); 
+			create index on _rdf_m( subject ); 
+			create index on _rdf_m( predicate ); 
+		</sql>	
+	</changeSet>
+
+
+
 </databaseChangeLog>
 
 
