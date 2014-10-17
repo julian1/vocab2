@@ -1,12 +1,8 @@
-
 <%  
-	
-	for @ret in query_sql_subject1( %{ select *  from ( VALUES (1, 'one'), (2, 'two'), (3, 'three')) as x( a, b) }, nil  );
-
-
+	for @ret in query_sql_subject1( %{ select *  from vocabulary_register }, nil  );
 %>
 
-a = <%= @ret['a'] %>, b = <%= @ret['b'] %>
+a = <%= @ret['uid'] %>
 
 <% end %>
 
