@@ -15,7 +15,7 @@ th, td {
 <script type="text/javascript">
 
 
-  function update_chart(id) {
+  function edit_field(id) {
     // using the same id for the editable field should make it easier to close, when we open 
     // different fields
 
@@ -31,7 +31,7 @@ th, td {
     console.log( 'x is ' + x );
   };
 
-  function close_chart(id) {
+  function close_field(id) {
  
     console.log( 'close !! ' + id );
     $( "#myresultform").remove();
@@ -59,8 +59,8 @@ th, td {
       <%= @row[@fname] %>  
       </span> 
 
-      <input class="submit" type="button" value="Edit" onclick="update_chart('edit_<%= @fname %>')">
-      <input class="submit" type="button" value="Close" onclick="close_chart('edit_<%= @fname %>')">
+      <input class="submit" type="button" value="Edit" onclick="edit_field('edit_<%= @fname %>')">
+      <input class="submit" type="button" value="Close" onclick="close_field('edit_<%= @fname %>')">
     </td>
   <% end %>
 
