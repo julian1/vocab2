@@ -11,16 +11,16 @@ th, td {
 </style>
 
 
-<% @result = @conn.exec('select * from vocabulary_register') %> 
+<% @result = @conn.exec('select uid, name, short_name, definition from vocabulary_term') %> 
 
 
-<table style="width:100%">
+<table style="width:70%">
 <tr>
 
 
 <% for @i in 0..@result.nfields - 1
-		@fname = @result.fname(@i) 
-	 %>
+	@fname = @result.fname(@i) 
+%>
 	<td> <%= @fname  %> </td>
 <% end %>
 
