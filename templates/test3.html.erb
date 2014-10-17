@@ -17,7 +17,7 @@ th, td {
 
   function update_chart(id) {
 
-    $( '#' + id).append('<textarea id="myresultform" rows="20" cols="100">' ); 
+    $( '#' + id).append('<textarea id="myresultform" rows="10" cols="100">' ); 
 
     console.log( 'whoot update chart ' + id );
   }
@@ -39,9 +39,9 @@ th, td {
 
   <% for @row in @result %>
     <td> 
-      <div id="edit_<%= @fname %>">
+      <span id="edit_<%= @fname %>">
       <%= @row[@fname] %>  
-      </div>
+      </span> 
 
       <input class="submit" type="button" value="Edit" onclick="update_chart('edit_<%= @fname %>')">
     </td>
