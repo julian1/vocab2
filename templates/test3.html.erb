@@ -21,19 +21,22 @@ th, td {
 
     var x = $( '#' + id)[0].innerHTML ; 
 
-    $( '#' + id).append('<textarea id="myresultform" rows="10" cols="100">' ); 
+    $( '#' + id).append('<textarea id="myresultform" rows="10" cols="100">     ' ); 
     $( '#myresultform')[0].value = x; 
 
 //  $('#myresultform')[0].value = '';
   // we could pass our initial value. 
   // but we also need to be able to copy it back...
-
-
     console.log( 'whoot update chart ' + id );
-
-
     console.log( 'x is ' + x );
+  };
+
+  function close_chart(id) {
+ 
+    console.log( 'close !! ' + id );
+    $( "#myresultform").remove();
   }
+
 
 </script>
 
@@ -57,6 +60,7 @@ th, td {
       </span> 
 
       <input class="submit" type="button" value="Edit" onclick="update_chart('edit_<%= @fname %>')">
+      <input class="submit" type="button" value="Close" onclick="close_chart('edit_<%= @fname %>')">
     </td>
   <% end %>
 
