@@ -37,10 +37,19 @@ th, td {
   };
 
   function close_field(id) {
- 
     var formid = 'form_' + id;
     console.log( 'close !! ' + id );
     $( '#' + formid).remove();
+  }
+
+  function update_field(id) {
+    var formid = 'form_' + id;
+    var value = $( '#' + formid )[0].value 
+
+    $( '#' + formid).remove();
+
+    $( '#' + id)[0].innerHTML  = value; 
+
   }
 
 
@@ -67,6 +76,7 @@ th, td {
 
       <input class="submit" type="button" value="Edit" onclick="edit_field('edit_<%= @fname %>')">
       <input class="submit" type="button" value="Close" onclick="close_field('edit_<%= @fname %>')">
+      <input class="submit" type="button" value="Update" onclick="update_field('edit_<%= @fname %>')">
     </td>
   <% end %>
 
