@@ -1,20 +1,45 @@
 
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
+</style>
+
+
 <% @result = @conn.exec('select * from vocabulary_register') %> 
+
+
+<table style="width:100%">
+<tr>
+
 
 <% for @i in 0..@result.nfields - 1
 		@fname = @result.fname(@i) 
 	 %>
-	<%= @fname  %>
+	<td> <%= @fname  %> </td>
 <% end %>
 
-<p>
+</tr>
 
-<% for @ret in @result  %>
+<% for @row in @result %>
 
+<tr>
 	<% for @i in 0..@result.nfields - 1 
 		@fname = @result.fname(@i) 
 	%>
-	<%=	@fname %>: <%= @ret[@fname] %>
+	<td> <%= @row[@fname] %> </td>
 	<% end %>
 
+</tr>
+
 <% end %>
+
+</table> 
+
+
+
