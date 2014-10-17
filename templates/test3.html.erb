@@ -1,0 +1,49 @@
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
+</style>
+
+<style>
+
+input {
+    position: relative;
+    left: 20px;
+}
+</style>
+
+
+<% @result = @conn.exec('select * from vocabulary_term where uid = $$http://vocab.nerc.ac.uk/collection/L22/current/TOOL0263$$') %> 
+
+
+<table style="width:70%">
+
+
+<% for @i in 0..@result.nfields - 1
+	@fname = @result.fname(@i) 
+%>
+	<tr>
+	<td> <%= @fname %> </td>
+
+	<% for @row in @result %>
+		<td> 
+			<span>
+			<span> <%= @row[@fname] %> </span> 
+
+			<input class="submit" type="button" value="Edit" onclick="update_chart()">
+			</span>
+		</td>
+	<% end %>
+	</tr>
+<% end %>
+
+
+</table> 
+
+
+
