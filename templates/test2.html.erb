@@ -1,0 +1,16 @@
+
+<% @result = @conn.exec('select * from vocabulary_register') %> 
+
+<% for @i in 0..@result.nfields - 1 %>
+
+        <%= @result.fname(@i) %>
+
+
+<% end %>
+
+
+<% for @ret in @result  %>
+
+ value	<%= @ret['uid'] %>
+
+<% end %>
