@@ -1,8 +1,35 @@
-<%  
-	for @ret in query_sql_subject1( %{ select *  from vocabulary_register }, nil  );
-%>
 
-a = <%= @ret['uid'] %>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 15px;
+}
+</style>
+
+
+
+<table style="width:100%">
+<tr>
+    <td> uri: </td>
+    <td> name </td>
+    <td> date </td>
+  </tr>
+
+<%  
+	for @ret in query_sql_subject1( %{ select * from vocabulary_register }, nil  );
+%>
+  
+  <tr>
+    <td><a href='<%= @ret['uid'] %>'><%= @ret['uid'] %></a> </td>
+    <td><%= @ret['name'] %></td>
+    <td><%= @ret['date'] %></td>
+  </tr>
 
 <% end %>
+</table> 
+
 
