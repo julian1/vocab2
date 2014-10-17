@@ -9,13 +9,20 @@ th, td {
 }
 </style>
 
-<style>
 
-input {
-    position: relative;
-    left: 20px;
-}
-</style>
+ <script language="javascript" type="text/javascript" src="jquery.js"></script>
+
+<script type="text/javascript">
+
+
+  function update_chart(id) {
+
+    $( '#' + id).append('<textarea id="myresultform" rows="20" cols="100">' ); 
+
+    console.log( 'whoot update chart ' + id );
+  }
+
+</script>
 
 
 <% @result = @conn.exec('select * from vocabulary_term where uid = $$http://vocab.nerc.ac.uk/collection/L22/current/TOOL0263$$') %> 
@@ -25,24 +32,25 @@ input {
 
 
 <% for @i in 0..@result.nfields - 1
-	@fname = @result.fname(@i) 
+  @fname = @result.fname(@i) 
 %>
-	<tr>
-	<td> <%= @fname %> </td>
+  <tr>
+  <td> <%= @fname %> </td>
 
-	<% for @row in @result %>
-		<td> 
-			<span>
-			<span> <%= @row[@fname] %> </span> 
+  <% for @row in @result %>
+    <td> 
+      <div id="edit_<%= @fname %>">
+      <%= @row[@fname] %>  
+      </div>
 
-			<input class="submit" type="button" value="Edit" onclick="update_chart()">
-			</span>
-		</td>
-	<% end %>
-	</tr>
+      <input class="submit" type="button" value="Edit" onclick="update_chart('edit_<%= @fname %>')">
+    </td>
+  <% end %>
+
+  <td>
+  </td>
+  </tr>
 <% end %>
-
-
 </table> 
 
 
