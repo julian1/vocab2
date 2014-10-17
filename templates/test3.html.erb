@@ -19,10 +19,15 @@ th, td {
     // using the same id for the editable field should make it easier to close, when we open 
     // different fields
 
+    // we really want to be able to open multiple fields, which means giving the element
+    // a unique id. 
+
     var x = $( '#' + id)[0].innerHTML ; 
 
-    $( '#' + id).append('<textarea id="myresultform" rows="10" cols="100">     ' ); 
-    $( '#myresultform')[0].value = x; 
+    var formid = 'form_' + id;
+
+    $( '#' + id).append('<textarea id="' + formid + '" rows="10" cols="100">     ' ); 
+    $( '#' + formid )[0].value = x; 
 
 //  $('#myresultform')[0].value = '';
   // we could pass our initial value. 
@@ -33,8 +38,9 @@ th, td {
 
   function close_field(id) {
  
+    var formid = 'form_' + id;
     console.log( 'close !! ' + id );
-    $( "#myresultform").remove();
+    $( '#' + formid).remove();
   }
 
 
