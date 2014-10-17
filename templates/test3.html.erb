@@ -16,10 +16,23 @@ th, td {
 
 
   function update_chart(id) {
+    // using the same id for the editable field should make it easier to close, when we open 
+    // different fields
+
+    var x = $( '#' + id)[0].innerHTML ; 
 
     $( '#' + id).append('<textarea id="myresultform" rows="10" cols="100">' ); 
+    $( '#myresultform')[0].value = x; 
+
+//  $('#myresultform')[0].value = '';
+  // we could pass our initial value. 
+  // but we also need to be able to copy it back...
+
 
     console.log( 'whoot update chart ' + id );
+
+
+    console.log( 'x is ' + x );
   }
 
 </script>
