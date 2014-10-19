@@ -27,3 +27,7 @@ render skos
     ./render.rb -t AODNParameterVocabulary.erb 
     ./render.rb -t parameterClassificationScheme.erb
 
+render tree
+
+    ./render.rb -t templates/tree.erb
+
