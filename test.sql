@@ -48,6 +48,9 @@ $$ language plpgsql;
 -- select id from  reference_source_select
 -- should perhaps return the id of the resource that we deleted,
 
+-- might be easier to express this with 'using reference_source_select( xxx) rfs ' 
+-- but we need to create a dummy entry ... so we can test the delete 
+
 create or replace function reference_source_delete( online_reference_resource_ varchar)
 returns void
 as $$
@@ -57,6 +60,35 @@ begin
   delete from reference_source rs using x where rs.id = x.id ;
 end
 $$ language plpgsql;
+
+
+-- id                        | integer                | not null default nextval('reference_source_id_seq'::regclass)
+-- citation_string           | character varying(110) | 
+-- online_reference_resource | character varying(200) | 
+-- organisation_id           | integer                | 
+-- online_term_resource      | character varying(110) | 
+
+
+create or replace function reference_source_insert( online_reference_resource varchar, citation_string varchar, organisation_acronym varchar, online_term_resource varchar )
+returns void
+as $$
+begin
+  -- we are going to have to construct select from parameters and then feed that in...
+  -- should be using a function to get the organisation id.
+--  select online_reference_resource, citation_string, organisation_acronym_ , online_term_resource 
+ -- from 
+
+--  with organisation as (select id from organisation o where o.acronym = organisation_acronym_ ) 
+  insert into reference_source( online_reference_resource, citation_string, organisation_id, online_term_resource)
+  -- this need the organisation acronym to be joined
+  select online_reference_resource, citation_string, o.id, online_term_resource
+  from organisation o where o.acronym = organisation_acronym
+  ;
+end
+$$ language plpgsql;
+
+
+
 
 
 
