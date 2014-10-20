@@ -31,3 +31,23 @@ render tree
 
     ./render.rb -t templates/tree.erb
 
+
+Summary of changes.
+  created migration changeset.
+  rename tables and fields, primary and foreign keys
+  integer primary keys on all tables - except linking tables that are not referenced
+  sequenced, and set to max
+  person and organisation combined when had both
+  subject/object tables removed
+
+  single rdf view
+  view over all resources
+
+
+Issues/ todo
+  Need to update on dbprod
+  person organisation affiliation is not correct
+  need fields description added against the fields
+  Make a view for select fields  self-describing table explicit - so it can be viewed in pgadmin.
+  Make user for Kim
+
