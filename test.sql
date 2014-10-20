@@ -82,6 +82,20 @@ end
 $$ language plpgsql;
 
 
+create or replace function reference_source_delete( online_reference_resource_ varchar)
+returns void
+as $$
+declare
+  reference_source_id int4 ;
+begin
+  select id into reference_source_id from reference_source_select( online_reference_resource_ ); 
+  if( reference_source_id is null) then
+    raise exception 'bad reference_source uid';
+  else
+    delete from reference_source rs where rs.id = reference_source_id; 
+  end if; 
+end
+$$ language plpgsql;
 
 
 
