@@ -22,11 +22,11 @@ drop function reference_source_list() ;
 
 
 create or replace function reference_source_list()
-returns table ( online_reference_resource varchar, citation_string varchar, organisation_acronym varchar, online_term_resource varchar)
+returns table ( online_reference_resource varchar, citation_string varchar, organisation_acronym varchar, online_term_resource varchar, id integer)
 as $$
 begin
 return query
-  select rs.online_reference_resource, rs.citation_string, o.acronym::varchar, rs.online_term_resource
+  select rs.online_reference_resource, rs.citation_string, o.acronym::varchar, rs.online_term_resource, rs.id
 	from reference_source rs
   left join organisation o on o.id = rs.organisation_id;
 end
@@ -34,7 +34,7 @@ $$ language plpgsql;
 
 
 create or replace function reference_source_select( online_reference_resource_ varchar)
-returns table ( online_reference_resource varchar, citation_string varchar, organisation_acronym varchar, online_term_resource varchar)
+returns table ( online_reference_resource varchar, citation_string varchar, organisation_acronym varchar, online_term_resource varchar, id integer)
 as $$
 begin
 return query 
@@ -43,6 +43,21 @@ return query
   where rsl.online_reference_resource = online_reference_resource_;
 end
 $$ language plpgsql;
+
+
+-- select id from  reference_source_select
+-- should perhaps return the id of the resource that we deleted,
+
+create or replace function reference_source_delete( online_reference_resource_ varchar)
+returns void
+as $$
+begin
+  with x as 
+  (select id from reference_source_select(online_reference_resource_)  )
+  delete from reference_source rs using x where rs.id = x.id ;
+end
+$$ language plpgsql;
+
 
 
 
