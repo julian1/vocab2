@@ -1399,6 +1399,71 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
+	<changeSet author="julian" id="000500">
+		<createView viewName="_schema_metadata_all">
+			-- create view fields as
+			SELECT
+					n.nspname as schema,
+					c.relname as relation,
+					c.relkind as kind,
+					a.attname AS field,
+			--      r.*,
+					t.typname || '(' || a.atttypmod || ')' AS Type,
+					CASE WHEN a.attnotnull = 't' THEN 'YES' ELSE 'NO' END AS _notnull,
+					-- CASE WHEN r.contype = 'p' THEN 'PRI' ELSE '' END AS Key,
+			--        r.contype as Contype,
+					(SELECT pg_catalog.pg_get_expr(d.adbin, d.adrelid)
+							FROM
+									pg_catalog.pg_attrdef d
+							WHERE
+									d.adrelid = a.attrelid
+									AND d.adnum = a.attnum
+									AND a.atthasdef) AS _default,
+			--        ''::varchar as Extras,
+					pg_get_constraintdef(c2.oid, true) as _constraint
+			--from pg_attribute a
+				-- left join pg_constraint c on c.conrelid = a.attrelid
+			--      , pg_catalog.obj_description(239533, 8)
+					, pg_catalog.col_description( c.oid, a.attnum) as _comment
+			FROM
+					pg_class c 
+					JOIN pg_attribute a ON a.attrelid = c.oid
+					JOIN pg_type t ON a.atttypid = t.oid
+					LEFT JOIN pg_catalog.pg_constraint r ON c.oid = r.conrelid 
+						AND r.conname = a.attname
+					left join pg_namespace n on n.oid=c.relnamespace
+
+				LEFT JOIN pg_constraint c2 ON (c2.conrelid = a.attrelid
+				AND (c2.conkey[1] = a.attnum
+				OR c2.conkey[2] = a.attnum OR c2.conkey[3] = a.attnum
+				OR c2.conkey[4] = a.attnum OR c2.conkey[5] = a.attnum
+				OR c2.conkey[6] = a.attnum) OR c2.conkey[7] = a.attnum
+				OR c2.conkey[8] = a.attnum)
+			WHERE
+			 --       c.relname = 'tablename'
+			--        AND a.attnum > 0
+					a.attnum > 0 
+			--ORDER BY a.attnum
+			ORDER BY n.nspname, c.relname , a.attnum;
+		</createView>
+
+
+		<createView viewName="_schema_metadata">
+			select  
+				relation, field, type, _notnull, _default, _constraint, _comment 
+			from _schema_metadata_all 
+			where schema = current_schema()
+			and kind = 'r' 
+			and relation not in ('databasechangelog', 'databasechangeloglock' )
+		</createView>
+	</changeSet>
+
+	<changeSet author="julian" id="000502">
+		<sql>	
+			comment on column amendment.request_date is 'date amendment request was created';
+		</sql>	
+	</changeSet>
+
 
 </databaseChangeLog>
 
