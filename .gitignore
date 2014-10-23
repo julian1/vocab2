@@ -15,4 +15,5 @@ shared_src/
 # Some extra personal ignore settings
 .bundle
 skos_files*
+output
 
