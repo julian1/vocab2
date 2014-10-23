@@ -925,6 +925,23 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
+	<!-- concept category -->
+	<!-- this is for any category - not just top concept -->
+	<changeSet author="julian" id="000107--000">
+		<createView viewName="_whoot_top_concept">
+
+			select
+				c.name as subject,
+				c.label as skos_prefLabel,
+				c.description as skos_definition
+			from classification_scheme_category c
+		</createView>
+	</changeSet>
+
+
+
+
+
 	<!-- why not build aggregated views but group  somewhat -->
 	<changeSet author="julian" id="000108">
 		<createView viewName="_rdf_dcterms_issued_2">

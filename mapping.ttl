@@ -21,20 +21,27 @@ map:contr_vocab_db a d2rq:Database;
 
 # ok, 
 # Table mytable
-map:Concept a d2rq:ClassMap;
-	d2rq:dataStorage map:contr_vocab_db;
-	d2rq:uriPattern "http://mytable/@@_rdf.subject@@";
-	d2rq:condition "predicate = 'rdf:type' and object = 'skos:Concept'";
-	d2rq:class skos:Concept;
-	.
+#map:Concept a d2rq:ClassMap;
+#	d2rq:dataStorage map:contr_vocab_db;
+#	d2rq:uriPattern "http://mytable/@@_rdf.subject@@";
+#	d2rq:condition "predicate = 'rdf:type' and object = 'skos:Concept'";
+#	d2rq:class skos:Concept;
+#	.
 
 
 
 map:TopConcept a d2rq:ClassMap;
 	d2rq:dataStorage map:contr_vocab_db;
-	d2rq:uriPattern "http://mytable/@@_rdf.subject@@";
-	d2rq:condition "predicate = 'rdf:type' and object = 'skos:TopConcept'";
+	d2rq:uriPattern "@@_whoot_top_concept.subject@@";
 	d2rq:class skos:TopConcept;
+	.
+
+
+map:PaperTitle a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:TopConcept;
+    d2rq:property skos:prefLabel;
+    d2rq:column "_whoot_top_concept.skos_preflabel";
+    d2rq:lang "en";
 	.
 
 
