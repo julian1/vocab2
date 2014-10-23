@@ -28,6 +28,8 @@ map:Concept a d2rq:ClassMap;
 	d2rq:class skos:Concept;
 	.
 
+
+
 map:TopConcept a d2rq:ClassMap;
 	d2rq:dataStorage map:contr_vocab_db;
 	d2rq:uriPattern "http://mytable/@@_rdf.subject@@";
