@@ -1,0 +1,38 @@
+@prefix map: <#> .
+#@prefix db: <> .
+@prefix vocab: <vocab/> .
+@prefix skos: <skos/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+
+map:contr_vocab_db a d2rq:Database;
+	d2rq:jdbcDriver "org.postgresql.Driver";
+	d2rq:jdbcDSN "jdbc:postgresql://localhost/vocab";
+	d2rq:username "contr_vocab_db";
+	d2rq:password "contr_vocab_db";
+	.
+
+# must specify uriColumn if object is uri rather than literal.
+
+# rdf:type  | skos:Concept
+
+# ok, 
+# Table mytable
+map:Concept a d2rq:ClassMap;
+	d2rq:dataStorage map:contr_vocab_db;
+	d2rq:uriPattern "http://mytable/@@_rdf.subject@@";
+	d2rq:condition "predicate = 'rdf:type' and object = 'skos:Concept'";
+	d2rq:class skos:Concept;
+	.
+
+map:TopConcept a d2rq:ClassMap;
+	d2rq:dataStorage map:contr_vocab_db;
+	d2rq:uriPattern "http://mytable/@@_rdf.subject@@";
+	d2rq:condition "predicate = 'rdf:type' and object = 'skos:TopConcept'";
+	d2rq:class skos:TopConcept;
+	.
+
+
