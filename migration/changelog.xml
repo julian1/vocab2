@@ -54,7 +54,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- support for DDL actions -->
-	<changeSet author="julian" id="000001-5">
+	<changeSet author="julian" id="0001">
        <sql>
 			create function exec(text) returns text
 			language plpgsql volatile
@@ -65,7 +65,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- organisation name -->
-	<changeSet author="julian" id="000002">
+	<changeSet author="julian" id="0002">
 		<renameColumn newColumnName="id" oldColumnName="organisation_name_id" tableName="organisation"/>
 		<renameColumn newColumnName="name" oldColumnName="organisation_name" tableName="organisation"/>
 		<renameColumn newColumnName="description" oldColumnName="organisation_name_description" tableName="organisation"/>
@@ -84,7 +84,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- person -->
-	<changeSet author="julian" id="000003">
+	<changeSet author="julian" id="0003">
 		<renameColumn newColumnName="id" oldColumnName="person_id" tableName="person"/>
 		<renameColumn newColumnName="name" oldColumnName="person_name" tableName="person"/>
 		<renameColumn newColumnName="salutation" oldColumnName="person_salutation" tableName="person"/>
@@ -100,7 +100,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	<!-- new table responsible party to replace register_owner, register_manager, term_proposer etc
 		should probably also incorporate affiliation_type since it's a one-to-one mapping
 	-->
-	<changeSet author="julian" id="000004">
+	<changeSet author="julian" id="0004">
 		<createTable tableName="responsible_party" >
 			<column name="id" type="serial">
 				 <constraints primaryKey="true"/>
@@ -137,7 +137,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- vocabulary_register -->
-	<changeSet author="julian" id="000005">
+	<changeSet author="julian" id="0005">
 		<!-- integer primary key -->
 		<sql>
 			alter table vocabulary_register drop constraint vocabulary_register_table_pkey cascade
@@ -213,7 +213,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- vocabulary_term -->
-	<changeSet author="julian" id="000006">
+	<changeSet author="julian" id="0006">
 		<!-- remove old primary key, add new integer one -->
 		<sql>
 			alter table vocabulary_term drop constraint vocabular_term_table_pkey cascade;
@@ -307,7 +307,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- external_associated_terms -->
-	<changeSet author="julian" id="000007">
+	<changeSet author="julian" id="0007">
 		<!-- not necessary for primary key here since nothing references -->
 
 		<!-- reference vocabulary_term(id) -->
@@ -350,7 +350,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- amendment -->
-	<changeSet author="julian" id="000008">
+	<changeSet author="julian" id="0008">
 
 		<!-- id is already primary key, but not serial -->
 		<renameColumn newColumnName="id" oldColumnName="amendment_id" tableName="amendment"/>
@@ -428,7 +428,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- association_type -->
-	<changeSet author="julian" id="000009">
+	<changeSet author="julian" id="0009">
 		<!-- name is primary key -->
 		<renameColumn newColumnName="name" oldColumnName="association_type_name" tableName="association_type"/>
 		<renameColumn newColumnName="description" oldColumnName="association_type_name_description" tableName="association_type"/>
@@ -436,7 +436,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- reference_source -->
-	<changeSet author="julian" id="000010">
+	<changeSet author="julian" id="0010">
 		<renameColumn newColumnName="id" oldColumnName="reference_id" tableName="reference_source"/>
 		<sql>
 			select exec('create sequence reference_source_id_seq start '||(select max(id) +1 from reference_source));
@@ -447,7 +447,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- organisation synonym -->
-	<changeSet author="julian" id="000011">
+	<changeSet author="julian" id="0011">
 		<renameColumn newColumnName="id" oldColumnName="organisation_synonym_id" tableName="organisation_synonym"/>
 		<sql>
 			create sequence organisation_synonym_id_seq start 1;
@@ -459,7 +459,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- affiliation_type -->
-	<changeSet author="julian" id="000012">
+	<changeSet author="julian" id="0012">
 		<!-- name is primary key -->
 		<renameColumn newColumnName="name" oldColumnName="affiliation_type_name" tableName="affiliation_type"/>
 		<renameColumn newColumnName="description" oldColumnName="affiliation_description" tableName="affiliation_type"/>
@@ -471,13 +471,13 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	<!-- this is a composite primary key, should probably just be a unique constraint on the 3 terms
 		or and then link with integer id. better - combine into the responsible_party concept
 	-->
-	<changeSet author="julian" id="000014">
+	<changeSet author="julian" id="0013">
 		<renameColumn newColumnName="organisation_id" oldColumnName="organisation_name_id" tableName="person_organisational_affiliation"/>
 	</changeSet>
 
 
 	<!-- vocabulary_type -->
-	<changeSet author="julian" id="000015">
+	<changeSet author="julian" id="0014">
 		<!-- name is primary key -->
 		<renameColumn newColumnName="name" oldColumnName="vocabulary_type_name" tableName="vocabulary_type"/>
 		<renameColumn newColumnName="definition" oldColumnName="vocabulary_type_definition" tableName="vocabulary_type"/>
@@ -485,7 +485,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- internal_associated_terms  -->
-	<changeSet author="julian" id="000017">
+	<changeSet author="julian" id="0015">
 		<!-- nothing referencing, so doesn't need primary key -->
 
 		<!-- avoid the indirection through the object_term and subject_term tables drop tables -->
@@ -533,7 +533,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- term_category_classification -->
-	<changeSet author="julian" id="000018">
+	<changeSet author="julian" id="0016">
 		<!-- use vocabulary_term(id), and drop vocabulary_term_name -->
 		<addColumn tableName="term_category_classification">
 			<column name="vocabulary_term_id" type="integer"/>
@@ -568,7 +568,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- classification_scheme to use responsible_party in place of person,organisation fields -->
-	<changeSet author="julian" id="000016">
+	<changeSet author="julian" id="0017">
 		<addColumn tableName="classification_scheme">
 			<column name="responsible_party_id" type="integer"/>
 		</addColumn>
@@ -603,7 +603,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- classification_scheme_category -->
-	<changeSet author="julian" id="000016-5">
+	<changeSet author="julian" id="0018">
 		<!-- should name be called uri here?
 			from rdf/skos pov yes, but maybe not from higher level conceptual pov
 		-->
@@ -620,7 +620,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- classification_scheme_association -->
-	<changeSet author="julian" id="000016-7">
+	<changeSet author="julian" id="0019">
 
 		<!-- normalize -->
 		<dropColumn columnName="hierarchy_level" tableName="classification_scheme_association"/>
@@ -648,7 +648,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- strip trailing slashes from uris -->
-	<changeSet author="julian" id="000021-4">
+	<changeSet author="julian" id="0020">
 		<sql>
 			update external_associated_terms set uid = regexp_replace( uid, '\/$', '');
 			update vocabulary_term set uid = regexp_replace( uid, '\/$', '')
@@ -661,7 +661,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 		join the tables up in some obvious ways, to aid logical presentation to human user
 	-->
 
-	<changeSet author="julian" id="000021-5">
+	<changeSet author="julian" id="0021">
 		<createView viewName="_get_uid">
 			-- helps us to find the source of misc terms
 			select 'external_associated_terms' as relation, 'uid' as field, uid as uid  from external_associated_terms
@@ -684,7 +684,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 	<!-- view of responsible party - should probably also have the association type
 		when we refactor this -->
-	<changeSet author="julian" id="000019">
+	<changeSet author="julian" id="0022">
 		<createView viewName="_get_responsible_party">
 			select
 				p.name as person_name,
@@ -699,7 +699,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	<!-- amendment
 			this is organised in terms of amendment, although we use vt.uid as first ref
 	-->
-	<changeSet author="julian" id="000019-5">
+	<changeSet author="julian" id="0023">
 		<createView viewName="_get_amendment">
 			select
 				trim(vt.uid) as uid,
@@ -720,7 +720,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- external associated terms -->
-	<changeSet author="julian" id="000020">
+	<changeSet author="julian" id="0024">
 		<createView viewName="_get_external_associated_terms">
 			select
 				trim(vt.uid) as uid,
@@ -754,7 +754,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- term -> other term -->
-	<changeSet author="julian" id="000020-6">
+	<changeSet author="julian" id="0025">
 		<createView viewName="_get_internal_associated_terms">
 			select
 				trim(svt.uid) as uid,					-- subject
@@ -776,7 +776,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 		should be rewritten to select from  term_category_classification
 	-->
-	<changeSet author="julian" id="000020-8">
+	<changeSet author="julian" id="0026">
 		<createView viewName="_get_term_category_classification">
 			select
 				trim( vt.uid) as uid,
@@ -794,7 +794,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 	<!-- category -> other category -->
-	<changeSet author="julian" id="000020-9">
+	<changeSet author="julian" id="0027">
 		<createView viewName="_get_classification_scheme_association">
 			select
 				trim( c1.name) as uid,
@@ -812,395 +812,94 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 	<!-- RDF views -->
 
+
+	<!-- CONCEPT SCHEME -->
+	<changeSet author="julian" id="0028">
+
+		<!-- one-to-one fields -->
+		<createView viewName="_skos_concept_scheme">
+			select
+				s.name as subject,
+				'skos:ConceptScheme'::varchar as rdf_type,
+				s.date_added as dcterms_issued,
+				s.title as dc_title,
+				s.description as dc_description,
+				o.name as dc_creator,
+				p.name as dc_publisher,
+				null as dcterms_hasversion
+
+			from classification_scheme s
+
+			join responsible_party rp on rp.id = s.responsible_party_id
+			join organisation o on rp.organisation_id = o.id
+
+			join responsible_party rp2 on rp2.id = s.responsible_party_id
+			join person p on rp2.person_id = p.id
+
+			union all
+
+
+			select
+				vr.uid as subject,
+				'skos:ConceptScheme'::varchar as rdf_type,
+				vr.date as dcterms_issued,
+				vr.name as dc_title,
+				vr.content_summary as dc_description,
+				o.name as dc_creator,
+				p.name as dc_publisher,
+				vr.version as dcterms_hasversion
+
+
+			from vocabulary_register vr
+
+			join responsible_party rp on rp.id = vr. owner_responsible_party_id
+			join organisation o on rp.organisation_id = o.id
+
+			join responsible_party rp2 on rp2.id = vr. owner_responsible_party_id
+			join person p on rp2.person_id = p.id
+
+
+		</createView>
+
+		<createView viewName="_rdf_concept_scheme">
+			select
+				s.subject as subject, 'rdf:type' as predicate, s.rdf_type as object
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dcterms:issued', s.dcterms_issued::varchar
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dc:title', s.dc_title
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dc:description', s.dc_description
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dc:creator', s.dc_creator
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dc:publisher', s.dc_publisher
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dcterms:hasVersion', s.dcterms_hasversion
+			from _skos_concept_scheme s
+		</createView>
+	</changeSet>
+
 	<!-- Concept Scheme -->
-	<changeSet author="julian" id="000100-5">
-		<createView viewName="_rdf_type_concept_scheme">    <!-- for classification scheme -->
-			select
-				s.name as subject,
-				'rdf:type'::varchar as predicate,
-				'skos:ConceptScheme'::varchar as object
-			from classification_scheme s
-		</createView>
-	</changeSet>
 
 
-	<!-- classification scheme -->
-	<changeSet author="julian" id="000100-6">
-		<createView viewName="_rdf_dcterms_issued">
-			select
-				s.name as subject,
-				'dcterms:issued'::varchar as predicate,
-				s.date_added::varchar as object
-			from classification_scheme s
-		</createView>
-	</changeSet>
 
 
-	<changeSet author="julian" id="000103">
-		<createView viewName="_rdf_dc_title">
-			select
-				s.name as subject,
-				'dc:title'::varchar as predicate,
-				s.title as object
-			from classification_scheme s
-		</createView>
-	</changeSet>
 
 
-	<changeSet author="julian" id="000104">
-		<createView viewName="_rdf_dc_description">
-			select
-				s.name as subject,
-				'dc:description'::varchar as predicate,
-				s.description as object
-			from classification_scheme s
-		</createView>
-	</changeSet>
-
-
-	<!-- we're dealing with persons not organisations here
-		Mappings doc, suggests, should not include organisation here -->
-	<changeSet author="julian" id="000105">
-		<createView viewName="_rdf_dc_creator">
-			select
-				s.name as subject,
-				'dc:creator'::varchar as predicate,
-				o.name as object
-			from classification_scheme s
-			join responsible_party rp on rp.id = s.responsible_party_id
-			join organisation o on rp.organisation_id = o.id
-		</createView>
-	</changeSet>
-
-
-	<changeSet author="julian" id="000106">
-		<createView viewName="_rdf_dc_publisher">
-			select
-				s.name as subject,
-				'dc:publisher'::varchar as predicate,
-				p.name as object
-			from classification_scheme s
-			join responsible_party rp on rp.id = s.responsible_party_id
-			join person p on rp.person_id = p.id
-		</createView>
-	</changeSet>
-
-
-	<!-- TopConcept -->
-	<changeSet author="julian" id="000106-1">
-		<createView viewName="_rdf_type_top_concept">
-			select
-				c.name as subject,
-				'rdf:type'::varchar as predicate,
-				'skos:TopConcept'::varchar as object
-			from classification_scheme_category c
-			join classification_scheme_association a on c.id = a.classification_scheme_category_id
-			where parent_classification_scheme_category_id is null
-		</createView>
-	</changeSet>
-
-
-	<!-- concept -->
-	<!-- this is for any category - not just top concept -->
-	<changeSet author="julian" id="000107">
-		<createView viewName="_rdf_skos_pref_label">
-			select
-				c.name as subject,
-				'skos:prefLabel'::varchar as predicate,
-				c.label
-			from classification_scheme_category c
-		</createView>
-	</changeSet>
-
-
-	<!-- this is for any category - not just top concept -->
-	<changeSet author="julian" id="000107-5">
-		<createView viewName="_rdf_skos_definition">
-			select
-				c.name as subject,
-				'skos:definition'::varchar as predicate,
-				c.description
-			from classification_scheme_category c
-		</createView>
-	</changeSet>
-
-
-	<!-- concept category -->
-	<!-- this is for any category - not just top concept -->
-	<changeSet author="julian" id="000107--000">
-		<createView viewName="_whoot_top_concept">
-
-			select
-				c.name as subject,
-				c.label as skos_prefLabel,
-				c.description as skos_definition
-			from classification_scheme_category c
-		</createView>
-	</changeSet>
-
-
-
-
-
-	<!-- why not build aggregated views but group  somewhat -->
-	<changeSet author="julian" id="000108">
-		<createView viewName="_rdf_dcterms_issued_2">
-			select
-				c.name as subject,
-				'dcterms:issued'::varchar as predicate,
-				c.date_added::varchar as object
-			from classification_scheme_category c
-		</createView>
-	</changeSet>
-
-	<!-- category in a scheme -->
-	<changeSet author="julian" id="000109">
-		<createView viewName="_rdf_skos_inscheme">
-			select
-				c.name as subject,
-				'skos:inScheme' as predicate,
-				s.name as object
-			from classification_scheme_category c
-			join classification_scheme s on c.classification_scheme_id = s.id;
-		</createView>
-	</changeSet>
-
-
-
-
-	<!-- Concept -->
-	<changeSet author="julian" id="000111">
-		<createView viewName="_rdf_type_concept">
-			select
-				c.name as subject,
-				'rdf:type'::varchar as predicate,
-				'skos:Concept'::varchar as object
-			from classification_scheme_category c
-		</createView>
-	</changeSet>
-
-
-	<changeSet author="julian" id="000112">
-		<createView viewName="_rdf_skos_broader">
-			select
-				c1.name as subject,
-				'skos:broader' as predicate,
-				c2.name as object
-			from classification_scheme_association a
-			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id
-			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id
-			-- order by c2.name, c1.name
-		</createView>
-	</changeSet>
-
-
-	<changeSet author="julian" id="000112-1">
-		<createView viewName="_rdf_skos_narrower">
-			select
-				b.object as subject,
-				'skos:narrower' as predicate,
-				b.subject as object
-			from _rdf_skos_broader b
-		</createView>
-	</changeSet>
-
-
-
-
-	<!-- ConceptScheme for parameter vocabulary -->
-
-	<changeSet author="julian" id="000113">
-		<createView viewName="_rdf_type_concept_scheme_2"> <!-- for vocaublary register -->
-			select
-				r.uid as subject,
-				'rdf:type'::varchar as predicate,
-				'skos:ConceptScheme'::varchar as object
-			from vocabulary_register r
-		</createView>
-	</changeSet>
-
-
-
-	<!-- title is name -->
-	<changeSet author="julian" id="000114">
-		<createView viewName="_rdf_dc_title_2">
-			select
-				vr.uid as subject,
-				'dc:title'::varchar as predicate,
-				vr.name as object
-			from vocabulary_register vr
-		</createView>
-	</changeSet>
-
-	<changeSet author="julian" id="000115">
-		<createView viewName="_rdf_dc_description_2">
-			select
-				vr.uid as subject,
-				'dc:description'::varchar as predicate,
-				vr.content_summary as object
-			from vocabulary_register vr
-		</createView>
-	</changeSet>
-
-	<changeSet author="julian" id="000116">
-		<createView viewName="_rdf_dc_creator_2">
-			select
-				vr.uid as subject,
-				'dc:creator'::varchar as predicate,
-				o.name
-			from vocabulary_register vr
-			join responsible_party rp on rp.id = vr. owner_responsible_party_id
-			join organisation o on rp.organisation_id = o.id
-		</createView>
-	</changeSet>
-
-	<changeSet author="julian" id="000117">
-		<createView viewName="_rdf_dc_publisher_2">
-			select
-				vr.uid as subject,
-				'dc:publisher'::varchar as predicate,
-				p.name
-			from vocabulary_register vr
-			join responsible_party rp on rp.id = vr. owner_responsible_party_id
-			join person p on rp.person_id = p.id
-			join organisation o on rp.organisation_id = o.id
-		</createView>
-	</changeSet>
-
-	<changeSet author="julian" id="000118">
-		<createView viewName="_rdf_dcterms_has_version">
-			select
-				vr.uid as subject,
-				'dcterms:hasVersion'::varchar as predicate,
-				vr.version
-			from vocabulary_register vr
-		</createView>
-	</changeSet>
-
-	<changeSet author="julian" id="000119">
-		<createView viewName="_rdf_dcterms_issued_3">
-			select
-				vr.uid as subject,
-				'dcterms:issued'::varchar as predicate,
-				vr.date::varchar as object
-			from vocabulary_register vr
-		</createView>
-	</changeSet>
-
-
-	<!-- -->
-
-	<changeSet author="julian" id="000120">
-		<createView viewName="_rdf_type_concept_2">
-			select
-				vt.uid as subject,
-				'rdf:type'::varchar as predicate,
-				'skos:Concept'::varchar as object
-			from vocabulary_term vt
-		</createView>
-	</changeSet>
-
-	<!-- in the register scheme -->
-	<changeSet author="julian" id="000121">
-		<createView viewName="_rdf_skos_inscheme_2">
-			select
-				vt.uid as subject,
-				'skos:inScheme' as predicate,
-				vr.uid as object
-			from vocabulary_term vt
-			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id
-		</createView>
-	</changeSet>
-
-
-	<changeSet author="julian" id="000122">
-		<createView viewName="_rdf_skos_pref_label_2">
-			select
-				vt.uid as subject,
-				'skos:prefLabel'::varchar as predicate,
-				vt.name as object
-			from vocabulary_term vt
-		</createView>
-	</changeSet>
-
-
-	<changeSet author="julian" id="000123">
-		<createView viewName="_rdf_skos_definition_2">
-			select
-				vt.uid as subject,
-				'skos:definition'::varchar as predicate,
-				vt.definition as object
-			from vocabulary_term vt
-		</createView>
-	</changeSet>
-
-
-	<changeSet author="julian" id="000124">
-		<createView viewName="_rdf_dc_source">
-			select
-				vt.uid as subject,
-				'dc:source'::varchar as predicate,
-				case when rs.citation_string is not null
-					then rs.citation_string
-					else vr.name
-				end as object
-			from vocabulary_term vt
-			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id
-			left join reference_source rs on vt.reference_source_id = rs.id
-		</createView>
-	</changeSet>
-
-
-	<changeSet author="julian" id="000125">
-		<createView viewName="_rdf_dc_publisher_3">
-			select
-			vt.uid as subject,
-			-- rs.organisation_id,
-			'dc:publisher'::varchar as predicate,
-			case
-				when rso.name is not null
-				then rso.name
-				else vro.name
-			end as object
-			from vocabulary_term vt
-			-- reference source organisation
-			left join reference_source rs on vt.reference_source_id = rs.id
-			left join organisation rso on rs.organisation_id = rso.id
-			-- vocabulary register organisation
-			-- Bad Data? or migration - contains references to value 52 but there is no corresponding organisation
-			-- in the original data
-			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id
-			left join responsible_party rp on vr.owner_responsible_party_id = rp.id
-			left join organisation vro on rp.organisation_id = vro.id
-		</createView>
-	</changeSet>
-
-
-	<changeSet author="julian" id="000126">
-		<createView viewName="_rdf_dcterms_created">
-			select
-			vt.uid as subject,
-			'dcterms:created'::varchar as predicate,
-			vt.date_added::varchar as object
-			from vocabulary_term vt
-		</createView>
-	</changeSet>
-
-
-	<!--changeSet author="julian" id="000127">
-		<createView viewName="_rdf_skos_inscheme_3">
-			select
-				vt.uid as subject,
-				'skos:inScheme'::varchar as predicate,
-				s.name as object
-			from vocabulary_term vt
-			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
-			join classification_scheme s on tcc.classification_scheme_id = s.id
-		</createView>
-	</changeSet -->
-
-
-	<changeSet author="julian" id="000127">
+	<changeSet author="julian" id="0029">
 
 		<createView viewName="_term_classification_scheme_category">
 			-- map the classification_scheme_category id's with the term id.
@@ -1236,87 +935,195 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			join classification_scheme cs on cs.id = csc.classification_scheme_id
 		</createView>
 
-		<createView viewName="_rdf_skos_inscheme_3">
-			select
-				trim(vt.uid) as uid,
-				'skos:inScheme'::varchar as predicate,
-				trim( cs.name) as classification_scheme_name
-			from _term_classification_scheme  tcs
-			join vocabulary_term vt on vt.id = tcs.vocabulary_term_id
-			join classification_scheme cs on cs.id = tcs.classification_scheme_id
-		</createView>
 
 	</changeSet>
 
 
-   <!--
-		sql for first and second tier broader predicate
-		union all
-
-		select
-		vt.uid as subject,
-		'skos:broader' as predicate,
-		t1_csc.name as object
-
-		from vocabulary_term vt
-		- get second-tier category
-		join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
-		join classification_scheme_category t2_csc on tcc.classification_scheme_category_id = t2_csc.id
-		- get first-tier category
-		join classification_scheme_association csa on csa.classification_scheme_category_id = t2_csc.id
-		join classification_scheme_category t1_csc on csa.parent_classification_scheme_category_id = t1_csc.id
-	-->
 
 
-	<changeSet author="julian" id="000128">
-		<createView viewName="_rdf_skos_broader_2">
+	<!-- CONCEPT -->
+
+	<changeSet author="julian" id="0030">
+
+		<!-- one-to-one fields -->
+		<createView viewName="_skos_concept">
 			select
-			vt.uid as subject,
-			'skos:broader' as predicate,
-			csc.name as object
+				c.name as subject,
+				'skos:Concept'::varchar as rdf_type,
+				c.label as skos_preflabel,
+				c.description as skos_definition,
+				c.date_added as dcterms_issued,
+				-- should be issued ?
+				null as dcterms_created,
+				null as dc_source,
+				null as dc_publisher
+
+			from classification_scheme_category c
+
+			union all
+			select
+				vt.uid as subject,
+				'skos:Concept'::varchar as rdf_type,
+				vt.name as skos_preflabel,
+				vt.definition as skos_definition,
+				null as dcterms_issued,
+				-- should be issued ?
+				vt.date_added as dcterms_created,
+				case when rs.citation_string is not null
+					then rs.citation_string
+					else vr.name
+				end as dc_source,
+				case
+					when rso.name is not null
+					then rso.name
+					else vro.name
+				end as dc_publisher
+
+
+			from vocabulary_term vt
+
+			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id
+
+			-- should be left, since we explicitly test for null
+			left join reference_source rs on vt.reference_source_id = rs.id
+
+			-- reference source organisation
+			left join organisation rso on rs.organisation_id = rso.id
+			-- vocabulary register organisation
+			-- Bad Data? or migration - contains references to value 52 but there is no corresponding organisation
+			-- in the original data
+			left join responsible_party rp on vr.owner_responsible_party_id = rp.id
+			left join organisation vro on rp.organisation_id = vro.id
+
+		</createView>
+
+		<!-- the inscheme stuff isn't right because it could be in several schemes -->
+
+
+		<!-- top concept won't have broader -->
+		<!-- one-to-many -->
+		<createView viewName="_skos_concept_skos_broader">
+			select
+				c1.name as subject,
+				c2.name as object
+			from classification_scheme_association a
+			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id
+			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id
+			-- order by c2.name, c1.name
+
+			union all
+			select
+				vt.uid as subject,
+				-- 'skos:broader' as predicate,
+				csc.name as object
 			from vocabulary_term vt
 			-- get second-tier category
 			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
 			join classification_scheme_category csc on tcc.classification_scheme_category_id = csc.id
-		</createView>
-	</changeSet>
 
+			union all
 
-	<changeSet author="julian" id="000129">
-		<createView viewName="_rdf_skos_narrower_2">
-			select
-			b.object as subject,
-			'skos:narrower'::varchar as predicate,
-			b.subject as object
-			from _rdf_skos_broader_2 b order by subject;
-		</createView>
-	</changeSet>
-
-
-	<!-- broader for platforms -->
-	<changeSet author="julian" id="000130">
-		<createView viewName="_rdf_skos_broader_3">
 			select
                 svt.uid as subject,
-                'skos:broader' as predicate,
+                -- 'skos:broader' as predicate,
                 ovt.uid as object
             from internal_associated_terms iat
             left join vocabulary_term svt on iat.subject_vocabulary_term_id = svt.id
             left join vocabulary_term ovt on iat.object_vocabulary_term_id = ovt.id
             where association_type_name = 'isInstanceOf'
+
+
 		</createView>
-	</changeSet>
 
-
-	<changeSet author="julian" id="000131">
-		<createView viewName="_rdf_skos_narrower_3">
+		<!-- should be constrained to be top concept only -->
+		<createView viewName="_skos_concept_skos_narrower">
 			select
-			b.object as subject,
-			'skos:narrower'::varchar as predicate,
-			b.subject as object
-			from _rdf_skos_broader_3 b order by subject;
+				object as subject,
+				subject as object
+			from _skos_concept_skos_broader
 		</createView>
+
+		<createView viewName="_skos_concept_skos_inscheme">
+
+			select
+				vt.uid as subject,
+				vr.uid as object
+			from vocabulary_term vt
+			join vocabulary_register vr on vr.id = vt.vocabulary_register_id
+
+			union all
+
+			select
+				c.name as subject,
+				s.name as object
+			from classification_scheme_category c
+			join classification_scheme_association a on c.id = a.classification_scheme_category_id
+			join classification_scheme s on c.classification_scheme_id = s.id
+
+			union all
+
+			select
+				vt.uid as subject,
+				cs.name as object
+			from _term_classification_scheme tcs
+			join vocabulary_term vt on vt.id = tcs.vocabulary_term_id
+			join classification_scheme cs on cs.id = tcs.classification_scheme_id
+		</createView>
+
+
+
+
+		<createView viewName="_rdf_concept">
+			select
+				c.subject as subject, 'skos:prefLabel' as predicate, c.skos_preflabel as object
+			from _skos_concept  c
+			union all
+			select
+				c.subject as subject, 'rdf:type' as predicate, c.rdf_type
+			from _skos_concept  c
+			union all
+			select
+				c.subject, 'skos:definition'::varchar, c.skos_definition
+			from _skos_concept  c
+			union all
+			-- BOTH ISSUED AND CREATED ?
+			select
+				c.subject, 'dcterms:issued'::varchar, c.dcterms_issued::varchar
+			from _skos_concept  c
+
+			union all
+			select
+				s.subject, 'skos:inScheme'::varchar, s.object
+			from _skos_concept_skos_inscheme  s
+
+			union all
+			select
+				b.subject, 'skos:broader'::varchar, b.object
+			from _skos_concept_skos_broader  b
+			union all
+			select
+				n.subject, 'skos:narrower'::varchar, n.object
+			from _skos_concept_skos_narrower n
+			union all
+			select
+				c.subject, 'dcterms:created'::varchar, c.dcterms_created::varchar
+			from _skos_concept  c
+			union all
+			select
+				c.subject, 'dc:source'::varchar, c.dc_source
+			from _skos_concept  c
+			union all
+			select
+				c.subject, 'dc:publisher'::varchar, c.dc_publisher
+			from _skos_concept  c
+
+
+		</createView>
+
 	</changeSet>
+
+
+
 
 
 
@@ -1335,45 +1142,11 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	-->
 
 	<!-- aggregate rdf view -->
-	<changeSet author="julian" id="000307">
+	<changeSet author="julian" id="0031">
 		<createView viewName="_rdf">
-			select * from _rdf_dcterms_issued
-			union all select * from _rdf_type_concept_scheme
-			union all select * from _rdf_dc_publisher
-			union all select * from _rdf_dc_title
-			union all select * from _rdf_dc_description
-			union all select * from _rdf_dc_creator
-			union all select * from _rdf_dc_publisher
-			union all select * from _rdf_type_top_concept
-			union all select * from _rdf_skos_pref_label
-			union all select * from _rdf_skos_definition
-			union all select * from _rdf_dcterms_issued_2
-			union all select * from _rdf_skos_inscheme
-			union all select * from _rdf_skos_narrower
-			union all select * from _rdf_skos_broader
-			union all select * from _rdf_type_concept
-			union all select * from _rdf_type_concept_scheme_2
-			union all select * from _rdf_dc_title_2
-			union all select * from _rdf_dc_description_2
-			union all select * from _rdf_dc_creator_2
-			union all select * from _rdf_dc_publisher_2
-			union all select * from _rdf_dcterms_has_version
-			union all select * from _rdf_dcterms_issued_3
-			union all select * from _rdf_type_concept_2
-			union all select * from _rdf_skos_inscheme_2
-			union all select * from _rdf_skos_pref_label_2
-			union all select * from _rdf_skos_definition_2
-			union all select * from _rdf_dc_source
-			union all select * from _rdf_dc_publisher_3
-			union all select * from _rdf_dcterms_created
-			union all select * from _rdf_skos_inscheme_3
-			union all select * from _rdf_skos_broader_2
-			union all select * from _rdf_skos_narrower_2
-			union all select * from _rdf_skos_broader_3
-			union all select * from _rdf_skos_narrower_3
+			select * from _rdf_concept_scheme
+			union all select * from _rdf_concept
 
-			-- TODO this is useful in develop, but slows things down so get rid of it later for performance
-			-- order by predicate, subject
 		</createView>
 	</changeSet>
 
@@ -1391,32 +1164,32 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet-->
 
 
-	<!-- Seb request. Move entries under PAR category into Physical-Water->Optical Properties, 
-	and remove PAR category --> 
-	<changeSet author="julian" id="000400">
-		<sql>	
-			update term_category_classification 
-			set classification_scheme_category_id = 45 
-			where classification_scheme_category_id = 29; 
+	<!-- Seb request. Move entries under PAR category into Physical-Water->Optical Properties,
+	and remove PAR category -->
+	<changeSet author="julian" id="0032">
+		<sql>
+			update term_category_classification
+			set classification_scheme_category_id = 45
+			where classification_scheme_category_id = 29;
 
-			delete from classification_scheme_category 
+			delete from classification_scheme_category
 			where id = 29;
-		</sql>	
+		</sql>
 	</changeSet>
 
 
 	<!-- create a matview -->
-	<changeSet author="julian" id="000401">
-		<sql>	
+	<changeSet author="julian" id="0033">
+		<sql>
 			create materialized view _rdf_m as select * from _rdf;
-			create index on _rdf_m( object ); 
-			create index on _rdf_m( subject ); 
-			create index on _rdf_m( predicate ); 
-		</sql>	
+			create index on _rdf_m( object );
+			create index on _rdf_m( subject );
+			create index on _rdf_m( predicate );
+		</sql>
 	</changeSet>
 
 
-	<changeSet author="julian" id="000500">
+	<changeSet author="julian" id="0034">
 		<createView viewName="_schema_metadata_all">
 			-- create view fields as
 			SELECT
@@ -1443,10 +1216,10 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			--      , pg_catalog.obj_description(239533, 8)
 					, pg_catalog.col_description( c.oid, a.attnum) as _comment
 			FROM
-					pg_class c 
+					pg_class c
 					JOIN pg_attribute a ON a.attrelid = c.oid
 					JOIN pg_type t ON a.atttypid = t.oid
-					LEFT JOIN pg_catalog.pg_constraint r ON c.oid = r.conrelid 
+					LEFT JOIN pg_catalog.pg_constraint r ON c.oid = r.conrelid
 						AND r.conname = a.attname
 					left join pg_namespace n on n.oid=c.relnamespace
 
@@ -1459,27 +1232,58 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			WHERE
 			 --       c.relname = 'tablename'
 			--        AND a.attnum > 0
-					a.attnum > 0 
+					a.attnum > 0
 			--ORDER BY a.attnum
 			ORDER BY n.nspname, c.relname , a.attnum;
 		</createView>
 
 
 		<createView viewName="_schema_metadata">
-			select  
-				relation, field, type, _notnull, _default, _constraint, _comment 
-			from _schema_metadata_all 
+			select
+				relation, field, type, _notnull, _default, _constraint, _comment
+			from _schema_metadata_all
 			where schema = current_schema()
-			and kind = 'r' 
+			and kind = 'r'
 			and relation not in ('databasechangelog', 'databasechangeloglock' )
 		</createView>
 	</changeSet>
 
-	<changeSet author="julian" id="000502">
-		<sql>	
+	<!-- example comment -->
+	<changeSet author="julian" id="0035">
+		<sql>
 			comment on column amendment.request_date is 'date amendment request was created';
-		</sql>	
+		</sql>
 	</changeSet>
+
+
+	<!-- reinstate unit_view for geoserver -->
+	<changeSet author="julian" id="0036">
+		<createView viewName="unit_view">
+			SELECT vocabulary_term.id,
+				vocabulary_term.name,
+				vocabulary_term.short_name,
+				vocabulary_term.definition,
+				vocabulary_term.date_added
+			FROM contr_vocab_db.vocabulary_term
+			WHERE vocabulary_term.vocabulary_type_name = 'UnitsOfMeasure'::bpchar
+			ORDER BY vocabulary_term.name;
+		</createView>
+	</changeSet>
+
+	<!-- organisational_affiliation helper view -->
+	<changeSet author="julian" id="0037">
+		<createView viewName="_get_organisational_affiliation">
+			select
+				p.name as person,
+				o.name as organisation,
+				poa.affiliation_type_name as affiliation
+			from person_organisational_affiliation poa
+			join person p on p.id = poa.person_id
+			join organisation o on o.id = poa.organisation_id ;
+		</createView>
+	</changeSet>
+
+
 
 
 </databaseChangeLog>

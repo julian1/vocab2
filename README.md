@@ -1,6 +1,13 @@
 vocab2
 ======
 
+TODO
+    change uid to external uid in external terms association
+    map affiliation into responsible party
+    create dummy record for organisation 52
+    clarify topconcept - Simon Piggott picker
+
+
 checkout
 
     git clone https://github.com/julian1/vocab2
@@ -12,9 +19,9 @@ build db
 run migrations
 
     cd migration/
-    ./run_migrations.sh 
+    ./run_migrations.sh
 
-sql query examples for rdf view, 
+sql query examples for rdf view,
 
     ./connect.sh
     select * from _rdf ;
@@ -22,9 +29,9 @@ sql query examples for rdf view,
     select * from _rdf where predicate = 'rdf:type' order by object;
     select object from _rdf where predicate = 'skos:inScheme' and subject = 'http://vocab.aodn.org.au/def/parameter/383';
 
-render skos 
+render skos
 
-    ./render.rb -t AODNParameterVocabulary.erb 
+    ./render.rb -t AODNParameterVocabulary.erb
     ./render.rb -t parameterClassificationScheme.erb
 
 render tree
@@ -43,11 +50,11 @@ Summary of changes.
   * view over all resources
 
 Issues/ todo
-  * need to explain how changeset is explicit and managed and versioned on git - in julian1/vocab.
-  * Make a view metadata for select fields  self-describing table explicit - so it can be viewed in pgadmin. using the objects from 
-     call it _schema_meta or just _meta 
-  * Update on dbprod
-  * New user for Kim
+  * (done) need to explain how changeset is explicit and managed and versioned on git - in julian1/vocab.
+  * (done) Make a view metadata for select fields  self-describing table explicit - so it can be viewed in pgadmin. using the objects from
+     call it _schema_meta or just _meta
+  * (done) Update on dbprod
+  * (done) New user for Kim
   * person organisation affiliation is not correct
   * need fields description added against the fields - would like on the db changeset - to make schema versioned in git.
 
