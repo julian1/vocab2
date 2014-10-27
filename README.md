@@ -2,10 +2,10 @@ vocab2
 ======
 
 TODO
-    change uid to external uid in external terms association
-    map affiliation into responsible party
-    create dummy record for organisation 52
-    clarify topconcept - Simon Piggott picker
+  * change uid to external uid in external terms association
+  * map affiliation into responsible party
+  * create dummy record for organisation 52
+  * clarify topconcept - Simon Piggott picker
 
 
 checkout
