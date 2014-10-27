@@ -6,6 +6,7 @@ TODO
   * map affiliation into responsible party
   * create dummy record for organisation 52
   * clarify topconcept - Simon Piggott picker
+  * tighten the metadata to show 'contr_vocab_db' schema and not everything 
 
 
 checkout
