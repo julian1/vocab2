@@ -1284,6 +1284,86 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
+	<!-- add primary id's for these join tables to aid db reverse engineering, orm etc -->
+	<changeSet author="julian" id="0038">
+		<addColumn tableName="internal_associated_terms">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="internal_associated_terms"/>
+
+		<addColumn tableName="external_associated_terms">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="external_associated_terms"/>
+
+	</changeSet>
+
+
+	<!-- merge person_organisational_affiliatio into responsible_party -->
+	<changeSet author="julian" id="0039">
+
+		<!-- do this first to make cascading keys easier -->
+		<dropView viewName="_get_organisational_affiliation"/>
+		<dropTable tableName="person_organisational_affiliation"/>
+
+		<!-- parties not yet added -->
+		<sql>
+			insert into responsible_party (person_id, organisation_id)
+			select p.id, o.id
+			from person p
+			cross join organisation o
+			where ( o.acronym ~ 'eMII' and p.name ~ 'Natalia' )
+			or ( o.acronym ~ 'AAD' and p.name ~ 'Kim' )
+		</sql>
+
+		<dropForeignKeyConstraint baseTableName="affiliation_type" constraintName="affiliation_type_table_pkey"/>
+
+		<!-- create primary key for affiliation type -->
+		<addColumn tableName="affiliation_type">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="affiliation_type" />
+
+		<!-- reference from responsible party -->
+		<addColumn tableName="responsible_party">
+			<column name="affiliation_type_id" type="serial"/>
+		</addColumn>
+
+		<!-- update responsible_party to use -->
+		<sql>
+			update responsible_party
+			set affiliation_type_id = at.id
+			from affiliation_type at
+			where at.name = 'employedBy'
+		</sql>
+
+	    <addForeignKeyConstraint
+            constraintName="responsible_party_affiliation_type_fkey"
+			baseColumnNames="affiliation_type_id"
+            baseTableName="responsible_party"
+            referencedColumnNames="id"
+            referencedTableName="affiliation_type"
+		/>
+
+		<!-- recreate view -->
+		<dropView viewName="_get_responsible_party"/>
+		<createView viewName="_get_responsible_party">
+			select
+				p.name as person_name,
+				o.acronym as organisation_acronym,
+				at.name as affiliation_type_name
+			from responsible_party rp
+			left join person p on p.id = rp.person_id
+			left join organisation o on o.id = rp.organisation_id
+			left join affiliation_type at on at.id = rp.affiliation_type_id
+		</createView>
+	</changeSet>
+
+
+	<!-- requested by Kim to make less ambiguous -->
+	<changeSet author="julian" id="0040">
+		<renameColumn newColumnName="external_uid" oldColumnName="uid" tableName="external_associated_terms"/>
+	</changeSet>
 
 
 </databaseChangeLog>
