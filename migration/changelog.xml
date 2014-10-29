@@ -1360,11 +1360,6 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
-	<!-- requested by Kim to make less ambiguous -->
-	<changeSet author="julian" id="0040">
-		<renameColumn newColumnName="external_uid" oldColumnName="uid" tableName="external_associated_terms"/>
-	</changeSet>
-
 
 </databaseChangeLog>
 
