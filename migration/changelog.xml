@@ -1360,6 +1360,43 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
+	<!-- test, see if changes reveng-->
+	<changeSet author="julian" id="0040">
+		<addColumn tableName="term_category_classification">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="term_category_classification" />
+
+
+		<addColumn tableName="classification_scheme_association">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="classification_scheme_association" />
+
+	</changeSet>
+
+	<!-- fix up register_source.organisation foreign key, by first creating non-existent organisation record -->
+	<changeSet author="julian" id="0041">
+		<sql>
+			insert into organisation( name, acronym) values ('seadatanet FIXME', 'seadatanet' );
+		</sql>
+		<!-- register_source is currently filled with orphaned value 52, so update with ref to seadatanet -->
+		<sql>
+			update reference_source
+			set organisation_id = o.id
+			from organisation o
+			where o.name = 'seadatanet FIXME'
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="reference_source_organisation_fkey"
+			baseColumnNames="organisation_id"
+            baseTableName="reference_source"
+            referencedColumnNames="id"
+            referencedTableName="organisation"
+		/>
+	</changeSet>
+
+
 
 </databaseChangeLog>
 
