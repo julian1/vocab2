@@ -753,23 +753,6 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 
-	<!-- term -> other term -->
-	<changeSet author="julian" id="0025">
-		<createView viewName="_get_internal_associated_terms">
-			select
-				trim(svt.uid) as uid,					-- subject
-				trim(svt.name) as name,
-				trim(association_type_name) as type,
-				trim(ovt.uid) as parent_uid,
-				trim(ovt.name) as parent_name
-			from internal_associated_terms iat
-			left join vocabulary_term svt on iat.subject_vocabulary_term_id = svt.id
-			left join vocabulary_term ovt on iat.object_vocabulary_term_id = ovt.id
-			order by svt.uid, ovt.uid
-		</createView>
-	</changeSet>
-
-
 
 	<!-- term -> category
 		should this be category as primary thing first...?
@@ -807,6 +790,66 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			order by c1.name, c2.name
 		</createView>
 	</changeSet>
+
+
+
+
+
+	<!-- primary key for association_type type and use -->
+	<changeSet author="julian" id="0027-1">
+		<sql>
+			alter table association_type drop constraint association_type_table_pkey cascade
+		</sql>
+		<addColumn tableName="association_type">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="association_type" />
+
+
+		<addColumn tableName="internal_associated_terms">
+			<column name="association_type_id" type="integer"/>
+		</addColumn>
+
+		<sql>
+			update internal_associated_terms iat
+			set association_type_id = at.id
+			from association_type at
+			where iat.association_type_name = at.name
+		</sql>
+
+	    <addForeignKeyConstraint
+            constraintName="internal_associated_terms_association_type_fkey"
+			baseColumnNames="association_type_id"
+            baseTableName="internal_associated_terms"
+            referencedColumnNames="id"
+            referencedTableName="association_type"
+		/>
+
+		<dropColumn columnName="association_type_name" tableName="internal_associated_terms"/>
+	</changeSet>
+
+
+
+	<!-- term -> other term -->
+	<changeSet author="julian" id="0027-1">
+		<createView viewName="_get_internal_associated_terms">
+			select
+				trim(svt.uid) as uid,					-- subject
+				trim(svt.name) as name,
+				trim(at.name) as association_type_name,
+				trim(ovt.uid) as parent_uid,
+				trim(ovt.name) as parent_name
+			from internal_associated_terms iat
+			left join vocabulary_term svt on iat.subject_vocabulary_term_id = svt.id
+			left join vocabulary_term ovt on iat.object_vocabulary_term_id = ovt.id
+			left join association_type at on at.id = iat.association_type_id 
+			order by svt.uid, ovt.uid
+		</createView>
+	</changeSet>
+
+
+
+
 
 
 	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
@@ -917,7 +960,8 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			left join classification_scheme_category csc1 on tcc1.classification_scheme_category_id = csc1.id
 			-- join through tcc and one level of the iat
 			left join internal_associated_terms iat on iat.subject_vocabulary_term_id = vt1.id
-			and iat.association_type_name = 'isInstanceOf'
+			left join association_type at on at.id = iat.association_type_id
+			and at.name = 'isInstanceOf'
 			left join term_category_classification tcc2 on tcc2.vocabulary_term_id = iat.object_vocabulary_term_id
 			left join classification_scheme_category csc2 on tcc2.classification_scheme_category_id = csc2.id
 		</createView>
@@ -1030,7 +1074,8 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
             from internal_associated_terms iat
             left join vocabulary_term svt on iat.subject_vocabulary_term_id = svt.id
             left join vocabulary_term ovt on iat.object_vocabulary_term_id = ovt.id
-            where association_type_name = 'isInstanceOf'
+			left join association_type at on iat.association_type_id = at.id
+            where at.name = 'isInstanceOf'
 
 
 		</createView>
@@ -1400,7 +1445,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 
-	<!-- primary key for vocabulary type and use it -->
+	<!-- primary key for vocabulary type and use it from vocabulary_term -->
 	<changeSet author="julian" id="0042">
 		<sql>
 			alter table vocabulary_type drop constraint vocabulary_type_table_pkey cascade
@@ -1418,7 +1463,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			update vocabulary_term vt
 			set vocabulary_type_id = t.id
 			from vocabulary_type t
-			where vt.vocabulary_type_name = t.name 
+			where vt.vocabulary_type_name = t.name
 		</sql>
 
 	    <addForeignKeyConstraint
@@ -1430,7 +1475,28 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 		/>
 
 		<addNotNullConstraint columnName="vocabulary_type_id" tableName="vocabulary_term"/>
+		
+		<!-- type-name is used in view so we have to drop before dropping the column -->
+		<dropView viewName="unit_view"/>
+		<dropColumn columnName="vocabulary_type_name" tableName="vocabulary_term"/>
+
+		<!-- create the view joining on new id -->
+		<createView viewName="unit_view">
+			select
+				vt.id,
+				vt.name,
+				vt.short_name,
+				vt.definition,
+				vt.date_added
+			from vocabulary_term vt
+			join vocabulary_type t on t.id = vt.vocabulary_type_id
+			where t.name = 'UnitsOfMeasure'
+			order by vt.name;
+		</createView>
 	</changeSet>
+
+
+
 
 
 
