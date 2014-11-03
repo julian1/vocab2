@@ -825,13 +825,13 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
             referencedTableName="association_type"
 		/>
 
-		<dropColumn columnName="association_type_name" tableName="internal_associated_terms"/>
+		<!-- dropColumn columnName="association_type_name" tableName="internal_associated_terms"/ -->
 	</changeSet>
 
 
 
 	<!-- term -> other term -->
-	<changeSet author="julian" id="0027-1">
+	<changeSet author="julian" id="0027-2">
 		<createView viewName="_get_internal_associated_terms">
 			select
 				trim(svt.uid) as uid,					-- subject
@@ -959,11 +959,14 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			left join term_category_classification tcc1 on tcc1.vocabulary_term_id = vt1.id
 			left join classification_scheme_category csc1 on tcc1.classification_scheme_category_id = csc1.id
 			-- join through tcc and one level of the iat
-			left join internal_associated_terms iat on iat.subject_vocabulary_term_id = vt1.id
-			left join association_type at on at.id = iat.association_type_id
-			and at.name = 'isInstanceOf'
+			-- WORKS left join internal_associated_terms iat on iat.subject_vocabulary_term_id = vt1.id and iat.association_type_name = 'isInstanceOf'
+
+			-- join internal_associated_terms iat on iat.subject_vocabulary_term_id = vt1.id 
+			-- join association_type at on at.id = iat.association_type_id and at.name = 'isInstanceOf'
+
 			left join term_category_classification tcc2 on tcc2.vocabulary_term_id = iat.object_vocabulary_term_id
 			left join classification_scheme_category csc2 on tcc2.classification_scheme_category_id = csc2.id
+			-- where at.name = 'isInstanceOf'
 		</createView>
 
 		<createView viewName="_term_classification_scheme">
