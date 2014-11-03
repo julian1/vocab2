@@ -1360,7 +1360,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
-	<!-- test, see if changes reveng-->
+	<!-- primary keys help reveng gorm/hibernate mappings -->
 	<changeSet author="julian" id="0040">
 		<addColumn tableName="term_category_classification">
 			<column name="id" type="serial"/>
@@ -1394,6 +1394,42 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
             referencedColumnNames="id"
             referencedTableName="organisation"
 		/>
+
+		<addNotNullConstraint columnName="organisation_id" tableName="reference_source"/>
+	</changeSet>
+
+
+
+	<!-- primary key for vocabulary type and use it -->
+	<changeSet author="julian" id="0042">
+		<sql>
+			alter table vocabulary_type drop constraint vocabulary_type_table_pkey cascade
+		</sql>
+		<addColumn tableName="vocabulary_type">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="vocabulary_type" />
+
+		<addColumn tableName="vocabulary_term">
+			<column name="vocabulary_type_id" type="integer"/>
+		</addColumn>
+
+		<sql>
+			update vocabulary_term vt
+			set vocabulary_type_id = t.id
+			from vocabulary_type t
+			where vt.vocabulary_type_name = t.name 
+		</sql>
+
+	    <addForeignKeyConstraint
+            constraintName="vocabulary_term_vocabulary_type_fkey"
+			baseColumnNames="vocabulary_type_id"
+            baseTableName="vocabulary_term"
+            referencedColumnNames="id"
+            referencedTableName="vocabulary_type"
+		/>
+
+		<addNotNullConstraint columnName="vocabulary_type_id" tableName="vocabulary_term"/>
 	</changeSet>
 
 
