@@ -825,7 +825,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
             referencedTableName="association_type"
 		/>
 
-		<!-- dropColumn columnName="association_type_name" tableName="internal_associated_terms"/ -->
+		<dropColumn columnName="association_type_name" tableName="internal_associated_terms"/>
 	</changeSet>
 
 
@@ -842,7 +842,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			from internal_associated_terms iat
 			left join vocabulary_term svt on iat.subject_vocabulary_term_id = svt.id
 			left join vocabulary_term ovt on iat.object_vocabulary_term_id = ovt.id
-			left join association_type at on at.id = iat.association_type_id 
+			left join association_type at on at.id = iat.association_type_id
 			order by svt.uid, ovt.uid
 		</createView>
 	</changeSet>
@@ -949,9 +949,13 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			-- we only deal with one level of indirection via the iat, because
 			-- that's all that the data requires
 
-			with ciat as ( select iat.*,at.name  from internal_associated_terms iat left join association_type at on at.id = iat.association_type_id where at.name = 'isInstanceOf' ) 
-
-
+			-- constrained internal associations
+			with ciat as (
+				select iat.*
+				from internal_associated_terms iat
+				left join association_type at on at.id = iat.association_type_id
+				where at.name = 'isInstanceOf'
+			)
 			select
 			vt1.id as vocabulary_term_id,
 			case when csc1.id is not null
@@ -962,21 +966,11 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			from vocabulary_term vt1
 			left join term_category_classification tcc1 on tcc1.vocabulary_term_id = vt1.id
 			left join classification_scheme_category csc1 on tcc1.classification_scheme_category_id = csc1.id
-			-- join through tcc and one level of the iat
---			-- WORKS left join internal_associated_terms iat on iat.subject_vocabulary_term_id = vt1.id and iat.association_type_name = 'isInstanceOf'
 
---			left join internal_associated_terms iat on iat.subject_vocabulary_term_id = vt1.id 
---			left join association_type at on at.id = iat.association_type_id and at.name = 'isInstanceOf'
-
---			left join internal_associated_terms iat, association_type at on iat.subject_vocabulary_term_id = vt1.id and  at.id = iat.association_type_id and at.name = 'isInstanceOf'
-
-
-			left join ciat iat on iat.subject_vocabulary_term_id = vt1.id 
-
-
+			-- join through iat
+			left join ciat iat on iat.subject_vocabulary_term_id = vt1.id
 			left join term_category_classification tcc2 on tcc2.vocabulary_term_id = iat.object_vocabulary_term_id
 			left join classification_scheme_category csc2 on tcc2.classification_scheme_category_id = csc2.id
-			-- where at.name = 'isInstanceOf'
 		</createView>
 
 		<createView viewName="_term_classification_scheme">
@@ -1488,7 +1482,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 		/>
 
 		<addNotNullConstraint columnName="vocabulary_type_id" tableName="vocabulary_term"/>
-		
+
 		<!-- type-name is used in view so we have to drop before dropping the column -->
 		<dropView viewName="unit_view"/>
 		<dropColumn columnName="vocabulary_type_name" tableName="vocabulary_term"/>
