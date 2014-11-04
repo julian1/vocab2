@@ -719,20 +719,6 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	</changeSet>
 
 
-	<!-- external associated terms -->
-	<changeSet author="julian" id="0024">
-		<createView viewName="_get_external_associated_terms">
-			select
-				trim(vt.uid) as uid,
-				trim(vt.name) as name,
-				trim(eat.uid) as external_uid,
-				trim(association_type_name) as type
-			from external_associated_terms eat
-			left join vocabulary_term vt on eat.vocabulary_term_id = vt.id
-			order by uid, external_uid
-		</createView>
-	</changeSet>
-
 
 
 	<!-- 	this should probably have the reference souce as the uid
@@ -795,7 +781,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 
-	<!-- primary key for association_type type and use -->
+	<!-- primary key for association_type type and use for internal and external association tables -->
 	<changeSet author="julian" id="0027-1">
 		<sql>
 			alter table association_type drop constraint association_type_table_pkey cascade
@@ -826,6 +812,27 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 		/>
 
 		<dropColumn columnName="association_type_name" tableName="internal_associated_terms"/>
+
+		<addColumn tableName="external_associated_terms">
+			<column name="association_type_id" type="integer"/>
+		</addColumn>
+		<sql>
+			update external_associated_terms eat
+			set association_type_id = at.id
+			from association_type at
+			where eat.association_type_name = at.name
+		</sql>
+
+	    <addForeignKeyConstraint
+            constraintName="external_associated_terms_association_type_fkey"
+			baseColumnNames="association_type_id"
+            baseTableName="external_associated_terms"
+            referencedColumnNames="id"
+            referencedTableName="association_type"
+		/>
+
+		<dropColumn columnName="association_type_name" tableName="external_associated_terms"/>
+
 	</changeSet>
 
 
@@ -847,6 +854,21 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 		</createView>
 	</changeSet>
 
+
+	<!-- external associated terms -->
+	<changeSet author="julian" id="0024">
+		<createView viewName="_get_external_associated_terms">
+			select
+				trim(vt.uid) as uid,
+				trim(vt.name) as name,
+				trim(eat.uid) as external_uid,
+				trim(at.name) as association_type
+			from external_associated_terms eat
+			left join vocabulary_term vt on eat.vocabulary_term_id = vt.id
+			left join association_type at on at.id = eat.association_type_id
+			order by uid, external_uid
+		</createView>
+	</changeSet>
 
 
 
