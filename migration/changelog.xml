@@ -1508,7 +1508,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 		<dropView viewName="unit_view"/>
 		<dropColumn columnName="vocabulary_type_name" tableName="vocabulary_term"/>
 
-		<!-- create the view joining on new id -->
+		<!-- re-create the view joining on new id -->
 		<createView viewName="unit_view">
 			select
 				vt.id,
@@ -1521,6 +1521,7 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			where t.name = 'UnitsOfMeasure'
 			order by vt.name;
 		</createView>
+
 	</changeSet>
 
 
