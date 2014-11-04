@@ -960,10 +960,6 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 	<!-- Concept Scheme -->
 
 
-
-
-
-
 	<changeSet author="julian" id="0029">
 
 		<createView viewName="_term_classification_scheme_category">
@@ -971,6 +967,8 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			-- we only deal with one level of indirection via the iat, because
 			-- that's all that the data requires
 
+			-- TODO this should probably be a view, so it can be planned in the query optimiser
+			-- rather than created as a temporary table
 			-- constrained internal associations
 			with ciat as (
 				select iat.*
@@ -983,9 +981,10 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 			case when csc1.id is not null
 				then csc1.id
 				else csc2.id
-			end as classification_scheme_category_id --,
-			-- join directly through tcc
+			end as classification_scheme_category_id
+
 			from vocabulary_term vt1
+			-- join directly through tcc
 			left join term_category_classification tcc1 on tcc1.vocabulary_term_id = vt1.id
 			left join classification_scheme_category csc1 on tcc1.classification_scheme_category_id = csc1.id
 
