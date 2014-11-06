@@ -1,0 +1,109 @@
+
+vocab=> select relation,field,_constraint  from admin.fields  where schema = 'contr_vocab_db' and kind = 'r' and relation ~ 'class';
+             relation              |                   field                    |                                                         _constraint                                                          
+-----------------------------------+--------------------------------------------+------------------------------------------------------------------------------------------------------------------------------
+ classification_scheme             | classification_scheme_id                   | PRIMARY KEY (classification_scheme_id)
+ classification_scheme             | classification_scheme_name                 | 
+ classification_scheme             | classification_scheme_description          | 
+ classification_scheme             | classification_scheme_title                | 
+ classification_scheme             | date_added                                 | 
+ classification_scheme             | responsible_party_id                       | FOREIGN KEY (responsible_party_id) REFERENCES responsible_party(id)
+ classification_scheme_association | classification_scheme_id                   | FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(classification_scheme_id)
+ classification_scheme_association | classification_scheme_category_id          | FOREIGN KEY (classification_scheme_category_id) REFERENCES classification_scheme_category(classification_scheme_category_id)
+ classification_scheme_association | hierarchy_level                            | 
+ classification_scheme_association | parent_category_code                       | 
+ classification_scheme_association | parent_category_name                       | 
+ classification_scheme_association | parent_category_label                      | 
+ classification_scheme_association | classification_scheme_category_label       | 
+ classification_scheme_category    | classification_scheme_category_id          | PRIMARY KEY (classification_scheme_category_id)
+ classification_scheme_category    | classification_scheme_category_name        | 
+ classification_scheme_category    | classification_scheme_category_description | 
+ classification_scheme_category    | classification_scheme_id                   | FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(classification_scheme_id)
+ classification_scheme_category    | classification_scheme_category_label       | 
+ classification_scheme_category    | date_added                                 | 
+ term_category_classification      | classification_scheme_id                   | FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(classification_scheme_id)
+ term_category_classification      | classification_scheme_category_id          | FOREIGN KEY (classification_scheme_category_id) REFERENCES classification_scheme_category(classification_scheme_category_id)
+ term_category_classification      | vocabulary_term_code                       | 
+ term_category_classification      | vocabulary_term_uid                        | 
+ term_category_classification      | date_added_to_association                  | 
+ term_category_classification      | vocabulary_term_id                         | FOREIGN KEY (vocabulary_term_id) REFERENCES vocabulary_term(id)
+(25 rows)
+
+
+
+
+vocab=> \d  term_category_classification
+          Table "contr_vocab_db.term_category_classification"
+              Column               |          Type          | Modifiers
+-----------------------------------+------------------------+-----------
+ classification_scheme_id          | integer                | not null
+ classification_scheme_category_id | integer                | not null
+ vocabulary_term_code              | integer                |
+ vocabulary_term_uid               | character varying(110) |
+ date_added_to_association         | date                   |
+ vocabulary_term_id                | integer                |
+Foreign-key constraints:
+    "term_category_classification_table_fkey2" FOREIGN KEY (classification_scheme_category_id) REFERENCES classification_scheme_category(classification_scheme_category_id)
+    "term_category_classification_table_fkey3" FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(classification_scheme_id)
+    "term_category_classification_vocabulary_term_fkey" FOREIGN KEY (vocabulary_term_id) REFERENCES vocabulary_term(id)
+
+
+
+vocab=> \d classification_scheme_category 
+              Table "contr_vocab_db.classification_scheme_category"
+                   Column                   |          Type           | Modifiers 
+--------------------------------------------+-------------------------+-----------
+ classification_scheme_category_id          | integer                 | not null
+ classification_scheme_category_name        | character varying(1010) | 
+ classification_scheme_category_description | character varying(1010) | 
+ classification_scheme_id                   | integer                 | 
+ classification_scheme_category_label       | character varying(1010) | 
+ date_added                                 | date                    | 
+Indexes:
+    "classification_scheme_category_table_pkey" PRIMARY KEY, btree (classification_scheme_category_id)
+Foreign-key constraints:
+    "classification_scheme_category_table_fkey" FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(classification_scheme_id)
+Referenced by:
+    TABLE "classification_scheme_association" CONSTRAINT "classification_scheme_association_table_fkey" FOREIGN KEY (classification_scheme_category_id) REFERENCES classification_scheme_category(classification_scheme_category_id)
+    TABLE "term_category_classification" CONSTRAINT "term_category_classification_table_fkey2" FOREIGN KEY (classification_scheme_category_id) REFERENCES classification_scheme_category(classification_scheme_category_id)
+
+
+vocab=> \d classification_scheme 
+              Table "contr_vocab_db.classification_scheme"
+              Column               |          Type           | Modifiers 
+-----------------------------------+-------------------------+-----------
+ classification_scheme_id          | integer                 | not null
+ classification_scheme_name        | character varying(1010) | 
+ classification_scheme_description | character varying(1010) | 
+ classification_scheme_title       | character varying(1010) | 
+ date_added                        | date                    | 
+ responsible_party_id              | integer                 | 
+Indexes:
+    "classification_scheme_table_pkey" PRIMARY KEY, btree (classification_scheme_id)
+Foreign-key constraints:
+    "classification_scheme_responsible_party_fkey" FOREIGN KEY (responsible_party_id) REFERENCES responsible_party(id)
+Referenced by:
+    TABLE "classification_scheme_association" CONSTRAINT "classification_scheme_association_table_fkey2" FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(classification_scheme_id)
+    TABLE "classification_scheme_category" CONSTRAINT "classification_scheme_category_table_fkey" FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(classification_scheme_id)
+    TABLE "term_category_classification" CONSTRAINT "term_category_classification_table_fkey3" FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(classification_scheme_id)
+
+
+
+vocab=> \d classification_scheme_association 
+         Table "contr_vocab_db.classification_scheme_association"
+                Column                |          Type          | Modifiers 
+--------------------------------------+------------------------+-----------
+ classification_scheme_id             | integer                | 
+ classification_scheme_category_id    | integer                | 
+ hierarchy_level                      | integer                | 
+ parent_category_code                 | integer                | 
+ parent_category_name                 | character varying(110) | 
+ parent_category_label                | character varying(110) | 
+ classification_scheme_category_label | character varying(110) | 
+Foreign-key constraints:
+    "classification_scheme_association_table_fkey" FOREIGN KEY (classification_scheme_category_id) REFERENCES classification_scheme_category(classification_scheme_category_id)
+    "classification_scheme_association_table_fkey2" FOREIGN KEY (classification_scheme_id) REFERENCES classification_scheme(classification_scheme_id)
+
+
+
+

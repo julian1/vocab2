@@ -1,0 +1,119 @@
+
+<% for @conceptScheme in query_sql_subject( %{
+	select subject from _rdf_m where predicate = 'rdf:type' and object = 'skos:ConceptScheme'; }, nil )%>
+
+<%= @conceptScheme %>
+
+
+  
+  <% for @topConcept in query_sql_subject( %{
+    select
+      type.subject
+    from _rdf_m type
+    join _rdf_m inScheme on inScheme.subject = type.subject
+    where type.predicate = 'rdf:type' and type.object = 'skos:TopConcept'
+    and inScheme.predicate = 'skos:inScheme' and inScheme.object = '#{ @conceptScheme }' ; 
+  } , nil )%>
+  <% for @prefLabel in query_rdf_objects( 'skos:prefLabel', @topConcept) %> <%= @prefLabel%> <% end %>  
+
+    <% for @narrower in query_sql_subject( %{
+      select
+        type.subject
+      from _rdf_m type
+      join _rdf_m broader on broader.subject = type.subject
+      where type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+      and broader.predicate = 'skos:broader' and broader.object = '#{ @topConcept}' ; 
+    } , nil )%>
+    <% for @prefLabel in query_rdf_objects( 'skos:prefLabel', @narrower) %> <%= @prefLabel%> <% end %> 
+
+      <% for @narrower2 in query_sql_subject( %{
+        select
+          type.subject
+        from _rdf_m type
+        join _rdf_m narrower on narrower.subject = type.subject
+        where type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+        and narrower.predicate = 'skos:broader' and narrower.object = '#{ @narrower}' ; 
+      } , nil )%>
+      <% for @prefLabel in query_rdf_objects( 'skos:prefLabel', @narrower2) %> <%= @prefLabel%> <% end %> 
+
+          <% for @narrower3 in query_sql_subject( %{
+            select
+              type.subject
+            from _rdf_m type
+            join _rdf_m broader on broader.subject = type.subject
+            where type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+            and broader.predicate = 'skos:broader' and broader.object = '#{ @narrower2}' ; 
+          } , nil )%>
+
+          <% for @prefLabel in query_rdf_objects( 'skos:prefLabel', @narrower3) %> <%= @prefLabel%> <% end %> 
+          <% end %>
+
+
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+
+
+    <% for @concept in query_sql_subject( %{
+      select
+        type.subject
+      from _rdf_m type
+      left join _rdf_m broader on broader.subject = type.subject and broader.predicate = 'skos:broader'
+      left join _rdf_m inScheme on inScheme.subject = type.subject and inScheme.predicate = 'skos:inScheme'
+      where
+        type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+        and broader.object is null
+        and inScheme.object = '#{ @conceptScheme}'
+      order by type.subject
+    } , nil )%>
+    <% for @prefLabel in query_rdf_objects( 'skos:prefLabel', @concept) %> <%= @prefLabel%> <% end %>  
+
+      <% for @narrower in query_sql_subject( %{
+        select
+          type.subject
+        from _rdf_m type
+        join _rdf_m broader on broader.subject = type.subject
+        where type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+        and broader.predicate = 'skos:broader' and broader.object = '#{ @concept}' ; 
+      } , nil )%>
+      <% for @prefLabel in query_rdf_objects( 'skos:prefLabel', @narrower) %> <%= @prefLabel%> <% end %>  
+
+        <% for @narrower2 in query_sql_subject( %{
+          select
+            type.subject
+          from _rdf_m type
+          join _rdf_m broader on broader.subject = type.subject
+          where type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+          and broader.predicate = 'skos:broader' and broader.object = '#{ @narrower}' ; 
+        } , nil )%>
+        <% for @prefLabel in query_rdf_objects( 'skos:prefLabel', @narrower2) %> <%= @prefLabel%> <% end %>
+
+
+          <% for @narrower3 in query_sql_subject( %{
+            select
+              type.subject
+            from _rdf_m type
+            join _rdf_m broader on broader.subject = type.subject
+            where type.predicate = 'rdf:type' and type.object = 'skos:Concept'
+            and broader.predicate = 'skos:broader' and broader.object = '#{ @narrower2}' ; 
+          } , nil )%>
+          <% for @prefLabel in query_rdf_objects( 'skos:prefLabel', @narrower3) %> <%= @prefLabel%> <% end %>
+          <% end %>
+
+
+        <% end %>
+
+
+      <% end %>
+
+
+  <% end %>
+
+
+
+
+<% end %>
+
+

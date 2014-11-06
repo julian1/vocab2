@@ -1,0 +1,27 @@
+
+print out in case no ssh.
+
+# ssh to my machine
+
+	ssh meteo@131.217.38.46
+
+  screen -ls
+  screen -d
+  screen -r
+
+- show the db migrations. 
+  less changelog.xml 
+
+- show the rdf
+  select * from _rdf
+
+- generate skos
+  ./render.rb -t parameterClassificationScheme.erb | tee out.xml
+
+- view result
+  vim skos_files9/parameterClassificationScheme.xml
+
+- detach  ctl  a  d
+  logout  ctl d
+
+

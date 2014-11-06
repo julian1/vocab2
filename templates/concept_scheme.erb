@@ -1,0 +1,42 @@
+
+<!-- TODO fix organisation element which is repeated twice -->
+
+<skos:ConceptScheme rdf:about="<%= @conceptScheme %>">
+
+  <% for @object in query_rdf_objects( 'dc:title', @conceptScheme ) %>
+  <dc:title><%= @object %></dc:title>
+  <% end%>
+
+  <% for @object in query_rdf_objects( 'dc:description', @conceptScheme ) %>
+  <dc:description><%= @object %></dc:description>
+  <% end %>
+
+  <% for @object in query_rdf_objects( 'dc:creator', @conceptScheme ) %>
+    <dc:creator>
+      <foaf:Organisation>
+        <foaf:name><%= @object %></foaf:name>
+      </foaf:Organisation>
+    </dc:creator>
+  <% end %>
+
+  <% for @object in query_rdf_objects( 'dc:publisher', @conceptScheme ) %>
+    <dc:publisher>
+      <foaf:Organisation>
+        <foaf:name><%= @object %></foaf:name>
+      </foaf:Organisation>
+    </dc:publisher>
+  <% end %>
+
+ <% for @object in query_rdf_objects( 'dcterms:hasVersion', @conceptScheme ) %>
+  <dcterms:hasVersion><%= @object %></dcterms:hasVersion>
+  <% end %>
+
+  <dc:rights>Freely Available For Reuse</dc:rights>
+
+  <% for @object in query_rdf_objects( 'dcterms:issued', @conceptScheme ) %>
+  <dcterms:issued><%= @object %></dcterms:issued>
+  <% end %>
+
+</skos:ConceptScheme>
+
+

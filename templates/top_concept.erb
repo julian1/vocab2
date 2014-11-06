@@ -1,0 +1,25 @@
+
+<skos:TopConcept rdf:about="<%= @topConcept %>">
+
+    <% for @object in query_rdf_objects( 'skos:prefLabel', @topConcept ) %>
+    <skos:prefLabel xml:lang="en"><%= @object %></skos:prefLabel>
+    <% end %>
+
+    <% for @object in query_rdf_objects( 'skos:definition', @topConcept ) %>
+    <skos:definition><%= @object %></skos:definition>
+    <% end %>
+
+    <% for @object in query_rdf_objects( 'dcterms:issued', @topConcept ) %>
+    <dcterms:issued><%= @object %></dcterms:issued>
+    <% end %>
+
+    <% for @object in query_rdf_objects( 'skos:inScheme', @topConcept ) %>
+    <skos:inScheme rdf:resource="<%= @object %>"/>
+    <% end %>
+
+    <% for @object in query_rdf_objects( 'skos:narrower', @topConcept ) %>
+    <skos:narrower rdf:resource="<%= @object %>"/>
+    <% end %>
+
+</skos:TopConcept>
+

@@ -1,0 +1,20 @@
+
+<%= render "header.erb" %>
+
+<% @conceptScheme = 'http://vocab.aodn.org.au/def/platform' %>
+
+<%= render "concept_scheme.erb" %>
+
+
+<% for @concept in query_sql_subject( %{
+	select r1.subject as subject
+	from _rdf_m r1
+	left join _rdf_m r2 on r2.subject = r1.subject
+	where r1.predicate = 'skos:inScheme' and r1.object = '#{ @conceptScheme }'
+	and r2.predicate = 'rdf:type' and r2.object = 'skos:Concept' },
+	nil )%>
+<%= render "concept.erb" %>
+<% end %>
+
+<%= render "footer.erb" %>
+

@@ -1,0 +1,162 @@
+@prefix map: <#> .
+#@prefix db: <> .
+@prefix vocab: <vocab/> .
+@prefix skos: <skos/> .
+@prefix dcterms: <dcterms/> .
+@prefix dc: <dc/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+
+map:contr_vocab_db a d2rq:Database;
+	d2rq:jdbcDriver "org.postgresql.Driver";
+	d2rq:jdbcDSN "jdbc:postgresql://localhost/vocab";
+	d2rq:username "contr_vocab_db";
+	d2rq:password "contr_vocab_db";
+	.
+
+# must specify uriColumn if object is uri rather than literal.
+
+# rdf:type  | skos:Concept
+
+# ok, 
+# Table mytable
+#map:Concept a d2rq:ClassMap;
+#	d2rq:dataStorage map:contr_vocab_db;
+#	d2rq:uriPattern "http://mytable/@@_rdf.subject@@";
+#	d2rq:condition "predicate = 'rdf:type' and object = 'skos:Concept'";
+#	d2rq:class skos:Concept;
+#	.
+
+
+### ConceptScheme
+
+map:ConceptScheme a d2rq:ClassMap;
+	d2rq:dataStorage map:contr_vocab_db;
+	d2rq:uriPattern "@@_skos_concept_scheme.subject@@";
+	d2rq:class skos:ConceptScheme;
+	.
+
+map:ConceptSchemeDctermsIssued a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:ConceptScheme;
+    d2rq:property dcterms:issued;
+    d2rq:column "_skos_concept_scheme.dcterms_issued";
+	.
+
+map:ConceptSchemeTitle a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:ConceptScheme;
+    d2rq:property dc:title;
+    d2rq:column "_skos_concept_scheme.dc_title";
+	.
+
+map:ConceptSchemeDescription a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:ConceptScheme;
+    d2rq:property dc:description;
+    d2rq:column "_skos_concept_scheme.dc_description";
+	.
+
+map:ConceptSchemeCreator a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:ConceptScheme;
+    d2rq:property dc:creator;
+    d2rq:column "_skos_concept_scheme.dc_creator";
+	.
+
+map:ConceptSchemePublisher a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:ConceptScheme;
+    d2rq:property dc:publisher;
+    d2rq:column "_skos_concept_scheme.dc_publisher";
+	.
+
+map:ConceptSchemeHasVersion a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:ConceptScheme;
+    d2rq:property dcterms:hasVersion;
+    d2rq:uriColumn "_skos_concept_scheme.dcterms_hasversion";
+	.
+
+
+
+### Concept
+
+map:Concept a d2rq:ClassMap;
+	d2rq:dataStorage map:contr_vocab_db;
+	d2rq:uriPattern "@@_skos_concept.subject@@";
+	d2rq:class skos:Concept;
+	.
+
+map:ConceptSkosPrefLabel a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Concept;
+    d2rq:property skos:prefLabel;
+    d2rq:column "_skos_concept.skos_preflabel";
+    d2rq:lang "en";
+	.
+
+map:ConceptSkosDefinition a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Concept;
+    d2rq:property skos:definition;
+    d2rq:column "_skos_concept.skos_definition";
+    d2rq:lang "en";
+	.
+
+# date field
+map:ConceptDctermsIssued a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Concept;
+    d2rq:property dcterms:issued;
+    d2rq:column "_skos_concept.dcterms_issued";
+	.
+
+
+# one to many
+map:ConceptSkosBroader a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Concept;
+    d2rq:property skos:broader;
+	d2rq:join "_skos_concept.subject <= _skos_concept_skos_broader.subject";
+    d2rq:uriColumn "_skos_concept_skos_broader.object";
+	.
+
+# one to many
+map:ConceptSkosNarrower a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Concept;
+    d2rq:property skos:narrower;
+	d2rq:join "_skos_concept.subject <= _skos_concept_skos_narrower.subject";
+    d2rq:uriColumn "_skos_concept_skos_narrower.object";
+	.
+
+
+map:ConceptDctermsCreated a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Concept;
+    d2rq:property dcterms:created;
+    d2rq:column "_skos_concept.dcterms_created";
+	.	
+
+map:ConceptDcSource a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Concept;
+    d2rq:property dc:source;
+    d2rq:column "_skos_concept.dc_source";
+	.	
+
+map:ConceptDcPublisher a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Concept;
+    d2rq:property dc:publisher;
+    d2rq:column "_skos_concept.dc_publisher";
+	.	
+
+
+# one to many
+map:ConceptSkosInscheme a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:Concept;
+    d2rq:property skos:inScheme;
+	d2rq:join "_skos_concept.subject <= _skos_concept_skos_inscheme.subject";
+    d2rq:uriColumn "_skos_concept_skos_inscheme.object";
+	.
+
+
+	
+#######
+
+
+
+
+
+

@@ -1,0 +1,1535 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+
+	<!-- TODO
+		- work out if we really need the trim.
+
+		- IMPORTANT
+			- person_organisational_affiliation, could/should have the affiliation put in
+			the responsible party. but leave for the moment.
+			- and leave as null if no affiliation. if only person or organisation is present.
+			- but avoid for now.
+
+		- maybe change name responsible_party to just party to distinguish from iso concept
+
+		- group in the one changeset. - Irrespective of how we organize the union code, it doesn't make
+		sense to have separate change sets for every view
+
+		- need to go back over the handbook - and see if there are any other case/when handling that we missed
+
+		- we could denormalize everything if we wanted, for speed this would be easy in a script.
+
+	-->
+
+
+	<!-- rename tables to get rid of _table suffix -->
+	<changeSet author="julian" id="000001">
+		<renameTable newTableName="affiliation_type" oldTableName="affiliation_type_table" />
+		<renameTable newTableName="amendment" oldTableName="amendment_table" />
+		<renameTable newTableName="association_type" oldTableName="association_type_table" />
+		<renameTable newTableName="classification_scheme_association" oldTableName="classification_scheme_association_table" />
+		<renameTable newTableName="classification_scheme_category" oldTableName="classification_scheme_category_table" />
+		<renameTable newTableName="classification_scheme" oldTableName="classification_scheme_table" />
+		<renameTable newTableName="external_associated_terms" oldTableName="external_associated_terms_table" />
+		<renameTable newTableName="internal_associated_terms" oldTableName="internal_associated_terms_table" />
+		<renameTable newTableName="object_term" oldTableName="object_term_table" />
+		<renameTable newTableName="organisation" oldTableName="organisation_name_table" />
+		<renameTable newTableName="organisation_synonym" oldTableName="organisation_synonym_table" />
+		<renameTable newTableName="person_organisational_affiliation" oldTableName="person_organisational_affiliation_table" />
+		<renameTable newTableName="person" oldTableName="person_table" />
+		<renameTable newTableName="reference_source" oldTableName="reference_source_table" />
+		<renameTable newTableName="register_manager" oldTableName="register_manager_table" />
+		<renameTable newTableName="register_owner" oldTableName="register_owner_table" />
+		<renameTable newTableName="subject_term" oldTableName="subject_term_table" />
+		<renameTable newTableName="term_category_classification" oldTableName="term_category_classification_table" />
+		<renameTable newTableName="term_proposer" oldTableName="term_proposer_table" />
+		<renameTable newTableName="vocabulary_register" oldTableName="vocabulary_register_table" />
+		<renameTable newTableName="vocabulary_term" oldTableName="vocabulary_term_table" />
+		<renameTable newTableName="vocabulary_type" oldTableName="vocabulary_type_table" />
+	</changeSet>
+
+
+	<!-- support for DDL actions -->
+	<changeSet author="julian" id="0001">
+       <sql>
+			create function exec(text) returns text
+			language plpgsql volatile
+			as $$ begin execute $1; return $1; end; $$;
+			grant all on function exec(text) to public
+       </sql>
+	</changeSet>
+
+
+	<!-- organisation name -->
+	<changeSet author="julian" id="0002">
+		<renameColumn newColumnName="id" oldColumnName="organisation_name_id" tableName="organisation"/>
+		<renameColumn newColumnName="name" oldColumnName="organisation_name" tableName="organisation"/>
+		<renameColumn newColumnName="description" oldColumnName="organisation_name_description" tableName="organisation"/>
+		<renameColumn newColumnName="acronym" oldColumnName="organisation_acronym" tableName="organisation"/>
+		<renameColumn newColumnName="address" oldColumnName="organisation_address" tableName="organisation"/>
+		<renameColumn newColumnName="status" oldColumnName="organisation_name_status" tableName="organisation"/>
+		<renameColumn newColumnName="notes" oldColumnName="organisation_notes" tableName="organisation"/>
+		<!-- normalize - use organisation synonym table instead -->
+		<dropColumn columnName="organisation_synonym" tableName="organisation"/>
+		<!-- sequence on primary key -->
+		<sql>
+			select exec('create sequence organisation_id_seq start '||(select max(id) +1 from organisation));
+			alter table organisation alter column id set default nextval('organisation_id_seq')
+		</sql>
+	</changeSet>
+
+
+	<!-- person -->
+	<changeSet author="julian" id="0003">
+		<renameColumn newColumnName="id" oldColumnName="person_id" tableName="person"/>
+		<renameColumn newColumnName="name" oldColumnName="person_name" tableName="person"/>
+		<renameColumn newColumnName="salutation" oldColumnName="person_salutation" tableName="person"/>
+		<renameColumn newColumnName="email" oldColumnName="contact_email" tableName="person"/>
+		<!-- sequence on primary key -->
+		<sql>
+			select exec('create sequence person_id_seq start '||(select max(id) +1 from person));
+			alter table person alter column id set default nextval('person_id_seq')
+		</sql>
+	</changeSet>
+
+
+	<!-- new table responsible party to replace register_owner, register_manager, term_proposer etc
+		should probably also incorporate affiliation_type since it's a one-to-one mapping
+	-->
+	<changeSet author="julian" id="0004">
+		<createTable tableName="responsible_party" >
+			<column name="id" type="serial">
+				 <constraints primaryKey="true"/>
+			</column>
+			<column name="person_id" type="integer"/>
+			<column name="organisation_id" type="integer"/>
+		</createTable>
+		<addUniqueConstraint columnNames="person_id,organisation_id" tableName="responsible_party" />
+		<sql>
+			-- this is very flexible, for adding other entries - and affiliation_type if we need
+			insert into responsible_party (person_id, organisation_id)
+			select p.id, o.id
+			from person p
+			cross join organisation o
+			where ( o.acronym ~ 'eMII' and p.name ~ 'Seb' )
+			or ( o.acronym ~ 'IMOS' and p.name ~ 'Seb' )
+		</sql>
+
+	    <addForeignKeyConstraint
+            constraintName="responsible_party_person_fkey"
+			baseColumnNames="person_id"
+            baseTableName="responsible_party"
+            referencedColumnNames="id"
+            referencedTableName="person"
+		/>
+	    <addForeignKeyConstraint
+            constraintName="responsible_party_organisation_fkey"
+			baseColumnNames="organisation_id"
+            baseTableName="responsible_party"
+            referencedColumnNames="id"
+            referencedTableName="organisation"
+		/>
+	</changeSet>
+
+
+	<!-- vocabulary_register -->
+	<changeSet author="julian" id="0005">
+		<!-- integer primary key -->
+		<sql>
+			alter table vocabulary_register drop constraint vocabulary_register_table_pkey cascade
+		</sql>
+		<addColumn tableName="vocabulary_register">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="vocabulary_register" />
+
+		<!-- rename -->
+		<renameColumn newColumnName="uid" oldColumnName="register_uid" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="name" oldColumnName="register_name" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="content_summary" oldColumnName="register_content_summary" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="language_name" oldColumnName="register_language_name" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="language_code" oldColumnName="register_language_code" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="language_country" oldColumnName="register_language_country" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="language_encoding" oldColumnName="register_language_encoding" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="version" oldColumnName="register_version" tableName="vocabulary_register"/>
+		<renameColumn newColumnName="date" oldColumnName="register_date" tableName="vocabulary_register"/>
+
+		<!-- constraints -->
+		<addUniqueConstraint columnNames="name" tableName="vocabulary_register" />
+		<addNotNullConstraint columnName="name" tableName="vocabulary_register"/>
+
+		<addUniqueConstraint columnNames="uid" tableName="vocabulary_register" />
+		<addNotNullConstraint columnName="uid" tableName="vocabulary_register"/>
+
+
+		<!-- use responsible_party and drop register_manager table -->
+		<addColumn tableName="vocabulary_register">
+			<column name="manager_responsible_party_id" type="integer"/>
+		</addColumn>
+		<sql>
+			-- eg. 1
+			update vocabulary_register vr set manager_responsible_party_id = rp.id
+			from responsible_party rp, register_manager rm
+			where vr.name = rm.register_name
+			and rm.person_id = rp.person_id
+			and rm.organisation_name_id = rp.organisation_id
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="vocabulary_register_manager_responsible_party_fkey"
+			baseColumnNames="manager_responsible_party_id"
+            baseTableName="vocabulary_register"
+            referencedColumnNames="id"
+            referencedTableName="responsible_party"
+		/>
+		<dropTable tableName="register_manager"/>
+
+
+		<!-- use responsible_party and drop register_owner table -->
+		<addColumn tableName="vocabulary_register">
+			<column name="owner_responsible_party_id" type="integer"/>
+		</addColumn>
+		<sql>
+			-- eg. 1
+			update vocabulary_register vr set owner_responsible_party_id = rp.id
+			from responsible_party rp, register_owner ro
+			where vr.name = ro.register_name
+			and ro.person_id = rp.person_id
+			and ro.organisation_name_id = rp.organisation_id
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="vocabulary_register_owner_responsible_party_fkey"
+			baseColumnNames="owner_responsible_party_id"
+            baseTableName="vocabulary_register"
+            referencedColumnNames="id"
+            referencedTableName="responsible_party"
+		/>
+		<dropTable tableName="register_owner"/>
+
+	</changeSet>
+
+
+	<!-- vocabulary_term -->
+	<changeSet author="julian" id="0006">
+		<!-- remove old primary key, add new integer one -->
+		<sql>
+			alter table vocabulary_term drop constraint vocabular_term_table_pkey cascade;
+		</sql>
+
+		<!-- primary but not serial -->
+		<renameColumn newColumnName="id" oldColumnName="vocabulary_term_code" tableName="vocabulary_term"/>
+		<addPrimaryKey columnNames="id" tableName="vocabulary_term" />
+		<sql>
+			-- drop sequence vocabulary_term_id_seq;
+			select exec('create sequence vocabulary_term_id_seq start '||(select max(id) +1 from vocabulary_term));
+			alter table vocabulary_term alter column id set default nextval('vocabulary_term_id_seq')
+		</sql>
+
+
+		<!-- unique constraint on name -->
+		<renameColumn newColumnName="name" oldColumnName="vocabulary_term_name" tableName="vocabulary_term"/>
+		<addUniqueConstraint columnNames="name" tableName="vocabulary_term" />
+		<addNotNullConstraint columnName="name" tableName="vocabulary_term"/>
+
+		<!-- unique constraint on uid -->
+		<renameColumn newColumnName="uid" oldColumnName="vocabulary_term_uid" tableName="vocabulary_term"/>
+		<addUniqueConstraint columnNames="uid" tableName="vocabulary_term" />
+		<addNotNullConstraint columnName="uid" tableName="vocabulary_term"/>
+
+		<!-- clean up column naming -->
+		<renameColumn newColumnName="short_name" oldColumnName="vocabulary_term_short_name" tableName="vocabulary_term"/>
+		<renameColumn newColumnName="ancillary_information" oldColumnName="vocabulary_term_ancillary_information" tableName="vocabulary_term"/>
+		<renameColumn newColumnName="definition" oldColumnName="vocabulary_term_definition" tableName="vocabulary_term"/>
+
+		<!-- normalize -->
+		<dropColumn columnName="internal_relationship" tableName="vocabulary_term"/>
+		<dropColumn columnName="external_relationship" tableName="vocabulary_term"/>
+		<dropColumn columnName="vocabulary_instance_of" tableName="vocabulary_term"/>
+
+		<!-- term_proposer responsible party and drop term_proposer table and existing ref -->
+		<dropColumn columnName="term_proposer_id" tableName="vocabulary_term"/>
+		<addColumn tableName="vocabulary_term">
+			<column name="proposer_responsible_party_id" type="integer"/>
+		</addColumn>
+		<sql>
+			update vocabulary_term set proposer_responsible_party_id = 1
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="vocabulary_term_proposer_responsible_party_fkey"
+			baseColumnNames="proposer_responsible_party_id"
+            baseTableName="vocabulary_term"
+            referencedColumnNames="id"
+            referencedTableName="responsible_party"
+		/>
+		<dropTable tableName="term_proposer"/>
+
+
+		<!-- vocabulary_term to use vocabulary_register(id) -->
+		<addColumn tableName="vocabulary_term">
+			<column name="vocabulary_register_id" type="integer"/>
+		</addColumn>
+		<sql>
+			update vocabulary_term vt set vocabulary_register_id = vr.id
+			from vocabulary_register vr
+			where vr.name = vt.register_name
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="vocabulary_term_vocabulary_register_fkey"
+			baseColumnNames="vocabulary_register_id"
+            baseTableName="vocabulary_term"
+            referencedColumnNames="id"
+            referencedTableName="vocabulary_register"
+		/>
+		<dropColumn columnName="register_name" tableName="vocabulary_term"/>
+
+
+		<!-- change added_by to point at person table -->
+		<addColumn tableName="vocabulary_term">
+			<column name="added_by_person_id" type="integer"/>
+		</addColumn>
+		<sql>
+			update vocabulary_term vt set added_by_person_id = p.id
+			from person p
+			where lower( p.name) = lower( regexp_replace(vt.added_by, '(.*) (.*).*', '\2, \1'))
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="vocabulary_term_added_by_person_fkey"
+			baseColumnNames="added_by_person_id"
+            baseTableName="vocabulary_term"
+            referencedColumnNames="id"
+            referencedTableName="person"
+		/>
+		<dropColumn columnName="added_by" tableName="vocabulary_term"/>
+	</changeSet>
+
+
+	<!-- external_associated_terms -->
+	<changeSet author="julian" id="0007">
+		<!-- not necessary for primary key here since nothing references -->
+
+		<!-- reference vocabulary_term(id) -->
+		<addColumn tableName="external_associated_terms">
+			<column name="vocabulary_term_id" type="integer"/>
+		</addColumn>
+		<sql>
+			update external_associated_terms a set vocabulary_term_id = v.id
+			from vocabulary_term v
+			where v.name = a.vocabulary_term_name
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="external_associated_terms_vocabulary_term_id_fkey"
+			baseColumnNames="vocabulary_term_id"
+            baseTableName="external_associated_terms"
+            referencedColumnNames="id"
+            referencedTableName="vocabulary_term"
+		/>
+		<dropColumn columnName="vocabulary_term_name" tableName="external_associated_terms"/>
+
+		<renameColumn newColumnName="uid" oldColumnName="external_term_uid" tableName="external_associated_terms"/>
+
+		<!-- enforce tuple uniqueness -->
+		<addUniqueConstraint columnNames="vocabulary_term_id,uid,association_type_name" tableName="external_associated_terms" />
+		<addNotNullConstraint columnName="uid" tableName="external_associated_terms"/>
+		<addNotNullConstraint columnName="association_type_name" tableName="external_associated_terms"/>
+
+		<!-- delete badly loaded data, whereby external terms refer to themselves via the vocabulary_table -->
+		<sql>
+			delete from external_associated_terms eat
+			using vocabulary_term vt
+			where eat.vocabulary_term_id = vt.id
+			and eat.uid = vt.uid
+		</sql>
+
+		<!-- note the uid is correct - and represents a real external resource
+			that is not repeated anywhere else -->
+
+	</changeSet>
+
+
+	<!-- amendment -->
+	<changeSet author="julian" id="0008">
+
+		<!-- id is already primary key, but not serial -->
+		<renameColumn newColumnName="id" oldColumnName="amendment_id" tableName="amendment"/>
+		<sql>
+			select exec('create sequence amendment_id_seq start '||(select max(id) +1 from amendment));
+			alter table amendment alter column id set default nextval('amendment_id_seq')
+		</sql>
+
+		<addColumn tableName="amendment">
+			<column name="vocabulary_term_id" type="integer"/>
+		</addColumn>
+		<sql>
+			update amendment a set vocabulary_term_id = v.id
+			from vocabulary_term v
+			where v.name = a.vocabulary_term_name
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="amendment_vocabulary_term_id_fkey"
+			baseColumnNames="vocabulary_term_id"
+            baseTableName="amendment"
+            referencedColumnNames="id"
+            referencedTableName="vocabulary_term"/>
+		 <addNotNullConstraint columnName="vocabulary_term_id" tableName="amendment"/>
+
+		<!-- normalize -->
+		<dropColumn columnName="vocabulary_term_name" tableName="amendment"/>
+		<dropColumn columnName="vocabulary_term_code" tableName="amendment"/>
+
+
+		<renameColumn newColumnName="type" oldColumnName="amendment_type" tableName="amendment"/>
+		<renameColumn newColumnName="request_date" oldColumnName="amendment_request_date" tableName="amendment"/>
+		<renameColumn newColumnName="approval_date" oldColumnName="amendment_approval_date" tableName="amendment"/>
+
+		<!-- use vocabulary_register primary key id -->
+		<addColumn tableName="amendment">
+			<column name="vocabulary_register_id" type="integer"/>
+		</addColumn>
+		<sql>
+			update amendment a set vocabulary_register_id = vr.id
+			from vocabulary_register vr
+			where vr.name = a.register_name
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="amendment_vocabulary_register_id_fkey"
+			baseColumnNames="vocabulary_register_id"
+            baseTableName="amendment"
+            referencedColumnNames="id"
+            referencedTableName="vocabulary_register"
+		/>
+		<dropColumn columnName="register_name" tableName="amendment"/>
+
+
+		<!-- amendment to use responsible party, and drop person,organisation fields -->
+		<addColumn tableName="amendment">
+			<column name="responsible_party_id" type="integer"/>
+		</addColumn>
+		<sql>
+			-- eg. 1
+			update amendment a set responsible_party_id = rp.id
+			from responsible_party rp
+			where a.person_id = rp.person_id
+			and a.organisation_name_id = rp.organisation_id
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="amendment_responsible_party_fkey"
+			baseColumnNames="responsible_party_id"
+            baseTableName="amendment"
+            referencedColumnNames="id"
+            referencedTableName="responsible_party"
+		/>
+		<dropColumn columnName="person_id" tableName="amendment"/>
+		<dropColumn columnName="organisation_name_id" tableName="amendment"/>
+
+	</changeSet>
+
+
+	<!-- association_type -->
+	<changeSet author="julian" id="0009">
+		<!-- name is primary key -->
+		<renameColumn newColumnName="name" oldColumnName="association_type_name" tableName="association_type"/>
+		<renameColumn newColumnName="description" oldColumnName="association_type_name_description" tableName="association_type"/>
+	</changeSet>
+
+
+	<!-- reference_source -->
+	<changeSet author="julian" id="0010">
+		<renameColumn newColumnName="id" oldColumnName="reference_id" tableName="reference_source"/>
+		<sql>
+			select exec('create sequence reference_source_id_seq start '||(select max(id) +1 from reference_source));
+			alter table reference_source alter column id set default nextval('reference_source_id_seq')
+		</sql>
+		<renameColumn newColumnName="organisation_id" oldColumnName="organisation_name_id" tableName="reference_source"/>
+	</changeSet>
+
+
+	<!-- organisation synonym -->
+	<changeSet author="julian" id="0011">
+		<renameColumn newColumnName="id" oldColumnName="organisation_synonym_id" tableName="organisation_synonym"/>
+		<sql>
+			create sequence organisation_synonym_id_seq start 1;
+			alter table organisation_synonym alter column id set default nextval('organisation_synonym_id_seq')
+		</sql>
+		<renameColumn newColumnName="name" oldColumnName="organisation_name" tableName="organisation_synonym"/>
+		<renameColumn newColumnName="organisation_id" oldColumnName="organisation_name_id" tableName="organisation_synonym"/>
+	</changeSet>
+
+
+	<!-- affiliation_type -->
+	<changeSet author="julian" id="0012">
+		<!-- name is primary key -->
+		<renameColumn newColumnName="name" oldColumnName="affiliation_type_name" tableName="affiliation_type"/>
+		<renameColumn newColumnName="description" oldColumnName="affiliation_description" tableName="affiliation_type"/>
+	</changeSet>
+
+
+
+	<!-- person_organisational_affiliation  -->
+	<!-- this is a composite primary key, should probably just be a unique constraint on the 3 terms
+		or and then link with integer id. better - combine into the responsible_party concept
+	-->
+	<changeSet author="julian" id="0013">
+		<renameColumn newColumnName="organisation_id" oldColumnName="organisation_name_id" tableName="person_organisational_affiliation"/>
+	</changeSet>
+
+
+	<!-- vocabulary_type -->
+	<changeSet author="julian" id="0014">
+		<!-- name is primary key -->
+		<renameColumn newColumnName="name" oldColumnName="vocabulary_type_name" tableName="vocabulary_type"/>
+		<renameColumn newColumnName="definition" oldColumnName="vocabulary_type_definition" tableName="vocabulary_type"/>
+	</changeSet>
+
+
+	<!-- internal_associated_terms  -->
+	<changeSet author="julian" id="0015">
+		<!-- nothing referencing, so doesn't need primary key -->
+
+		<!-- avoid the indirection through the object_term and subject_term tables drop tables -->
+		<addColumn tableName="internal_associated_terms">
+			<column name="subject_vocabulary_term_id" type="integer"/>
+		</addColumn>
+		<addColumn tableName="internal_associated_terms">
+			<column name="object_vocabulary_term_id" type="integer"/>
+		</addColumn>
+		<sql>
+			-- note they exist as one-to-one mapping, but do it properly
+			update internal_associated_terms ia
+				set subject_vocabulary_term_id = vs.id,
+				object_vocabulary_term_id = vo.id
+				from subject_term s, object_term o, vocabulary_term vs, vocabulary_term vo
+				where ia.subject_term_id = s.subject_term_id
+				 and vs.name = s.vocabulary_term_name
+				 and ia.object_term_id = o.object_term_id
+				 and vo.name = o.vocabulary_term_name
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="internal_associated_terms_subject_vocabulary_term_fkey"
+			baseColumnNames="subject_vocabulary_term_id"
+            baseTableName="internal_associated_terms"
+            referencedColumnNames="id"
+            referencedTableName="vocabulary_term"
+		/>
+	    <addForeignKeyConstraint
+            constraintName="internal_associated_terms_object_vocabulary_term_fkey"
+			baseColumnNames="object_vocabulary_term_id"
+            baseTableName="internal_associated_terms"
+            referencedColumnNames="id"
+            referencedTableName="vocabulary_term"
+		/>
+		<dropColumn columnName="subject_term_id" tableName="internal_associated_terms"/>
+		<dropColumn columnName="object_term_id" tableName="internal_associated_terms"/>
+		<dropTable tableName="subject_term"/>
+		<dropTable tableName="object_term"/>
+
+		<!-- enforce tuple uniqueness - actually whole thing could be primary key -->
+		<addUniqueConstraint columnNames="subject_vocabulary_term_id,object_vocabulary_term_id,association_type_name"
+			tableName="internal_associated_terms" />
+
+	</changeSet>
+
+
+	<!-- term_category_classification -->
+	<changeSet author="julian" id="0016">
+		<!-- use vocabulary_term(id), and drop vocabulary_term_name -->
+		<addColumn tableName="term_category_classification">
+			<column name="vocabulary_term_id" type="integer"/>
+		</addColumn>
+		<sql>
+			update term_category_classification tcc set vocabulary_term_id = vt.id
+			from vocabulary_term vt
+			where tcc.vocabulary_term_name = vt.name
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="term_category_classification_vocabulary_term_fkey"
+			baseColumnNames="vocabulary_term_id"
+            baseTableName="term_category_classification"
+            referencedColumnNames="id"
+            referencedTableName="vocabulary_term"
+		/>
+		<dropColumn columnName="vocabulary_term_name" tableName="term_category_classification"/>
+
+		<!-- normalize - these should come from the classification_scheme table which can be joined through the
+		classification_scheme_category -->
+		<dropColumn columnName="date_added_to_association" tableName="term_category_classification"/>
+		<dropColumn columnName="classification_scheme_id" tableName="term_category_classification"/>
+
+		<!-- normalize
+		these are available by joining on the new vocabulary_term_id
+		-->
+		<dropColumn columnName="vocabulary_term_code" tableName="term_category_classification"/>
+		<dropColumn columnName="vocabulary_term_uid" tableName="term_category_classification"/>
+	</changeSet>
+
+
+
+
+	<!-- classification_scheme to use responsible_party in place of person,organisation fields -->
+	<changeSet author="julian" id="0017">
+		<addColumn tableName="classification_scheme">
+			<column name="responsible_party_id" type="integer"/>
+		</addColumn>
+		<sql>
+			-- update classification_scheme set responsible_party_id = 2 -- Seb, Imos
+			update classification_scheme cs set responsible_party_id = rp.id
+			from responsible_party rp
+			where cs.person_id = rp.person_id
+			and cs.organisation_name_id = rp.organisation_id
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="classification_scheme_responsible_party_fkey"
+			baseColumnNames="responsible_party_id"
+            baseTableName="classification_scheme"
+            referencedColumnNames="id"
+            referencedTableName="responsible_party"
+		/>
+
+		<dropColumn columnName="person_id" tableName="classification_scheme"/>
+		<dropColumn columnName="organisation_name_id" tableName="classification_scheme"/>
+
+		<renameColumn newColumnName="id" oldColumnName="classification_scheme_id" tableName="classification_scheme"/>
+		<renameColumn newColumnName="name" oldColumnName="classification_scheme_name" tableName="classification_scheme"/>
+		<renameColumn newColumnName="description" oldColumnName="classification_scheme_description" tableName="classification_scheme"/>
+		<renameColumn newColumnName="title" oldColumnName="classification_scheme_title" tableName="classification_scheme"/>
+		<!-- id is already primary but needs a sequence	-->
+		<sql>
+			select exec('create sequence classification_scheme_seq start '||(select max(id) +1 from classification_scheme));
+			alter table classification_scheme alter column id set default nextval('classification_scheme_seq')
+		</sql>
+	</changeSet>
+
+
+	<!-- classification_scheme_category -->
+	<changeSet author="julian" id="0018">
+		<!-- should name be called uri here?
+			from rdf/skos pov yes, but maybe not from higher level conceptual pov
+		-->
+		<renameColumn newColumnName="id" oldColumnName="classification_scheme_category_id" tableName="classification_scheme_category"/>
+		<renameColumn newColumnName="name" oldColumnName="classification_scheme_category_name" tableName="classification_scheme_category"/>
+		<renameColumn newColumnName="description" oldColumnName="classification_scheme_category_description" tableName="classification_scheme_category"/>
+		<renameColumn newColumnName="label" oldColumnName="classification_scheme_category_label" tableName="classification_scheme_category"/>
+		<!-- id is already primary but needs a sequence	-->
+		<sql>
+			select exec('create sequence classification_scheme_category_seq start '||(select max(id) +1 from classification_scheme_category));
+			alter table classification_scheme_category alter column id set default nextval('classification_scheme_category_seq')
+		</sql>
+	</changeSet>
+
+
+	<!-- classification_scheme_association -->
+	<changeSet author="julian" id="0019">
+
+		<!-- normalize -->
+		<dropColumn columnName="hierarchy_level" tableName="classification_scheme_association"/>
+		<dropColumn columnName="parent_category_name" tableName="classification_scheme_association"/>
+		<dropColumn columnName="parent_category_label" tableName="classification_scheme_association"/>
+		<dropColumn columnName="classification_scheme_category_label" tableName="classification_scheme_association"/>
+
+		<!-- classification_scheme_id is available via classification_scheme_id field of
+			of classification_scheme_category table which can be joined using classification_scheme_category_id
+			and appears to contain more complete data.
+		-->
+		<dropColumn columnName="classification_scheme_id" tableName="classification_scheme_association"/>
+
+		<!-- can be null, when it's root of the tree -->
+		<renameColumn newColumnName="parent_classification_scheme_category_id" oldColumnName="parent_category_code" tableName="classification_scheme_association"/>
+	    <addForeignKeyConstraint
+            constraintName="classification_scheme_association_parent_classification_scheme_category_fkey"
+			baseColumnNames="parent_classification_scheme_category_id"
+            baseTableName="classification_scheme_association"
+            referencedColumnNames="id"
+            referencedTableName="classification_scheme_category"
+		/>
+	</changeSet>
+
+
+
+	<!-- strip trailing slashes from uris -->
+	<changeSet author="julian" id="0020">
+		<sql>
+			update external_associated_terms set uid = regexp_replace( uid, '\/$', '');
+			update vocabulary_term set uid = regexp_replace( uid, '\/$', '')
+		</sql>
+	</changeSet>
+
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+	<!-- USER VIEWS
+		join the tables up in some obvious ways, to aid logical presentation to human user
+	-->
+
+	<changeSet author="julian" id="0021">
+		<createView viewName="_get_uid">
+			-- helps us to find the source of misc terms
+			select 'external_associated_terms' as relation, 'uid' as field, uid as uid  from external_associated_terms
+			union all
+			select 'classification_scheme', 'name', name from classification_scheme
+			union all
+			select 'classification_scheme_category', 'name', name  from classification_scheme_category
+			union all
+			select 'external_associated_terms', 'uid', uid from external_associated_terms
+			union all
+			select 'reference_source', 'online_ref..', online_reference_resource from reference_source
+			union all
+			select 'vocabulary_register', 'uid', uid from vocabulary_register
+			union all
+			select 'vocabulary_term', 'uid', uid from vocabulary_term
+			order by relation, field
+		</createView>
+	</changeSet>
+
+
+	<!-- view of responsible party - should probably also have the association type
+		when we refactor this -->
+	<changeSet author="julian" id="0022">
+		<createView viewName="_get_responsible_party">
+			select
+				p.name as person_name,
+				o.acronym as organisation_acronym
+			from responsible_party rp
+			left join person p on p.id = rp.person_id
+			left join organisation o on o.id = rp.organisation_id
+		</createView>
+	</changeSet>
+
+
+	<!-- amendment
+			this is organised in terms of amendment, although we use vt.uid as first ref
+	-->
+	<changeSet author="julian" id="0023">
+		<createView viewName="_get_amendment">
+			select
+				trim(vt.uid) as uid,
+				a.type,
+				a.request_date,
+				a.approval_date,
+				trim( vr.name) as register_name,
+				p.name as person_name,
+				o.acronym as organisation_acronym
+			from amendment a
+			left join vocabulary_term vt on a.vocabulary_term_id = vt.id
+			left join vocabulary_register vr on a.vocabulary_register_id = vr.id
+			left join responsible_party rp on a.responsible_party_id = rp.id
+			left join person p on p.id = rp.person_id
+			left join organisation o on o.id = rp.organisation_id
+		</createView>
+	</changeSet>
+
+
+
+
+	<!-- 	this should probably have the reference souce as the uid
+	<changeSet author="julian" id="000020-7">
+		<createView viewName="_get_reference_source">
+			select
+				trim( vt.uid) as uid,
+				trim( vt.name) as name,
+				trim( rs.citation_string) as citation_string,
+				trim( rs.online_reference_resource) as online_reference_resource,
+				trim( o.acronym) as organisation_acronym
+			from vocabulary_term vt
+			join reference_source rs on vt.reference_source_id = rs.id
+			left join organisation o on rs.organisation_id = o.id
+			order by vt.uid, rs.online_reference_resource
+		</createView>
+	</changeSet -->
+
+
+
+
+	<!-- term -> category
+		should this be category as primary thing first...?
+
+		should be rewritten to select from  term_category_classification
+	-->
+	<changeSet author="julian" id="0026">
+		<createView viewName="_get_term_category_classification">
+			select
+				trim( vt.uid) as uid,
+				trim( vt.name) as name,
+				trim( csc.name) as category_name,
+				trim( csc.label) as category_label,
+				csc.date_added as date_added
+			from vocabulary_term vt
+			-- get second-tier category
+			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
+			join classification_scheme_category csc on tcc.classification_scheme_category_id = csc.id
+			order by vt.uid, csc.name
+		</createView>
+	</changeSet>
+
+
+	<!-- category -> other category -->
+	<changeSet author="julian" id="0027">
+		<createView viewName="_get_classification_scheme_association">
+			select
+				trim( c1.name) as uid,
+				trim( c1.label) as label,
+				trim( c2.name) as parent_uid,
+				trim( c2.label) as parent_label
+			from classification_scheme_association a
+			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id
+			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id
+			order by c1.name, c2.name
+		</createView>
+	</changeSet>
+
+
+
+
+
+	<!-- primary key for association_type type and use for internal and external association tables -->
+	<changeSet author="julian" id="0027-1">
+		<sql>
+			alter table association_type drop constraint association_type_table_pkey cascade
+		</sql>
+		<addColumn tableName="association_type">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="association_type" />
+
+
+		<addColumn tableName="internal_associated_terms">
+			<column name="association_type_id" type="integer"/>
+		</addColumn>
+
+		<sql>
+			update internal_associated_terms iat
+			set association_type_id = at.id
+			from association_type at
+			where iat.association_type_name = at.name
+		</sql>
+
+	    <addForeignKeyConstraint
+            constraintName="internal_associated_terms_association_type_fkey"
+			baseColumnNames="association_type_id"
+            baseTableName="internal_associated_terms"
+            referencedColumnNames="id"
+            referencedTableName="association_type"
+		/>
+
+		<dropColumn columnName="association_type_name" tableName="internal_associated_terms"/>
+
+		<addColumn tableName="external_associated_terms">
+			<column name="association_type_id" type="integer"/>
+		</addColumn>
+		<sql>
+			update external_associated_terms eat
+			set association_type_id = at.id
+			from association_type at
+			where eat.association_type_name = at.name
+		</sql>
+
+	    <addForeignKeyConstraint
+            constraintName="external_associated_terms_association_type_fkey"
+			baseColumnNames="association_type_id"
+            baseTableName="external_associated_terms"
+            referencedColumnNames="id"
+            referencedTableName="association_type"
+		/>
+
+		<dropColumn columnName="association_type_name" tableName="external_associated_terms"/>
+
+	</changeSet>
+
+
+
+	<!-- term -> other term -->
+	<changeSet author="julian" id="0027-2">
+		<createView viewName="_get_internal_associated_terms">
+			select
+				trim(svt.uid) as uid,					-- subject
+				trim(svt.name) as name,
+				trim(at.name) as association_type_name,
+				trim(ovt.uid) as parent_uid,
+				trim(ovt.name) as parent_name
+			from internal_associated_terms iat
+			left join vocabulary_term svt on iat.subject_vocabulary_term_id = svt.id
+			left join vocabulary_term ovt on iat.object_vocabulary_term_id = ovt.id
+			left join association_type at on at.id = iat.association_type_id
+			order by svt.uid, ovt.uid
+		</createView>
+	</changeSet>
+
+
+	<!-- external associated terms -->
+	<changeSet author="julian" id="0024">
+		<createView viewName="_get_external_associated_terms">
+			select
+				trim(vt.uid) as uid,
+				trim(vt.name) as name,
+				trim(eat.uid) as external_uid,
+				trim(at.name) as association_type
+			from external_associated_terms eat
+			left join vocabulary_term vt on eat.vocabulary_term_id = vt.id
+			left join association_type at on at.id = eat.association_type_id
+			order by uid, external_uid
+		</createView>
+	</changeSet>
+
+
+
+
+
+	<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+	<!-- RDF views -->
+
+
+	<!-- CONCEPT SCHEME -->
+	<changeSet author="julian" id="0028">
+
+		<!-- one-to-one fields -->
+		<createView viewName="_skos_concept_scheme">
+			select
+				s.name as subject,
+				'skos:ConceptScheme'::varchar as rdf_type,
+				s.date_added as dcterms_issued,
+				s.title as dc_title,
+				s.description as dc_description,
+				o.name as dc_creator,
+				p.name as dc_publisher,
+				null as dcterms_hasversion
+
+			from classification_scheme s
+
+			join responsible_party rp on rp.id = s.responsible_party_id
+			join organisation o on rp.organisation_id = o.id
+
+			join responsible_party rp2 on rp2.id = s.responsible_party_id
+			join person p on rp2.person_id = p.id
+
+			union all
+
+
+			select
+				vr.uid as subject,
+				'skos:ConceptScheme'::varchar as rdf_type,
+				vr.date as dcterms_issued,
+				vr.name as dc_title,
+				vr.content_summary as dc_description,
+				o.name as dc_creator,
+				p.name as dc_publisher,
+				vr.version as dcterms_hasversion
+
+
+			from vocabulary_register vr
+
+			join responsible_party rp on rp.id = vr. owner_responsible_party_id
+			join organisation o on rp.organisation_id = o.id
+
+			join responsible_party rp2 on rp2.id = vr. owner_responsible_party_id
+			join person p on rp2.person_id = p.id
+
+
+		</createView>
+
+		<createView viewName="_rdf_concept_scheme">
+			select
+				s.subject as subject, 'rdf:type' as predicate, s.rdf_type as object
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dcterms:issued', s.dcterms_issued::varchar
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dc:title', s.dc_title
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dc:description', s.dc_description
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dc:creator', s.dc_creator
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dc:publisher', s.dc_publisher
+			from _skos_concept_scheme s
+			union all
+			select
+				s.subject, 'dcterms:hasVersion', s.dcterms_hasversion
+			from _skos_concept_scheme s
+		</createView>
+	</changeSet>
+
+	<!-- Concept Scheme -->
+
+
+	<changeSet author="julian" id="0029">
+
+		<createView viewName="_term_classification_scheme_category">
+			-- map the classification_scheme_category id's with the term id.
+			-- we only deal with one level of indirection via the iat, because
+			-- that's all that the data requires
+
+			-- TODO this should probably be a view, so it can be planned in the query optimiser
+			-- rather than created as a temporary table
+			-- constrained internal associations
+			with ciat as (
+				select iat.*
+				from internal_associated_terms iat
+				left join association_type at on at.id = iat.association_type_id
+				where at.name = 'isInstanceOf'
+			)
+			select
+			vt1.id as vocabulary_term_id,
+			case when csc1.id is not null
+				then csc1.id
+				else csc2.id
+			end as classification_scheme_category_id
+
+			from vocabulary_term vt1
+			-- join directly through tcc
+			left join term_category_classification tcc1 on tcc1.vocabulary_term_id = vt1.id
+			left join classification_scheme_category csc1 on tcc1.classification_scheme_category_id = csc1.id
+
+			-- join through iat
+			left join ciat iat on iat.subject_vocabulary_term_id = vt1.id
+			left join term_category_classification tcc2 on tcc2.vocabulary_term_id = iat.object_vocabulary_term_id
+			left join classification_scheme_category csc2 on tcc2.classification_scheme_category_id = csc2.id
+		</createView>
+
+		<createView viewName="_term_classification_scheme">
+			-- map the classification_scheme id's with the the term id, by looking through the
+			-- classification_scheme_category.
+			-- note that all classification_scheme_category's maintain a ref to the classification_scheme
+			-- not just root ones.
+			select
+				mv.vocabulary_term_id as vocabulary_term_id,
+				csc.classification_scheme_id as classification_scheme_id
+			from _term_classification_scheme_category mv
+			join classification_scheme_category csc on csc.id =  mv.classification_scheme_category_id
+			join classification_scheme cs on cs.id = csc.classification_scheme_id
+		</createView>
+
+
+	</changeSet>
+
+
+
+
+	<!-- CONCEPT -->
+
+	<changeSet author="julian" id="0030">
+
+		<!-- one-to-one fields -->
+		<createView viewName="_skos_concept">
+			select
+				c.name as subject,
+				'skos:Concept'::varchar as rdf_type,
+				c.label as skos_preflabel,
+				c.description as skos_definition,
+				c.date_added as dcterms_issued,
+				-- should be issued ?
+				null as dcterms_created,
+				null as dc_source,
+				null as dc_publisher
+
+			from classification_scheme_category c
+
+			union all
+			select
+				vt.uid as subject,
+				'skos:Concept'::varchar as rdf_type,
+				vt.name as skos_preflabel,
+				vt.definition as skos_definition,
+				null as dcterms_issued,
+				-- should be issued ?
+				vt.date_added as dcterms_created,
+				case when rs.citation_string is not null
+					then rs.citation_string
+					else vr.name
+				end as dc_source,
+				case
+					when rso.name is not null
+					then rso.name
+					else vro.name
+				end as dc_publisher
+
+
+			from vocabulary_term vt
+
+			left join vocabulary_register vr on vt.vocabulary_register_id = vr.id
+
+			-- should be left, since we explicitly test for null
+			left join reference_source rs on vt.reference_source_id = rs.id
+
+			-- reference source organisation
+			left join organisation rso on rs.organisation_id = rso.id
+			-- vocabulary register organisation
+			-- Bad Data? or migration - contains references to value 52 but there is no corresponding organisation
+			-- in the original data
+			left join responsible_party rp on vr.owner_responsible_party_id = rp.id
+			left join organisation vro on rp.organisation_id = vro.id
+
+		</createView>
+
+		<!-- the inscheme stuff isn't right because it could be in several schemes -->
+
+
+		<!-- top concept won't have broader -->
+		<!-- one-to-many -->
+		<createView viewName="_skos_concept_skos_broader">
+			select
+				c1.name as subject,
+				c2.name as object
+			from classification_scheme_association a
+			join classification_scheme_category c1 on a.classification_scheme_category_id = c1.id
+			join classification_scheme_category c2 on a.parent_classification_scheme_category_id = c2.id
+			-- order by c2.name, c1.name
+
+			union all
+			select
+				vt.uid as subject,
+				-- 'skos:broader' as predicate,
+				csc.name as object
+			from vocabulary_term vt
+			-- get second-tier category
+			join term_category_classification tcc on tcc.vocabulary_term_id = vt.id
+			join classification_scheme_category csc on tcc.classification_scheme_category_id = csc.id
+
+			union all
+
+			select
+                svt.uid as subject,
+                -- 'skos:broader' as predicate,
+                ovt.uid as object
+            from internal_associated_terms iat
+            left join vocabulary_term svt on iat.subject_vocabulary_term_id = svt.id
+            left join vocabulary_term ovt on iat.object_vocabulary_term_id = ovt.id
+			left join association_type at on iat.association_type_id = at.id
+            where at.name = 'isInstanceOf'
+
+
+		</createView>
+
+		<!-- should be constrained to be top concept only -->
+		<createView viewName="_skos_concept_skos_narrower">
+			select
+				object as subject,
+				subject as object
+			from _skos_concept_skos_broader
+		</createView>
+
+		<createView viewName="_skos_concept_skos_inscheme">
+
+			select
+				vt.uid as subject,
+				vr.uid as object
+			from vocabulary_term vt
+			join vocabulary_register vr on vr.id = vt.vocabulary_register_id
+
+			union all
+
+			select
+				c.name as subject,
+				s.name as object
+			from classification_scheme_category c
+			join classification_scheme_association a on c.id = a.classification_scheme_category_id
+			join classification_scheme s on c.classification_scheme_id = s.id
+
+			union all
+
+			select
+				vt.uid as subject,
+				cs.name as object
+			from _term_classification_scheme tcs
+			join vocabulary_term vt on vt.id = tcs.vocabulary_term_id
+			join classification_scheme cs on cs.id = tcs.classification_scheme_id
+		</createView>
+
+
+
+
+		<createView viewName="_rdf_concept">
+			select
+				c.subject as subject, 'skos:prefLabel' as predicate, c.skos_preflabel as object
+			from _skos_concept  c
+			union all
+			select
+				c.subject as subject, 'rdf:type' as predicate, c.rdf_type
+			from _skos_concept  c
+			union all
+			select
+				c.subject, 'skos:definition'::varchar, c.skos_definition
+			from _skos_concept  c
+			union all
+			-- BOTH ISSUED AND CREATED ?
+			select
+				c.subject, 'dcterms:issued'::varchar, c.dcterms_issued::varchar
+			from _skos_concept  c
+
+			union all
+			select
+				s.subject, 'skos:inScheme'::varchar, s.object
+			from _skos_concept_skos_inscheme  s
+
+			union all
+			select
+				b.subject, 'skos:broader'::varchar, b.object
+			from _skos_concept_skos_broader  b
+			union all
+			select
+				n.subject, 'skos:narrower'::varchar, n.object
+			from _skos_concept_skos_narrower n
+			union all
+			select
+				c.subject, 'dcterms:created'::varchar, c.dcterms_created::varchar
+			from _skos_concept  c
+			union all
+			select
+				c.subject, 'dc:source'::varchar, c.dc_source
+			from _skos_concept  c
+			union all
+			select
+				c.subject, 'dc:publisher'::varchar, c.dc_publisher
+			from _skos_concept  c
+
+
+		</createView>
+
+	</changeSet>
+
+
+
+
+
+
+	<!--
+		Would be nice to order term results better, eg.
+
+		vocab=> select regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '.*/([0-9]*)$'  )    ;
+			 regexp_matches
+			 {34}
+
+		vocab=> select  regexp_matches( 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/34', '(.*)/.*$'  )    ;
+             regexp_matches
+			 {http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category}
+
+        ((regexp_matches( _rdf.subject, $$.*/([0-9]*)$ $$  ))[1]::int)
+	-->
+
+	<!-- aggregate rdf view -->
+	<changeSet author="julian" id="0031">
+		<createView viewName="_rdf">
+			select * from _rdf_concept_scheme
+			union all select * from _rdf_concept
+
+		</createView>
+	</changeSet>
+
+
+	<!--changeSet author="julian" id="000308">
+		<sql>
+			CREATE FUNCTION rdf_object( predicate_ varchar, subject_ varchar  )
+			RETURNS varchar AS $$
+			DECLARE
+			BEGIN
+				select object from _rdf where predicate = $1 and subject = $2 ;
+			END;
+			$$ LANGUAGE plpgsql;
+		</sql>
+	</changeSet-->
+
+
+	<!-- Seb request. Move entries under PAR category into Physical-Water->Optical Properties,
+	and remove PAR category -->
+	<changeSet author="julian" id="0032">
+		<sql>
+			update term_category_classification
+			set classification_scheme_category_id = 45
+			where classification_scheme_category_id = 29;
+
+			delete from classification_scheme_category
+			where id = 29;
+		</sql>
+	</changeSet>
+
+
+	<!-- create a matview -->
+	<changeSet author="julian" id="0033">
+		<sql>
+			create materialized view _rdf_m as select * from _rdf;
+			create index on _rdf_m( object );
+			create index on _rdf_m( subject );
+			create index on _rdf_m( predicate );
+		</sql>
+	</changeSet>
+
+
+	<changeSet author="julian" id="0034">
+		<createView viewName="_schema_metadata_all">
+			-- create view fields as
+			SELECT
+					n.nspname as schema,
+					c.relname as relation,
+					c.relkind as kind,
+					a.attname AS field,
+			--      r.*,
+					t.typname || '(' || a.atttypmod || ')' AS Type,
+					CASE WHEN a.attnotnull = 't' THEN 'YES' ELSE 'NO' END AS _notnull,
+					-- CASE WHEN r.contype = 'p' THEN 'PRI' ELSE '' END AS Key,
+			--        r.contype as Contype,
+					(SELECT pg_catalog.pg_get_expr(d.adbin, d.adrelid)
+							FROM
+									pg_catalog.pg_attrdef d
+							WHERE
+									d.adrelid = a.attrelid
+									AND d.adnum = a.attnum
+									AND a.atthasdef) AS _default,
+			--        ''::varchar as Extras,
+					pg_get_constraintdef(c2.oid, true) as _constraint
+			--from pg_attribute a
+				-- left join pg_constraint c on c.conrelid = a.attrelid
+			--      , pg_catalog.obj_description(239533, 8)
+					, pg_catalog.col_description( c.oid, a.attnum) as _comment
+			FROM
+					pg_class c
+					JOIN pg_attribute a ON a.attrelid = c.oid
+					JOIN pg_type t ON a.atttypid = t.oid
+					LEFT JOIN pg_catalog.pg_constraint r ON c.oid = r.conrelid
+						AND r.conname = a.attname
+					left join pg_namespace n on n.oid=c.relnamespace
+
+				LEFT JOIN pg_constraint c2 ON (c2.conrelid = a.attrelid
+				AND (c2.conkey[1] = a.attnum
+				OR c2.conkey[2] = a.attnum OR c2.conkey[3] = a.attnum
+				OR c2.conkey[4] = a.attnum OR c2.conkey[5] = a.attnum
+				OR c2.conkey[6] = a.attnum) OR c2.conkey[7] = a.attnum
+				OR c2.conkey[8] = a.attnum)
+			WHERE
+			 --       c.relname = 'tablename'
+			--        AND a.attnum > 0
+					a.attnum > 0
+			--ORDER BY a.attnum
+			ORDER BY n.nspname, c.relname , a.attnum;
+		</createView>
+
+
+		<createView viewName="_schema_metadata">
+			select
+				relation, field, type, _notnull, _default, _constraint, _comment
+			from _schema_metadata_all
+			where schema = current_schema()
+			and kind = 'r'
+			and relation not in ('databasechangelog', 'databasechangeloglock' )
+		</createView>
+	</changeSet>
+
+	<!-- example comment -->
+	<changeSet author="julian" id="0035">
+		<sql>
+			comment on column amendment.request_date is 'date amendment request was created';
+		</sql>
+	</changeSet>
+
+
+	<!-- reinstate unit_view for geoserver -->
+	<changeSet author="julian" id="0036">
+		<createView viewName="unit_view">
+			SELECT vocabulary_term.id,
+				vocabulary_term.name,
+				vocabulary_term.short_name,
+				vocabulary_term.definition,
+				vocabulary_term.date_added
+			FROM contr_vocab_db.vocabulary_term
+			WHERE vocabulary_term.vocabulary_type_name = 'UnitsOfMeasure'::bpchar
+			ORDER BY vocabulary_term.name;
+		</createView>
+	</changeSet>
+
+	<!-- organisational_affiliation helper view -->
+	<changeSet author="julian" id="0037">
+		<createView viewName="_get_organisational_affiliation">
+			select
+				p.name as person,
+				o.name as organisation,
+				poa.affiliation_type_name as affiliation
+			from person_organisational_affiliation poa
+			join person p on p.id = poa.person_id
+			join organisation o on o.id = poa.organisation_id ;
+		</createView>
+	</changeSet>
+
+
+	<!-- add primary id's for these join tables to aid db reverse engineering, orm etc -->
+	<changeSet author="julian" id="0038">
+		<addColumn tableName="internal_associated_terms">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="internal_associated_terms"/>
+
+		<addColumn tableName="external_associated_terms">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="external_associated_terms"/>
+
+	</changeSet>
+
+
+	<!-- merge person_organisational_affiliatio into responsible_party -->
+	<changeSet author="julian" id="0039">
+
+		<!-- do this first to make cascading keys easier -->
+		<dropView viewName="_get_organisational_affiliation"/>
+		<dropTable tableName="person_organisational_affiliation"/>
+
+		<!-- parties not yet added -->
+		<sql>
+			insert into responsible_party (person_id, organisation_id)
+			select p.id, o.id
+			from person p
+			cross join organisation o
+			where ( o.acronym ~ 'eMII' and p.name ~ 'Natalia' )
+			or ( o.acronym ~ 'AAD' and p.name ~ 'Kim' )
+		</sql>
+
+		<dropForeignKeyConstraint baseTableName="affiliation_type" constraintName="affiliation_type_table_pkey"/>
+
+		<!-- create primary key for affiliation type -->
+		<addColumn tableName="affiliation_type">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="affiliation_type" />
+
+		<!-- reference from responsible party -->
+		<addColumn tableName="responsible_party">
+			<column name="affiliation_type_id" type="serial"/>
+		</addColumn>
+
+		<!-- update responsible_party to use -->
+		<sql>
+			update responsible_party
+			set affiliation_type_id = at.id
+			from affiliation_type at
+			where at.name = 'employedBy'
+		</sql>
+
+	    <addForeignKeyConstraint
+            constraintName="responsible_party_affiliation_type_fkey"
+			baseColumnNames="affiliation_type_id"
+            baseTableName="responsible_party"
+            referencedColumnNames="id"
+            referencedTableName="affiliation_type"
+		/>
+
+		<!-- recreate view -->
+		<dropView viewName="_get_responsible_party"/>
+		<createView viewName="_get_responsible_party">
+			select
+				p.name as person_name,
+				o.acronym as organisation_acronym,
+				at.name as affiliation_type_name
+			from responsible_party rp
+			left join person p on p.id = rp.person_id
+			left join organisation o on o.id = rp.organisation_id
+			left join affiliation_type at on at.id = rp.affiliation_type_id
+		</createView>
+	</changeSet>
+
+
+	<!-- primary keys help reveng gorm/hibernate mappings -->
+	<changeSet author="julian" id="0040">
+		<addColumn tableName="term_category_classification">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="term_category_classification" />
+
+
+		<addColumn tableName="classification_scheme_association">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="classification_scheme_association" />
+
+	</changeSet>
+
+	<!-- fix up register_source.organisation foreign key, by first creating non-existent organisation record -->
+	<changeSet author="julian" id="0041">
+		<sql>
+			insert into organisation( name, acronym) values ('seadatanet FIXME', 'seadatanet' );
+		</sql>
+		<!-- register_source is currently filled with orphaned value 52, so update with ref to seadatanet -->
+		<sql>
+			update reference_source
+			set organisation_id = o.id
+			from organisation o
+			where o.name = 'seadatanet FIXME'
+		</sql>
+	    <addForeignKeyConstraint
+            constraintName="reference_source_organisation_fkey"
+			baseColumnNames="organisation_id"
+            baseTableName="reference_source"
+            referencedColumnNames="id"
+            referencedTableName="organisation"
+		/>
+
+		<addNotNullConstraint columnName="organisation_id" tableName="reference_source"/>
+	</changeSet>
+
+
+
+	<!-- primary key for vocabulary type and use it from vocabulary_term -->
+	<changeSet author="julian" id="0042">
+		<sql>
+			alter table vocabulary_type drop constraint vocabulary_type_table_pkey cascade
+		</sql>
+		<addColumn tableName="vocabulary_type">
+			<column name="id" type="serial"/>
+		</addColumn>
+		<addPrimaryKey columnNames="id" tableName="vocabulary_type" />
+
+		<addColumn tableName="vocabulary_term">
+			<column name="vocabulary_type_id" type="integer"/>
+		</addColumn>
+
+		<sql>
+			update vocabulary_term vt
+			set vocabulary_type_id = t.id
+			from vocabulary_type t
+			where vt.vocabulary_type_name = t.name
+		</sql>
+
+	    <addForeignKeyConstraint
+            constraintName="vocabulary_term_vocabulary_type_fkey"
+			baseColumnNames="vocabulary_type_id"
+            baseTableName="vocabulary_term"
+            referencedColumnNames="id"
+            referencedTableName="vocabulary_type"
+		/>
+
+		<addNotNullConstraint columnName="vocabulary_type_id" tableName="vocabulary_term"/>
+
+		<!-- type-name is used in view so we have to drop before dropping the column -->
+		<dropView viewName="unit_view"/>
+		<dropColumn columnName="vocabulary_type_name" tableName="vocabulary_term"/>
+
+		<!-- re-create the view joining on new id -->
+		<createView viewName="unit_view">
+			select
+				vt.id,
+				vt.name,
+				vt.short_name,
+				vt.definition,
+				vt.date_added
+			from vocabulary_term vt
+			join vocabulary_type t on t.id = vt.vocabulary_type_id
+			where t.name = 'UnitsOfMeasure'
+			order by vt.name;
+		</createView>
+
+	</changeSet>
+
+
+
+
+
+
+</databaseChangeLog>
+
+
+
