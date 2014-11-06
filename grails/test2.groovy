@@ -4,14 +4,14 @@
 //o.notes = 'great organisation'
 //o.save( flush: true, failOnError:true )
 
-//a = vocab.AffiliationType.get(1)
-//a.name = 'whoot'
-//a.save( flush: true, failOnError:true )
+a = vocab.AffiliationType.get(1)
+a.name = 'whoot'
+a.save( flush: true, failOnError:true )
 
 
-//p = vocab.Person.get(1)
-//p.name = 'johnny'
-//p.save( flush: true, failOnError:true )
+p = vocab.Person.get(3)
+p.name = 'johnny'
+p.save( flush: true, failOnError:true )
 
 // organisation synonym to records
 
