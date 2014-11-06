@@ -13,7 +13,7 @@ class Person {
 	                  vocabularyTerms: VocabularyTerm]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'person_id_seq']
 		version false
 	}
 
