@@ -1526,6 +1526,11 @@ xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liqui
 
 
 
+	<!-- avoid clash with hibernate version field -->
+    <changeSet author="julian" id="0043">
+        <renameColumn newColumnName="_version" oldColumnName="version" tableName="vocabulary_register"/>
+    </changeSet>
+
 
 
 
