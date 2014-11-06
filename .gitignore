@@ -14,4 +14,5 @@ shared_src/
 
 # Some extra personal ignore settings
 .bundle
-
+target
+proposal/latex/tmp/
