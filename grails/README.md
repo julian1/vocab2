@@ -1,33 +1,20 @@
 
-
-grails
-run-script test3.groovy
-shell 
-
-exporting as standalone,
-
-https://spring.io/guides/gs/accessing-data-gorm/
-
-----
-
 Plan to manage -   
 	bring together db change-migration,  and grails under,  and skos templates in one repo
 	fork d2rml with submodule
 	fork skos.  
 	git submodules 
 
-To run,
-grails run-script test.groovy
-grails shell 
+Running,
+	grails run-script test.groovy
+	grails run-script test2.groovy
+	grails shell 
 
 
-Ownership Perhaps,
+Possible Ownership options,
 	VocabularyTerm -> eat, iat, tcc, csa
 	Organisation -> organisation synonym
 	referenceSource -> vocabularyTerm
-
-
-amendment vocabulary_register_id looks wrong, because can get from vocabulary_term -> vocab register.
 
 
 Liquibase
@@ -44,22 +31,19 @@ Issues
 	- review pluralisation - etc. partys
 	- (leave) remove view code from hibernate.
 	- test changes / transactions
-	- ownership semantics - belongs to 
-		- classification scheme association
-		- transactions
-	- sequence number generation and saving
-	- need to combine into the same git repo - so changes will track together  
-		- and sparql mappings.
+	- (done ) ownership semantics - belongs to  - leave as is
+	- (done) sequence number generation and saving
+	- (done) need to combine into the same git repo - so changes will track together and sparql mappings.
+	- (done) need to change version field in db changelog. 
+	- (done) understand optimistic locking strategy.
 
-	- need to change version field in db changelog. 
-
-	understand optimistic locking strategy.
-
-ORM - reverse engineer,
-	- sequences - hibernate wants own single sequence
-	- missing foreign key constraints
-	- version field. 
-	- gorm dynamic typing bugs.
+ORM Issues 
+	- reverse engineer,
+		- property naming when multiple one to many relationships
+		- sequences - hibernate wants own single sequence
+		- hiberate rather than existing key constraints
+		- version field naming conflicts 
+		- gorm dynamic typing bugs
 
 
 
@@ -69,27 +53,8 @@ Domain class examples,
 http://grails.org/doc/latest/ref/Domain%20Classes/findAll.html
 
 
-
-
 -------
-Need to downgrade hibernate to version 3 to do the rev-engineer.
-then upgrade to 4 get it start in console.
-
--------
-
-build.sh
-
-----
-grails 2.4.4
-
-grails create-app vocab
-git init
-
-git add $( find -type f | grep -v git  )
-g cm 'initial'
-
-g a .gitignore
-etc.
-
-
+Note if run rev-engineer script then must
+	downgrade hibernate to version 3 to do the rev-engineer.
+	then upgrade to 4 get it start in console.
 
