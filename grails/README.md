@@ -1,4 +1,15 @@
 
+
+grails
+run-script test3.groovy
+shell 
+
+exporting as standalone,
+
+https://spring.io/guides/gs/accessing-data-gorm/
+
+----
+
 Plan to manage -   
 	bring together db change-migration,  and grails under,  and skos templates in one repo
 	fork d2rml with submodule
