@@ -11,15 +11,12 @@ class ResponsibleParty {
 	                  managerResponsiblePartys: VocabularyRegister,
 	                  ownerResponsiblePartys: VocabularyRegister,
 	                  vocabularyTerms: VocabularyTerm]
-	static belongsTo = [AffiliationType, Organisation, Person]
 
-	// TODO you have multiple hasMany references for class(es) [VocabularyRegister] 
-	//      so you'll need to disambiguate them with the 'mappedBy' property:
+	// static belongsTo = [AffiliationType, Organisation, Person]
 
 
     static mappedBy = [ managerResponsiblePartys: "managerResponsibleParty",
                          ownerResponsiblePartys: "ownerResponsibleParty"]
-
 
 	static mapping = {
 		id generator: "assigned"

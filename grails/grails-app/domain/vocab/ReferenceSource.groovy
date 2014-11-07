@@ -8,7 +8,8 @@ class ReferenceSource {
 	Organisation organisation
 
 	static hasMany = [vocabularyTerms: VocabularyTerm]
-	static belongsTo = [Organisation]
+
+	// static belongsTo = [Organisation]
 
 	static mapping = {
 		id generator: "assigned"

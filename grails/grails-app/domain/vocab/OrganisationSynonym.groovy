@@ -5,7 +5,7 @@ class OrganisationSynonym {
 	String name
 	Organisation organisation
 
-	static belongsTo = [Organisation]
+	// static belongsTo = [Organisation]
 
 	static mapping = {
 		id generator: "assigned"

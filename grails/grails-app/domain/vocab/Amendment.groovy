@@ -9,7 +9,7 @@ class Amendment {
 	ResponsibleParty responsibleParty
 	VocabularyTerm vocabularyTerm
 
-	static belongsTo = [ResponsibleParty, VocabularyRegister, VocabularyTerm]
+	// static belongsTo = [ResponsibleParty, VocabularyRegister, VocabularyTerm]
 
 	static mapping = {
 		id generator: "assigned"

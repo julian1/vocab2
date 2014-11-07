@@ -12,14 +12,14 @@ class VocabularyRegister {
 	String _version
 	Date date
 	Date dateOfLastChange
-	//  ERROR: column this_.responsible_party_by_manager_responsible_party_id_id does not exist
-	// db column manager_responsible_party_id 
+
 	ResponsibleParty ownerResponsibleParty
 	ResponsibleParty managerResponsibleParty
 
 	static hasMany = [amendments: Amendment,
 	                  vocabularyTerms: VocabularyTerm]
-	static belongsTo = [ResponsibleParty]
+
+	// static belongsTo = [ResponsibleParty]
 
 	static mapping = {
 		id generator: "assigned"

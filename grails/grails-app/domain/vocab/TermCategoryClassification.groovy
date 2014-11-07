@@ -5,7 +5,7 @@ class TermCategoryClassification {
 	ClassificationSchemeCategory classificationSchemeCategory
 	VocabularyTerm vocabularyTerm
 
-	static belongsTo = [ClassificationSchemeCategory, VocabularyTerm]
+	// static belongsTo = [ClassificationSchemeCategory, VocabularyTerm]
 
 	static mapping = {
 		id generator: "assigned"

@@ -16,14 +16,22 @@ Plan to manage -
 	fork skos.  
 	git submodules 
 
-------
 To run,
-
 grails run-script test.groovy
 grails shell 
 
-Can now generate the db from the domain. or the liquibase changeset.
----
+
+Ownership Perhaps,
+	VocabularyTerm -> eat, iat, tcc, csa
+	Organisation -> organisation synonym
+	referenceSource -> vocabularyTerm
+
+
+amendment vocabulary_register_id looks wrong, because can get from vocabulary_term -> vocab register.
+
+
+Liquibase
+	Can now generate the db from the domain. or the liquibase changeset.
 
 Goals
 	- one layer of abstraction above the db
@@ -32,12 +40,10 @@ Goals
 	- includes ownership specification for cascading saves and deletes
 
 Issues
-	- read and write roles on the db 
+	- (ok) read and write roles on the db 
 	- review pluralisation - etc. partys
-
-	- remove view code from hibernate.
+	- (leave) remove view code from hibernate.
 	- test changes / transactions
-
 	- ownership semantics - belongs to 
 		- classification scheme association
 		- transactions

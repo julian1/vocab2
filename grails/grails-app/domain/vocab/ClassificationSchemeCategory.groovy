@@ -11,10 +11,9 @@ class ClassificationSchemeCategory {
 	static hasMany = [ classificationSchemeCategorys : ClassificationSchemeAssociation,
 	                  parentClassificationSchemeCategorys : ClassificationSchemeAssociation,
 	                  termCategoryClassifications: TermCategoryClassification]
-	static belongsTo = [ClassificationScheme]
 
-	// TODO you have multiple hasMany references for class(es) [ClassificationSchemeAssociation] 
-	//      so you'll need to disambiguate them with the 'mappedBy' property:
+	// static belongsTo = [ClassificationScheme]
+
 	static mappedBy = [ classificationSchemeCategorys: "classificationSchemeCategory",
 	                  parentClassificationSchemeCategorys: "parentClassificationSchemeCategory"]
 

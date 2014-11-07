@@ -9,7 +9,8 @@ class ClassificationScheme {
 	ResponsibleParty responsibleParty
 
 	static hasMany = [classificationSchemeCategories: ClassificationSchemeCategory]
-	static belongsTo = [ResponsibleParty]
+
+	// static belongsTo = [ResponsibleParty]
 
 	static mapping = {
 		id generator: "assigned"

@@ -25,8 +25,10 @@ class VocabularyTerm {
 	                  externalAssociatedTerms: ExternalAssociatedTerms,
 	                  objectVocabularyTerms: InternalAssociatedTerms,
 	                  subjectVocabularyTerms : InternalAssociatedTerms,
-	                  termCategoryClassifications: TermCategoryClassification]
-	static belongsTo = [Person, ReferenceSource, ResponsibleParty, VocabularyRegister, VocabularyType]
+	                  termCategoryClassifications: TermCategoryClassification
+				]
+
+	// static belongsTo = [Person, ReferenceSource, ResponsibleParty, VocabularyRegister, VocabularyType]
 
 	// TODO you have multiple hasMany references for class(es) [InternalAssociatedTerms]
 	//      so you'll need to disambiguate them with the 'mappedBy' property:

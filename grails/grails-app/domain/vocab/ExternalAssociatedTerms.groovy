@@ -6,7 +6,7 @@ class ExternalAssociatedTerms {
 	AssociationType associationType
 	VocabularyTerm vocabularyTerm
 
-	static belongsTo = [AssociationType, VocabularyTerm]
+	// static belongsTo = [AssociationType, VocabularyTerm]
 
 	static mapping = {
 		id generator: "assigned"
