@@ -8,7 +8,7 @@ class VocabularyType {
 	static hasMany = [vocabularyTerms: VocabularyTerm]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'vocabulary_type_id_seq']
 		version false
 	}
 

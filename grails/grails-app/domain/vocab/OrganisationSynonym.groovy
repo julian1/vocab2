@@ -8,7 +8,7 @@ class OrganisationSynonym {
 	// static belongsTo = [Organisation]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'organisation_synonym_id_seq']
 		version false
 	}
 

@@ -8,7 +8,7 @@ class AffiliationType {
 	static hasMany = [responsibleParties: ResponsibleParty]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'affiliation_type_id_seq']
 		version false
 	}
 

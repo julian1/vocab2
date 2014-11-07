@@ -12,7 +12,6 @@ class VocabularyRegister {
 	String _version
 	Date date
 	Date dateOfLastChange
-
 	ResponsibleParty ownerResponsibleParty
 	ResponsibleParty managerResponsibleParty
 
@@ -22,7 +21,7 @@ class VocabularyRegister {
 	// static belongsTo = [ResponsibleParty]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'vocabulary_register_id_seq']
 		version false
 	}
 

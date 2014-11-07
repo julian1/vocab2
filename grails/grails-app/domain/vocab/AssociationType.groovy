@@ -9,7 +9,7 @@ class AssociationType {
 	                  internalAssociatedTermses: InternalAssociatedTerms]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:' association_type_id_seq']
 		version false
 	}
 

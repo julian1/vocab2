@@ -13,7 +13,7 @@ class ClassificationScheme {
 	// static belongsTo = [ResponsibleParty]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'classification_scheme_seq']
 		version false
 	}
 

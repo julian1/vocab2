@@ -8,7 +8,7 @@ class TermCategoryClassification {
 	// static belongsTo = [ClassificationSchemeCategory, VocabularyTerm]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'term_category_classification_id_seq']
 		version false
 	}
 }

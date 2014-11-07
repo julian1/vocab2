@@ -12,7 +12,7 @@ class Amendment {
 	// static belongsTo = [ResponsibleParty, VocabularyRegister, VocabularyTerm]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'amendment_id_seq']
 		version false
 	}
 

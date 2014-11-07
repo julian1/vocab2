@@ -8,7 +8,7 @@ class ClassificationSchemeAssociation {
 	// static belongsTo = [ClassificationSchemeCategory]
 
 	static mapping = {
-		id generator: "assigned"
+ 		id generator:'sequence', params:[sequence:'classification_scheme_association_id_seq']
 		version false
 	}
 }

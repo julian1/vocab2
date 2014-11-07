@@ -14,12 +14,11 @@ class ResponsibleParty {
 
 	// static belongsTo = [AffiliationType, Organisation, Person]
 
-
     static mappedBy = [ managerResponsiblePartys: "managerResponsibleParty",
                          ownerResponsiblePartys: "ownerResponsibleParty"]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'responsible_party_id_seq']
 		version false
 	}
 }

@@ -9,7 +9,7 @@ class InternalAssociatedTerms {
 	// static belongsTo = [AssociationType, VocabularyTerm]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'internal_associated_terms_id_seq']
 		version false
 	}
 }

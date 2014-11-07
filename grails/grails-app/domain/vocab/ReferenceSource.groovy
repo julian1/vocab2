@@ -12,7 +12,7 @@ class ReferenceSource {
 	// static belongsTo = [Organisation]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'reference_source_id_seq']
 		version false
 	}
 

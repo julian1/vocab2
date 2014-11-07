@@ -18,7 +18,7 @@ class ClassificationSchemeCategory {
 	                  parentClassificationSchemeCategorys: "parentClassificationSchemeCategory"]
 
 	static mapping = {
-		id generator: "assigned"
+		id generator:'sequence', params:[sequence:'classification_scheme_category_seq']
 		version false
 	}
 
