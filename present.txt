@@ -1,0 +1,45 @@
+
+print
+
+ssh meteo@131.217.38.46 
+screen -ls
+
+
+Problem
+select * from responsible_party ;
+Table,
+select * from organisation;
+
+Views, 
+select * from _get_responsible_party  ;
+
+Also, have Skos level views
+select * from _skos_concept limit 1 ;
+select * from _skos_concept_skos_narrower limit 1 ;
+
+And these are used to generate the files that we input to geonetwork for hierarchical search
+
+And rdf centric
+select * from _rdf;
+
+So we need a way to update the tables,
+
+Show As proposed the task was to write sql stored procs, to enable POs to create, (read), update, delete 	
+	- especially important,
+		- presents a logical object/tuple view, rather than an integer foreign key
+
+	- Show stored proc - these are brittle in their maintenance relative to the underlying .
+	- actions are CRUD. what do we use for CRUD - and ORM mapper. 
+		
+	- so I then started looking at our existing tools - and hibernate, and found a plugin
+	to reverse engineer, the db, and create the needed bindings, 
+	the result is, that can now drill down, using object like 'dot' notation. 		
+
+grails shell
+groovy:000> println vocab.VocabularyTerm.get(1).proposerResponsibleParty.person.name
+groovy:000> println vocab.VocabularyTerm.get(1).proposerResponsibleParty.organisation.name
+
+Wrote a bunch of test case/examples,
+
+
+
