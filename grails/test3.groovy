@@ -21,3 +21,10 @@ p = Person.findWhere( name: 'johnny' )
 assert p != null
 p.delete(flush: true)
 
+
+
+// make changes and discard
+o = new vocab.Organisation(  name: 'another new organisation', acronym: 'whoot' )
+o.discard()
+o.save( flush: true, failOnError:true )
+
