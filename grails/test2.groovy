@@ -25,38 +25,40 @@ p.save( flush: true, failOnError:true )
 
 // ResponsibleParty
 rp = ResponsibleParty.find( "from ResponsibleParty where organisation.acronym = 'eMII' and person.name = 'Mancini, Sebastien'" )
-//rp = ResponsibleParty.findWhere = { it.organisation.acronym = 'eMII' && it.person.name = 'Mancini, Sebastien' }
-//rp = ResponsibleParty.findWhere = { it.organisation.acronym = 'eMII'  }
-
-// term.vocabularyType = VocabularyType.findWhere( name: 'Instrument'  )
-
+// rp = ResponsibleParty.findWhere = { it.organisation.acronym = 'eMII' && it.person.name = 'Mancini, Sebastien' }
+// rp = ResponsibleParty.findWhere = { it.organisation.acronym = 'eMII'  }
 assert rp != null
+
 o = Organisation.findWhere( acronym: 'AAD' )
 assert o != null
 rp.organisation = o
-rp.isDirty()
+assert rp.isDirty() == true
 rp.save( flush: true, failOnError:true )
 
 // need to change back
 o = Organisation.find( "from Organisation where acronym = 'eMII'" )
+assert o != null
 rp.organisation = o
 rp.save( flush: true, failOnError:true )
 
 
 // VocabularyType
-t = VocabularyType.get( 1) 
+t = VocabularyType.findWhere( name: 'Instrument'  )
+assert t != null
 t.definition = 'whoot'
 t.save( flush: true, failOnError:true )
 
 
 // ReferenceSource
 rs = ReferenceSource.get( 1)
+assert rs != null
 rs.citationString = 'whoot'
 t.save( flush: true, failOnError:true )
 
 
 // VocabularyRegister
 vr = VocabularyRegister.get( 1) 
+assert vr != null
 vr.name = 'whoot'
 vr.save( flush: true, failOnError:true )
 
@@ -66,27 +68,33 @@ vr.save( flush: true, failOnError:true )
 
 // ClassificationScheme
 cs = ClassificationScheme.get( 1)
+assert cs != null
 cs.name = 'my classification scheme'
 cs.save( flush: true, failOnError:true )
 
 
 // AssociationType
 at = AssociationType.get( 1)
+assert at != null
 at.description = 'all about the association type'
 at.save( flush: true, failOnError:true )
 
 
 // VocabularyTerm
-//term = VocabularyTerm.find( "from VocabularyTerm where uid = 'http://vocab.aodn.org.au/def/imosfacilities/800' " )
 term = VocabularyTerm.findByUid( 'http://vocab.aodn.org.au/def/imosfacilities/800' )
+assert term != null
 term.definition = 'whoot'
 term.isDirty()
 term.save( flush: true, failOnError:true )
 
 // just differet accessors 
 term.vocabularyType = VocabularyType.find( "from VocabularyType where name = 'UnitsOfMeasure'" )
+assert term.vocabularyType != null
 term.vocabularyType = VocabularyType.findByName( 'UnitsOfMeasure' )
+assert term.vocabularyType != null
 term.vocabularyType = VocabularyType.findWhere( name: 'Instrument'  )
+assert term.vocabularyType != null
+
 
 assert term.vocabularyType != null
 term.save( flush: true, failOnError:true )
@@ -133,14 +141,18 @@ tcc.save( flush: true, failOnError:true )
 
 
 // ClassificationSchemeAssociation
-
 csa = ClassificationSchemeAssociation.find( 
-"from ClassificationSchemeAssociation "
-+ " where classificationSchemeCategory.name = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/2'" 
-+ " and parentClassificationSchemeCategory.name = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/56'" 
+  "from ClassificationSchemeAssociation "
+  + " where classificationSchemeCategory.name = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/2'" 
+  + " and parentClassificationSchemeCategory.name = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/56'" 
 )
 assert csa != null
 csa.parentClassificationSchemeCategory.name = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/45'
 tcc.save( flush: true, failOnError:true )
+
+// change back
+csa.parentClassificationSchemeCategory.name = 'http://vocab.aodn.org.au/def/ClassScheme/parameter1/Category/56'
+tcc.save( flush: true, failOnError:true )
+
 
 

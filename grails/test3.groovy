@@ -14,10 +14,10 @@ o.delete( flush: true)
 
 
 // Person
-p = new Person( name: 'johnny' )
+p = new Person( name: 'johnny2' )
 p.save( flush: true, failOnError:true )
 
-p = Person.findWhere( name: 'johnny' )
+p = Person.findWhere( name: 'johnny2' )
 assert p != null
 p.delete(flush: true)
 

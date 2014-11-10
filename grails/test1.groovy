@@ -1,5 +1,5 @@
 
-// READ ACTIONS
+// READ Examples,
 
 // general tuple / field access
 println vocab.Organisation.list().name
@@ -124,17 +124,16 @@ vocab.VocabularyTerm.findAll( "from VocabularyTerm " ).uid
 // by term
 term = vocab.VocabularyTerm.findWhere( uid: 'http://vocab.nerc.ac.uk/collection/L22/current/TOOL0665' )
 assert term != null
+
+term = vocab.VocabularyTerm.findByUid( 'http://vocab.nerc.ac.uk/collection/L22/current/TOOL0665' )
+assert term != null
+
 println term.uid
 println term.definition
 
 // change a property value
 term.definition = 'whoot'
 
-// save and flush, independent of hibernate session
-//#term.save( flush: = true )
-
-// throw on exception instead of returning null - which gives message
-//term.save( failOnError:true )
 
 // count of vocab terms
 vocab.VocabularyTerm.count

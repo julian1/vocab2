@@ -3,7 +3,7 @@ vocab2
 
 stored-procs
   - Goals
-    - what is purpose - allow Seb to make changes - essentially CRUD actions
+    - what is purpose - allow PO to make changes - essentially CRUD actions
     - preserve relational integrity - ( especially the join tables )
     - presenting a logical view of the data - eg. resolve foreign key references in favor of a more useful field.
     - Avoid spending too much time/complxity. 
