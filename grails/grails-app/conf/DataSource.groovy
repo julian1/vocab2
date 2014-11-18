@@ -21,7 +21,9 @@ environments {
         dataSource {
             //dbCreate = "update"
             driverClassName = "org.postgresql.Driver"
-            url = "jdbc:postgresql://127.0.0.1:5432/vocab"
+
+			url = 'jdbc:postgresql://127.0.0.1:5432/vocab?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory'
+            // url = "jdbc:postgresql://127.0.0.1:5432/vocab"
             username = "contr_vocab_db"
             password = "contr_vocab_db"
         }
