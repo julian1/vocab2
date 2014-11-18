@@ -27,11 +27,32 @@
 				<li class="fieldcontain">
 					<span id="affiliationType-label" class="property-label"><g:message code="responsibleParty.affiliationType.label" default="Affiliation Type" /></span>
 					
-						<span class="property-value" aria-labelledby="affiliationType-label"><g:link controller="affiliationType" action="show" id="${responsiblePartyInstance?.affiliationType?.id}">${responsiblePartyInstance?.affiliationType?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="affiliationType-label"><g:link controller="affiliationType" action="show" id="${responsiblePartyInstance?.affiliationType?.id}">${responsiblePartyInstance?.affiliationType?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
 			
+			
+				<g:if test="${responsiblePartyInstance?.organisation}">
+				<li class="fieldcontain">
+					<span id="organisation-label" class="property-label"><g:message code="responsibleParty.organisation.label" default="Organisation" /></span>
+					
+						<span class="property-value" aria-labelledby="organisation-label"><g:link controller="organisation" action="show" id="${responsiblePartyInstance?.organisation?.id}">${responsiblePartyInstance?.organisation?.acronym?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+
+			
+				<g:if test="${responsiblePartyInstance?.person}">
+				<li class="fieldcontain">
+					<span id="person-label" class="property-label"><g:message code="responsibleParty.person.label" default="Person" /></span>
+					
+						<span class="property-value" aria-labelledby="person-label"><g:link controller="person" action="show" id="${responsiblePartyInstance?.person?.id}">${responsiblePartyInstance?.person?.name?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+
+
 				<g:if test="${responsiblePartyInstance?.amendments}">
 				<li class="fieldcontain">
 					<span id="amendments-label" class="property-label"><g:message code="responsibleParty.amendments.label" default="Amendments" /></span>
@@ -64,15 +85,7 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${responsiblePartyInstance?.organisation}">
-				<li class="fieldcontain">
-					<span id="organisation-label" class="property-label"><g:message code="responsibleParty.organisation.label" default="Organisation" /></span>
-					
-						<span class="property-value" aria-labelledby="organisation-label"><g:link controller="organisation" action="show" id="${responsiblePartyInstance?.organisation?.id}">${responsiblePartyInstance?.organisation?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
+
 			
 				<g:if test="${responsiblePartyInstance?.ownerResponsiblePartys}">
 				<li class="fieldcontain">
@@ -84,15 +97,7 @@
 					
 				</li>
 				</g:if>
-			
-				<g:if test="${responsiblePartyInstance?.person}">
-				<li class="fieldcontain">
-					<span id="person-label" class="property-label"><g:message code="responsibleParty.person.label" default="Person" /></span>
-					
-						<span class="property-value" aria-labelledby="person-label"><g:link controller="person" action="show" id="${responsiblePartyInstance?.person?.id}">${responsiblePartyInstance?.person?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
+
 			
 				<g:if test="${responsiblePartyInstance?.vocabularyTerms}">
 				<li class="fieldcontain">

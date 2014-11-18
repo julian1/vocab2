@@ -24,11 +24,11 @@
 			<thead>
 					<tr>
 					
-						<th><g:message code="responsibleParty.affiliationType.label" default="Affiliation Type" /></th>
-					
+						<th><g:message code="responsibleParty.person.label" default="Person" /></th>
+
 						<th><g:message code="responsibleParty.organisation.label" default="Organisation" /></th>
 					
-						<th><g:message code="responsibleParty.person.label" default="Person" /></th>
+						<th><g:message code="responsibleParty.affiliationType.label" default="Affiliation Type" /></th>
 					
 					</tr>
 				</thead>
@@ -36,11 +36,11 @@
 				<g:each in="${responsiblePartyInstanceList}" status="i" var="responsiblePartyInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${responsiblePartyInstance.id}">${fieldValue(bean: responsiblePartyInstance, field: "affiliationType")}</g:link></td>
+						<td><g:link action="show" id="${responsiblePartyInstance.id}">${fieldValue(bean: responsiblePartyInstance, field: "person.name")}</g:link></td>
 					
-						<td>${fieldValue(bean: responsiblePartyInstance, field: "organisation")}</td>
+						<td>${fieldValue(bean: responsiblePartyInstance, field: "organisation.acronym")}</td>
 					
-						<td>${fieldValue(bean: responsiblePartyInstance, field: "person")}</td>
+						<td>${fieldValue(bean: responsiblePartyInstance, field: "affiliationType.name")}</td>
 					
 					</tr>
 				</g:each>

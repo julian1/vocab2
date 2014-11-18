@@ -7,9 +7,31 @@
 		<g:message code="responsibleParty.affiliationType.label" default="Affiliation Type" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="affiliationType" name="affiliationType.id" from="${vocab.AffiliationType.list()}" optionKey="id" required="" value="${responsiblePartyInstance?.affiliationType?.id}" class="many-to-one"/>
+	<g:select id="affiliationType" name="affiliationType.id" from="${vocab.AffiliationType.list()}" optionKey="id" optionValue="name" required="" value="${responsiblePartyInstance?.affiliationType?.id}" class="many-to-one"/>
 
 </div>
+
+
+<div class="fieldcontain ${hasErrors(bean: responsiblePartyInstance, field: 'organisation', 'error')} required">
+	<label for="organisation">
+		<g:message code="responsibleParty.organisation.label" default="Organisation" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="organisation" name="organisation.id" from="${vocab.Organisation.list()}" optionKey="id" optionValue="acronym" required="" value="${responsiblePartyInstance?.organisation?.id}" class="many-to-one"/>
+
+</div>
+
+
+
+<div class="fieldcontain ${hasErrors(bean: responsiblePartyInstance, field: 'person', 'error')} required">
+	<label for="person">
+		<g:message code="responsibleParty.person.label" default="Person" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="person" name="person.id" from="${vocab.Person.list()}" optionKey="id" optionValue="name" required="" value="${responsiblePartyInstance?.person?.id}" class="many-to-one"/>
+
+</div>
+
 
 <div class="fieldcontain ${hasErrors(bean: responsiblePartyInstance, field: 'amendments', 'error')} ">
 	<label for="amendments">
@@ -65,15 +87,6 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: responsiblePartyInstance, field: 'organisation', 'error')} required">
-	<label for="organisation">
-		<g:message code="responsibleParty.organisation.label" default="Organisation" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="organisation" name="organisation.id" from="${vocab.Organisation.list()}" optionKey="id" required="" value="${responsiblePartyInstance?.organisation?.id}" class="many-to-one"/>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: responsiblePartyInstance, field: 'ownerResponsiblePartys', 'error')} ">
 	<label for="ownerResponsiblePartys">
 		<g:message code="responsibleParty.ownerResponsiblePartys.label" default="Owner Responsible Partys" />
@@ -92,14 +105,6 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: responsiblePartyInstance, field: 'person', 'error')} required">
-	<label for="person">
-		<g:message code="responsibleParty.person.label" default="Person" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="person" name="person.id" from="${vocab.Person.list()}" optionKey="id" required="" value="${responsiblePartyInstance?.person?.id}" class="many-to-one"/>
-
-</div>
 
 <div class="fieldcontain ${hasErrors(bean: responsiblePartyInstance, field: 'vocabularyTerms', 'error')} ">
 	<label for="vocabularyTerms">
