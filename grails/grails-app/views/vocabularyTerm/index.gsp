@@ -26,15 +26,14 @@
 					
 						<g:sortableColumn property="name" title="${message(code: 'vocabularyTerm.name.label', default: 'Name')}" />
 					
+						<g:sortableColumn property="shortName" title="${message(code: 'vocabularyTerm.shortName.label', default: 'Short Name')}" />
+
 						<g:sortableColumn property="uid" title="${message(code: 'vocabularyTerm.uid.label', default: 'Uid')}" />
 					
-						<g:sortableColumn property="shortName" title="${message(code: 'vocabularyTerm.shortName.label', default: 'Short Name')}" />
 					
-						<g:sortableColumn property="ancillaryInformation" title="${message(code: 'vocabularyTerm.ancillaryInformation.label', default: 'Ancillary Information')}" />
 					
 						<g:sortableColumn property="definition" title="${message(code: 'vocabularyTerm.definition.label', default: 'Definition')}" />
 					
-						<g:sortableColumn property="alternativeTermExpression" title="${message(code: 'vocabularyTerm.alternativeTermExpression.label', default: 'Alternative Term Expression')}" />
 					
 					</tr>
 				</thead>
@@ -44,15 +43,14 @@
 					
 						<td><g:link action="show" id="${vocabularyTermInstance.id}">${fieldValue(bean: vocabularyTermInstance, field: "name")}</g:link></td>
 					
+						<td>${fieldValue(bean: vocabularyTermInstance, field: "shortName")}</td>
+
 						<td>${fieldValue(bean: vocabularyTermInstance, field: "uid")}</td>
 					
-						<td>${fieldValue(bean: vocabularyTermInstance, field: "shortName")}</td>
 					
-						<td>${fieldValue(bean: vocabularyTermInstance, field: "ancillaryInformation")}</td>
 					
 						<td>${fieldValue(bean: vocabularyTermInstance, field: "definition")}</td>
 					
-						<td>${fieldValue(bean: vocabularyTermInstance, field: "alternativeTermExpression")}</td>
 					
 					</tr>
 				</g:each>

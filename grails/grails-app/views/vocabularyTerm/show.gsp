@@ -135,7 +135,7 @@
 				<li class="fieldcontain">
 					<span id="addedByPerson-label" class="property-label"><g:message code="vocabularyTerm.addedByPerson.label" default="Added By Person" /></span>
 					
-						<span class="property-value" aria-labelledby="addedByPerson-label"><g:link controller="person" action="show" id="${vocabularyTermInstance?.addedByPerson?.id}">${vocabularyTermInstance?.addedByPerson?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="addedByPerson-label"><g:link controller="person" action="show" id="${vocabularyTermInstance?.addedByPerson?.id}">${vocabularyTermInstance?.addedByPerson?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -208,7 +208,7 @@
 				<li class="fieldcontain">
 					<span id="vocabularyRegister-label" class="property-label"><g:message code="vocabularyTerm.vocabularyRegister.label" default="Vocabulary Register" /></span>
 					
-						<span class="property-value" aria-labelledby="vocabularyRegister-label"><g:link controller="vocabularyRegister" action="show" id="${vocabularyTermInstance?.vocabularyRegister?.id}">${vocabularyTermInstance?.vocabularyRegister?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="vocabularyRegister-label"><g:link controller="vocabularyRegister" action="show" id="${vocabularyTermInstance?.vocabularyRegister?.id}">${vocabularyTermInstance?.vocabularyRegister?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -217,7 +217,7 @@
 				<li class="fieldcontain">
 					<span id="vocabularyType-label" class="property-label"><g:message code="vocabularyTerm.vocabularyType.label" default="Vocabulary Type" /></span>
 					
-						<span class="property-value" aria-labelledby="vocabularyType-label"><g:link controller="vocabularyType" action="show" id="${vocabularyTermInstance?.vocabularyType?.id}">${vocabularyTermInstance?.vocabularyType?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="vocabularyType-label"><g:link controller="vocabularyType" action="show" id="${vocabularyTermInstance?.vocabularyType?.id}">${vocabularyTermInstance?.vocabularyType?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

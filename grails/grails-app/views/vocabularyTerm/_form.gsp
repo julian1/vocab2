@@ -106,7 +106,7 @@
 		<g:message code="vocabularyTerm.referenceSource.label" default="Reference Source" />
 		
 	</label>
-	<g:select id="referenceSource" name="referenceSource.id" from="${vocab.ReferenceSource.list()}" optionKey="id" value="${vocabularyTermInstance?.referenceSource?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select id="referenceSource" name="referenceSource.id" from="${vocab.ReferenceSource.list()}" optionKey="id" optionValue="citationString" value="${vocabularyTermInstance?.referenceSource?.id}" class="many-to-one" noSelection="['null': '']"/>
 
 </div>
 
@@ -115,7 +115,7 @@
 		<g:message code="vocabularyTerm.addedByPerson.label" default="Added By Person" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="addedByPerson" name="addedByPerson.id" from="${vocab.Person.list()}" optionKey="id" required="" value="${vocabularyTermInstance?.addedByPerson?.id}" class="many-to-one"/>
+	<g:select id="addedByPerson" name="addedByPerson.id" from="${vocab.Person.list()}" optionKey="id" optionValue="name" required="" value="${vocabularyTermInstance?.addedByPerson?.id}" class="many-to-one"/>
 
 </div>
 
