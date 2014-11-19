@@ -63,7 +63,7 @@
 				<li class="fieldcontain">
 					<span id="classificationScheme-label" class="property-label"><g:message code="classificationSchemeCategory.classificationScheme.label" default="Classification Scheme" /></span>
 					
-						<span class="property-value" aria-labelledby="classificationScheme-label"><g:link controller="classificationScheme" action="show" id="${classificationSchemeCategoryInstance?.classificationScheme?.id}">${classificationSchemeCategoryInstance?.classificationScheme?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="classificationScheme-label"><g:link controller="classificationScheme" action="show" id="${classificationSchemeCategoryInstance?.classificationScheme?.id}">${classificationSchemeCategoryInstance?.classificationScheme?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

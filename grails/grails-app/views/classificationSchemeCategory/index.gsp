@@ -26,11 +26,10 @@
 					
 						<g:sortableColumn property="name" title="${message(code: 'classificationSchemeCategory.name.label', default: 'Name')}" />
 					
-						<g:sortableColumn property="description" title="${message(code: 'classificationSchemeCategory.description.label', default: 'Description')}" />
 					
 						<g:sortableColumn property="label" title="${message(code: 'classificationSchemeCategory.label.label', default: 'Label')}" />
-					
-						<g:sortableColumn property="dateAdded" title="${message(code: 'classificationSchemeCategory.dateAdded.label', default: 'Date Added')}" />
+
+						<g:sortableColumn property="description" title="${message(code: 'classificationSchemeCategory.description.label', default: 'Description')}" />
 					
 						<th><g:message code="classificationSchemeCategory.classificationScheme.label" default="Classification Scheme" /></th>
 					
@@ -42,13 +41,12 @@
 					
 						<td><g:link action="show" id="${classificationSchemeCategoryInstance.id}">${fieldValue(bean: classificationSchemeCategoryInstance, field: "name")}</g:link></td>
 					
-						<td>${fieldValue(bean: classificationSchemeCategoryInstance, field: "description")}</td>
 					
 						<td>${fieldValue(bean: classificationSchemeCategoryInstance, field: "label")}</td>
+
+						<td>${fieldValue(bean: classificationSchemeCategoryInstance, field: "description")}</td>
 					
-						<td><g:formatDate date="${classificationSchemeCategoryInstance.dateAdded}" /></td>
-					
-						<td>${fieldValue(bean: classificationSchemeCategoryInstance, field: "classificationScheme")}</td>
+						<td>${fieldValue(bean: classificationSchemeCategoryInstance, field: "classificationScheme.name")}</td>
 					
 					</tr>
 				</g:each>
