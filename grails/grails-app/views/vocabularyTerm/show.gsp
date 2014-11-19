@@ -161,13 +161,14 @@
 					
 				</li>
 				</g:if>
-			
+		
+				<!-- JA -->	
 				<g:if test="${vocabularyTermInstance?.objectVocabularyTerms}">
 				<li class="fieldcontain">
-					<span id="objectVocabularyTerms-label" class="property-label"><g:message code="vocabularyTerm.objectVocabularyTerms.label" default="Object Vocabulary Terms" /></span>
+					<span id="objectVocabularyTerms-label" class="property-label"><g:message code="vocabularyTerm.objectVocabularyTerms.label" default="Subject Vocabulary Terms" /></span>
 					
 						<g:each in="${vocabularyTermInstance.objectVocabularyTerms}" var="o">
-						<span class="property-value" aria-labelledby="objectVocabularyTerms-label"><g:link controller="internalAssociatedTerms" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="objectVocabularyTerms-label"><g:link controller="internalAssociatedTerms" action="show" id="${o.id}">${ ( o?.associationType?.name + ' ' + o?.subjectVocabularyTerm?.name )?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
@@ -181,13 +182,14 @@
 					
 				</li>
 				</g:if>
-			
+		
+				<!-- JA --> 	
 				<g:if test="${vocabularyTermInstance?.subjectVocabularyTerms}">
 				<li class="fieldcontain">
-					<span id="subjectVocabularyTerms-label" class="property-label"><g:message code="vocabularyTerm.subjectVocabularyTerms.label" default="Subject Vocabulary Terms" /></span>
+					<span id="subjectVocabularyTerms-label" class="property-label"><g:message code="vocabularyTerm.subjectVocabularyTerms.label" default="Object Vocabulary Terms" /></span>
 					
 						<g:each in="${vocabularyTermInstance.subjectVocabularyTerms}" var="s">
-						<span class="property-value" aria-labelledby="subjectVocabularyTerms-label"><g:link controller="internalAssociatedTerms" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="subjectVocabularyTerms-label"><g:link controller="internalAssociatedTerms" action="show" id="${s.id}">${ (s?.associationType?.name + ' ' + s?.objectVocabularyTerm?.name )?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
