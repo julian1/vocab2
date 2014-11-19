@@ -24,17 +24,20 @@
 			<thead>
 					<tr>
 					
+
 						<g:sortableColumn property="type" title="${message(code: 'amendment.type.label', default: 'Type')}" />
+
+						<g:sortableColumn property="vocabularyTerm.name" title="${message(code: 'amendment.vocabularyTerm.name', default: 'Vocabulary Term Name')}" />
 					
+
+						<th><g:message code="amendment.responsibleParty.label" default="Responsible Party" /></th>
+
 						<g:sortableColumn property="requestDate" title="${message(code: 'amendment.requestDate.label', default: 'Request Date')}" />
 					
 						<g:sortableColumn property="approvalDate" title="${message(code: 'amendment.approvalDate.label', default: 'Approval Date')}" />
 					
-						<th><g:message code="amendment.responsibleParty.label" default="Responsible Party" /></th>
 					
 						<th><g:message code="amendment.vocabularyRegister.label" default="Vocabulary Register" /></th>
-					
-						<th><g:message code="amendment.vocabularyTerm.label" default="Vocabulary Term" /></th>
 					
 					</tr>
 				</thead>
@@ -44,15 +47,17 @@
 					
 						<td><g:link action="show" id="${amendmentInstance.id}">${fieldValue(bean: amendmentInstance, field: "type")}</g:link></td>
 					
+						<td>${fieldValue(bean: amendmentInstance, field: "vocabularyTerm.name")}</td>
+
+						<td>${fieldValue(bean: amendmentInstance, field: "responsibleParty")}</td>
+
 						<td><g:formatDate date="${amendmentInstance.requestDate}" /></td>
 					
 						<td><g:formatDate date="${amendmentInstance.approvalDate}" /></td>
 					
-						<td>${fieldValue(bean: amendmentInstance, field: "responsibleParty")}</td>
 					
-						<td>${fieldValue(bean: amendmentInstance, field: "vocabularyRegister")}</td>
+						<td>${fieldValue(bean: amendmentInstance, field: "vocabularyRegister.name")}</td>
 					
-						<td>${fieldValue(bean: amendmentInstance, field: "vocabularyTerm")}</td>
 					
 					</tr>
 				</g:each>

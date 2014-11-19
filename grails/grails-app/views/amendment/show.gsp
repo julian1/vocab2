@@ -31,6 +31,16 @@
 					
 				</li>
 				</g:if>
+
+				<g:if test="${amendmentInstance?.vocabularyTerm}">
+				<li class="fieldcontain">
+					<span id="vocabularyTerm-label" class="property-label"><g:message code="amendment.vocabularyTerm.label" default="Vocabulary Term" /></span>
+					
+						<span class="property-value" aria-labelledby="vocabularyTerm-label"><g:link controller="vocabularyTerm" action="show" id="${amendmentInstance?.vocabularyTerm?.id}">${amendmentInstance?.vocabularyTerm?.name?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+
 			
 				<g:if test="${amendmentInstance?.requestDate}">
 				<li class="fieldcontain">
@@ -63,19 +73,11 @@
 				<li class="fieldcontain">
 					<span id="vocabularyRegister-label" class="property-label"><g:message code="amendment.vocabularyRegister.label" default="Vocabulary Register" /></span>
 					
-						<span class="property-value" aria-labelledby="vocabularyRegister-label"><g:link controller="vocabularyRegister" action="show" id="${amendmentInstance?.vocabularyRegister?.id}">${amendmentInstance?.vocabularyRegister?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="vocabularyRegister-label"><g:link controller="vocabularyRegister" action="show" id="${amendmentInstance?.vocabularyRegister?.id}">${amendmentInstance?.vocabularyRegister?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${amendmentInstance?.vocabularyTerm}">
-				<li class="fieldcontain">
-					<span id="vocabularyTerm-label" class="property-label"><g:message code="amendment.vocabularyTerm.label" default="Vocabulary Term" /></span>
-					
-						<span class="property-value" aria-labelledby="vocabularyTerm-label"><g:link controller="vocabularyTerm" action="show" id="${amendmentInstance?.vocabularyTerm?.id}">${amendmentInstance?.vocabularyTerm?.name?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
 			
 			</ol>
 			<g:form url="[resource:amendmentInstance, action:'delete']" method="DELETE">
