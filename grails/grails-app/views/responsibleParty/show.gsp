@@ -69,7 +69,7 @@
 					<span id="classificationSchemes-label" class="property-label"><g:message code="responsibleParty.classificationSchemes.label" default="Classification Schemes" /></span>
 					
 						<g:each in="${responsiblePartyInstance.classificationSchemes}" var="c">
-						<span class="property-value" aria-labelledby="classificationSchemes-label"><g:link controller="classificationScheme" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="classificationSchemes-label"><g:link controller="classificationScheme" action="show" id="${c.id}">${c?.name?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
@@ -80,7 +80,7 @@
 					<span id="managerResponsiblePartys-label" class="property-label"><g:message code="responsibleParty.managerResponsiblePartys.label" default="Manager Responsible Partys" /></span>
 					
 						<g:each in="${responsiblePartyInstance.managerResponsiblePartys}" var="m">
-						<span class="property-value" aria-labelledby="managerResponsiblePartys-label"><g:link controller="vocabularyRegister" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="managerResponsiblePartys-label"><g:link controller="vocabularyRegister" action="show" id="${m.id}">${m?.name?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
@@ -92,7 +92,7 @@
 					<span id="ownerResponsiblePartys-label" class="property-label"><g:message code="responsibleParty.ownerResponsiblePartys.label" default="Owner Responsible Partys" /></span>
 					
 						<g:each in="${responsiblePartyInstance.ownerResponsiblePartys}" var="o">
-						<span class="property-value" aria-labelledby="ownerResponsiblePartys-label"><g:link controller="vocabularyRegister" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="ownerResponsiblePartys-label"><g:link controller="vocabularyRegister" action="show" id="${o.id}">${o?.name?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
@@ -104,7 +104,7 @@
 					<span id="vocabularyTerms-label" class="property-label"><g:message code="responsibleParty.vocabularyTerms.label" default="Vocabulary Terms" /></span>
 					
 						<g:each in="${responsiblePartyInstance.vocabularyTerms}" var="v">
-						<span class="property-value" aria-labelledby="vocabularyTerms-label"><g:link controller="vocabularyTerm" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="vocabularyTerms-label"><g:link controller="vocabularyTerm" action="show" id="${v.id}">${v?.name.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
