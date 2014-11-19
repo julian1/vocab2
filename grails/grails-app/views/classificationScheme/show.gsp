@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list classificationScheme">
 			
+				<g:if test="${classificationSchemeInstance?.title}">
+				<li class="fieldcontain">
+					<span id="title-label" class="property-label"><g:message code="classificationScheme.title.label" default="Title" /></span>
+					
+						<span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${classificationSchemeInstance}" field="title"/></span>
+					
+				</li>
+				</g:if>
+
 				<g:if test="${classificationSchemeInstance?.name}">
 				<li class="fieldcontain">
 					<span id="name-label" class="property-label"><g:message code="classificationScheme.name.label" default="Name" /></span>
@@ -41,14 +50,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${classificationSchemeInstance?.title}">
-				<li class="fieldcontain">
-					<span id="title-label" class="property-label"><g:message code="classificationScheme.title.label" default="Title" /></span>
-					
-						<span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${classificationSchemeInstance}" field="title"/></span>
-					
-				</li>
-				</g:if>
 			
 				<g:if test="${classificationSchemeInstance?.dateAdded}">
 				<li class="fieldcontain">
@@ -64,7 +65,7 @@
 					<span id="classificationSchemeCategories-label" class="property-label"><g:message code="classificationScheme.classificationSchemeCategories.label" default="Classification Scheme Categories" /></span>
 					
 						<g:each in="${classificationSchemeInstance.classificationSchemeCategories}" var="c">
-						<span class="property-value" aria-labelledby="classificationSchemeCategories-label"><g:link controller="classificationSchemeCategory" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="classificationSchemeCategories-label"><g:link controller="classificationSchemeCategory" action="show" id="${c.id}">${c?.label?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>

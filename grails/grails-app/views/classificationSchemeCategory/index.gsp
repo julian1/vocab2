@@ -24,10 +24,10 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="name" title="${message(code: 'classificationSchemeCategory.name.label', default: 'Name')}" />
+						<g:sortableColumn property="name" title="${message(code: 'classificationSchemeCategory.name.label', default: 'Label')}" />
 					
 					
-						<g:sortableColumn property="label" title="${message(code: 'classificationSchemeCategory.label.label', default: 'Label')}" />
+						<g:sortableColumn property="label" title="${message(code: 'classificationSchemeCategory.label.label', default: 'Name')}" />
 
 						<g:sortableColumn property="description" title="${message(code: 'classificationSchemeCategory.description.label', default: 'Description')}" />
 					
@@ -39,10 +39,10 @@
 				<g:each in="${classificationSchemeCategoryInstanceList}" status="i" var="classificationSchemeCategoryInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${classificationSchemeCategoryInstance.id}">${fieldValue(bean: classificationSchemeCategoryInstance, field: "name")}</g:link></td>
+						<td><g:link action="show" id="${classificationSchemeCategoryInstance.id}">${fieldValue(bean: classificationSchemeCategoryInstance, field: "label")}</g:link></td>
 					
 					
-						<td>${fieldValue(bean: classificationSchemeCategoryInstance, field: "label")}</td>
+						<td>${fieldValue(bean: classificationSchemeCategoryInstance, field: "name")}</td>
 
 						<td>${fieldValue(bean: classificationSchemeCategoryInstance, field: "description")}</td>
 					

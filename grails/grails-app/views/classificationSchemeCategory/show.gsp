@@ -22,6 +22,16 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list classificationSchemeCategory">
+
+				<g:if test="${classificationSchemeCategoryInstance?.label}">
+				<li class="fieldcontain">
+					<span id="label-label" class="property-label"><g:message code="classificationSchemeCategory.label.label" default="Label" /></span>
+					
+						<span class="property-value" aria-labelledby="label-label"><g:fieldValue bean="${classificationSchemeCategoryInstance}" field="label"/></span>
+					
+				</li>
+				</g:if>
+
 			
 				<g:if test="${classificationSchemeCategoryInstance?.name}">
 				<li class="fieldcontain">
@@ -41,14 +51,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${classificationSchemeCategoryInstance?.label}">
-				<li class="fieldcontain">
-					<span id="label-label" class="property-label"><g:message code="classificationSchemeCategory.label.label" default="Label" /></span>
-					
-						<span class="property-value" aria-labelledby="label-label"><g:fieldValue bean="${classificationSchemeCategoryInstance}" field="label"/></span>
-					
-				</li>
-				</g:if>
 			
 				<g:if test="${classificationSchemeCategoryInstance?.dateAdded}">
 				<li class="fieldcontain">
@@ -63,7 +65,7 @@
 				<li class="fieldcontain">
 					<span id="classificationScheme-label" class="property-label"><g:message code="classificationSchemeCategory.classificationScheme.label" default="Classification Scheme" /></span>
 					
-						<span class="property-value" aria-labelledby="classificationScheme-label"><g:link controller="classificationScheme" action="show" id="${classificationSchemeCategoryInstance?.classificationScheme?.id}">${classificationSchemeCategoryInstance?.classificationScheme?.name?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="classificationScheme-label"><g:link controller="classificationScheme" action="show" id="${classificationSchemeCategoryInstance?.classificationScheme?.id}">${classificationSchemeCategoryInstance?.classificationScheme?.title?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

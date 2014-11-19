@@ -23,12 +23,13 @@
 			<table>
 			<thead>
 					<tr>
+
+						<g:sortableColumn property="title" title="${message(code: 'classificationScheme.title.label', default: 'Title')}" />
 					
 						<g:sortableColumn property="name" title="${message(code: 'classificationScheme.name.label', default: 'Name')}" />
 					
 						<g:sortableColumn property="description" title="${message(code: 'classificationScheme.description.label', default: 'Description')}" />
 					
-						<g:sortableColumn property="title" title="${message(code: 'classificationScheme.title.label', default: 'Title')}" />
 					
 						<g:sortableColumn property="dateAdded" title="${message(code: 'classificationScheme.dateAdded.label', default: 'Date Added')}" />
 					
@@ -40,11 +41,11 @@
 				<g:each in="${classificationSchemeInstanceList}" status="i" var="classificationSchemeInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${classificationSchemeInstance.id}">${fieldValue(bean: classificationSchemeInstance, field: "name")}</g:link></td>
+						<td><g:link action="show" id="${classificationSchemeInstance.id}">${fieldValue(bean: classificationSchemeInstance, field: "title")}</g:link></td>
 					
+						<td>${fieldValue(bean: classificationSchemeInstance, field: "name")}</td>
+
 						<td>${fieldValue(bean: classificationSchemeInstance, field: "description")}</td>
-					
-						<td>${fieldValue(bean: classificationSchemeInstance, field: "title")}</td>
 					
 						<td><g:formatDate date="${classificationSchemeInstance.dateAdded}" /></td>
 					
