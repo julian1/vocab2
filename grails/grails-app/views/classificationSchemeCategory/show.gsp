@@ -72,10 +72,10 @@
 			
 				<g:if test="${classificationSchemeCategoryInstance?.classificationSchemeCategorys}">
 				<li class="fieldcontain">
-					<span id="classificationSchemeCategorys-label" class="property-label"><g:message code="classificationSchemeCategory.classificationSchemeCategorys.label" default="Classification Scheme Categorys" /></span>
+					<span id="classificationSchemeCategorys-label" class="property-label"><g:message code="classificationSchemeCategory.classificationSchemeCategorys.label" default="Classification Scheme Categorys (association parent)" /></span>
 					
 						<g:each in="${classificationSchemeCategoryInstance.classificationSchemeCategorys}" var="c">
-						<span class="property-value" aria-labelledby="classificationSchemeCategorys-label"><g:link controller="classificationSchemeAssociation" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="classificationSchemeCategorys-label"><g:link controller="classificationSchemeAssociation" action="show" id="${c.id}">${c?.parentClassificationSchemeCategory?.label?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
@@ -83,10 +83,10 @@
 			
 				<g:if test="${classificationSchemeCategoryInstance?.parentClassificationSchemeCategorys}">
 				<li class="fieldcontain">
-					<span id="parentClassificationSchemeCategorys-label" class="property-label"><g:message code="classificationSchemeCategory.parentClassificationSchemeCategorys.label" default="Parent Classification Scheme Categorys" /></span>
+					<span id="parentClassificationSchemeCategorys-label" class="property-label"><g:message code="classificationSchemeCategory.parentClassificationSchemeCategorys.label" default="Parent Classification Scheme Categorys (association children)" /></span>
 					
 						<g:each in="${classificationSchemeCategoryInstance.parentClassificationSchemeCategorys}" var="p">
-						<span class="property-value" aria-labelledby="parentClassificationSchemeCategorys-label"><g:link controller="classificationSchemeAssociation" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="parentClassificationSchemeCategorys-label"><g:link controller="classificationSchemeAssociation" action="show" id="${p.id}">${p?.classificationSchemeCategory?.label?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
