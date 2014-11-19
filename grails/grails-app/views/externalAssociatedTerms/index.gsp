@@ -38,9 +38,9 @@
 					
 						<td><g:link action="show" id="${externalAssociatedTermsInstance.id}">${fieldValue(bean: externalAssociatedTermsInstance, field: "uid")}</g:link></td>
 					
-						<td>${fieldValue(bean: externalAssociatedTermsInstance, field: "associationType")}</td>
+						<td>${fieldValue(bean: externalAssociatedTermsInstance, field: "associationType.name")}</td>
 					
-						<td>${fieldValue(bean: externalAssociatedTermsInstance, field: "vocabularyTerm")}</td>
+						<td>${fieldValue(bean: externalAssociatedTermsInstance, field: "vocabularyTerm.name")}</td>
 					
 					</tr>
 				</g:each>

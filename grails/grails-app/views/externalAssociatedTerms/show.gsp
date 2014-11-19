@@ -36,7 +36,7 @@
 				<li class="fieldcontain">
 					<span id="associationType-label" class="property-label"><g:message code="externalAssociatedTerms.associationType.label" default="Association Type" /></span>
 					
-						<span class="property-value" aria-labelledby="associationType-label"><g:link controller="associationType" action="show" id="${externalAssociatedTermsInstance?.associationType?.id}">${externalAssociatedTermsInstance?.associationType?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="associationType-label"><g:link controller="associationType" action="show" id="${externalAssociatedTermsInstance?.associationType?.id}">${externalAssociatedTermsInstance?.associationType?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -45,7 +45,7 @@
 				<li class="fieldcontain">
 					<span id="vocabularyTerm-label" class="property-label"><g:message code="externalAssociatedTerms.vocabularyTerm.label" default="Vocabulary Term" /></span>
 					
-						<span class="property-value" aria-labelledby="vocabularyTerm-label"><g:link controller="vocabularyTerm" action="show" id="${externalAssociatedTermsInstance?.vocabularyTerm?.id}">${externalAssociatedTermsInstance?.vocabularyTerm?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="vocabularyTerm-label"><g:link controller="vocabularyTerm" action="show" id="${externalAssociatedTermsInstance?.vocabularyTerm?.id}">${externalAssociatedTermsInstance?.vocabularyTerm?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
