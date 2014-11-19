@@ -27,16 +27,7 @@
 				<li class="fieldcontain">
 					<span id="associationType-label" class="property-label"><g:message code="internalAssociatedTerms.associationType.label" default="Association Type" /></span>
 					
-						<span class="property-value" aria-labelledby="associationType-label"><g:link controller="associationType" action="show" id="${internalAssociatedTermsInstance?.associationType?.id}">${internalAssociatedTermsInstance?.associationType?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${internalAssociatedTermsInstance?.objectVocabularyTerm}">
-				<li class="fieldcontain">
-					<span id="objectVocabularyTerm-label" class="property-label"><g:message code="internalAssociatedTerms.objectVocabularyTerm.label" default="Object Vocabulary Term" /></span>
-					
-						<span class="property-value" aria-labelledby="objectVocabularyTerm-label"><g:link controller="vocabularyTerm" action="show" id="${internalAssociatedTermsInstance?.objectVocabularyTerm?.id}">${internalAssociatedTermsInstance?.objectVocabularyTerm?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="associationType-label"><g:link controller="associationType" action="show" id="${internalAssociatedTermsInstance?.associationType?.id}">${internalAssociatedTermsInstance?.associationType?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -45,10 +36,21 @@
 				<li class="fieldcontain">
 					<span id="subjectVocabularyTerm-label" class="property-label"><g:message code="internalAssociatedTerms.subjectVocabularyTerm.label" default="Subject Vocabulary Term" /></span>
 					
-						<span class="property-value" aria-labelledby="subjectVocabularyTerm-label"><g:link controller="vocabularyTerm" action="show" id="${internalAssociatedTermsInstance?.subjectVocabularyTerm?.id}">${internalAssociatedTermsInstance?.subjectVocabularyTerm?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="subjectVocabularyTerm-label"><g:link controller="vocabularyTerm" action="show" id="${internalAssociatedTermsInstance?.subjectVocabularyTerm?.id}">${internalAssociatedTermsInstance?.subjectVocabularyTerm?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
+
+
+				<g:if test="${internalAssociatedTermsInstance?.objectVocabularyTerm}">
+				<li class="fieldcontain">
+					<span id="objectVocabularyTerm-label" class="property-label"><g:message code="internalAssociatedTerms.objectVocabularyTerm.label" default="Object Vocabulary Term" /></span>
+					
+						<span class="property-value" aria-labelledby="objectVocabularyTerm-label"><g:link controller="vocabularyTerm" action="show" id="${internalAssociatedTermsInstance?.objectVocabularyTerm?.id}">${internalAssociatedTermsInstance?.objectVocabularyTerm?.name?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 			
 			</ol>
 			<g:form url="[resource:internalAssociatedTermsInstance, action:'delete']" method="DELETE">

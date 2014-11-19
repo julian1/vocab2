@@ -26,21 +26,21 @@
 					
 						<th><g:message code="internalAssociatedTerms.associationType.label" default="Association Type" /></th>
 					
-						<th><g:message code="internalAssociatedTerms.objectVocabularyTerm.label" default="Object Vocabulary Term" /></th>
 					
 						<th><g:message code="internalAssociatedTerms.subjectVocabularyTerm.label" default="Subject Vocabulary Term" /></th>
 					
+						<th><g:message code="internalAssociatedTerms.objectVocabularyTerm.label" default="Object Vocabulary Term" /></th>
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${internalAssociatedTermsInstanceList}" status="i" var="internalAssociatedTermsInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${internalAssociatedTermsInstance.id}">${fieldValue(bean: internalAssociatedTermsInstance, field: "associationType")}</g:link></td>
+						<td><g:link action="show" id="${internalAssociatedTermsInstance.id}">${fieldValue(bean: internalAssociatedTermsInstance, field: "associationType.name")}</g:link></td>
 					
-						<td>${fieldValue(bean: internalAssociatedTermsInstance, field: "objectVocabularyTerm")}</td>
-					
-						<td>${fieldValue(bean: internalAssociatedTermsInstance, field: "subjectVocabularyTerm")}</td>
+						<td>${fieldValue(bean: internalAssociatedTermsInstance, field: "subjectVocabularyTerm.name")}</td>
+
+						<td>${fieldValue(bean: internalAssociatedTermsInstance, field: "objectVocabularyTerm.name")}</td>
 					
 					</tr>
 				</g:each>
