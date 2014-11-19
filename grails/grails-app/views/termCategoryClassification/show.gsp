@@ -27,7 +27,7 @@
 				<li class="fieldcontain">
 					<span id="classificationSchemeCategory-label" class="property-label"><g:message code="termCategoryClassification.classificationSchemeCategory.label" default="Classification Scheme Category" /></span>
 					
-						<span class="property-value" aria-labelledby="classificationSchemeCategory-label"><g:link controller="classificationSchemeCategory" action="show" id="${termCategoryClassificationInstance?.classificationSchemeCategory?.id}">${termCategoryClassificationInstance?.classificationSchemeCategory?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="classificationSchemeCategory-label"><g:link controller="classificationSchemeCategory" action="show" id="${termCategoryClassificationInstance?.classificationSchemeCategory?.id}">${termCategoryClassificationInstance?.classificationSchemeCategory?.label?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -36,7 +36,7 @@
 				<li class="fieldcontain">
 					<span id="vocabularyTerm-label" class="property-label"><g:message code="termCategoryClassification.vocabularyTerm.label" default="Vocabulary Term" /></span>
 					
-						<span class="property-value" aria-labelledby="vocabularyTerm-label"><g:link controller="vocabularyTerm" action="show" id="${termCategoryClassificationInstance?.vocabularyTerm?.id}">${termCategoryClassificationInstance?.vocabularyTerm?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="vocabularyTerm-label"><g:link controller="vocabularyTerm" action="show" id="${termCategoryClassificationInstance?.vocabularyTerm?.id}">${termCategoryClassificationInstance?.vocabularyTerm?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

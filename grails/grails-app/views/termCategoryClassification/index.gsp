@@ -34,9 +34,9 @@
 				<g:each in="${termCategoryClassificationInstanceList}" status="i" var="termCategoryClassificationInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${termCategoryClassificationInstance.id}">${fieldValue(bean: termCategoryClassificationInstance, field: "classificationSchemeCategory")}</g:link></td>
+						<td><g:link action="show" id="${termCategoryClassificationInstance.id}">${fieldValue(bean: termCategoryClassificationInstance, field: "classificationSchemeCategory.label")}</g:link></td>
 					
-						<td>${fieldValue(bean: termCategoryClassificationInstance, field: "vocabularyTerm")}</td>
+						<td>${fieldValue(bean: termCategoryClassificationInstance, field: "vocabularyTerm.name")}</td>
 					
 					</tr>
 				</g:each>
