@@ -200,7 +200,7 @@
 					<span id="termCategoryClassifications-label" class="property-label"><g:message code="vocabularyTerm.termCategoryClassifications.label" default="Term Category Classifications" /></span>
 					
 						<g:each in="${vocabularyTermInstance.termCategoryClassifications}" var="t">
-						<span class="property-value" aria-labelledby="termCategoryClassifications-label"><g:link controller="termCategoryClassification" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="termCategoryClassifications-label"><g:link controller="termCategoryClassification" action="show" id="${t.id}">${t?.classificationSchemeCategory?.label?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>

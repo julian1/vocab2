@@ -97,7 +97,7 @@
 					<span id="termCategoryClassifications-label" class="property-label"><g:message code="classificationSchemeCategory.termCategoryClassifications.label" default="Term Category Classifications" /></span>
 					
 						<g:each in="${classificationSchemeCategoryInstance.termCategoryClassifications}" var="t">
-						<span class="property-value" aria-labelledby="termCategoryClassifications-label"><g:link controller="termCategoryClassification" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="termCategoryClassifications-label"><g:link controller="termCategoryClassification" action="show" id="${t.id}">${t?.vocabularyTerm?.name?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
