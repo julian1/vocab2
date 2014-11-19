@@ -46,7 +46,7 @@
 	
 <ul class="one-to-many">
 <g:each in="${referenceSourceInstance?.vocabularyTerms?}" var="v">
-    <li><g:link controller="vocabularyTerm" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></li>
+    <li><g:link controller="vocabularyTerm" action="show" id="${v.id}">${v?.name?.encodeAsHTML()}</g:link></li>
 </g:each>
 <li class="add">
 <g:link controller="vocabularyTerm" action="create" params="['referenceSource.id': referenceSourceInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'vocabularyTerm.label', default: 'VocabularyTerm')])}</g:link>

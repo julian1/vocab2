@@ -64,7 +64,7 @@
 					<span id="vocabularyTerms-label" class="property-label"><g:message code="referenceSource.vocabularyTerms.label" default="Vocabulary Terms" /></span>
 					
 						<g:each in="${referenceSourceInstance.vocabularyTerms}" var="v">
-						<span class="property-value" aria-labelledby="vocabularyTerms-label"><g:link controller="vocabularyTerm" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="vocabularyTerms-label"><g:link controller="vocabularyTerm" action="show" id="${v.id}">${v?.name?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
