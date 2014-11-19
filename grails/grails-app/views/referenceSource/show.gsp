@@ -54,7 +54,7 @@
 				<li class="fieldcontain">
 					<span id="organisation-label" class="property-label"><g:message code="referenceSource.organisation.label" default="Organisation" /></span>
 					
-						<span class="property-value" aria-labelledby="organisation-label"><g:link controller="organisation" action="show" id="${referenceSourceInstance?.organisation?.id}">${referenceSourceInstance?.organisation?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="organisation-label"><g:link controller="organisation" action="show" id="${referenceSourceInstance?.organisation?.id}">${referenceSourceInstance?.organisation?.acronym?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

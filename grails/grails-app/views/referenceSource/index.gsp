@@ -44,7 +44,7 @@
 					
 						<td>${fieldValue(bean: referenceSourceInstance, field: "onlineTermResource")}</td>
 					
-						<td>${fieldValue(bean: referenceSourceInstance, field: "organisation")}</td>
+						<td>${fieldValue(bean: referenceSourceInstance, field: "organisation.acronym")}</td>
 					
 					</tr>
 				</g:each>

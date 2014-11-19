@@ -34,7 +34,7 @@
 		<g:message code="referenceSource.organisation.label" default="Organisation" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="organisation" name="organisation.id" from="${vocab.Organisation.list()}" optionKey="id" required="" value="${referenceSourceInstance?.organisation?.id}" class="many-to-one"/>
+	<g:select id="organisation" name="organisation.id" from="${vocab.Organisation.list()}" optionKey="id" optionValue="acronym" required="" value="${referenceSourceInstance?.organisation?.id}" class="many-to-one"/>
 
 </div>
 
