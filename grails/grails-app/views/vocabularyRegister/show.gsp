@@ -128,7 +128,11 @@
 				<li class="fieldcontain">
 					<span id="managerResponsibleParty-label" class="property-label"><g:message code="vocabularyRegister.managerResponsibleParty.label" default="Manager Responsible Party" /></span>
 					
-						<span class="property-value" aria-labelledby="managerResponsibleParty-label"><g:link controller="responsibleParty" action="show" id="${vocabularyRegisterInstance?.managerResponsibleParty?.id}">${vocabularyRegisterInstance?.managerResponsibleParty?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="managerResponsibleParty-label"><g:link controller="responsibleParty" action="show" id="${vocabularyRegisterInstance?.managerResponsibleParty?.id}">${
+		( vocabularyRegisterInstance?.managerResponsibleParty?.person?.name 
+		+ ' ' + vocabularyRegisterInstance?.managerResponsibleParty?.affiliationType?.name 
+		+ ' ' + vocabularyRegisterInstance?.managerResponsibleParty?.organisation?.acronym ) .encodeAsHTML()
+		}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -137,7 +141,11 @@
 				<li class="fieldcontain">
 					<span id="ownerResponsibleParty-label" class="property-label"><g:message code="vocabularyRegister.ownerResponsibleParty.label" default="Owner Responsible Party" /></span>
 					
-						<span class="property-value" aria-labelledby="ownerResponsibleParty-label"><g:link controller="responsibleParty" action="show" id="${vocabularyRegisterInstance?.ownerResponsibleParty?.id}">${vocabularyRegisterInstance?.ownerResponsibleParty?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="ownerResponsibleParty-label"><g:link controller="responsibleParty" action="show" id="${vocabularyRegisterInstance?.ownerResponsibleParty?.id}">${
+		( vocabularyRegisterInstance?.ownerResponsibleParty?.person?.name 
+		+ ' ' + vocabularyRegisterInstance?.ownerResponsibleParty?.affiliationType?.name 
+		+ ' ' + vocabularyRegisterInstance?.ownerResponsibleParty?.organisation?.acronym ) .encodeAsHTML()
+		}</g:link></span>
 					
 				</li>
 				</g:if>

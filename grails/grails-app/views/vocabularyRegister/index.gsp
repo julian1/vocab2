@@ -24,17 +24,14 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="uid" title="${message(code: 'vocabularyRegister.uid.label', default: 'Uid')}" />
-					
 						<g:sortableColumn property="name" title="${message(code: 'vocabularyRegister.name.label', default: 'Name')}" />
+
+						<g:sortableColumn property="uid" title="${message(code: 'vocabularyRegister.uid.label', default: 'Uid')}" />
 					
 						<g:sortableColumn property="contentSummary" title="${message(code: 'vocabularyRegister.contentSummary.label', default: 'Content Summary')}" />
 					
-						<g:sortableColumn property="languageName" title="${message(code: 'vocabularyRegister.languageName.label', default: 'Language Name')}" />
 					
-						<g:sortableColumn property="languageCode" title="${message(code: 'vocabularyRegister.languageCode.label', default: 'Language Code')}" />
 					
-						<g:sortableColumn property="languageCountry" title="${message(code: 'vocabularyRegister.languageCountry.label', default: 'Language Country')}" />
 					
 					</tr>
 				</thead>
@@ -42,17 +39,14 @@
 				<g:each in="${vocabularyRegisterInstanceList}" status="i" var="vocabularyRegisterInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${vocabularyRegisterInstance.id}">${fieldValue(bean: vocabularyRegisterInstance, field: "uid")}</g:link></td>
+						<td><g:link action="show" id="${vocabularyRegisterInstance.id}">${fieldValue(bean: vocabularyRegisterInstance, field: "name")}</g:link></td>
 					
-						<td>${fieldValue(bean: vocabularyRegisterInstance, field: "name")}</td>
+						<td>${fieldValue(bean: vocabularyRegisterInstance, field: "uid")}</td>
 					
 						<td>${fieldValue(bean: vocabularyRegisterInstance, field: "contentSummary")}</td>
 					
-						<td>${fieldValue(bean: vocabularyRegisterInstance, field: "languageName")}</td>
 					
-						<td>${fieldValue(bean: vocabularyRegisterInstance, field: "languageCode")}</td>
 					
-						<td>${fieldValue(bean: vocabularyRegisterInstance, field: "languageCountry")}</td>
 					
 					</tr>
 				</g:each>

@@ -124,7 +124,11 @@
 		<g:message code="vocabularyRegister.ownerResponsibleParty.label" default="Owner Responsible Party" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="ownerResponsibleParty" name="ownerResponsibleParty.id" from="${vocab.ResponsibleParty.list()}" optionKey="id" required="" value="${vocabularyRegisterInstance?.ownerResponsibleParty?.id}" class="many-to-one"/>
+	<g:select id="ownerResponsibleParty" name="ownerResponsibleParty.id" from="${vocab.ResponsibleParty.list()}" optionKey="id" required="" value="${
+			vocabularyRegisterInstance?.ownerResponsibleParty?.person?.name 
+		+ ' ' + vocabularyRegisterInstance?.ownerResponsibleParty?.affiliationType?.name 
+		+ ' ' + vocabularyRegisterInstance?.ownerResponsibleParty?.organisation?.acronym 
+		}" class="many-to-one"/>
 
 </div>
 
