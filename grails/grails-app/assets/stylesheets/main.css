@@ -11,7 +11,7 @@ h1, h2, h3, h4, h5, h6 {
 /* BASE LAYOUT */
 
 html {
-	background-color: #ddd;
+	background-color: #ffffff;
 	background-image: -moz-linear-gradient(center top, #aaa, #ddd);
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaa), color-stop(1, #ddd));
 	background-image: linear-gradient(top, #aaa, #ddd);
@@ -37,8 +37,11 @@ html * {
 }
 
 body {
+	
+/*    background: #fff;
+    color: #B6E1F2 ; */
 	background: #ffffff;
-	color: #333333;
+	color: #333333; 
 	margin: 0 auto;
 	max-width: 960px;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
@@ -48,7 +51,7 @@ body {
 }
 
 #grailsLogo {
-	background-color: #abbf78;
+	background-color: #7f7fc0;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -65,7 +68,9 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #48802c;
+
+    color: #67695E;
+	/*color: #48802c; */
 }
 
 a:hover, a:active {
@@ -73,7 +78,8 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #48802c;
+	
+    color: #67695E;
 	font-weight: normal;
 	font-size: 1.25em;
 	margin: 0.8em 0 0.3em 0;
@@ -108,7 +114,7 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: #7f7fc0;/*#abbf78; */
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
@@ -283,7 +289,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .required-indicator {
-	color: #48802C;
+	color: #ffffff;
 	display: inline-block;
 	font-weight: bold;
 	margin-left: 0.3em;
@@ -476,7 +482,7 @@ th.desc a {
 }
 
 th:hover, tr:hover {
-	background: #E1F2B6;
+	background: #B6E1F2;
 }
 
 /* PAGINATION */
