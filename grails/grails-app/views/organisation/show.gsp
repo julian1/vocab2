@@ -82,7 +82,7 @@
 					<span id="organisationSynonyms-label" class="property-label"><g:message code="organisation.organisationSynonyms.label" default="Organisation Synonyms" /></span>
 					
 						<g:each in="${organisationInstance.organisationSynonyms}" var="o">
-						<span class="property-value" aria-labelledby="organisationSynonyms-label"><g:link controller="organisationSynonym" action="show" id="${o.id}">${o?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="organisationSynonyms-label"><g:link controller="organisationSynonym" action="show" id="${o.id}">${o?.name?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
@@ -93,7 +93,7 @@
 					<span id="referenceSources-label" class="property-label"><g:message code="organisation.referenceSources.label" default="Reference Sources" /></span>
 					
 						<g:each in="${organisationInstance.referenceSources}" var="r">
-						<span class="property-value" aria-labelledby="referenceSources-label"><g:link controller="referenceSource" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="referenceSources-label"><g:link controller="referenceSource" action="show" id="${r.id}">${r?.citationString?.encodeAsHTML()}</g:link></span>
 						</g:each>
 					
 				</li>
