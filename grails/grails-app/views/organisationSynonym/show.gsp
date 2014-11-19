@@ -36,7 +36,7 @@
 				<li class="fieldcontain">
 					<span id="organisation-label" class="property-label"><g:message code="organisationSynonym.organisation.label" default="Organisation" /></span>
 					
-						<span class="property-value" aria-labelledby="organisation-label"><g:link controller="organisation" action="show" id="${organisationSynonymInstance?.organisation?.id}">${organisationSynonymInstance?.organisation?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="organisation-label"><g:link controller="organisation" action="show" id="${organisationSynonymInstance?.organisation?.id}">${organisationSynonymInstance?.organisation?.name?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

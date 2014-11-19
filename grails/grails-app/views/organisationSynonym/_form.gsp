@@ -16,7 +16,7 @@
 		<g:message code="organisationSynonym.organisation.label" default="Organisation" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="organisation" name="organisation.id" from="${vocab.Organisation.list()}" optionKey="id" required="" value="${organisationSynonymInstance?.organisation?.id}" class="many-to-one"/>
+	<g:select id="organisation" name="organisation.id" from="${vocab.Organisation.list()}" optionKey="id" optionValue="name" required="" value="${organisationSynonymInstance?.organisation?.id}" class="many-to-one"/>
 
 </div>
 
