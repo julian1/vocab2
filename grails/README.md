@@ -1,4 +1,20 @@
 
+form (create,edit) -> optionValue="name" 
+index ->    <td>${fieldValue(bean: organisationSynonymInstance, field: "organisation.name")}</td>
+show ->		<span class="property-value" aria-labelledby="organisation-label"><g:link controller="organisation" action="show" id="${organisationSynonymInstance?.organisation?.id}">${organisationSynonymInstance?.organisation?.name?.encodeAsHTML()}</g:link></span>
+
+
+
+grails create-scaffold-controller vocab.Person
+
+generate-all vocab.Person
+
+Ok, we're interested in static scaffolding.
+
+
+	<g:select id="affiliationType" name="affiliationType.id" from="${vocab.AffiliationType.list()}" optionKey="id" optionValue="name" required="" value="${responsiblePartyInstance?.affiliationType?.id}" class="many-to-one"/>
+
+
 Plan to manage -   
 	bring together db change-migration,  and grails under,  and skos templates in one repo
 	fork d2rml with submodule
