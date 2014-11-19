@@ -27,7 +27,7 @@
 				<li class="fieldcontain">
 					<span id="classificationSchemeCategory-label" class="property-label"><g:message code="classificationSchemeAssociation.classificationSchemeCategory.label" default="Classification Scheme Category" /></span>
 					
-						<span class="property-value" aria-labelledby="classificationSchemeCategory-label"><g:link controller="classificationSchemeCategory" action="show" id="${classificationSchemeAssociationInstance?.classificationSchemeCategory?.id}">${classificationSchemeAssociationInstance?.classificationSchemeCategory?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="classificationSchemeCategory-label"><g:link controller="classificationSchemeCategory" action="show" id="${classificationSchemeAssociationInstance?.classificationSchemeCategory?.id}">${classificationSchemeAssociationInstance?.classificationSchemeCategory?.label?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -36,7 +36,7 @@
 				<li class="fieldcontain">
 					<span id="parentClassificationSchemeCategory-label" class="property-label"><g:message code="classificationSchemeAssociation.parentClassificationSchemeCategory.label" default="Parent Classification Scheme Category" /></span>
 					
-						<span class="property-value" aria-labelledby="parentClassificationSchemeCategory-label"><g:link controller="classificationSchemeCategory" action="show" id="${classificationSchemeAssociationInstance?.parentClassificationSchemeCategory?.id}">${classificationSchemeAssociationInstance?.parentClassificationSchemeCategory?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="parentClassificationSchemeCategory-label"><g:link controller="classificationSchemeCategory" action="show" id="${classificationSchemeAssociationInstance?.parentClassificationSchemeCategory?.id}">${classificationSchemeAssociationInstance?.parentClassificationSchemeCategory?.label?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

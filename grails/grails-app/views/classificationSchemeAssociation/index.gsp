@@ -34,9 +34,9 @@
 				<g:each in="${classificationSchemeAssociationInstanceList}" status="i" var="classificationSchemeAssociationInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${classificationSchemeAssociationInstance.id}">${fieldValue(bean: classificationSchemeAssociationInstance, field: "classificationSchemeCategory")}</g:link></td>
+						<td><g:link action="show" id="${classificationSchemeAssociationInstance.id}">${fieldValue(bean: classificationSchemeAssociationInstance, field: "classificationSchemeCategory.label")}</g:link></td>
 					
-						<td>${fieldValue(bean: classificationSchemeAssociationInstance, field: "parentClassificationSchemeCategory")}</td>
+						<td>${fieldValue(bean: classificationSchemeAssociationInstance, field: "parentClassificationSchemeCategory.label")}</td>
 					
 					</tr>
 				</g:each>

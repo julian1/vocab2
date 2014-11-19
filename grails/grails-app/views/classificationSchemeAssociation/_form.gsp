@@ -7,7 +7,7 @@
 		<g:message code="classificationSchemeAssociation.classificationSchemeCategory.label" default="Classification Scheme Category" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="classificationSchemeCategory" name="classificationSchemeCategory.id" from="${vocab.ClassificationSchemeCategory.list()}" optionKey="id" required="" value="${classificationSchemeAssociationInstance?.classificationSchemeCategory?.id}" class="many-to-one"/>
+	<g:select id="classificationSchemeCategory" name="classificationSchemeCategory.id" from="${vocab.ClassificationSchemeCategory.list()}" optionKey="id" optionValue="label" required="" value="${classificationSchemeAssociationInstance?.classificationSchemeCategory?.id}" class="many-to-one"/>
 
 </div>
 
@@ -16,7 +16,7 @@
 		<g:message code="classificationSchemeAssociation.parentClassificationSchemeCategory.label" default="Parent Classification Scheme Category" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="parentClassificationSchemeCategory" name="parentClassificationSchemeCategory.id" from="${vocab.ClassificationSchemeCategory.list()}" optionKey="id" required="" value="${classificationSchemeAssociationInstance?.parentClassificationSchemeCategory?.id}" class="many-to-one"/>
+	<g:select id="parentClassificationSchemeCategory" name="parentClassificationSchemeCategory.id" from="${vocab.ClassificationSchemeCategory.list()}" optionKey="id" optionValue="label" required="" value="${classificationSchemeAssociationInstance?.parentClassificationSchemeCategory?.id}" class="many-to-one"/>
 
 </div>
 
